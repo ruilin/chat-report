@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 13+ 的「按应用选择语言」需要此声明，否则系统设置里看不到语言选项。
+     顺序即系统设置中的展示顺序。 -->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en"/>
+    <locale android:name="zh-Hans"/>
+    <locale android:name="zh-Hant"/>
+</locale-config>
