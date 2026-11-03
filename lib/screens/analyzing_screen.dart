@@ -85,6 +85,7 @@ class _AnalyzingScreenState extends State<AnalyzingScreen> {
       Analytics.analysisFail(
         relationship: _rel,
         errorKind: e is ZaiException ? e.kind.name : 'other',
+        statusCode: e is ZaiException ? e.statusCode : null,
         durationSec: _elapsedSec,
       );
       if (mounted) {
@@ -124,7 +125,8 @@ class _AnalyzingScreenState extends State<AnalyzingScreen> {
           padding: const EdgeInsets.all(24),
           child: _rawError != null
               ? _ErrorView(
-                  message: _error?.localize(l) ?? l.errorNoConnection,
+                  // 非接口错误（如模型输出无法解析）同样不是网络问题
+                  message: _error?.localize(l) ?? l.errorServiceUnavailable,
                   onBack: () => Navigator.of(context).pop())
               : Column(
                   children: [

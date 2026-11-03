@@ -118,6 +118,7 @@
   "errorAllChunksFailed": "Analysis failed for every month. {detail}",
   "@errorAllChunksFailed": { "placeholders": { "detail": { "type": "String" } } },
   "errorNoConnection": "Couldn't reach the analysis service. Check your connection and try again.",
+  "errorServiceUnavailable": "The analysis service is temporarily unavailable. Please try again later.",
   "errorEmptyResponse": "The analysis service returned an empty response.",
   "errorRateLimited": "The analysis service is rate-limiting requests. Please try again shortly."
 }

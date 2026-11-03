@@ -320,6 +320,10 @@ class LEs extends L {
       'No se pudo conectar con el servicio de análisis. Revisa tu conexión e inténtalo de nuevo.';
 
   @override
+  String get errorServiceUnavailable =>
+      'El servicio de análisis no está disponible por ahora. Inténtalo de nuevo más tarde.';
+
+  @override
   String get errorEmptyResponse =>
       'El servicio de análisis devolvió una respuesta vacía.';
 

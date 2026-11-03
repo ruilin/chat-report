@@ -316,6 +316,10 @@ class LEn extends L {
       'Couldn\'t reach the analysis service. Check your connection and try again.';
 
   @override
+  String get errorServiceUnavailable =>
+      'The analysis service is temporarily unavailable. Please try again later.';
+
+  @override
   String get errorEmptyResponse =>
       'The analysis service returned an empty response.';
 

@@ -319,6 +319,10 @@ class LTr extends L {
       'Analiz hizmetine ulaşılamadı. Bağlantını kontrol edip tekrar dene.';
 
   @override
+  String get errorServiceUnavailable =>
+      'Analiz hizmeti şu anda kullanılamıyor. Lütfen daha sonra tekrar dene.';
+
+  @override
   String get errorEmptyResponse => 'Analiz hizmeti boş yanıt döndü.';
 
   @override

@@ -70,7 +70,11 @@ class AnalysisPipeline {
         _concurrency.clamp(1, chunks.length), (_) => worker()));
 
     if (monthResults.isEmpty) {
-      throw ZaiException('所有月份分析都失败了。$lastError');
+      // 保留最后一次错误的类型与状态码，界面文案和埋点都靠它区分原因
+      final last = lastError;
+      throw ZaiException('所有月份分析都失败了。$last',
+          statusCode: last is ZaiException ? last.statusCode : null,
+          kind: last is ZaiException ? last.kind : ZaiErrorKind.http);
     }
 
     onProgress?.call('Writing your report', .75);

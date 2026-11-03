@@ -319,6 +319,10 @@ class LIt extends L {
       'Impossibile raggiungere il servizio di analisi. Controlla la connessione e riprova.';
 
   @override
+  String get errorServiceUnavailable =>
+      'Il servizio di analisi è momentaneamente non disponibile. Riprova più tardi.';
+
+  @override
   String get errorEmptyResponse =>
       'Il servizio di analisi ha restituito una risposta vuota.';
 

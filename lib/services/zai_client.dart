@@ -137,7 +137,9 @@ class ZaiException implements Exception {
         ZaiErrorKind.noConnection => l.errorNoConnection,
         ZaiErrorKind.emptyResponse => l.errorEmptyResponse,
         ZaiErrorKind.rateLimited => l.errorRateLimited,
-        ZaiErrorKind.http => l.errorNoConnection,
+        // 端点可达但返回 4xx/5xx（key 失效、额度用尽、服务故障）：
+        // 不是用户网络的问题，别让用户去查 Wi-Fi
+        ZaiErrorKind.http => l.errorServiceUnavailable,
       };
 
   @override

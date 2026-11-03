@@ -93,16 +93,19 @@ class Analytics {
         'duration_sec': durationSec,
       });
 
-  /// [errorKind]: ZaiErrorKind.name，非接口错误为 other
+  /// [errorKind]: ZaiErrorKind.name，非接口错误为 other。
+  /// [statusCode]: 接口 HTTP 状态码，没有则记 0；401 突增通常意味着 key 失效或被盗用
   static void analysisFail({
     required String relationship,
     required String errorKind,
     required int durationSec,
+    int? statusCode,
   }) =>
       _log('analysis_fail', {
         'relationship': relationship,
         'error_kind': errorKind,
         'duration_sec': durationSec,
+        'status_code': statusCode ?? 0,
       });
 
   /// 分析未结束用户就离开了分析页

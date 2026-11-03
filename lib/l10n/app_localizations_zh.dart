@@ -308,6 +308,9 @@ class LZh extends L {
   String get errorNoConnection => '无法连接分析服务，请检查网络后重试。';
 
   @override
+  String get errorServiceUnavailable => '分析服务暂时不可用，请稍后再试。';
+
+  @override
   String get errorEmptyResponse => '分析服务返回了空内容。';
 
   @override
@@ -616,6 +619,9 @@ class LZhHant extends LZh {
 
   @override
   String get errorNoConnection => '無法連線分析服務，請檢查網路後重試。';
+
+  @override
+  String get errorServiceUnavailable => '分析服務暫時無法使用，請稍後再試。';
 
   @override
   String get errorEmptyResponse => '分析服務回傳了空內容。';

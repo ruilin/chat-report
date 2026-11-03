@@ -319,6 +319,10 @@ class LDe extends L {
       'Analysedienst nicht erreichbar. Prüf deine Verbindung und versuch\'s nochmal.';
 
   @override
+  String get errorServiceUnavailable =>
+      'Der Analysedienst ist gerade nicht erreichbar. Versuch es später noch mal.';
+
+  @override
   String get errorEmptyResponse =>
       'Der Analysedienst hat eine leere Antwort geliefert.';
 

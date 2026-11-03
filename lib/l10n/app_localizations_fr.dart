@@ -322,6 +322,10 @@ class LFr extends L {
       'Impossible de joindre le service d\'analyse. Vérifie ta connexion et réessaie.';
 
   @override
+  String get errorServiceUnavailable =>
+      'Le service d\'analyse est momentanément indisponible. Réessaie plus tard.';
+
+  @override
   String get errorEmptyResponse =>
       'Le service d\'analyse a renvoyé une réponse vide.';
 

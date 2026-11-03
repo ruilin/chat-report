@@ -118,6 +118,7 @@
   "errorAllChunksFailed": "所有月份的分析都失敗了。{detail}",
   "@errorAllChunksFailed": { "placeholders": { "detail": { "type": "String" } } },
   "errorNoConnection": "無法連線分析服務，請檢查網路後重試。",
+  "errorServiceUnavailable": "分析服務暫時無法使用，請稍後再試。",
   "errorEmptyResponse": "分析服務回傳了空內容。",
   "errorRateLimited": "分析服務正在限流，請稍後重試。"
 }

@@ -656,6 +656,12 @@ abstract class L {
   /// **'Couldn\'t reach the analysis service. Check your connection and try again.'**
   String get errorNoConnection;
 
+  /// No description provided for @errorServiceUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'The analysis service is temporarily unavailable. Please try again later.'**
+  String get errorServiceUnavailable;
+
   /// No description provided for @errorEmptyResponse.
   ///
   /// In en, this message translates to:

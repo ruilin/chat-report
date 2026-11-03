@@ -318,6 +318,10 @@ class LHi extends L {
       'एनालिसिस सर्विस से कनेक्ट नहीं हो पाया। अपना कनेक्शन चेक करके फिर से कोशिश करें।';
 
   @override
+  String get errorServiceUnavailable =>
+      'एनालिसिस सर्विस अभी उपलब्ध नहीं है। कृपया थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
   String get errorEmptyResponse => 'एनालिसिस सर्विस से खाली जवाब मिला।';
 
   @override

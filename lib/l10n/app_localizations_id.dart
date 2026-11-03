@@ -316,6 +316,10 @@ class LId extends L {
       'Gagal terhubung ke layanan analisis. Cek koneksi kamu lalu coba lagi.';
 
   @override
+  String get errorServiceUnavailable =>
+      'Layanan analisis sedang tidak tersedia. Coba lagi nanti ya.';
+
+  @override
   String get errorEmptyResponse => 'Layanan analisis mengirim respons kosong.';
 
   @override

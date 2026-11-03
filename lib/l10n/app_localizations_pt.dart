@@ -319,6 +319,10 @@ class LPt extends L {
       'Não foi possível acessar o serviço de análise. Verifique sua conexão e tente de novo.';
 
   @override
+  String get errorServiceUnavailable =>
+      'O serviço de análise está indisponível no momento. Tente de novo mais tarde.';
+
+  @override
   String get errorEmptyResponse =>
       'O serviço de análise retornou uma resposta vazia.';
 

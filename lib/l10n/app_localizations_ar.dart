@@ -314,6 +314,10 @@ class LAr extends L {
       'تعذّر الوصول إلى خدمة التحليل. تحقّق من اتصالك وحاول مجددًا.';
 
   @override
+  String get errorServiceUnavailable =>
+      'خدمة التحليل غير متاحة مؤقتًا. حاول مرة أخرى لاحقًا.';
+
+  @override
   String get errorEmptyResponse => 'أعادت خدمة التحليل ردًّا فارغًا.';
 
   @override

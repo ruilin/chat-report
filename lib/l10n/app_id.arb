@@ -100,6 +100,7 @@
   "parseTooFew": "Pesannya kurang banyak ({count}) — coba pakai opsi tempel aja",
   "errorAllChunksFailed": "Analisis gagal untuk semua bulan. {detail}",
   "errorNoConnection": "Gagal terhubung ke layanan analisis. Cek koneksi kamu lalu coba lagi.",
+  "errorServiceUnavailable": "Layanan analisis sedang tidak tersedia. Coba lagi nanti ya.",
   "errorEmptyResponse": "Layanan analisis mengirim respons kosong.",
   "errorRateLimited": "Layanan analisis lagi kebanjiran permintaan. Coba lagi sebentar lagi."
 }

@@ -100,6 +100,7 @@
   "parseTooFew": "No hay suficientes mensajes ({count}) — prueba a pegar la conversación",
   "errorAllChunksFailed": "El análisis falló en todos los meses. {detail}",
   "errorNoConnection": "No se pudo conectar con el servicio de análisis. Revisa tu conexión e inténtalo de nuevo.",
+  "errorServiceUnavailable": "El servicio de análisis no está disponible por ahora. Inténtalo de nuevo más tarde.",
   "errorEmptyResponse": "El servicio de análisis devolvió una respuesta vacía.",
   "errorRateLimited": "El servicio de análisis está limitando las solicitudes. Inténtalo de nuevo en un momento."
 }

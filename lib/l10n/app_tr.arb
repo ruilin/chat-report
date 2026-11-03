@@ -100,6 +100,7 @@
   "parseTooFew": "Yeterli mesaj yok ({count}) — bunun yerine yapıştırmayı dene",
   "errorAllChunksFailed": "Hiçbir ay analiz edilemedi. {detail}",
   "errorNoConnection": "Analiz hizmetine ulaşılamadı. Bağlantını kontrol edip tekrar dene.",
+  "errorServiceUnavailable": "Analiz hizmeti şu anda kullanılamıyor. Lütfen daha sonra tekrar dene.",
   "errorEmptyResponse": "Analiz hizmeti boş yanıt döndü.",
   "errorRateLimited": "Analiz hizmeti şu an çok fazla istek alıyor. Birazdan tekrar dene."
 }

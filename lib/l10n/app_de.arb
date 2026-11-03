@@ -100,6 +100,7 @@
   "parseTooFew": "Zu wenige Nachrichten ({count}) — probier lieber das Einfügen",
   "errorAllChunksFailed": "Die Analyse ist für alle Monate fehlgeschlagen. {detail}",
   "errorNoConnection": "Analysedienst nicht erreichbar. Prüf deine Verbindung und versuch's nochmal.",
+  "errorServiceUnavailable": "Der Analysedienst ist gerade nicht erreichbar. Versuch es später noch mal.",
   "errorEmptyResponse": "Der Analysedienst hat eine leere Antwort geliefert.",
   "errorRateLimited": "Der Analysedienst bekommt gerade zu viele Anfragen. Versuch's gleich nochmal."
 }
