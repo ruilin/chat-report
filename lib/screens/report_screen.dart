@@ -22,7 +22,10 @@ class ReportScreen extends StatelessWidget {
           children: [
             UAvatar(m.you, isYou: true, size: 30),
             Transform.translate(
-              offset: const Offset(-10, 0),
+              // 头像叠压：朝阅读方向的反向偏移，RTL 下镜像
+              offset: Offset(
+                  Directionality.of(context) == TextDirection.rtl ? 10 : -10,
+                  0),
               child: UAvatar(m.partner, isYou: false, size: 30),
             ),
             const SizedBox(width: 2),

@@ -5,9 +5,26 @@ import 'package:chat_report/l10n/locale_utils.dart';
 import 'package:chat_report/models/chat_data.dart';
 
 void main() {
-  test('all three locales are supported', () {
+  const newLanguages = ['es', 'pt', 'fr', 'de', 'it', 'tr', 'ar', 'hi', 'id'];
+
+  test('all locales are supported', () {
     final tags = L.supportedLocales.map((l) => l.toLanguageTag()).toSet();
-    expect(tags, containsAll(['en', 'zh', 'zh-Hant']));
+    expect(tags, containsAll(['en', 'zh', 'zh-Hant', ...newLanguages]));
+  });
+
+  test('new languages are translated, placeholders intact', () async {
+    final en = await L.delegate.load(const Locale('en'));
+    for (final code in newLanguages) {
+      final l = await L.delegate.load(Locale(code));
+      expect(l.setupTitle, isNot(en.setupTitle), reason: code);
+      expect(l.homeImportTitle, isNot(en.homeImportTitle), reason: code);
+      expect(l.reportYouAnd('Mia'), contains('Mia'), reason: code);
+      expect(l.setupMessageCount(12, 'X'), allOf(contains('12'), contains('X')),
+          reason: code);
+      expect(l.shareCardStarted('M'), contains('M'), reason: code);
+      // 品牌名不翻译
+      expect(l.appTitle, 'Chat Report', reason: code);
+    }
   });
 
   test('every locale resolves its own strings (no English leakage)', () async {
@@ -71,5 +88,11 @@ void main() {
         'Traditional Chinese');
     expect(await langFor(const Locale('zh', 'TW')), 'Traditional Chinese');
     expect(await langFor(const Locale('zh', 'HK')), 'Traditional Chinese');
+    expect(await langFor(const Locale('es', 'MX')), 'Spanish');
+    expect(await langFor(const Locale('pt', 'BR')), 'Brazilian Portuguese');
+    expect(await langFor(const Locale('ar')), 'Arabic');
+    expect(await langFor(const Locale('id')), 'Indonesian');
+    // 不支持的语言回退英文
+    expect(await langFor(const Locale('ja')), 'English');
   });
 }

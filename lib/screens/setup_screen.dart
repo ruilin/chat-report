@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/chat_data.dart';
@@ -25,8 +26,9 @@ class _SetupScreenState extends State<SetupScreen> {
   Widget build(BuildContext context) {
     final l = L.of(context);
     final data = widget.data;
+    final month = _monthYearFormat(Localizations.localeOf(context));
     final fmt =
-        '${_monthName(data.firstDate)} ${data.firstDate.year} – ${_monthName(data.lastDate)} ${data.lastDate.year}';
+        '${month.format(data.firstDate)} – ${month.format(data.lastDate)}';
 
     return Scaffold(
       appBar: AppBar(),
@@ -152,8 +154,11 @@ class _SetupScreenState extends State<SetupScreen> {
     );
   }
 
-  static String _monthName(DateTime d) => const [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-      ][d.month - 1];
+  /// 「Mar 2024」式月份，跟随界面语言；intl 没有 zh_Hant 这类
+  /// 带 script 的数据时回退到语言码
+  static DateFormat _monthYearFormat(Locale locale) {
+    final tag = locale.toString();
+    return DateFormat.yMMM(
+        DateFormat.localeExists(tag) ? tag : locale.languageCode);
+  }
 }

@@ -6,6 +6,22 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<!-- 与 lib/l10n/app_*.arb 对应；不声明的话 iOS 设置与 App Store 只认英文 -->
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>zh-Hans</string>
+		<string>zh-Hant</string>
+		<string>es</string>
+		<string>pt-BR</string>
+		<string>fr</string>
+		<string>de</string>
+		<string>it</string>
+		<string>tr</string>
+		<string>ar</string>
+		<string>hi</string>
+		<string>id</string>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Chat Report</string>
 	<key>CFBundleExecutable</key>

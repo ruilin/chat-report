@@ -19,19 +19,21 @@ class SplitBar extends StatelessWidget {
         children: [
           Expanded(
             flex: left.clamp(1, 99),
-            child: _segment(UColors.rose, '$left%', Alignment.centerLeft),
+            child: _segment(
+                UColors.rose, '$left%', AlignmentDirectional.centerStart),
           ),
           const SizedBox(width: 2),
           Expanded(
             flex: right.clamp(1, 99),
-            child: _segment(UColors.blue, '$right%', Alignment.centerRight),
+            child: _segment(
+                UColors.blue, '$right%', AlignmentDirectional.centerEnd),
           ),
         ],
       ),
     );
   }
 
-  Widget _segment(Color color, String label, Alignment align) {
+  Widget _segment(Color color, String label, AlignmentGeometry align) {
     return Container(
       alignment: align,
       padding: const EdgeInsets.symmetric(horizontal: 7),
@@ -78,6 +80,8 @@ class EmotionCurve extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Row(
+          // 时间轴与 _CurvePainter 一致固定从左到右，RTL 下也不镜像
+          textDirection: TextDirection.ltr,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _axisLabel(points.first.label),
@@ -223,7 +227,7 @@ class TopicBars extends StatelessWidget {
                   children: [
                     Expanded(
                       child: FractionallySizedBox(
-                        alignment: Alignment.centerLeft,
+                        alignment: AlignmentDirectional.centerStart,
                         widthFactor:
                             (topics[i].weight / maxW).clamp(.08, 1.0),
                         child: Container(
