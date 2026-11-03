@@ -1,6 +1,6 @@
 # Google Play 商店文案 — 简体中文（zh-CN）
 
-> 英文（默认语言）版见 [LISTING_EN.md](LISTING_EN.md)。截图用 `docs/store/zh/`。
+> 英文（默认语言）版见 [../en/LISTING.md](../en/LISTING.md)。本目录即简体中文版全部素材：文案、宣传图、截图。
 >
 > ✅ **App 界面已支持简体中文**（v1.1.0 起），报告正文也会用中文撰写。
 
@@ -60,6 +60,8 @@ Chat Report 把一份导出的聊天记录，变成一份关于这段关系的�
 
 赶时间？直接把一段对话粘贴进应用，就能免费快读。
 
+还没想好？在应用里先看一份示例报告，不用导出就知道会得到什么。
+
 适合谁
 
 好奇彼此相处节奏的情侣。想读懂暧昧期的人。想给一堆内部梗做年度回顾的好友。以及，正在回望某个已经结束的章节的人。
@@ -78,9 +80,9 @@ Chat Report 与任何消息服务均无从属、认可或关联关系。
 
 | 素材 | 规格 | 文件 |
 |---|---|---|
-| App icon | 512×512 PNG，无 alpha | `play_icon_512.png`（与英文共用） |
-| Feature graphic | 1024×500 PNG | `zh/feature_graphic.png` |
-| Phone screenshots | 1080×1920 | `zh/screenshot_1..6.png`（标题已中文化） |
+| App icon | 512×512 PNG，无 alpha | `../play_icon_512.png`（与英文共用） |
+| Feature graphic | 1024×500 PNG | `feature_graphic.png` |
+| Phone screenshots | 1080×1920 | `screenshot_1..6.png`（标题已中文化） |
 
 > 图标与宣传图是语言无关素材，Play Console 里各语言可复用同一套；截图则按语言各上传一套。
 

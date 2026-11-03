@@ -1,6 +1,6 @@
 # Google Play 商店文案 — English (United States) · 默认语言
 
-> 中文版见 [LISTING_ZH.md](LISTING_ZH.md)。截图用 `docs/store/en/`。
+> 本目录即英文版全部素材：文案（本文件）、宣传图、截图。其他语言见 `docs/store/<语言>/LISTING.md`。
 
 ---
 
@@ -60,9 +60,11 @@ HOW TO USE IT
 
 In a hurry? Paste any conversation straight into the app for a free quick read.
 
+Not sure yet? Open the sample report in the app to see exactly what you'll get — no export needed.
+
 WHO IT'S FOR
 
-Couples curious about their own rhythm. People trying to read a situationship. Friends who want a year-in-review of an epic group of inside jokes. Anyone looking back at a chapter that ended.
+Couples curious about their own rhythm. People trying to read a situationship. Best friends who want a year-in-review of their inside jokes. Anyone looking back at a chapter that ended.
 
 A NOTE ON WHAT THIS IS NOT
 
@@ -70,7 +72,7 @@ Chat Report describes patterns in a conversation. It is not therapy, not a diagn
 
 Chat Report is not affiliated with, endorsed by, or connected to any messaging service.
 ```
-> ~2,100 字符，留有余量。最后一行免责声明**必须保留** —— 避免与消息服务方产生关联暗示。
+> ~2,200 字符，留有余量。最后一行免责声明**必须保留** —— 避免与消息服务方产生关联暗示。
 
 ---
 
@@ -82,18 +84,18 @@ Chat Report is not affiliated with, endorsed by, or connected to any messaging s
 | Tags | Relationship, Analytics, Personal |
 | Contact email | **待填** —— 必须是能收信的地址 |
 | Website | **待填**（可选，但建议有） |
-| Privacy Policy URL | **必填** —— 见 `PRIVACY_POLICY.md`，需部署到公网 |
+| Privacy Policy URL | **必填** —— 见 `../PRIVACY_POLICY_EN.md`，需部署到公网 |
 | Default language | English (United States) |
 
 ---
 
-## 素材清单（均已生成于 `docs/store/`）
+## 素材清单（均在本目录）
 
 | 素材 | 规格 | 文件 |
 |---|---|---|
-| App icon | 512×512 PNG，无 alpha | `play_icon_512.png`（语言无关） |
-| Feature graphic | 1024×500 PNG | `en/feature_graphic.png` |
-| Phone screenshots | 1080×1920（9:16，符合 Play 2:1 上限）| `en/screenshot_1..6.png` |
+| App icon | 512×512 PNG，无 alpha | `../play_icon_512.png`（语言无关） |
+| Feature graphic | 1024×500 PNG | `feature_graphic.png` |
+| Phone screenshots | 1080×1920（9:16，符合 Play 2:1 上限）| `screenshot_1..6.png` |
 
 > Play 要求手机截图至少 2 张、最多 8 张。已备 6 张，建议全用 —— 商店转化率随截图数量提升。
 > **未提供**：平板截图（若不勾选平板支持则不需要）。

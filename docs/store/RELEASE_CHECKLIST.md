@@ -61,7 +61,7 @@
 | 商店图标 512 | `docs/store/play_icon_512.png`（语言无关，各语言复用） |
 | 宣传图 1024×500 | `docs/store/<语言>/feature_graphic.png`（12 种语言各一张，见下方语言表） |
 | 手机截图 ×6 ×3 语言 | `en/` + `zh/` + `zh-Hant/`（1080×1920；各语言真实界面） |
-| 商店文案 | `LISTING_EN.md`（默认）+ `LISTING_ZH.md` + `LISTING_ZH_HANT.md` |
+| 商店文案 | `docs/store/<语言>/LISTING.md`（12 种语言，与该语言的宣传图、截图同目录；`en/` 为默认语言） |
 | 隐私政策 | 三语 HTML 已提交至 `ruilin/resource` 仓库**待推送**（en / zh / zh-Hant，三页互链） |
 | 版本日志 | `RELEASE_NOTES.md`（中英各一版，均在 500 字符上限内） |
 
@@ -72,32 +72,32 @@
 **默认语言：English (United States)** —— 创建 App 时选定，**之后不可更改**。
 
 新增中文页：Play Console → *Store presence → Store listing → 右上角语言下拉 → Manage translations
-→ Add your own translation → 选 **中文 (简体) – zh-CN***，然后逐字段粘贴 `LISTING_ZH.md`。
+→ Add your own translation → 选 **中文 (简体) – zh-CN***，然后逐字段粘贴 `zh/LISTING.md`。
 
 每种语言需**分别**填写：应用名称、简短说明、完整说明、截图、宣传图、隐私政策 URL。
 图标全局共用，只传一次；宣传图按语言上传 `docs/store/<目录>/feature_graphic.png`。
 
 | 语言 | 代码 | 文案 | 截图 | 隐私政策 URL |
 |---|---|---|---|---|
-| English (US) — 默认 | `en-US` | `LISTING_EN.md` | `docs/store/en/` | `…/chatreport-privacy.html` |
-| 中文（简体） | `zh-CN` | `LISTING_ZH.md` | `docs/store/zh/` | `…/chatreport-privacy-zh.html` |
-| 中文（繁體）台灣 | `zh-TW` | `LISTING_ZH_HANT.md` | `docs/store/zh-Hant/` | `…/chatreport-privacy-zh-hant.html` |
-| 中文（香港） | `zh-HK` | `LISTING_ZH_HANT.md`（同一份贴两次） | `docs/store/zh-Hant/` | 同上 |
+| English (US) — 默认 | `en-US` | `en/LISTING.md` | `docs/store/en/` | `…/chatreport-privacy.html` |
+| 中文（简体） | `zh-CN` | `zh/LISTING.md` | `docs/store/zh/` | `…/chatreport-privacy-zh.html` |
+| 中文（繁體）台灣 | `zh-TW` | `zh-Hant/LISTING.md` | `docs/store/zh-Hant/` | `…/chatreport-privacy-zh-hant.html` |
+| 中文（香港） | `zh-HK` | `zh-Hant/LISTING.md`（同一份贴两次） | `docs/store/zh-Hant/` | 同上 |
 
-App 内另支持 9 种语言，宣传图已就绪（`docs/store/<目录>/feature_graphic.png`），
-但商店文案与截图尚未准备 —— Play 要求每个语言版本填齐名称和说明，备齐后再建：
+App 内另支持 9 种语言，文案与宣传图已就绪，在各自目录的 `LISTING.md` 与 `feature_graphic.png`。
+这 9 种暂无本地化截图（Play 会回退显示英文截图），隐私政策也暂用英文版 URL：
 
-| 语言 | 代码 | 宣传图目录 |
-|---|---|---|
-| Español (Latinoamérica) | `es-419` | `docs/store/es/` |
-| Português (Brasil) | `pt-BR` | `docs/store/pt/` |
-| Français | `fr-FR` | `docs/store/fr/` |
-| Deutsch | `de-DE` | `docs/store/de/` |
-| Italiano | `it-IT` | `docs/store/it/` |
-| Türkçe | `tr-TR` | `docs/store/tr/` |
-| العربية | `ar` | `docs/store/ar/` |
-| हिन्दी | `hi-IN` | `docs/store/hi/` |
-| Bahasa Indonesia | `id` | `docs/store/id/` |
+| 语言 | 代码 | 文案 + 宣传图 | 隐私政策 URL |
+|---|---|---|---|
+| Español (Latinoamérica) | `es-419` | `docs/store/es/` | 英文版 |
+| Português (Brasil) | `pt-BR` | `docs/store/pt/` | 英文版 |
+| Français | `fr-FR` | `docs/store/fr/` | 英文版 |
+| Deutsch | `de-DE` | `docs/store/de/` | 英文版 |
+| Italiano | `it-IT` | `docs/store/it/` | 英文版 |
+| Türkçe | `tr-TR` | `docs/store/tr/` | 英文版 |
+| العربية | `ar` | `docs/store/ar/` | 英文版 |
+| हिन्दी | `hi-IN` | `docs/store/hi/` | 英文版 |
+| Bahasa Indonesia | `id` | `docs/store/id/` | 英文版 |
 
 宣传图重新生成：`tool/capture_banner_src.sh <原图目录>`（真机采集）→
 `python3 tool/gen_feature_graphic.py <原图目录>`（裁出分享卡与情绪曲线卡、Chrome 渲染）。
@@ -179,7 +179,7 @@ Play Console 操作顺序：
 1. Create app → 填名称/语言/免费或付费
 2. **Internal testing** → Create new release → 上传 `app-release.aab`
 3. App content：隐私政策 URL、Data safety、内容分级、目标受众、广告声明（选"无广告"）
-4. Store listing：按语言粘贴 `LISTING_*.md` 的文案 + 上传对应语言的截图
+4. Store listing：按语言粘贴 `docs/store/<语言>/LISTING.md` 的文案 + 上传对应语言的截图
 5. 内部测试跑通后再逐步推 Closed → Open → Production
 
 ## 版本号规则

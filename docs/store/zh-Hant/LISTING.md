@@ -1,7 +1,7 @@
 # Google Play 商店文案 — 繁體中文（zh-TW / zh-HK）
 
-> 英文（預設語言）版見 [LISTING_EN.md](LISTING_EN.md)，簡體版見 [LISTING_ZH.md](LISTING_ZH.md)。
-> 截圖用 `docs/store/zh-Hant/`。
+> 英文（預設語言）版見 [../en/LISTING.md](../en/LISTING.md)，簡體版見 [../zh/LISTING.md](../zh/LISTING.md)。
+> 本目錄即繁體中文版全部素材：文案、宣傳圖、截圖。
 >
 > ✅ **App 介面已支援繁體中文**（v1.1.0 起），報告內文也會以繁體中文撰寫。
 >
@@ -64,6 +64,8 @@ Chat Report 把一份匯出的聊天紀錄，變成一份關於這段關係的�
 
 趕時間？直接把一段對話貼進應用程式，就能免費快讀。
 
+還沒想好？在應用程式裡先看一份範例報告，不必匯出就知道會得到什麼。
+
 適合誰
 
 好奇彼此相處節奏的情侶。想讀懂曖昧期的人。想為一堆內部梗做年度回顧的好友。以及，正在回望某個已經結束的篇章的人。
@@ -82,9 +84,9 @@ Chat Report 與任何訊息服務均無從屬、認可或關聯關係。
 
 | 素材 | 規格 | 檔案 |
 |---|---|---|
-| App icon | 512×512 PNG，無 alpha | `play_icon_512.png`（與其他語言共用） |
-| Feature graphic | 1024×500 PNG | `zh-Hant/feature_graphic.png` |
-| Phone screenshots | 1080×1920 | `zh-Hant/screenshot_1..6.png`（標題已繁體化） |
+| App icon | 512×512 PNG，無 alpha | `../play_icon_512.png`（與其他語言共用） |
+| Feature graphic | 1024×500 PNG | `feature_graphic.png` |
+| Phone screenshots | 1080×1920 | `screenshot_1..6.png`（標題已繁體化） |
 
 ---
 
