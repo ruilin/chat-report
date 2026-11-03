@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:chat_report/l10n/app_localizations.dart';
 import 'package:chat_report/main.dart';
@@ -31,6 +32,34 @@ void main() {
     expect(sampleLangOf(const Locale('zh', 'TW')), 'zh-Hant');
     expect(sampleLangOf(const Locale('es', 'MX')), 'es');
     expect(sampleLangOf(const Locale('ja')), 'en');
+  });
+
+  testWidgets('reply-time labels fit at 360dp in every language',
+      (tester) async {
+    tester.view.physicalSize = const Size(360, 780);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    for (final locale in L.supportedLocales) {
+      await tester.pumpWidget(MaterialApp(
+        locale: locale,
+        localizationsDelegates: L.localizationsDelegates,
+        supportedLocales: L.supportedLocales,
+        home: ReportScreen(
+            report: buildSampleReport(lang: sampleLangOf(locale))),
+      ));
+      await tester.pumpAndSettle();
+      final l = L.of(tester.element(find.byType(ReportScreen)));
+      for (final label in [
+        l.labelYourReplyTime,
+        l.labelTheirReplyTime('MIA'),
+      ]) {
+        final paragraph =
+            tester.renderObject<RenderParagraph>(find.text(label));
+        expect(paragraph.didExceedMaxLines, isFalse,
+            reason: '$locale: "$label" is truncated');
+      }
+    }
   });
 
   testWidgets('home sample link opens a marked report that leads to import',

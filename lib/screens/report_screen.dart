@@ -175,17 +175,22 @@ class ReportScreen extends StatelessWidget {
           const SizedBox(height: 4),
           SplitBar(leftShare: m.startShareOf(m.you)),
           const SizedBox(height: 14),
-          Row(
-            children: [
-              _replyTile(l.labelYourReplyTime, fmtDur(m.medianReply[m.you]!),
-                  UColors.roseSoft, const Color(0xFFB06A79)),
-              const SizedBox(width: 10),
-              _replyTile(
-                  l.labelTheirReplyTime(m.partner.toUpperCase()),
-                  fmtDur(m.medianReply[m.partner]!),
-                  UColors.blueSoft,
-                  const Color(0xFF4E82A6)),
-            ],
+          // 标签可能换行（长名字、西/葡/意等较长译文），两块等高、数值底对齐
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _replyTile(l.labelYourReplyTime,
+                    fmtDur(m.medianReply[m.you]!), UColors.roseSoft,
+                    const Color(0xFFB06A79)),
+                const SizedBox(width: 10),
+                _replyTile(
+                    l.labelTheirReplyTime(m.partner.toUpperCase()),
+                    fmtDur(m.medianReply[m.partner]!),
+                    UColors.blueSoft,
+                    const Color(0xFF4E82A6)),
+              ],
+            ),
           ),
         ],
       ),
@@ -211,9 +216,11 @@ class ReportScreen extends StatelessWidget {
             color: bg, borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(label,
-                maxLines: 1,
+                // 真机字体下通常 1–2 行；留第 3 行给很长的联系人名
+                maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 8.5,
