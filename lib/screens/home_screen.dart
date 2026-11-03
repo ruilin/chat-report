@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../debug/mock_report.dart';
 import '../l10n/app_localizations.dart';
+import '../services/analytics.dart';
 import '../services/whatsapp_parser.dart';
 import '../theme.dart';
 import 'import_guide_sheet.dart';
@@ -22,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// 主入口：先弹分步引导（含跳转 WhatsApp），用户拿到文件后再选取。
   Future<void> _startImport() async {
+    Analytics.importGuideOpen();
     final action = await showImportGuideSheet(context);
     if (action == 'pick') await _importFile();
   }
@@ -29,12 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _importFile() async {
     const group = XTypeGroup(label: 'Chat export', extensions: ['txt']);
     final file = await openFile(acceptedTypeGroups: [group]);
+    Analytics.importFilePick(file == null ? 'cancelled' : 'picked');
     if (file == null) return;
     final raw = await file.readAsString();
-    await _parseAndGo(raw);
+    await _parseAndGo(raw, source: 'file');
   }
 
   Future<void> _pasteText() async {
+    Analytics.pasteSheetOpen();
     final l = L.of(context);
     final controller = TextEditingController();
     final raw = await showModalBottomSheet<String>(
@@ -93,17 +97,28 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-    if (raw != null && raw.trim().isNotEmpty) await _parseAndGo(raw);
+    if (raw != null && raw.trim().isNotEmpty) {
+      await _parseAndGo(raw, source: 'paste');
+    }
   }
 
-  Future<void> _parseAndGo(String raw) async {
+  /// [source]: file / paste，仅用于埋点区分入口
+  Future<void> _parseAndGo(String raw, {required String source}) async {
     setState(() => _busy = true);
     try {
       final data = WhatsAppParser().parse(raw);
+      Analytics.chatParseSuccess(
+        source: source,
+        messageCount: data.messages.length,
+        participantCount: data.participants.length,
+        daySpan: data.lastDate.difference(data.firstDate).inDays,
+      );
       if (!mounted) return;
       await Navigator.of(context).push(MaterialPageRoute(
+          settings: const RouteSettings(name: 'setup'),
           builder: (_) => SetupScreen(data: data)));
     } on ParseException catch (e) {
+      Analytics.chatParseFail(source: source, reason: e.kind.name);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(e.localize(L.of(context))),

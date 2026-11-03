@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "60046918748",
+    "project_id": "chatreport-34c7e",
+    "storage_bucket": "chatreport-34c7e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60046918748:android:09f57276e94277ac539299",
+        "android_client_info": {
+          "package_name": "com.ruilin.chatreport"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtoZbH1NNUEspHDZ0PYNnOCXShtHdGg7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

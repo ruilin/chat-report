@@ -8,6 +8,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/report.dart';
+import '../services/analytics.dart';
 import '../theme.dart';
 
 /// 分享卡片（设计稿 Step 4）：固定深色 —— 在浅色的 IG Story 流里跳出来；
@@ -131,6 +132,7 @@ class ShareCard extends StatelessWidget {
 Future<void> showShareSheet(BuildContext context, RelationshipReport report) {
   final boundaryKey = GlobalKey();
   var sharing = false;
+  Analytics.shareSheetOpen();
 
   return showModalBottomSheet<void>(
     context: context,
@@ -174,9 +176,11 @@ Future<void> showShareSheet(BuildContext context, RelationshipReport report) {
                     : () async {
                         setState(() => sharing = true);
                         try {
-                                          await _captureAndShare(
+                          final status = await _captureAndShare(
                               boundaryKey, L.of(ctx).shareText);
+                          Analytics.shareResult(status.name);
                         } catch (e) {
+                          Analytics.shareResult('error');
                           if (ctx.mounted) {
                             ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
                                 content:
@@ -207,7 +211,8 @@ Future<void> showShareSheet(BuildContext context, RelationshipReport report) {
   );
 }
 
-Future<void> _captureAndShare(
+/// 返回系统分享面板的结果（success / dismissed / unavailable）
+Future<ShareResultStatus> _captureAndShare(
     GlobalKey boundaryKey, String shareText) async {
   final boundary = boundaryKey.currentContext?.findRenderObject()
       as RenderRepaintBoundary?;
@@ -223,8 +228,9 @@ Future<void> _captureAndShare(
       '${dir.path}/chat_report_${DateTime.now().millisecondsSinceEpoch}.png');
   await file.writeAsBytes(bytes.buffer.asUint8List());
 
-  await SharePlus.instance.share(ShareParams(
+  final result = await SharePlus.instance.share(ShareParams(
     files: [XFile(file.path, mimeType: 'image/png')],
     text: shareText,
   ));
+  return result.status;
 }

@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'l10n/app_localizations.dart';
 import 'screens/home_screen.dart';
+import 'services/analytics.dart';
 import 'theme.dart';
 
-void main() => runApp(const ChatReportApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Analytics.init();
+  runApp(const ChatReportApp());
+}
 
 class ChatReportApp extends StatelessWidget {
   const ChatReportApp({super.key});
@@ -17,6 +22,7 @@ class ChatReportApp extends StatelessWidget {
       theme: buildTheme(),
       localizationsDelegates: L.localizationsDelegates,
       supportedLocales: L.supportedLocales,
+      navigatorObservers: Analytics.observers,
       home: const HomeScreen(),
     );
   }

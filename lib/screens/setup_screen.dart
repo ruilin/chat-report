@@ -133,6 +133,7 @@ class _SetupScreenState extends State<SetupScreen> {
                 onPressed: _relationship == null
                     ? null
                     : () => Navigator.of(context).push(MaterialPageRoute(
+                          settings: const RouteSettings(name: 'analyzing'),
                           builder: (_) => AnalyzingScreen(
                             data: widget.data,
                             you: _you,

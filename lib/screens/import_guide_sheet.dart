@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../l10n/app_localizations.dart';
+import '../services/analytics.dart';
 import '../theme.dart';
 
 /// 导入引导弹层：分步教用户从 WhatsApp 导出聊天记录，
@@ -37,11 +38,14 @@ class _ImportGuideSheet extends StatelessWidget {
       Uri.parse('whatsapp://'),
       mode: LaunchMode.externalApplication,
     ).catchError((_) => false);
-    if (!ok) {
+    if (ok) {
+      Analytics.whatsappOpen('app');
+    } else {
       final web = await launchUrl(
         Uri.parse('https://wa.me/'),
         mode: LaunchMode.externalApplication,
       ).catchError((_) => false);
+      Analytics.whatsappOpen(web ? 'web' : 'failed');
       if (!web) {
         messenger.showSnackBar(SnackBar(
           content: Text(failedMsg),

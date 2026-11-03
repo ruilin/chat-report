@@ -6,6 +6,7 @@ import '../l10n/app_localizations.dart';
 import '../l10n/locale_utils.dart';
 import '../models/chat_data.dart';
 import '../services/analysis_pipeline.dart';
+import '../services/analytics.dart';
 import '../services/zai_client.dart';
 import '../services/metrics_engine.dart';
 import '../theme.dart';
@@ -35,6 +36,11 @@ class _AnalyzingScreenState extends State<AnalyzingScreen> {
   Timer? _quipTimer;
   ZaiException? _error;
   Object? _rawError;
+  final _stopwatch = Stopwatch();
+  bool _finished = false;
+
+  String get _rel => widget.relationship.name;
+  int get _elapsedSec => _stopwatch.elapsed.inSeconds;
 
   @override
   void initState() {
@@ -47,6 +53,9 @@ class _AnalyzingScreenState extends State<AnalyzingScreen> {
   }
 
   Future<void> _run() async {
+    _stopwatch.start();
+    Analytics.analysisStart(
+        relationship: _rel, messageCount: widget.data.messages.length);
     try {
       final metrics =
           MetricsEngine().compute(widget.data, you: widget.you);
@@ -59,12 +68,25 @@ class _AnalyzingScreenState extends State<AnalyzingScreen> {
           if (mounted) setState(() => _fraction = fraction);
         },
       );
+      _finished = true;
+      Analytics.analysisSuccess(
+        relationship: _rel,
+        messageCount: widget.data.messages.length,
+        durationSec: _elapsedSec,
+      );
       if (!mounted) return;
       Navigator.of(context).pushReplacement(MaterialPageRoute(
+          settings: const RouteSettings(name: 'report'),
           builder: (_) => ReportScreen(report: report)));
     } catch (e) {
       // ignore: avoid_print
       print('[analyze] failed: $e');
+      _finished = true;
+      Analytics.analysisFail(
+        relationship: _rel,
+        errorKind: e is ZaiException ? e.kind.name : 'other',
+        durationSec: _elapsedSec,
+      );
       if (mounted) {
         setState(() {
           _error = e is ZaiException ? e : null;
@@ -76,6 +98,9 @@ class _AnalyzingScreenState extends State<AnalyzingScreen> {
 
   @override
   void dispose() {
+    if (!_finished && _stopwatch.isRunning) {
+      Analytics.analysisCancel(relationship: _rel, elapsedSec: _elapsedSec);
+    }
     _quipTimer?.cancel();
     _pipeline.dispose();
     super.dispose();
