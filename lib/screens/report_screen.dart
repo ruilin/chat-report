@@ -92,7 +92,9 @@ class ReportScreen extends StatelessWidget {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
+        // 显式 padding 会让 ListView 不再自动避让系统栏，底部要自己加上导航栏高度
+        padding: EdgeInsets.fromLTRB(
+            20, 8, 20, 32 + MediaQuery.paddingOf(context).bottom),
         children: [
           if (isSample) ...[
             _sampleBanner(context, l),
