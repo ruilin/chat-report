@@ -31,7 +31,7 @@ class LAr extends L {
 
   @override
   String get homePrivacy =>
-      'يجري التحليل على هاتفك. لا نحتفظ بمحادثاتك أبدًا — تُحذف فور جاهزية تقريرك.';
+      'تُحسب الإحصاءات على هاتفك. ولكتابة تقريرك تُرسل رسائلك إلى مزوّد الذكاء الاصطناعي لدينا — ولا نحتفظ بها أبدًا.';
 
   @override
   String get pasteSheetTitle => 'الصق محادثة';
@@ -164,7 +164,20 @@ class LAr extends L {
 
   @override
   String get analyzingPrivacy =>
-      'تُحذف المحادثات من خوادمنا فور انتهاء التحليل.';
+      'تُرسل رسائلك إلى مزوّد الذكاء الاصطناعي لدينا فقط لكتابة هذا التقرير. ولا نحتفظ بها.';
+
+  @override
+  String get consentTitle => 'قبل التحليل';
+
+  @override
+  String get consentBody =>
+      'تُحسب الأعداد وأوقات الرد على هاتفك. ولكتابة تقريرك، يُرسل نص هذه المحادثة — بما في ذلك رسائل الطرف الآخر والأسماء — عبر اتصال مشفّر إلى مزوّد الذكاء الاصطناعي لدينا Z.ai. لا نحتفظ به. حلّل فقط المحادثات التي تشارك فيها.';
+
+  @override
+  String get consentAgree => 'موافق، حلّل';
+
+  @override
+  String get consentCancel => 'ليس الآن';
 
   @override
   String get errorTitle => 'حدث خطأ ما';

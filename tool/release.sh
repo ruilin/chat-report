@@ -22,7 +22,9 @@ flutter test
 
 echo
 echo "── 构建 AAB ───────────────────────────────"
-flutter build appbundle --release
+# --obfuscate 混淆 Dart 符号名；符号表留在本地，用来还原线上崩溃堆栈（勿上传/勿删）
+SYMBOLS="build/symbols/$NAME+$CODE"
+flutter build appbundle --release --obfuscate --split-debug-info="$SYMBOLS"
 
 AAB=build/app/outputs/bundle/release/app-release.aab
 
@@ -33,11 +35,17 @@ ACTUAL_CODE=$(unzip -p "$AAB" base/manifest/AndroidManifest.xml \
 SIGNER=$(keytool -printcert -jarfile "$AAB" 2>/dev/null \
   | grep -m1 -E "Owner|所有者" | sed 's/.*: //')
 
+UNPACKED=$(mktemp -d)
+unzip -o -q "$AAB" -d "$UNPACKED"
+dart run tool/check_key_leak.dart "$UNPACKED"
+rm -rf "$UNPACKED"
+
 echo "  versionName : $NAME"
 echo "  versionCode : $CODE"
 echo "  签名主体     : $SIGNER"
 echo "  体积         : $(du -h "$AAB" | cut -f1)"
 echo "  路径         : $AAB"
+echo "  符号表       : $SYMBOLS"
 
 case "$SIGNER" in
   *"Chat Report"*) ;;

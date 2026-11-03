@@ -32,7 +32,7 @@ class LFr extends L {
 
   @override
   String get homePrivacy =>
-      'L\'analyse se fait sur ton téléphone. Tes discussions ne sont jamais conservées — elles sont supprimées dès que ton rapport est prêt.';
+      'Les statistiques sont calculées sur ton téléphone. Pour rédiger ton rapport, tes messages sont envoyés à notre fournisseur d\'IA — on ne les conserve jamais.';
 
   @override
   String get pasteSheetTitle => 'Coller une conversation';
@@ -170,7 +170,20 @@ class LFr extends L {
 
   @override
   String get analyzingPrivacy =>
-      'Tes discussions sont supprimées de nos serveurs dès que c\'est terminé.';
+      'Tes messages sont envoyés à notre fournisseur d\'IA uniquement pour rédiger ce rapport. On ne les conserve pas.';
+
+  @override
+  String get consentTitle => 'Avant l\'analyse';
+
+  @override
+  String get consentBody =>
+      'Les comptes et les temps de réponse sont calculés sur ton téléphone. Pour rédiger ton rapport, le texte de cette discussion — y compris les messages et les noms de l\'autre personne — est envoyé via une connexion chiffrée à notre fournisseur d\'IA, Z.ai. On ne le conserve pas. N\'analyse que des discussions auxquelles tu participes.';
+
+  @override
+  String get consentAgree => 'Accepter et analyser';
+
+  @override
+  String get consentCancel => 'Pas maintenant';
 
   @override
   String get errorTitle => 'Oups, quelque chose a coincé';

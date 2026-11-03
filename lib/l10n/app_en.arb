@@ -9,7 +9,7 @@
   "homeImportHint": "Step-by-step guide inside — takes about 30 seconds  →",
   "homePasteTitle": "Paste a conversation",
   "homePasteSubtitle": "Quick read · free · 30 seconds",
-  "homePrivacy": "Analysis runs on your phone. Your chats are never stored — deleted the moment your report is ready.",
+  "homePrivacy": "Stats are calculated on your phone. To write your report, your messages go to our AI provider — we never keep them.",
 
   "pasteSheetTitle": "Paste a conversation",
   "pasteSheetSubtitle": "Copy messages from any chat and paste them here.",
@@ -60,7 +60,11 @@
   "stageCounting": "Counting who texts first",
   "stageBetweenLines": "Reading between the lines",
   "stageWriting": "Writing your report",
-  "analyzingPrivacy": "Chats are deleted from our servers the moment this finishes.",
+  "analyzingPrivacy": "Your messages are sent to our AI provider only to write this report. We don't keep them.",
+  "consentTitle": "Before we analyze",
+  "consentBody": "Counts and reply times are calculated on your phone. To write your report, the text of this chat — including the other person's messages and names — is sent over an encrypted connection to our AI provider, Z.ai. We don't store it. Only analyze chats you're part of.",
+  "consentAgree": "Agree & analyze",
+  "consentCancel": "Not now",
   "errorTitle": "Something went wrong",
   "errorRetry": "Try again",
 

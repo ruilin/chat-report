@@ -32,7 +32,7 @@ class LTr extends L {
 
   @override
   String get homePrivacy =>
-      'Analiz telefonunda yapılır. Sohbetlerin asla saklanmaz — raporun hazır olduğu anda silinir.';
+      'İstatistikler telefonunda hesaplanır. Raporunu yazmak için mesajların yapay zekâ sağlayıcımıza gönderilir — onları asla saklamayız.';
 
   @override
   String get pasteSheetTitle => 'Bir sohbet yapıştır';
@@ -168,7 +168,20 @@ class LTr extends L {
 
   @override
   String get analyzingPrivacy =>
-      'Bu işlem biter bitmez sohbetler sunucularımızdan silinir.';
+      'Mesajların yalnızca bu raporu yazmak için yapay zekâ sağlayıcımıza gönderilir. Onları saklamayız.';
+
+  @override
+  String get consentTitle => 'Analizden önce';
+
+  @override
+  String get consentBody =>
+      'Mesaj sayıları ve yanıt süreleri telefonunda hesaplanır. Raporunu yazmak için bu sohbetin metni (karşı tarafın mesajları ve isimler dahil) şifreli bağlantıyla yapay zekâ sağlayıcımız Z.ai\'ye gönderilir. Bunu saklamayız. Yalnızca dahil olduğun sohbetleri analiz et.';
+
+  @override
+  String get consentAgree => 'Kabul et ve analiz et';
+
+  @override
+  String get consentCancel => 'Şimdi değil';
 
   @override
   String get errorTitle => 'Bir şeyler ters gitti';

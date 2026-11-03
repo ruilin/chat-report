@@ -30,7 +30,7 @@ class LZh extends L {
   String get homePasteSubtitle => '快读 · 免费 · 30 秒';
 
   @override
-  String get homePrivacy => '分析在你的手机上进行。聊天内容从不留存 —— 报告生成后即刻删除。';
+  String get homePrivacy => '统计在你的手机上完成。为了生成报告，聊天内容会发送给我们的 AI 服务商，我们不留存。';
 
   @override
   String get pasteSheetTitle => '粘贴一段对话';
@@ -159,7 +159,20 @@ class LZh extends L {
   String get stageWriting => '撰写你的报告';
 
   @override
-  String get analyzingPrivacy => '分析一结束，聊天内容即从服务器删除。';
+  String get analyzingPrivacy => '聊天内容仅发送给 AI 服务商用于生成本次报告，我们不留存。';
+
+  @override
+  String get consentTitle => '分析前请确认';
+
+  @override
+  String get consentBody =>
+      '消息数、回复时长等统计在你的手机上完成。为了生成报告，这段聊天的文字（包括对方的消息和双方名字）会经加密连接发送给我们的 AI 服务商 Z.ai（智谱）。我们不保存这些内容。请只分析你本人参与的聊天。';
+
+  @override
+  String get consentAgree => '同意并分析';
+
+  @override
+  String get consentCancel => '暂不';
 
   @override
   String get errorTitle => '出了点问题';
@@ -327,7 +340,7 @@ class LZhHant extends LZh {
   String get homePasteSubtitle => '快讀 · 免費 · 30 秒';
 
   @override
-  String get homePrivacy => '分析在你的手機上進行。聊天內容從不留存 —— 報告產生後立即刪除。';
+  String get homePrivacy => '統計在你的手機上完成。為了產生報告，聊天內容會傳送給我們的 AI 服務商，我們不留存。';
 
   @override
   String get pasteSheetTitle => '貼上一段對話';
@@ -456,7 +469,20 @@ class LZhHant extends LZh {
   String get stageWriting => '撰寫你的報告';
 
   @override
-  String get analyzingPrivacy => '分析一結束，聊天內容即從伺服器刪除。';
+  String get analyzingPrivacy => '聊天內容僅傳送給 AI 服務商用於產生本次報告，我們不留存。';
+
+  @override
+  String get consentTitle => '分析前請確認';
+
+  @override
+  String get consentBody =>
+      '訊息數、回覆時間等統計在你的手機上完成。為了產生報告，這段聊天的文字（包括對方的訊息和雙方名字）會經加密連線傳送給我們的 AI 服務商 Z.ai（智譜）。我們不儲存這些內容。請只分析你本人參與的聊天。';
+
+  @override
+  String get consentAgree => '同意並分析';
+
+  @override
+  String get consentCancel => '暫不';
 
   @override
   String get errorTitle => '出了點問題';

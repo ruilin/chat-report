@@ -32,7 +32,7 @@ class LId extends L {
 
   @override
   String get homePrivacy =>
-      'Analisis berjalan di HP kamu. Chat kamu tidak pernah disimpan — langsung dihapus begitu laporanmu siap.';
+      'Statistik dihitung di HP kamu. Untuk menulis laporanmu, pesanmu dikirim ke penyedia AI kami — kami tidak pernah menyimpannya.';
 
   @override
   String get pasteSheetTitle => 'Tempel percakapan';
@@ -166,7 +166,20 @@ class LId extends L {
 
   @override
   String get analyzingPrivacy =>
-      'Chat langsung dihapus dari server kami begitu proses ini selesai.';
+      'Pesanmu dikirim ke penyedia AI kami hanya untuk menulis laporan ini. Kami tidak menyimpannya.';
+
+  @override
+  String get consentTitle => 'Sebelum dianalisis';
+
+  @override
+  String get consentBody =>
+      'Jumlah pesan dan waktu balas dihitung di HP kamu. Untuk menulis laporanmu, teks chat ini — termasuk pesan dan nama orang lain — dikirim lewat koneksi terenkripsi ke penyedia AI kami, Z.ai. Kami tidak menyimpannya. Analisis hanya chat yang kamu ikuti.';
+
+  @override
+  String get consentAgree => 'Setuju & analisis';
+
+  @override
+  String get consentCancel => 'Nanti saja';
 
   @override
   String get errorTitle => 'Ada yang salah';

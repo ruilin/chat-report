@@ -69,6 +69,10 @@ class Analytics {
 
   // —— 分析 ——
 
+  /// 首次分析前的 AI 处理同意弹窗，[result]: accepted / declined
+  static void aiConsent(String result) =>
+      _log('ai_consent', {'result': result});
+
   static void analysisStart({
     required String relationship,
     required int messageCount,

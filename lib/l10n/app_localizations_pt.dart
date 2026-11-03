@@ -32,7 +32,7 @@ class LPt extends L {
 
   @override
   String get homePrivacy =>
-      'A análise roda no seu celular. Suas conversas nunca ficam salvas — são apagadas assim que o relatório fica pronto.';
+      'As estatísticas são calculadas no seu celular. Para escrever o relatório, suas mensagens vão para nosso provedor de IA — nunca as guardamos.';
 
   @override
   String get pasteSheetTitle => 'Cole uma conversa';
@@ -169,7 +169,20 @@ class LPt extends L {
 
   @override
   String get analyzingPrivacy =>
-      'As conversas são apagadas dos nossos servidores assim que a análise termina.';
+      'Suas mensagens são enviadas ao nosso provedor de IA só para escrever este relatório. Não as guardamos.';
+
+  @override
+  String get consentTitle => 'Antes de analisar';
+
+  @override
+  String get consentBody =>
+      'Contagens e tempos de resposta são calculados no seu celular. Para escrever o relatório, o texto desta conversa — incluindo as mensagens e os nomes da outra pessoa — é enviado por uma conexão criptografada ao nosso provedor de IA, Z.ai. Não guardamos esse conteúdo. Analise só conversas das quais você participa.';
+
+  @override
+  String get consentAgree => 'Aceitar e analisar';
+
+  @override
+  String get consentCancel => 'Agora não';
 
   @override
   String get errorTitle => 'Algo deu errado';

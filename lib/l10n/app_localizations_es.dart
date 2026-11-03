@@ -31,7 +31,7 @@ class LEs extends L {
 
   @override
   String get homePrivacy =>
-      'El análisis se hace en tu teléfono. Tus chats nunca se guardan: se borran en cuanto tu informe está listo.';
+      'Las estadísticas se calculan en tu teléfono. Para escribir tu informe, tus mensajes se envían a nuestro proveedor de IA; nunca los guardamos.';
 
   @override
   String get pasteSheetTitle => 'Pega una conversación';
@@ -169,7 +169,20 @@ class LEs extends L {
 
   @override
   String get analyzingPrivacy =>
-      'Los chats se borran de nuestros servidores en cuanto termina el análisis.';
+      'Tus mensajes se envían a nuestro proveedor de IA solo para escribir este informe. No los guardamos.';
+
+  @override
+  String get consentTitle => 'Antes de analizar';
+
+  @override
+  String get consentBody =>
+      'Los conteos y tiempos de respuesta se calculan en tu teléfono. Para escribir tu informe, el texto de este chat —incluidos los mensajes y nombres de la otra persona— se envía por una conexión cifrada a nuestro proveedor de IA, Z.ai. No lo guardamos. Analiza solo chats en los que participas.';
+
+  @override
+  String get consentAgree => 'Aceptar y analizar';
+
+  @override
+  String get consentCancel => 'Ahora no';
 
   @override
   String get errorTitle => 'Algo salió mal';

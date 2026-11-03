@@ -161,7 +161,7 @@ abstract class L {
   /// No description provided for @homePrivacy.
   ///
   /// In en, this message translates to:
-  /// **'Analysis runs on your phone. Your chats are never stored — deleted the moment your report is ready.'**
+  /// **'Stats are calculated on your phone. To write your report, your messages go to our AI provider — we never keep them.'**
   String get homePrivacy;
 
   /// No description provided for @pasteSheetTitle.
@@ -407,8 +407,32 @@ abstract class L {
   /// No description provided for @analyzingPrivacy.
   ///
   /// In en, this message translates to:
-  /// **'Chats are deleted from our servers the moment this finishes.'**
+  /// **'Your messages are sent to our AI provider only to write this report. We don\'t keep them.'**
   String get analyzingPrivacy;
+
+  /// No description provided for @consentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Before we analyze'**
+  String get consentTitle;
+
+  /// No description provided for @consentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Counts and reply times are calculated on your phone. To write your report, the text of this chat — including the other person\'s messages and names — is sent over an encrypted connection to our AI provider, Z.ai. We don\'t store it. Only analyze chats you\'re part of.'**
+  String get consentBody;
+
+  /// No description provided for @consentAgree.
+  ///
+  /// In en, this message translates to:
+  /// **'Agree & analyze'**
+  String get consentAgree;
+
+  /// No description provided for @consentCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get consentCancel;
 
   /// No description provided for @errorTitle.
   ///

@@ -9,7 +9,7 @@
   "homeImportHint": "Adım adım rehber içeride — yaklaşık 30 saniye  →",
   "homePasteTitle": "Bir sohbet yapıştır",
   "homePasteSubtitle": "Hızlı okuma · ücretsiz · 30 saniye",
-  "homePrivacy": "Analiz telefonunda yapılır. Sohbetlerin asla saklanmaz — raporun hazır olduğu anda silinir.",
+  "homePrivacy": "İstatistikler telefonunda hesaplanır. Raporunu yazmak için mesajların yapay zekâ sağlayıcımıza gönderilir — onları asla saklamayız.",
 
   "pasteSheetTitle": "Bir sohbet yapıştır",
   "pasteSheetSubtitle": "Herhangi bir sohbetten mesajları kopyala ve buraya yapıştır.",
@@ -55,7 +55,11 @@
   "stageCounting": "Kimin önce yazdığı hesaplanıyor",
   "stageBetweenLines": "Satır araları okunuyor",
   "stageWriting": "Raporun yazılıyor",
-  "analyzingPrivacy": "Bu işlem biter bitmez sohbetler sunucularımızdan silinir.",
+  "analyzingPrivacy": "Mesajların yalnızca bu raporu yazmak için yapay zekâ sağlayıcımıza gönderilir. Onları saklamayız.",
+  "consentTitle": "Analizden önce",
+  "consentBody": "Mesaj sayıları ve yanıt süreleri telefonunda hesaplanır. Raporunu yazmak için bu sohbetin metni (karşı tarafın mesajları ve isimler dahil) şifreli bağlantıyla yapay zekâ sağlayıcımız Z.ai'ye gönderilir. Bunu saklamayız. Yalnızca dahil olduğun sohbetleri analiz et.",
+  "consentAgree": "Kabul et ve analiz et",
+  "consentCancel": "Şimdi değil",
   "errorTitle": "Bir şeyler ters gitti",
   "errorRetry": "Tekrar dene",
 

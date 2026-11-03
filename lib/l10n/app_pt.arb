@@ -9,7 +9,7 @@
   "homeImportHint": "Com guia passo a passo — leva uns 30 segundos  →",
   "homePasteTitle": "Cole uma conversa",
   "homePasteSubtitle": "Leitura rápida · grátis · 30 segundos",
-  "homePrivacy": "A análise roda no seu celular. Suas conversas nunca ficam salvas — são apagadas assim que o relatório fica pronto.",
+  "homePrivacy": "As estatísticas são calculadas no seu celular. Para escrever o relatório, suas mensagens vão para nosso provedor de IA — nunca as guardamos.",
 
   "pasteSheetTitle": "Cole uma conversa",
   "pasteSheetSubtitle": "Copie mensagens de qualquer conversa e cole aqui.",
@@ -55,7 +55,11 @@
   "stageCounting": "Contando quem puxa assunto primeiro",
   "stageBetweenLines": "Lendo nas entrelinhas",
   "stageWriting": "Escrevendo seu relatório",
-  "analyzingPrivacy": "As conversas são apagadas dos nossos servidores assim que a análise termina.",
+  "analyzingPrivacy": "Suas mensagens são enviadas ao nosso provedor de IA só para escrever este relatório. Não as guardamos.",
+  "consentTitle": "Antes de analisar",
+  "consentBody": "Contagens e tempos de resposta são calculados no seu celular. Para escrever o relatório, o texto desta conversa — incluindo as mensagens e os nomes da outra pessoa — é enviado por uma conexão criptografada ao nosso provedor de IA, Z.ai. Não guardamos esse conteúdo. Analise só conversas das quais você participa.",
+  "consentAgree": "Aceitar e analisar",
+  "consentCancel": "Agora não",
   "errorTitle": "Algo deu errado",
   "errorRetry": "Tentar de novo",
 

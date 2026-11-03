@@ -51,7 +51,7 @@ void main() {
     // 抽查几个最容易被简转繁工具做错的词
     expect(hant.homeImportTitle, contains('匯入'));
     expect(hant.reportMessages(3), contains('則'));
-    expect(hant.analyzingPrivacy, contains('伺服器'));
+    expect(hant.consentBody, contains('連線'));
     expect(hant.guideStep4Detail, contains('檔案'));
   });
 

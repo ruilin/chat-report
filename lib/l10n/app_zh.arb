@@ -9,7 +9,7 @@
   "homeImportHint": "内含分步引导 —— 约 30 秒完成  →",
   "homePasteTitle": "粘贴一段对话",
   "homePasteSubtitle": "快读 · 免费 · 30 秒",
-  "homePrivacy": "分析在你的手机上进行。聊天内容从不留存 —— 报告生成后即刻删除。",
+  "homePrivacy": "统计在你的手机上完成。为了生成报告，聊天内容会发送给我们的 AI 服务商，我们不留存。",
 
   "pasteSheetTitle": "粘贴一段对话",
   "pasteSheetSubtitle": "从任意聊天软件复制消息，粘贴到这里。",
@@ -60,7 +60,11 @@
   "stageCounting": "统计谁更常先开口",
   "stageBetweenLines": "读出言外之意",
   "stageWriting": "撰写你的报告",
-  "analyzingPrivacy": "分析一结束，聊天内容即从服务器删除。",
+  "analyzingPrivacy": "聊天内容仅发送给 AI 服务商用于生成本次报告，我们不留存。",
+  "consentTitle": "分析前请确认",
+  "consentBody": "消息数、回复时长等统计在你的手机上完成。为了生成报告，这段聊天的文字（包括对方的消息和双方名字）会经加密连接发送给我们的 AI 服务商 Z.ai（智谱）。我们不保存这些内容。请只分析你本人参与的聊天。",
+  "consentAgree": "同意并分析",
+  "consentCancel": "暂不",
   "errorTitle": "出了点问题",
   "errorRetry": "重试",
 

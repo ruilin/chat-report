@@ -1,6 +1,6 @@
 # Privacy Policy — Chat Report
 
-**Last updated: 10 August 2026**
+**Last updated: 3 November 2026**
 
 ⚠️ **上架前必做**：把本文件部署到一个公开可访问的 URL（GitHub Pages / Notion 公开页 / 自有域名均可），
 并把该 URL 填进 Play Console 的 *Store listing → Privacy Policy*。Play 会自动抓取校验，
@@ -16,18 +16,21 @@ Chat Report ("the app") is provided by [COMPANY / DEVELOPER NAME]. You can reach
 
 - We do not have accounts, and we do not build a profile of you.
 - Your chat file is read and measured **on your device**.
-- To write the interpretive parts of your report, portions of your conversation text are sent to an AI provider over an encrypted connection, and are **deleted once your report is generated**.
+- To write the interpretive parts of your report, the text of your conversation (including the other person's messages and names) is sent to our AI provider, Z.ai, over an encrypted connection. We ask for your consent before the first analysis, and **we do not store that text**.
+- We use Google Firebase Analytics to understand how the app is used. It never receives your conversation text, names or report content.
 - We do not sell or share your data with advertisers or data brokers.
 
 ## What data the app handles
 
 **Conversation content you choose to import.** When you select an exported chat file, or paste text into the app, the app parses it locally. All statistics — message counts, reply times, who starts conversations, activity by hour — are computed on your device and never leave it.
 
-**Text sent for AI interpretation.** To produce the written parts of the report (the warmth reading, the emotion curve notes, topics, personality tags, and the full reading), the app sends portions of your conversation text to our AI processing provider, Z.ai (Zhipu AI), over an encrypted (HTTPS) connection. This text is processed to generate your report and is not retained by us. Please refer to Z.ai's own privacy terms for their handling of API data.
+**Text sent for AI interpretation.** To produce the written parts of the report (the warmth reading, the emotion curve notes, topics, personality tags, and the full reading), the app sends the text of your conversation, including the sender names shown in your chat, to our AI processing provider, Z.ai (Zhipu AI), over an encrypted (HTTPS) connection. Before the first analysis, the app asks for your consent and explains this. This text is processed to generate your report and is not retained by us. Please refer to Z.ai's own privacy terms for their handling of API data.
 
 **Your report.** The finished report is stored only on your device. Deleting the app deletes it.
 
-**What we do NOT collect.** No name, email, phone number, contacts, location, advertising identifier, or device identifier is collected by the app.
+**Usage analytics.** We use Google Firebase Analytics to understand how the app is used: which screens are opened, whether an import or analysis succeeds or fails, how long it takes, the number of messages and the relationship type you choose. Firebase assigns a random app-instance identifier and collects basic device information (such as device model, OS version and country). Conversation text, participant names and report content are never sent to Firebase. Google processes this data under its own privacy policy.
+
+**What we do NOT collect.** No name, email, phone number, contacts, precise location or advertising identifier is collected by the app.
 
 ## Information about other people
 
@@ -37,7 +40,7 @@ Please be thoughtful: analyze conversations you are a genuine participant in, an
 
 ## Legal basis (EEA/UK users)
 
-Where GDPR applies, our legal basis for processing the conversation content you import is your **consent**, given by choosing to import a file and tapping Analyze. You may withdraw consent at any time by not using the feature and by deleting the app.
+Where GDPR applies, our legal basis for processing the conversation content you import is your **consent**, given by tapping "Agree & analyze" in the consent prompt shown before your first analysis. You may withdraw consent at any time by not using the feature and by deleting the app.
 
 ## Your rights
 

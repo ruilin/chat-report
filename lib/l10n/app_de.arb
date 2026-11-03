@@ -9,7 +9,7 @@
   "homeImportHint": "Mit Schritt-für-Schritt-Anleitung — dauert ca. 30 Sekunden  →",
   "homePasteTitle": "Unterhaltung einfügen",
   "homePasteSubtitle": "Schnell-Check · gratis · 30 Sekunden",
-  "homePrivacy": "Die Analyse läuft auf deinem Handy. Deine Chats werden nie gespeichert — sie werden gelöscht, sobald dein Report fertig ist.",
+  "homePrivacy": "Die Statistiken werden auf deinem Handy berechnet. Für deinen Report gehen deine Nachrichten an unseren KI-Anbieter — wir speichern sie nie.",
 
   "pasteSheetTitle": "Unterhaltung einfügen",
   "pasteSheetSubtitle": "Kopier Nachrichten aus einem beliebigen Chat und füg sie hier ein.",
@@ -55,7 +55,11 @@
   "stageCounting": "Zähle, wer zuerst schreibt",
   "stageBetweenLines": "Lese zwischen den Zeilen",
   "stageWriting": "Schreibe deinen Report",
-  "analyzingPrivacy": "Chats werden von unseren Servern gelöscht, sobald das hier fertig ist.",
+  "analyzingPrivacy": "Deine Nachrichten gehen nur für diesen Report an unseren KI-Anbieter. Wir speichern sie nicht.",
+  "consentTitle": "Bevor wir analysieren",
+  "consentBody": "Zählungen und Antwortzeiten werden auf deinem Handy berechnet. Für deinen Report wird der Text dieses Chats — inklusive der Nachrichten und Namen der anderen Person — verschlüsselt an unseren KI-Anbieter Z.ai gesendet. Wir speichern ihn nicht. Analysiere nur Chats, an denen du beteiligt bist.",
+  "consentAgree": "Zustimmen & analysieren",
+  "consentCancel": "Nicht jetzt",
   "errorTitle": "Da ist was schiefgelaufen",
   "errorRetry": "Nochmal versuchen",
 

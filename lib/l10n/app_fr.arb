@@ -9,7 +9,7 @@
   "homeImportHint": "Guide pas à pas inclus — environ 30 secondes  →",
   "homePasteTitle": "Coller une conversation",
   "homePasteSubtitle": "Lecture rapide · gratuit · 30 secondes",
-  "homePrivacy": "L'analyse se fait sur ton téléphone. Tes discussions ne sont jamais conservées — elles sont supprimées dès que ton rapport est prêt.",
+  "homePrivacy": "Les statistiques sont calculées sur ton téléphone. Pour rédiger ton rapport, tes messages sont envoyés à notre fournisseur d'IA — on ne les conserve jamais.",
 
   "pasteSheetTitle": "Coller une conversation",
   "pasteSheetSubtitle": "Copie des messages depuis n'importe quelle discussion et colle-les ici.",
@@ -55,7 +55,11 @@
   "stageCounting": "Qui écrit en premier",
   "stageBetweenLines": "Lecture entre les lignes",
   "stageWriting": "Rédaction de ton rapport",
-  "analyzingPrivacy": "Tes discussions sont supprimées de nos serveurs dès que c'est terminé.",
+  "analyzingPrivacy": "Tes messages sont envoyés à notre fournisseur d'IA uniquement pour rédiger ce rapport. On ne les conserve pas.",
+  "consentTitle": "Avant l'analyse",
+  "consentBody": "Les comptes et les temps de réponse sont calculés sur ton téléphone. Pour rédiger ton rapport, le texte de cette discussion — y compris les messages et les noms de l'autre personne — est envoyé via une connexion chiffrée à notre fournisseur d'IA, Z.ai. On ne le conserve pas. N'analyse que des discussions auxquelles tu participes.",
+  "consentAgree": "Accepter et analyser",
+  "consentCancel": "Pas maintenant",
   "errorTitle": "Oups, quelque chose a coincé",
   "errorRetry": "Réessayer",
 

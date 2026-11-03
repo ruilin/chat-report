@@ -47,7 +47,7 @@ Every statistic — message counts, reply times, who texts first — is calculat
 PRIVACY FIRST
 
 • Your chat file is parsed and measured entirely on your device
-• Only the text needed for interpretation is sent for analysis, over an encrypted connection, and it is deleted as soon as your report is ready
+• To write your report, the chat text is sent to our AI provider over an encrypted connection — you're asked first, and we never store it
 • Nothing is stored on our servers, and there is no account to create
 • When you share a report card, names are automatically shortened to initials — there is no way to turn that off
 

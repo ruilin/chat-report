@@ -32,7 +32,7 @@ class LIt extends L {
 
   @override
   String get homePrivacy =>
-      'L\'analisi avviene sul tuo telefono. Le tue chat non vengono mai salvate: le eliminiamo appena il report è pronto.';
+      'Le statistiche vengono calcolate sul tuo telefono. Per scrivere il report, i tuoi messaggi vanno al nostro fornitore di IA: non li conserviamo mai.';
 
   @override
   String get pasteSheetTitle => 'Incolla una conversazione';
@@ -168,7 +168,20 @@ class LIt extends L {
 
   @override
   String get analyzingPrivacy =>
-      'Le chat vengono eliminate dai nostri server appena l\'analisi finisce.';
+      'I tuoi messaggi vengono inviati al nostro fornitore di IA solo per scrivere questo report. Non li conserviamo.';
+
+  @override
+  String get consentTitle => 'Prima dell\'analisi';
+
+  @override
+  String get consentBody =>
+      'Conteggi e tempi di risposta vengono calcolati sul tuo telefono. Per scrivere il report, il testo di questa chat, compresi i messaggi e i nomi dell\'altra persona, viene inviato con una connessione crittografata al nostro fornitore di IA, Z.ai. Non lo conserviamo. Analizza solo chat a cui partecipi.';
+
+  @override
+  String get consentAgree => 'Accetta e analizza';
+
+  @override
+  String get consentCancel => 'Non ora';
 
   @override
   String get errorTitle => 'Qualcosa è andato storto';

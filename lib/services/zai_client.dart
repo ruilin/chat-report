@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../config/api_key.dart';
+import '../config/key_codec.dart';
 import '../l10n/app_localizations.dart';
 
 /// z.ai (Zhipu GLM) OpenAI 兼容接口客户端。
@@ -19,6 +20,9 @@ class ZaiClient {
 
   /// 跨实例记住可用端点，避免每次都先撞一遍不通的
   static String? _preferredEndpoint;
+
+  /// key 以混淆形式编进包里，首次使用时还原（见 key_codec.dart）
+  static final _apiKey = revealKey(zaiKeyData, zaiKeyPad);
 
   final http.Client _http;
   ZaiClient([http.Client? client]) : _http = client ?? http.Client();
@@ -52,7 +56,7 @@ class ZaiClient {
               Uri.parse(endpoint),
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer $zaiApiKey',
+                'Authorization': 'Bearer $_apiKey',
               },
               body: body,
             )

@@ -125,14 +125,17 @@ URL 前缀：`https://ruilin.github.io/resource/`
 
 | 数据类型 | 收集 | 分享 | 目的 | 是否必需 |
 |---|---|---|---|---|
-| Messages → Other in-app messages | ✅ Collected | ❌ Not shared | App functionality | 用户可选（Optional）—— 仅在用户主动导入时 |
+| Messages → Other in-app messages | ✅ Collected | ❌ Not shared（Z.ai 作为代我们处理的服务商，不算 sharing） | App functionality | 用户可选（Optional）—— 仅在用户主动导入并同意时 |
+| App activity → App interactions | ✅ Collected | ❌ Not shared | Analytics | 必需（Firebase Analytics 自动收集） |
+| Device or other IDs | ✅ Collected | ❌ Not shared | Analytics | 必需（Firebase app instance ID） |
 
 补充勾选：
 
-- **Is this data processed ephemerally?** → **Yes**（分析完即删，不落库）
+- **Is this data processed ephemerally?** → Messages：**Yes**（我们不落库；Z.ai 对 API 数据的留存以其条款为准）；Analytics 两项：**No**
 - **Is data encrypted in transit?** → **Yes**（HTTPS/TLS）
 - **Can users request data deletion?** → 说明不保留数据、无账号；报告仅存本机
-- 其余类别（位置、联系人、财务、设备 ID、广告 ID 等）→ 全部 **不收集**
+- 其余类别（精确位置、联系人、财务、广告 ID 等）→ 全部 **不收集**
+- 自 Firebase Analytics 接入（2026-11）起，上面两行 Analytics 必须申报，否则与实际不符
 
 > ⚠️ 一旦改成后端代理，如果后端会留日志，上面的 "ephemerally" 就要改口径 —— 表单必须与实际实现一致，Play 会抽查。
 

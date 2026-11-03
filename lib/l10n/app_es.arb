@@ -9,7 +9,7 @@
   "homeImportHint": "Con guía paso a paso — unos 30 segundos  →",
   "homePasteTitle": "Pega una conversación",
   "homePasteSubtitle": "Lectura rápida · gratis · 30 segundos",
-  "homePrivacy": "El análisis se hace en tu teléfono. Tus chats nunca se guardan: se borran en cuanto tu informe está listo.",
+  "homePrivacy": "Las estadísticas se calculan en tu teléfono. Para escribir tu informe, tus mensajes se envían a nuestro proveedor de IA; nunca los guardamos.",
 
   "pasteSheetTitle": "Pega una conversación",
   "pasteSheetSubtitle": "Copia mensajes de cualquier chat y pégalos aquí.",
@@ -55,7 +55,11 @@
   "stageCounting": "Contando quién escribe primero",
   "stageBetweenLines": "Leyendo entre líneas",
   "stageWriting": "Escribiendo tu informe",
-  "analyzingPrivacy": "Los chats se borran de nuestros servidores en cuanto termina el análisis.",
+  "analyzingPrivacy": "Tus mensajes se envían a nuestro proveedor de IA solo para escribir este informe. No los guardamos.",
+  "consentTitle": "Antes de analizar",
+  "consentBody": "Los conteos y tiempos de respuesta se calculan en tu teléfono. Para escribir tu informe, el texto de este chat —incluidos los mensajes y nombres de la otra persona— se envía por una conexión cifrada a nuestro proveedor de IA, Z.ai. No lo guardamos. Analiza solo chats en los que participas.",
+  "consentAgree": "Aceptar y analizar",
+  "consentCancel": "Ahora no",
   "errorTitle": "Algo salió mal",
   "errorRetry": "Reintentar",
 

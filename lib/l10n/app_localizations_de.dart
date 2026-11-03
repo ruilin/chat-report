@@ -32,7 +32,7 @@ class LDe extends L {
 
   @override
   String get homePrivacy =>
-      'Die Analyse läuft auf deinem Handy. Deine Chats werden nie gespeichert — sie werden gelöscht, sobald dein Report fertig ist.';
+      'Die Statistiken werden auf deinem Handy berechnet. Für deinen Report gehen deine Nachrichten an unseren KI-Anbieter — wir speichern sie nie.';
 
   @override
   String get pasteSheetTitle => 'Unterhaltung einfügen';
@@ -169,7 +169,20 @@ class LDe extends L {
 
   @override
   String get analyzingPrivacy =>
-      'Chats werden von unseren Servern gelöscht, sobald das hier fertig ist.';
+      'Deine Nachrichten gehen nur für diesen Report an unseren KI-Anbieter. Wir speichern sie nicht.';
+
+  @override
+  String get consentTitle => 'Bevor wir analysieren';
+
+  @override
+  String get consentBody =>
+      'Zählungen und Antwortzeiten werden auf deinem Handy berechnet. Für deinen Report wird der Text dieses Chats — inklusive der Nachrichten und Namen der anderen Person — verschlüsselt an unseren KI-Anbieter Z.ai gesendet. Wir speichern ihn nicht. Analysiere nur Chats, an denen du beteiligt bist.';
+
+  @override
+  String get consentAgree => 'Zustimmen & analysieren';
+
+  @override
+  String get consentCancel => 'Nicht jetzt';
 
   @override
   String get errorTitle => 'Da ist was schiefgelaufen';

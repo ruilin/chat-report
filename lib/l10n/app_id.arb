@@ -9,7 +9,7 @@
   "homeImportHint": "Ada panduan langkah demi langkah — cuma sekitar 30 detik  →",
   "homePasteTitle": "Tempel percakapan",
   "homePasteSubtitle": "Baca cepat · gratis · 30 detik",
-  "homePrivacy": "Analisis berjalan di HP kamu. Chat kamu tidak pernah disimpan — langsung dihapus begitu laporanmu siap.",
+  "homePrivacy": "Statistik dihitung di HP kamu. Untuk menulis laporanmu, pesanmu dikirim ke penyedia AI kami — kami tidak pernah menyimpannya.",
 
   "pasteSheetTitle": "Tempel percakapan",
   "pasteSheetSubtitle": "Salin pesan dari chat mana pun, lalu tempel di sini.",
@@ -55,7 +55,11 @@
   "stageCounting": "Menghitung siapa yang chat duluan",
   "stageBetweenLines": "Membaca yang tersirat",
   "stageWriting": "Menulis laporanmu",
-  "analyzingPrivacy": "Chat langsung dihapus dari server kami begitu proses ini selesai.",
+  "analyzingPrivacy": "Pesanmu dikirim ke penyedia AI kami hanya untuk menulis laporan ini. Kami tidak menyimpannya.",
+  "consentTitle": "Sebelum dianalisis",
+  "consentBody": "Jumlah pesan dan waktu balas dihitung di HP kamu. Untuk menulis laporanmu, teks chat ini — termasuk pesan dan nama orang lain — dikirim lewat koneksi terenkripsi ke penyedia AI kami, Z.ai. Kami tidak menyimpannya. Analisis hanya chat yang kamu ikuti.",
+  "consentAgree": "Setuju & analisis",
+  "consentCancel": "Nanti saja",
   "errorTitle": "Ada yang salah",
   "errorRetry": "Coba lagi",
 

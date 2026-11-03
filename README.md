@@ -8,9 +8,9 @@ WhatsApp 聊天记录关系分析 App（Flutter）。导入/粘贴聊天记录 �
 ## 快速开始
 
 ```bash
-# 1. 配置 API key（文件已 gitignore）
-cp lib/config/api_key.example.dart lib/config/api_key.dart
-#    编辑 api_key.dart 填入 z.ai key
+# 1. 生成 API key 文件（已 gitignore；key 以 XOR 混淆存放，交互输入不回显）
+dart run tool/obfuscate_key.dart
+#    旧的明文 api_key.dart 不带参数运行即自动迁移；只想先编译可 cp api_key.example.dart
 
 # 2. 运行
 flutter pub get
