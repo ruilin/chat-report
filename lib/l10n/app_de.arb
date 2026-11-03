@@ -10,6 +10,10 @@
   "homePasteTitle": "Unterhaltung einfügen",
   "homePasteSubtitle": "Schnell-Check · gratis · 30 Sekunden",
   "homePrivacy": "Die Statistiken werden auf deinem Handy berechnet. Für deinen Report gehen deine Nachrichten an unseren KI-Anbieter — wir speichern sie nie.",
+  "homeSampleTitle": "Erst mal einen Beispiel-Report ansehen",
+  "homeSampleSubtitle": "Aus einem erfundenen Chat · ganz ohne Export",
+  "sampleBanner": "Das ist ein Beispiel-Report aus einem erfundenen Chat zwischen Alex und Mia. Deiner entsteht aus deinen eigenen Nachrichten.",
+  "sampleCta": "Meinen Chat analysieren",
 
   "pasteSheetTitle": "Unterhaltung einfügen",
   "pasteSheetSubtitle": "Kopier Nachrichten aus einem beliebigen Chat und füg sie hier ein.",

@@ -35,6 +35,20 @@ class LHi extends L {
       'आंकड़े आपके फ़ोन पर ही निकाले जाते हैं। रिपोर्ट लिखने के लिए आपके मैसेज हमारे AI प्रोवाइडर को भेजे जाते हैं — हम उन्हें कभी सेव नहीं करते।';
 
   @override
+  String get homeSampleTitle => 'पहले एक सैंपल रिपोर्ट देखें';
+
+  @override
+  String get homeSampleSubtitle =>
+      'एक काल्पनिक चैट से बनी · एक्सपोर्ट की ज़रूरत नहीं';
+
+  @override
+  String get sampleBanner =>
+      'यह एक सैंपल रिपोर्ट है, जो Alex और Mia की एक काल्पनिक चैट से बनी है। आपकी रिपोर्ट आपके अपने मैसेज से बनेगी।';
+
+  @override
+  String get sampleCta => 'मेरी चैट एनालाइज़ करें';
+
+  @override
   String get pasteSheetTitle => 'बातचीत पेस्ट करें';
 
   @override

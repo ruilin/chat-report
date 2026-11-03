@@ -10,6 +10,10 @@
   "homePasteTitle": "Bir sohbet yapıştır",
   "homePasteSubtitle": "Hızlı okuma · ücretsiz · 30 saniye",
   "homePrivacy": "İstatistikler telefonunda hesaplanır. Raporunu yazmak için mesajların yapay zekâ sağlayıcımıza gönderilir — onları asla saklamayız.",
+  "homeSampleTitle": "Önce örnek bir rapora göz at",
+  "homeSampleSubtitle": "Kurgusal bir sohbetten · dışa aktarma gerekmez",
+  "sampleBanner": "Bu, Alex ile Mia arasındaki kurgusal bir sohbetten oluşturulmuş örnek bir rapor. Seninki kendi mesajlarından oluşturulur.",
+  "sampleCta": "Kendi sohbetimi analiz et",
 
   "pasteSheetTitle": "Bir sohbet yapıştır",
   "pasteSheetSubtitle": "Herhangi bir sohbetten mesajları kopyala ve buraya yapıştır.",

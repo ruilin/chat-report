@@ -164,6 +164,30 @@ abstract class L {
   /// **'Stats are calculated on your phone. To write your report, your messages go to our AI provider — we never keep them.'**
   String get homePrivacy;
 
+  /// No description provided for @homeSampleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'See a sample report first'**
+  String get homeSampleTitle;
+
+  /// No description provided for @homeSampleSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Made from a made-up chat · no export needed'**
+  String get homeSampleSubtitle;
+
+  /// No description provided for @sampleBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a sample report, made from a made-up chat between Alex and Mia. Yours will be built from your own messages.'**
+  String get sampleBanner;
+
+  /// No description provided for @sampleCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyze my own chat'**
+  String get sampleCta;
+
   /// No description provided for @pasteSheetTitle.
   ///
   /// In en, this message translates to:

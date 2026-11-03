@@ -10,6 +10,10 @@
   "homePasteTitle": "Cole uma conversa",
   "homePasteSubtitle": "Leitura rápida · grátis · 30 segundos",
   "homePrivacy": "As estatísticas são calculadas no seu celular. Para escrever o relatório, suas mensagens vão para nosso provedor de IA — nunca as guardamos.",
+  "homeSampleTitle": "Veja antes um relatório de exemplo",
+  "homeSampleSubtitle": "Feito com uma conversa fictícia · sem exportar nada",
+  "sampleBanner": "Este é um relatório de exemplo, feito com uma conversa fictícia entre Alex e Mia. O seu vai ser criado com as suas próprias mensagens.",
+  "sampleCta": "Analisar minha conversa",
 
   "pasteSheetTitle": "Cole uma conversa",
   "pasteSheetSubtitle": "Copie mensagens de qualquer conversa e cole aqui.",

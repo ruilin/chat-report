@@ -35,6 +35,20 @@ class LIt extends L {
       'Le statistiche vengono calcolate sul tuo telefono. Per scrivere il report, i tuoi messaggi vanno al nostro fornitore di IA: non li conserviamo mai.';
 
   @override
+  String get homeSampleTitle => 'Guarda prima un report di esempio';
+
+  @override
+  String get homeSampleSubtitle =>
+      'Creato da una chat inventata · senza esportare nulla';
+
+  @override
+  String get sampleBanner =>
+      'Questo è un report di esempio, creato da una chat inventata tra Alex e Mia. Il tuo nascerà dai tuoi messaggi.';
+
+  @override
+  String get sampleCta => 'Analizza la mia chat';
+
+  @override
   String get pasteSheetTitle => 'Incolla una conversazione';
 
   @override

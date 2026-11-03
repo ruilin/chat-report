@@ -10,6 +10,10 @@
   "homePasteTitle": "Pega una conversación",
   "homePasteSubtitle": "Lectura rápida · gratis · 30 segundos",
   "homePrivacy": "Las estadísticas se calculan en tu teléfono. Para escribir tu informe, tus mensajes se envían a nuestro proveedor de IA; nunca los guardamos.",
+  "homeSampleTitle": "Mira primero un informe de ejemplo",
+  "homeSampleSubtitle": "Hecho con un chat inventado · sin exportar nada",
+  "sampleBanner": "Este es un informe de ejemplo, hecho con un chat inventado entre Alex y Mia. El tuyo se crea con tus propios mensajes.",
+  "sampleCta": "Analizar mi chat",
 
   "pasteSheetTitle": "Pega una conversación",
   "pasteSheetSubtitle": "Copia mensajes de cualquier chat y pégalos aquí.",

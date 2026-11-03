@@ -35,6 +35,20 @@ class LEn extends L {
       'Stats are calculated on your phone. To write your report, your messages go to our AI provider — we never keep them.';
 
   @override
+  String get homeSampleTitle => 'See a sample report first';
+
+  @override
+  String get homeSampleSubtitle =>
+      'Made from a made-up chat · no export needed';
+
+  @override
+  String get sampleBanner =>
+      'This is a sample report, made from a made-up chat between Alex and Mia. Yours will be built from your own messages.';
+
+  @override
+  String get sampleCta => 'Analyze my own chat';
+
+  @override
   String get pasteSheetTitle => 'Paste a conversation';
 
   @override

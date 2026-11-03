@@ -10,6 +10,10 @@
   "homePasteTitle": "Coller une conversation",
   "homePasteSubtitle": "Lecture rapide · gratuit · 30 secondes",
   "homePrivacy": "Les statistiques sont calculées sur ton téléphone. Pour rédiger ton rapport, tes messages sont envoyés à notre fournisseur d'IA — on ne les conserve jamais.",
+  "homeSampleTitle": "Voir d'abord un exemple de rapport",
+  "homeSampleSubtitle": "Basé sur une discussion inventée · sans export",
+  "sampleBanner": "Ceci est un exemple de rapport, basé sur une discussion inventée entre Alex et Mia. Le tien sera créé à partir de tes propres messages.",
+  "sampleCta": "Analyser ma discussion",
 
   "pasteSheetTitle": "Coller une conversation",
   "pasteSheetSubtitle": "Copie des messages depuis n'importe quelle discussion et colle-les ici.",

@@ -10,6 +10,10 @@
   "homePasteTitle": "粘贴一段对话",
   "homePasteSubtitle": "快读 · 免费 · 30 秒",
   "homePrivacy": "统计在你的手机上完成。为了生成报告，聊天内容会发送给我们的 AI 服务商，我们不留存。",
+  "homeSampleTitle": "先看一份示例报告",
+  "homeSampleSubtitle": "用虚构的聊天生成 · 无需导出",
+  "sampleBanner": "这是一份示例报告，来自 Alex 和 Mia 的一段虚构聊天。你的报告会根据你自己的聊天生成。",
+  "sampleCta": "分析我自己的聊天",
 
   "pasteSheetTitle": "粘贴一段对话",
   "pasteSheetSubtitle": "从任意聊天软件复制消息，粘贴到这里。",

@@ -34,6 +34,19 @@ class LAr extends L {
       'تُحسب الإحصاءات على هاتفك. ولكتابة تقريرك تُرسل رسائلك إلى مزوّد الذكاء الاصطناعي لدينا — ولا نحتفظ بها أبدًا.';
 
   @override
+  String get homeSampleTitle => 'شاهد تقريرًا نموذجيًا أولًا';
+
+  @override
+  String get homeSampleSubtitle => 'من محادثة خيالية · دون تصدير';
+
+  @override
+  String get sampleBanner =>
+      'هذا تقرير نموذجي من محادثة خيالية بين Alex وMia. سيُنشأ تقريرك من رسائلك أنت.';
+
+  @override
+  String get sampleCta => 'حلّل محادثتي';
+
+  @override
   String get pasteSheetTitle => 'الصق محادثة';
 
   @override

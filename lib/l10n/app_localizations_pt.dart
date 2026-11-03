@@ -35,6 +35,20 @@ class LPt extends L {
       'As estatísticas são calculadas no seu celular. Para escrever o relatório, suas mensagens vão para nosso provedor de IA — nunca as guardamos.';
 
   @override
+  String get homeSampleTitle => 'Veja antes um relatório de exemplo';
+
+  @override
+  String get homeSampleSubtitle =>
+      'Feito com uma conversa fictícia · sem exportar nada';
+
+  @override
+  String get sampleBanner =>
+      'Este é um relatório de exemplo, feito com uma conversa fictícia entre Alex e Mia. O seu vai ser criado com as suas próprias mensagens.';
+
+  @override
+  String get sampleCta => 'Analisar minha conversa';
+
+  @override
   String get pasteSheetTitle => 'Cole uma conversa';
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/report.dart';
+import '../services/analytics.dart';
 import '../theme.dart';
 import '../widgets/charts.dart';
 import '../widgets/share_card.dart';
@@ -10,7 +11,44 @@ import '../widgets/share_card.dart';
 /// 原则：每个数字可追溯（本地统计 + 金句附时间）；深读为付费模块（MVP 先全量展示）。
 class ReportScreen extends StatelessWidget {
   final RelationshipReport report;
-  const ReportScreen({super.key, required this.report});
+
+  /// 首页「示例报告」入口打开：顶部标注示例并引导去分析自己的聊天，不提供分享
+  final bool isSample;
+
+  const ReportScreen({super.key, required this.report, this.isSample = false});
+
+  Widget _sampleBanner(BuildContext context, L l) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 12),
+      decoration: BoxDecoration(
+        color: UColors.roseSoft,
+        border: Border.all(color: UColors.roseBorder),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l.sampleBanner,
+              style: const TextStyle(
+                  fontSize: 12.5, height: 1.5, color: UColors.ink2)),
+          const SizedBox(height: 10),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: UColors.rose,
+              shape: const StadiumBorder(),
+              visualDensity: VisualDensity.compact,
+            ),
+            onPressed: () {
+              Analytics.sampleCtaClick();
+              Navigator.of(context).pop('import');
+            },
+            child: Text(l.sampleCta,
+                style: const TextStyle(fontWeight: FontWeight.w600)),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +84,20 @@ class ReportScreen extends StatelessWidget {
           ],
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.ios_share, size: 20),
-            onPressed: () => showShareSheet(context, report),
-          ),
+          if (!isSample)
+            IconButton(
+              icon: const Icon(Icons.ios_share, size: 20),
+              onPressed: () => showShareSheet(context, report),
+            ),
         ],
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
         children: [
+          if (isSample) ...[
+            _sampleBanner(context, l),
+            const SizedBox(height: 14),
+          ],
           _warmthCard(l),
           const SizedBox(height: 14),
           _balanceCard(l),

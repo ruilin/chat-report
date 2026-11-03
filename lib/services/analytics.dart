@@ -67,6 +67,12 @@ class Analytics {
   static void chatParseFail({required String source, required String reason}) =>
       _log('chat_parse_fail', {'source': source, 'reason': reason});
 
+  /// 首页「先看示例报告」
+  static void sampleReportOpen() => _log('sample_report_open');
+
+  /// 示例报告顶部「分析我自己的聊天」，点后直接进入导入引导
+  static void sampleCtaClick() => _log('sample_cta_click');
+
   // —— 分析 ——
 
   /// 首次分析前的 AI 处理同意弹窗，[result]: accepted / declined

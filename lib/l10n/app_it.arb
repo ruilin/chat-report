@@ -10,6 +10,10 @@
   "homePasteTitle": "Incolla una conversazione",
   "homePasteSubtitle": "Lettura veloce · gratis · 30 secondi",
   "homePrivacy": "Le statistiche vengono calcolate sul tuo telefono. Per scrivere il report, i tuoi messaggi vanno al nostro fornitore di IA: non li conserviamo mai.",
+  "homeSampleTitle": "Guarda prima un report di esempio",
+  "homeSampleSubtitle": "Creato da una chat inventata · senza esportare nulla",
+  "sampleBanner": "Questo è un report di esempio, creato da una chat inventata tra Alex e Mia. Il tuo nascerà dai tuoi messaggi.",
+  "sampleCta": "Analizza la mia chat",
 
   "pasteSheetTitle": "Incolla una conversazione",
   "pasteSheetSubtitle": "Copia i messaggi da qualsiasi chat e incollali qui.",

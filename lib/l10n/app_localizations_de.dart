@@ -35,6 +35,20 @@ class LDe extends L {
       'Die Statistiken werden auf deinem Handy berechnet. Für deinen Report gehen deine Nachrichten an unseren KI-Anbieter — wir speichern sie nie.';
 
   @override
+  String get homeSampleTitle => 'Erst mal einen Beispiel-Report ansehen';
+
+  @override
+  String get homeSampleSubtitle =>
+      'Aus einem erfundenen Chat · ganz ohne Export';
+
+  @override
+  String get sampleBanner =>
+      'Das ist ein Beispiel-Report aus einem erfundenen Chat zwischen Alex und Mia. Deiner entsteht aus deinen eigenen Nachrichten.';
+
+  @override
+  String get sampleCta => 'Meinen Chat analysieren';
+
+  @override
   String get pasteSheetTitle => 'Unterhaltung einfügen';
 
   @override

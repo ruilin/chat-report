@@ -33,6 +33,18 @@ class LZh extends L {
   String get homePrivacy => '统计在你的手机上完成。为了生成报告，聊天内容会发送给我们的 AI 服务商，我们不留存。';
 
   @override
+  String get homeSampleTitle => '先看一份示例报告';
+
+  @override
+  String get homeSampleSubtitle => '用虚构的聊天生成 · 无需导出';
+
+  @override
+  String get sampleBanner => '这是一份示例报告，来自 Alex 和 Mia 的一段虚构聊天。你的报告会根据你自己的聊天生成。';
+
+  @override
+  String get sampleCta => '分析我自己的聊天';
+
+  @override
   String get pasteSheetTitle => '粘贴一段对话';
 
   @override
@@ -344,6 +356,18 @@ class LZhHant extends LZh {
 
   @override
   String get homePrivacy => '統計在你的手機上完成。為了產生報告，聊天內容會傳送給我們的 AI 服務商，我們不留存。';
+
+  @override
+  String get homeSampleTitle => '先看一份範例報告';
+
+  @override
+  String get homeSampleSubtitle => '用虛構的聊天產生 · 不必匯出';
+
+  @override
+  String get sampleBanner => '這是一份範例報告，來自 Alex 和 Mia 的一段虛構聊天。你的報告會根據你自己的聊天產生。';
+
+  @override
+  String get sampleCta => '分析我自己的聊天';
 
   @override
   String get pasteSheetTitle => '貼上一段對話';

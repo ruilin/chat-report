@@ -35,6 +35,20 @@ class LTr extends L {
       'İstatistikler telefonunda hesaplanır. Raporunu yazmak için mesajların yapay zekâ sağlayıcımıza gönderilir — onları asla saklamayız.';
 
   @override
+  String get homeSampleTitle => 'Önce örnek bir rapora göz at';
+
+  @override
+  String get homeSampleSubtitle =>
+      'Kurgusal bir sohbetten · dışa aktarma gerekmez';
+
+  @override
+  String get sampleBanner =>
+      'Bu, Alex ile Mia arasındaki kurgusal bir sohbetten oluşturulmuş örnek bir rapor. Seninki kendi mesajlarından oluşturulur.';
+
+  @override
+  String get sampleCta => 'Kendi sohbetimi analiz et';
+
+  @override
   String get pasteSheetTitle => 'Bir sohbet yapıştır';
 
   @override

@@ -2,8 +2,8 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../debug/mock_report.dart';
 import '../l10n/app_localizations.dart';
+import '../sample/sample_report.dart';
 import '../services/analytics.dart';
 import '../services/whatsapp_parser.dart';
 import '../theme.dart';
@@ -35,6 +35,21 @@ class _HomeScreenState extends State<HomeScreen> {
     if (file == null) return;
     final raw = await file.readAsString();
     await _parseAndGo(raw, source: 'file');
+  }
+
+  /// 示例报告：导出聊天记录门槛高，先让新用户看到成品。
+  /// 报告页底部按钮返回 'import' 时直接进入导入引导。
+  Future<void> _openSample() async {
+    Analytics.sampleReportOpen();
+    final action = await Navigator.of(context).push<String>(MaterialPageRoute(
+      settings: const RouteSettings(name: 'report_sample'),
+      builder: (_) => ReportScreen(
+        report: buildSampleReport(
+            lang: sampleLangOf(Localizations.localeOf(context))),
+        isSample: true,
+      ),
+    ));
+    if (action == 'import' && mounted) await _startImport();
   }
 
   Future<void> _pasteText() async {
@@ -140,13 +155,14 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                // debug 彩蛋：长按 logo 打开 mock 报告，调 UI 不用跑 LLM
+                // debug 彩蛋：长按 logo 打开不带「示例」标记的示例报告，
+                // 用于目检报告页和采集商店截图（tool/capture_shots.sh）
                 onLongPress: kDebugMode
                     ? () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) =>
-                            ReportScreen(
-                                report: buildMockReport(
-                                    lang: _mockLangOf(context)))))
+                        builder: (_) => ReportScreen(
+                            report: buildSampleReport(
+                                lang: sampleLangOf(
+                                    Localizations.localeOf(context))))))
                     : null,
                 child: Text(l.appTitle,
                     style: UType.serifItalic.copyWith(fontSize: 30)),
@@ -169,6 +185,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 subtitle: l.homePasteSubtitle,
                 onTap: _busy ? null : _pasteText,
               ),
+              const SizedBox(height: 10),
+              _SampleLink(
+                title: l.homeSampleTitle,
+                subtitle: l.homeSampleSubtitle,
+                onTap: _busy ? null : _openSample,
+              ),
               const Spacer(),
               if (_busy)
                 const Center(
@@ -185,14 +207,48 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-/// debug mock 报告的语言键，与 promptLanguageOf 同源
-String _mockLangOf(BuildContext context) {
-  final loc = Localizations.localeOf(context);
-  if (loc.languageCode != 'zh') return 'en';
-  return (loc.scriptCode == 'Hant' ||
-          const {'TW', 'HK', 'MO'}.contains(loc.countryCode))
-      ? 'zh-Hant'
-      : 'zh';
+/// 首页第三入口：先看示例报告。比两张入口卡轻一档，不抢主路径
+class _SampleLink extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final VoidCallback? onTap;
+
+  const _SampleLink(
+      {required this.title, required this.subtitle, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+        child: Row(
+          children: [
+            const Text('👀', style: TextStyle(fontSize: 17)),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      style: const TextStyle(
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.w600,
+                          color: UColors.rose)),
+                  Text(subtitle,
+                      style: const TextStyle(
+                          fontSize: 11.5, color: UColors.muted)),
+                ],
+              ),
+            ),
+            // chevron_right 随 RTL 自动镜像
+            const Icon(Icons.chevron_right, size: 20, color: UColors.rose),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class _EntryCard extends StatelessWidget {

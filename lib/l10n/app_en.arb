@@ -10,6 +10,10 @@
   "homePasteTitle": "Paste a conversation",
   "homePasteSubtitle": "Quick read · free · 30 seconds",
   "homePrivacy": "Stats are calculated on your phone. To write your report, your messages go to our AI provider — we never keep them.",
+  "homeSampleTitle": "See a sample report first",
+  "homeSampleSubtitle": "Made from a made-up chat · no export needed",
+  "sampleBanner": "This is a sample report, made from a made-up chat between Alex and Mia. Yours will be built from your own messages.",
+  "sampleCta": "Analyze my own chat",
 
   "pasteSheetTitle": "Paste a conversation",
   "pasteSheetSubtitle": "Copy messages from any chat and paste them here.",

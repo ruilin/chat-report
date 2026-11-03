@@ -34,6 +34,20 @@ class LEs extends L {
       'Las estadísticas se calculan en tu teléfono. Para escribir tu informe, tus mensajes se envían a nuestro proveedor de IA; nunca los guardamos.';
 
   @override
+  String get homeSampleTitle => 'Mira primero un informe de ejemplo';
+
+  @override
+  String get homeSampleSubtitle =>
+      'Hecho con un chat inventado · sin exportar nada';
+
+  @override
+  String get sampleBanner =>
+      'Este es un informe de ejemplo, hecho con un chat inventado entre Alex y Mia. El tuyo se crea con tus propios mensajes.';
+
+  @override
+  String get sampleCta => 'Analizar mi chat';
+
+  @override
   String get pasteSheetTitle => 'Pega una conversación';
 
   @override

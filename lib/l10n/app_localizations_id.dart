@@ -35,6 +35,19 @@ class LId extends L {
       'Statistik dihitung di HP kamu. Untuk menulis laporanmu, pesanmu dikirim ke penyedia AI kami — kami tidak pernah menyimpannya.';
 
   @override
+  String get homeSampleTitle => 'Lihat contoh laporan dulu';
+
+  @override
+  String get homeSampleSubtitle => 'Dari chat rekaan · tanpa perlu ekspor';
+
+  @override
+  String get sampleBanner =>
+      'Ini contoh laporan dari chat rekaan antara Alex dan Mia. Laporanmu akan dibuat dari pesanmu sendiri.';
+
+  @override
+  String get sampleCta => 'Analisis chat-ku';
+
+  @override
   String get pasteSheetTitle => 'Tempel percakapan';
 
   @override

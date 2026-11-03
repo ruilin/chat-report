@@ -35,6 +35,20 @@ class LFr extends L {
       'Les statistiques sont calculées sur ton téléphone. Pour rédiger ton rapport, tes messages sont envoyés à notre fournisseur d\'IA — on ne les conserve jamais.';
 
   @override
+  String get homeSampleTitle => 'Voir d\'abord un exemple de rapport';
+
+  @override
+  String get homeSampleSubtitle =>
+      'Basé sur une discussion inventée · sans export';
+
+  @override
+  String get sampleBanner =>
+      'Ceci est un exemple de rapport, basé sur une discussion inventée entre Alex et Mia. Le tien sera créé à partir de tes propres messages.';
+
+  @override
+  String get sampleCta => 'Analyser ma discussion';
+
+  @override
   String get pasteSheetTitle => 'Coller une conversation';
 
   @override
