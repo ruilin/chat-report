@@ -43,51 +43,53 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: UColors.screen,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
-      builder: (ctx) => Padding(
-        padding: EdgeInsets.only(
-          left: 20,
-          right: 20,
-          top: 20,
-          bottom: MediaQuery.of(ctx).viewInsets.bottom + 20,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(l.pasteSheetTitle,
-                style: const TextStyle(
-                    fontSize: 17, fontWeight: FontWeight.w700)),
-            const SizedBox(height: 4),
-            Text(l.pasteSheetSubtitle,
-                style: const TextStyle(fontSize: 12, color: UColors.muted)),
-            const SizedBox(height: 12),
-            TextField(
-              controller: controller,
-              maxLines: 8,
-              style: const TextStyle(fontSize: 13),
-              decoration: InputDecoration(
-                hintText: l.pasteSheetHint,
-                hintStyle:
-                    const TextStyle(color: UColors.faint, fontSize: 13),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: const BorderSide(color: UColors.line),
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: MediaQuery.of(ctx).viewInsets.bottom + 20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(l.pasteSheetTitle,
+                  style: const TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.w700)),
+              const SizedBox(height: 4),
+              Text(l.pasteSheetSubtitle,
+                  style: const TextStyle(fontSize: 12, color: UColors.muted)),
+              const SizedBox(height: 12),
+              TextField(
+                controller: controller,
+                maxLines: 8,
+                style: const TextStyle(fontSize: 13),
+                decoration: InputDecoration(
+                  hintText: l.pasteSheetHint,
+                  hintStyle:
+                      const TextStyle(color: UColors.faint, fontSize: 13),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(14),
+                    borderSide: const BorderSide(color: UColors.line),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 12),
-            FilledButton(
-              style: FilledButton.styleFrom(
-                backgroundColor: UColors.rose,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: const StadiumBorder(),
+              const SizedBox(height: 12),
+              FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: UColors.rose,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: const StadiumBorder(),
+                ),
+                onPressed: () => Navigator.pop(ctx, controller.text),
+                child: Text(l.pasteSheetAction),
               ),
-              onPressed: () => Navigator.pop(ctx, controller.text),
-              child: Text(l.pasteSheetAction),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
