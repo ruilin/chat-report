@@ -79,7 +79,7 @@ Chat Report 与任何消息服务均无从属、认可或关联关系。
 | 素材 | 规格 | 文件 |
 |---|---|---|
 | App icon | 512×512 PNG，无 alpha | `play_icon_512.png`（与英文共用） |
-| Feature graphic | 1024×500 PNG | `feature_graphic_1024x500.png`（与英文共用） |
+| Feature graphic | 1024×500 PNG | `zh/feature_graphic.png` |
 | Phone screenshots | 1080×1920 | `zh/screenshot_1..6.png`（标题已中文化） |
 
 > 图标与宣传图是语言无关素材，Play Console 里各语言可复用同一套；截图则按语言各上传一套。

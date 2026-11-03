@@ -83,7 +83,7 @@ Chat Report 與任何訊息服務均無從屬、認可或關聯關係。
 | 素材 | 規格 | 檔案 |
 |---|---|---|
 | App icon | 512×512 PNG，無 alpha | `play_icon_512.png`（與其他語言共用） |
-| Feature graphic | 1024×500 PNG | `feature_graphic_1024x500.png`（與其他語言共用） |
+| Feature graphic | 1024×500 PNG | `zh-Hant/feature_graphic.png` |
 | Phone screenshots | 1080×1920 | `zh-Hant/screenshot_1..6.png`（標題已繁體化） |
 
 ---

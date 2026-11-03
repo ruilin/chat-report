@@ -92,7 +92,7 @@ Chat Report is not affiliated with, endorsed by, or connected to any messaging s
 | 素材 | 规格 | 文件 |
 |---|---|---|
 | App icon | 512×512 PNG，无 alpha | `play_icon_512.png`（语言无关） |
-| Feature graphic | 1024×500 PNG | `feature_graphic_1024x500.png`（语言无关） |
+| Feature graphic | 1024×500 PNG | `en/feature_graphic.png` |
 | Phone screenshots | 1080×1920（9:16，符合 Play 2:1 上限）| `en/screenshot_1..6.png` |
 
 > Play 要求手机截图至少 2 张、最多 8 张。已备 6 张，建议全用 —— 商店转化率随截图数量提升。

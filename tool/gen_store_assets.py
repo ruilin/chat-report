@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""生成 Google Play 上架素材：应用图标 512、宣传图 1024×500、带标题的手机截图。
+"""生成 Google Play 上架素材：应用图标 512、带标题的手机截图。
+
+宣传图（feature graphic）按语言另由 tool/gen_feature_graphic.py 生成。
 
 原始手机截图 1080×2340（1:2.17）超出 Play 的 2:1 宽高比上限，
 本脚本重新构图为 1080×1920（9:16）并加标题带。
 
 截图按语言各出一套：英文（默认）→ docs/store/en/，简体 → zh/，繁体 → zh-Hant/。
-图标与宣传图为语言无关，放 docs/store/。
+图标为语言无关，放 docs/store/。
 
 用法：python3 tool/gen_store_assets.py <原始截图根目录>
      该目录下需有 en/ zh-Hans/ zh-Hant/ 三个子目录（由 tool/capture_shots.sh 生成）
@@ -121,32 +123,6 @@ def make_screenshot(src_path, caption, dest, dark=False, lang="en"):
     return dest
 
 
-def make_feature_graphic(dest):
-    """1024×500 宣传图"""
-    W, H = 1024, 500
-    canvas = gradient((W, H), INK, PLUM)
-    draw = ImageDraw.Draw(canvas)
-
-    # 左侧图标
-    icon = Image.open(os.path.join(ROOT, "docs/icon_preview.png")).convert("RGB")
-    size = 210
-    icon = rounded(icon.resize((size, size), Image.LANCZOS), 48)
-    canvas.paste(icon, (78, (H - size) // 2), icon)
-
-    # 右侧文案
-    x = 78 + size + 62
-    f_title = font(FONT_SERIF, 74)
-    f_sub = font(FONT_REG, 32)
-    draw.text((x, 168), "Chat Report", font=f_title, fill=CREAM)
-    draw.text((x, 268), "What's really in your chats?", font=f_sub, fill=(200, 170, 185))
-
-    # 品牌重音条
-    draw.rounded_rectangle([x, 330, x + 96, 340], radius=5, fill=ROSE)
-
-    canvas.save(dest)
-    return dest
-
-
 def make_play_icon(dest):
     """512×512 商店图标（无 alpha）"""
     icon = Image.open(os.path.join(ROOT, "docs/icon_preview.png")).convert("RGB")
@@ -159,8 +135,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
 
     make_play_icon(os.path.join(OUT, "play_icon_512.png"))
-    make_feature_graphic(os.path.join(OUT, "feature_graphic_1024x500.png"))
-    print("icon + feature graphic ✓")
+    print("icon ✓（宣传图见 tool/gen_feature_graphic.py）")
 
     if not src_dir:
         print("（未提供截图目录，跳过截图合成）")
