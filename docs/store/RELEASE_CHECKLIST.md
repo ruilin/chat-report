@@ -60,7 +60,7 @@
 | 明文流量 | 仅 debug 允许（开发代理用），release 强制 HTTPS |
 | 商店图标 512 | `docs/store/play_icon_512.png`（语言无关，各语言复用） |
 | 宣传图 1024×500 | `docs/store/<语言>/feature_graphic.png`（12 种语言各一张，见下方语言表） |
-| 手机截图 ×6 ×3 语言 | `en/` + `zh/` + `zh-Hant/`（1080×1920；各语言真实界面） |
+| 手机截图 ×6 ×12 语言 | `docs/store/<语言>/screenshot_1..6.png`（1080×1920；各语言真实界面） |
 | 商店文案 | `docs/store/<语言>/LISTING.md`（12 种语言，与该语言的宣传图、截图同目录；`en/` 为默认语言） |
 | 隐私政策 | 三语 HTML 已提交至 `ruilin/resource` 仓库**待推送**（en / zh / zh-Hant，三页互链） |
 | 版本日志 | `RELEASE_NOTES.md`（中英各一版，均在 500 字符上限内） |
@@ -84,10 +84,10 @@
 | 中文（繁體）台灣 | `zh-TW` | `zh-Hant/LISTING.md` | `docs/store/zh-Hant/` | `…/chatreport-privacy-zh-hant.html` |
 | 中文（香港） | `zh-HK` | `zh-Hant/LISTING.md`（同一份贴两次） | `docs/store/zh-Hant/` | 同上 |
 
-App 内另支持 9 种语言，文案与宣传图已就绪，在各自目录的 `LISTING.md` 与 `feature_graphic.png`。
-这 9 种暂无本地化截图（Play 会回退显示英文截图），隐私政策也暂用英文版 URL：
+App 内另支持 9 种语言，文案、宣传图、截图已就绪，都在各自目录（`LISTING.md`、`feature_graphic.png`、`screenshot_1..6.png`）。
+这 9 种隐私政策暂用英文版 URL：
 
-| 语言 | 代码 | 文案 + 宣传图 | 隐私政策 URL |
+| 语言 | 代码 | 文案 + 宣传图 + 截图 | 隐私政策 URL |
 |---|---|---|---|
 | Español (Latinoamérica) | `es-419` | `docs/store/es/` | 英文版 |
 | Português (Brasil) | `pt-BR` | `docs/store/pt/` | 英文版 |
@@ -109,8 +109,8 @@ URL 前缀：`https://ruilin.github.io/resource/`
 
 > 未翻译的语言会自动回退到默认语言（英文），所以不必担心覆盖不到的地区。
 
-> 截图为**各语言真实界面**（非英文界面配译文标题）—— 由 `tool/capture_shots.sh` 逐语言
-> 采集原图，再经 `tool/gen_store_assets.py` 加标题带合成。
+> 截图为**各语言真实界面**（非英文界面配译文标题）—— 由 `tool/capture_shots.py` 在模拟器上
+> 逐语言采集原图（状态栏干净、不占用手机），再经 `tool/gen_store_assets.py` 加标题带合成。
 
 ---
 

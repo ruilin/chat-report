@@ -158,15 +158,15 @@ def page(lang_dir, strings, font_stack, share_png, curve_png):
 </body></html>"""
 
 
-def render(html_path, out_png):
+def render(html_path, out_png, w=W, h=H):
     shot = out_png + ".2x.png"
     subprocess.run(
         [CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars",
-         "--force-device-scale-factor=2", f"--window-size={W},{H}",
+         "--force-device-scale-factor=2", f"--window-size={w},{h}",
          f"--screenshot={shot}", "file://" + html_path],
         check=True, capture_output=True)
-    # 2 倍渲染再缩回 1024×500，文字边缘更干净；Play 要求无 alpha
-    Image.open(shot).convert("RGB").resize((W, H), Image.LANCZOS).save(out_png)
+    # 2 倍渲染再缩回目标尺寸，文字边缘更干净；Play 要求无 alpha
+    Image.open(shot).convert("RGB").resize((w, h), Image.LANCZOS).save(out_png)
     os.remove(shot)
 
 

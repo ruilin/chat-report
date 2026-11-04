@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               GestureDetector(
                 // debug 彩蛋：长按 logo 打开不带「示例」标记的示例报告，
-                // 用于目检报告页和采集商店截图（tool/capture_shots.sh）
+                // 用于目检报告页和采集商店截图（tool/capture_shots.py）
                 onLongPress: kDebugMode
                     ? () => Navigator.of(context).push(MaterialPageRoute(
                         builder: (_) => ReportScreen(

@@ -98,7 +98,7 @@ Chat Report hiçbir mesajlaşma hizmetiyle bağlantılı değildir ve hiçbiri t
 |---|---|---|
 | App icon | 512×512 PNG，无 alpha | `../play_icon_512.png`（语言无关） |
 | Feature graphic | 1024×500 PNG | `feature_graphic.png` |
-| Phone screenshots | 1080×1920（9:16，符合 Play 2:1 上限）| **暂无土耳其语截图** —— Play 会回退显示英文版 `../en/screenshot_1..6.png` |
+| Phone screenshots | 1080×1920（9:16，符合 Play 2:1 上限）| `screenshot_1..6.png`（本目录，该语言真实界面 + 译文标题） |
 
-> 如需土耳其语截图：用 `tool/capture_shots.sh` + `tool/gen_store_assets.py` 生成，但这两个脚本目前只覆盖 en / zh / zh-Hant，需先加上 tr。
+> 截图重新生成：`tool/capture_shots.py <原图目录>` → `tool/gen_store_assets.py <原图目录>`。
 > **未提供**：平板截图（若不勾选平板支持则不需要）。
