@@ -306,9 +306,10 @@ void main() {
         // 名字要写明，模型才不会自己音译
         expect(s, contains('"Alex"'));
       }
-      // 报告写给用户本人看
-      expect(systems.where((s) => s.contains('as "you" in the second person')),
-          hasLength(2));
+      // 报告写给用户本人看，每一步都不能用用户的名字
+      for (final s in systems) {
+        expect(s, contains('as "you" in the second person'));
+      }
     });
 
     test('free report prompt does not receive premium signals', () async {

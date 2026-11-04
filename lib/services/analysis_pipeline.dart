@@ -127,7 +127,7 @@ class AnalysisPipeline {
           'Every quote is the text of one message copied exactly, without sender or time. '
           'Topics are short nouns (e.g. "Food", "Work", "Travel"). '
           'At most 3 quotes, 2 events, 2 conflict_moments and 3 signals. '
-          '${_languageRules(language, metrics)}',
+          '${_languageRules(language, metrics)} ${_addressRules(metrics)}',
       user: 'Month $month:\n$text',
     );
   }
@@ -344,10 +344,11 @@ class AnalysisPipeline {
       'Never quote messages inside other text: paraphrase them in $language. '
       'Only quote fields hold original wording, copied verbatim in their original language.';
 
-  /// 报告是写给用户本人看的，用第二人称
+  /// 报告是写给用户本人看的，用第二人称。按月分析也要遵守，否则名字会被带进汇总
   static String _addressRules(ChatMetrics metrics) =>
       'Speak directly to ${jsonEncode(metrics.you)} as "you" in the second person and never use their name; '
-      'refer to the other person as ${jsonEncode(metrics.partner)}.';
+      'if the input mentions them by name, rewrite it as "you". '
+      'Refer to the other person as ${jsonEncode(metrics.partner)}.';
 
   /// 429 指数退避多试几次；没回应或 JSON 损坏只再试一次；其他异常直接抛出。
   Future<T> _withRetry<T>(Future<T> Function() task) async {
