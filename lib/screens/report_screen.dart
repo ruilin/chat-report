@@ -5,10 +5,12 @@ import '../models/report.dart';
 import '../services/analytics.dart';
 import '../theme.dart';
 import '../widgets/charts.dart';
+import '../widgets/deep_dive_section.dart';
 import '../widgets/share_card.dart';
+import 'coach_screen.dart';
 
 /// 报告页 —— 整个产品为这一页服务。
-/// 原则：每个数字可追溯（本地统计 + 金句附时间）；深读为付费模块（MVP 先全量展示）。
+/// 原则：每个数字可追溯（本地统计 + 金句附时间）；专题分析是付费模块，其余免费。
 class ReportScreen extends StatelessWidget {
   final RelationshipReport report;
 
@@ -67,19 +69,26 @@ class ReportScreen extends StatelessWidget {
               child: UAvatar(m.partner, isYou: false, size: 30),
             ),
             const SizedBox(width: 2),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(l.reportYouAnd(m.partner),
-                    style: const TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.w700)),
-                Text(l.reportMessages(m.totalMessages),
-                    style: const TextStyle(
-                      fontSize: 10.5,
-                      color: UColors.muted,
-                      fontFeatures: [FontFeature.tabularFigures()],
-                    )),
-              ],
+            // 联系人名字可能很长，不能撑破标题栏
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(l.reportYouAnd(m.partner),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.w700)),
+                  Text(l.reportMessages(m.totalMessages),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 10.5,
+                        color: UColors.muted,
+                        fontFeatures: [FontFeature.tabularFigures()],
+                      )),
+                ],
+              ),
             ),
           ],
         ),
@@ -113,7 +122,52 @@ class ReportScreen extends StatelessWidget {
           _personalityCard(l),
           const SizedBox(height: 14),
           _deepReadingCard(l),
+          const SizedBox(height: 14),
+          DeepDiveSection(report: report, isSample: isSample),
+          if (!isSample) ...[
+            const SizedBox(height: 14),
+            _coachCard(context, l),
+          ],
         ],
+      ),
+    );
+  }
+
+  Widget _coachCard(BuildContext context, L l) {
+    return UCard(
+      padding: EdgeInsets.zero,
+      child: Material(
+        type: MaterialType.transparency,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              settings: const RouteSettings(name: 'coach'),
+              builder: (_) => CoachScreen(report: report))),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                const Text('💬', style: TextStyle(fontSize: 19)),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(l.coachEntryTitle,
+                          style: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w700)),
+                      Text(l.coachEntrySubtitle,
+                          style: const TextStyle(
+                              fontSize: 11.5, color: UColors.muted)),
+                    ],
+                  ),
+                ),
+                const Icon(Icons.chevron_right,
+                    size: 20, color: UColors.muted),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

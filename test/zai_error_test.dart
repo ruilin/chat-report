@@ -14,7 +14,7 @@ void main() {
 
   Future<ZaiException> failWith(http.Client client) async {
     try {
-      await ZaiClient(client).complete(model: 'm', system: 's', user: 'u');
+      await ZaiClient(client).completeJson(model: 'm', system: 's', user: 'u');
     } on ZaiException catch (e) {
       return e;
     }
@@ -37,11 +37,26 @@ void main() {
     expect(e.localize(en), en.errorRateLimited);
   });
 
+  test('429 for an empty balance is not retried as rate limiting', () async {
+    final e = await failWith(MockClient((_) async => http.Response(
+        '{"error":{"code":"1113","message":"Insufficient balance"}}', 429)));
+    expect(e.isRateLimited, isFalse);
+    expect(e.statusCode, 429);
+    expect(e.localize(en), en.errorServiceUnavailable);
+  });
+
   test('unreachable endpoints map to no connection', () async {
     final e = await failWith(
         MockClient((_) async => throw http.ClientException('offline')));
     expect(e.kind, ZaiErrorKind.noConnection);
     expect(e.localize(en), en.errorNoConnection);
+  });
+
+  test('broken JSON is a bad response, not a crash', () {
+    expect(
+        () => ZaiClient.extractJson('{"a": 1,, }'),
+        throwsA(isA<ZaiException>()
+            .having((e) => e.isBadResponse, 'isBadResponse', isTrue)));
   });
 
   test('pipeline keeps the last error kind and status code', () async {

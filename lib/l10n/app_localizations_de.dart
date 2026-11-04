@@ -343,4 +343,186 @@ class LDe extends L {
   @override
   String get errorRateLimited =>
       'Der Analysedienst bekommt gerade zu viele Anfragen. Versuch\'s gleich nochmal.';
+
+  @override
+  String get deepDiveTitle => 'Tiefenanalyse';
+
+  @override
+  String get attachmentAnxious => 'Eher ängstlich';
+
+  @override
+  String get attachmentAvoidant => 'Eher vermeidend';
+
+  @override
+  String get attachmentSecure => 'Eher sicher';
+
+  @override
+  String get attachmentMixed => 'Gemischt';
+
+  @override
+  String get deepDiveMissing =>
+      'Die Tiefenanalyse konnte diesmal nicht erstellt werden. Analysiere diesen Chat erneut, um es noch einmal zu versuchen.';
+
+  @override
+  String get deepDiveSubtitle =>
+      'Was der kostenlose Bericht nicht abdeckt. Jede Erkenntnis kommt mit der genauen Nachricht dahinter.';
+
+  @override
+  String get sectionConflict => 'Streit und Versöhnung';
+
+  @override
+  String get sectionRedFlags => 'Warnsignale';
+
+  @override
+  String get sectionGreenFlags => 'Positive Signale';
+
+  @override
+  String get sectionAttachment => 'Bindungsstile';
+
+  @override
+  String get sectionTurningPoints => 'Wendepunkte';
+
+  @override
+  String deepDiveBuy(String price) {
+    return 'Für $price freischalten';
+  }
+
+  @override
+  String get deepDiveOneTime => 'Einmalzahlung für diesen Bericht. Kein Abo.';
+
+  @override
+  String get deepDiveUnavailable =>
+      'Käufe sind gerade nicht verfügbar. Bitte versuch es später noch einmal.';
+
+  @override
+  String get deepDivePending =>
+      'Deine Zahlung steht noch aus. Dieser Bericht wird freigeschaltet, sobald sie eingegangen ist.';
+
+  @override
+  String get deepDiveFailed =>
+      'Der Kauf wurde nicht abgeschlossen. Bitte versuch es noch einmal.';
+
+  @override
+  String get deepDiveUseCredit => 'Mit deinem bezahlten Guthaben freischalten';
+
+  @override
+  String get deepDiveDisclaimer =>
+      'Eine KI-Einschätzung zum Nachdenken, keine Diagnose.';
+
+  @override
+  String get deepDiveNoRedFlags =>
+      'Keine klaren Warnsignale in diesen Nachrichten.';
+
+  @override
+  String get deepDiveNoGreenFlags =>
+      'Keine klaren positiven Signale in diesen Nachrichten.';
+
+  @override
+  String get attachmentLoopLabel => 'Das Muster zwischen euch';
+
+  @override
+  String get sampleDeepDiveHint =>
+      'Dein eigener Bericht enthält diesen Abschnitt.';
+
+  @override
+  String get savedTitle => 'Meine Berichte';
+
+  @override
+  String savedSubtitle(int count) {
+    return '$count auf diesem Handy gespeichert';
+  }
+
+  @override
+  String get savedNote =>
+      'Berichte werden nur auf diesem Handy gespeichert. Beim Deinstallieren der App werden sie gelöscht.';
+
+  @override
+  String get savedEmpty => 'Noch keine gespeicherten Berichte.';
+
+  @override
+  String get savedDeleteTitle => 'Diesen Bericht löschen?';
+
+  @override
+  String get savedDeleteBody =>
+      'Er lässt sich nicht wiederherstellen. Hast du ihn bezahlt freigeschaltet, geht auch das verloren.';
+
+  @override
+  String get savedDeleteConfirm => 'Löschen';
+
+  @override
+  String get savedDeleteCancel => 'Behalten';
+
+  @override
+  String get savedUnlockedBadge => 'Tiefenanalyse freigeschaltet';
+
+  @override
+  String get coachEntryTitle => 'KI-Coach fragen';
+
+  @override
+  String get coachEntrySubtitle => 'Frag alles zu diesem Bericht';
+
+  @override
+  String get coachTitle => 'KI-Coach';
+
+  @override
+  String get coachDisclaimer =>
+      'Der Coach ist eine KI: Er kann sich irren und ersetzt keine professionelle Hilfe.';
+
+  @override
+  String get coachHint => 'Frag etwas zu dieser Beziehung…';
+
+  @override
+  String get coachSlow => 'Die KI braucht länger als sonst. Neuer Versuch…';
+
+  @override
+  String get coachSend => 'Senden';
+
+  @override
+  String get coachSuggest1 => 'Warum streiten wir immer über dasselbe?';
+
+  @override
+  String get coachSuggest2 => 'Wie spreche ich etwas Schwieriges an?';
+
+  @override
+  String get coachSuggest3 => 'Woran sollte ich zuerst arbeiten?';
+
+  @override
+  String coachLeft(int count) {
+    return 'Noch $count Fragen';
+  }
+
+  @override
+  String get coachOutTitle => 'Keine Fragen mehr übrig';
+
+  @override
+  String coachOutBody(int count) {
+    return 'Hol dir $count weitere für alle deine Berichte.';
+  }
+
+  @override
+  String coachBuy(int count, String price) {
+    return '$count Fragen für $price';
+  }
+
+  @override
+  String get coachBuyNote => 'Einmalzahlung. Kein Abo.';
+
+  @override
+  String get coachPending =>
+      'Deine Zahlung steht noch aus. Die Fragen werden hinzugefügt, sobald sie eingegangen ist.';
+
+  @override
+  String get coachReportTitle => 'Diese Antwort melden';
+
+  @override
+  String get coachReportOffensive => 'Beleidigend oder unangemessen';
+
+  @override
+  String get coachReportHarmful => 'Schädlicher oder gefährlicher Rat';
+
+  @override
+  String get coachReportWrong => 'Falsch oder erfunden';
+
+  @override
+  String get coachReportThanks => 'Danke, wir haben deine Meldung erhalten.';
 }

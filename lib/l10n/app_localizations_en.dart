@@ -340,4 +340,184 @@ class LEn extends L {
   @override
   String get errorRateLimited =>
       'The analysis service is rate-limiting requests. Please try again shortly.';
+
+  @override
+  String get deepDiveTitle => 'Deep dive';
+
+  @override
+  String get attachmentAnxious => 'Anxious-leaning';
+
+  @override
+  String get attachmentAvoidant => 'Avoidant-leaning';
+
+  @override
+  String get attachmentSecure => 'Secure-leaning';
+
+  @override
+  String get attachmentMixed => 'Mixed';
+
+  @override
+  String get deepDiveMissing =>
+      'The deep dive couldn\'t be generated this time. Analyze this chat again to retry.';
+
+  @override
+  String get deepDiveSubtitle =>
+      'What the free report doesn\'t cover. Every finding comes with the exact message behind it.';
+
+  @override
+  String get sectionConflict => 'Fights and making up';
+
+  @override
+  String get sectionRedFlags => 'Red flags';
+
+  @override
+  String get sectionGreenFlags => 'Green flags';
+
+  @override
+  String get sectionAttachment => 'Attachment styles';
+
+  @override
+  String get sectionTurningPoints => 'Turning points';
+
+  @override
+  String deepDiveBuy(String price) {
+    return 'Unlock for $price';
+  }
+
+  @override
+  String get deepDiveOneTime =>
+      'One-time payment for this report. Not a subscription.';
+
+  @override
+  String get deepDiveUnavailable =>
+      'Purchases aren\'t available right now. Please try again later.';
+
+  @override
+  String get deepDivePending =>
+      'Your payment is pending. This report unlocks once it goes through.';
+
+  @override
+  String get deepDiveFailed =>
+      'The purchase didn\'t complete. Please try again.';
+
+  @override
+  String get deepDiveUseCredit => 'Unlock with your prepaid credit';
+
+  @override
+  String get deepDiveDisclaimer =>
+      'An AI reading for reflection, not a diagnosis.';
+
+  @override
+  String get deepDiveNoRedFlags => 'No clear red flags in these messages.';
+
+  @override
+  String get deepDiveNoGreenFlags => 'No clear green flags in these messages.';
+
+  @override
+  String get attachmentLoopLabel => 'The pattern between you';
+
+  @override
+  String get sampleDeepDiveHint => 'Your own report will include this section.';
+
+  @override
+  String get savedTitle => 'My reports';
+
+  @override
+  String savedSubtitle(int count) {
+    return '$count saved on this phone';
+  }
+
+  @override
+  String get savedNote =>
+      'Reports are saved only on this phone. Uninstalling the app deletes them.';
+
+  @override
+  String get savedEmpty => 'No saved reports yet.';
+
+  @override
+  String get savedDeleteTitle => 'Delete this report?';
+
+  @override
+  String get savedDeleteBody =>
+      'It can\'t be recovered. If you paid to unlock it, that unlock is lost too.';
+
+  @override
+  String get savedDeleteConfirm => 'Delete';
+
+  @override
+  String get savedDeleteCancel => 'Keep';
+
+  @override
+  String get savedUnlockedBadge => 'Deep dive unlocked';
+
+  @override
+  String get coachEntryTitle => 'Ask the AI coach';
+
+  @override
+  String get coachEntrySubtitle => 'Ask anything about this report';
+
+  @override
+  String get coachTitle => 'AI coach';
+
+  @override
+  String get coachDisclaimer =>
+      'The coach is an AI: it can be wrong and doesn\'t replace professional help.';
+
+  @override
+  String get coachHint => 'Ask about this relationship…';
+
+  @override
+  String get coachSlow => 'The AI is taking longer than usual. Trying again…';
+
+  @override
+  String get coachSend => 'Send';
+
+  @override
+  String get coachSuggest1 => 'Why do we keep having the same fight?';
+
+  @override
+  String get coachSuggest2 => 'How can I bring up something hard?';
+
+  @override
+  String get coachSuggest3 => 'What should I work on first?';
+
+  @override
+  String coachLeft(int count) {
+    return '$count questions left';
+  }
+
+  @override
+  String get coachOutTitle => 'You\'re out of questions';
+
+  @override
+  String coachOutBody(int count) {
+    return 'Get $count more to use on any of your reports.';
+  }
+
+  @override
+  String coachBuy(int count, String price) {
+    return '$count questions for $price';
+  }
+
+  @override
+  String get coachBuyNote => 'One-time payment. Not a subscription.';
+
+  @override
+  String get coachPending =>
+      'Your payment is pending. Your questions will be added once it goes through.';
+
+  @override
+  String get coachReportTitle => 'Report this answer';
+
+  @override
+  String get coachReportOffensive => 'Offensive or inappropriate';
+
+  @override
+  String get coachReportHarmful => 'Harmful or unsafe advice';
+
+  @override
+  String get coachReportWrong => 'Wrong or made up';
+
+  @override
+  String get coachReportThanks => 'Thanks, we\'ve received your report.';
 }

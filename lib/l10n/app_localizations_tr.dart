@@ -342,4 +342,186 @@ class LTr extends L {
   @override
   String get errorRateLimited =>
       'Analiz hizmeti şu an çok fazla istek alıyor. Birazdan tekrar dene.';
+
+  @override
+  String get deepDiveTitle => 'Derin analiz';
+
+  @override
+  String get attachmentAnxious => 'Kaygılı eğilim';
+
+  @override
+  String get attachmentAvoidant => 'Kaçıngan eğilim';
+
+  @override
+  String get attachmentSecure => 'Güvenli eğilim';
+
+  @override
+  String get attachmentMixed => 'Karma';
+
+  @override
+  String get deepDiveMissing =>
+      'Derin analiz bu kez oluşturulamadı. Yeniden denemek için bu sohbeti tekrar analiz edin.';
+
+  @override
+  String get deepDiveSubtitle =>
+      'Ücretsiz raporun değinmediği konular. Her bulgu, dayandığı mesajın kendisiyle birlikte gelir.';
+
+  @override
+  String get sectionConflict => 'Kavgalar ve barışmalar';
+
+  @override
+  String get sectionRedFlags => 'Kırmızı bayraklar';
+
+  @override
+  String get sectionGreenFlags => 'Yeşil bayraklar';
+
+  @override
+  String get sectionAttachment => 'Bağlanma stilleri';
+
+  @override
+  String get sectionTurningPoints => 'Dönüm noktaları';
+
+  @override
+  String deepDiveBuy(String price) {
+    return '$price ile kilidi aç';
+  }
+
+  @override
+  String get deepDiveOneTime =>
+      'Bu rapor için tek seferlik ödeme. Abonelik değildir.';
+
+  @override
+  String get deepDiveUnavailable =>
+      'Satın alma şu anda kullanılamıyor. Lütfen daha sonra tekrar dene.';
+
+  @override
+  String get deepDivePending =>
+      'Ödemen beklemede. Tamamlandığında bu raporun kilidi açılacak.';
+
+  @override
+  String get deepDiveFailed => 'Satın alma tamamlanmadı. Lütfen tekrar dene.';
+
+  @override
+  String get deepDiveUseCredit => 'Önceden ödediğin krediyle kilidi aç';
+
+  @override
+  String get deepDiveDisclaimer =>
+      'Düşünmen için bir yapay zeka yorumu, teşhis değildir.';
+
+  @override
+  String get deepDiveNoRedFlags =>
+      'Bu mesajlarda belirgin bir kırmızı bayrak yok.';
+
+  @override
+  String get deepDiveNoGreenFlags =>
+      'Bu mesajlarda belirgin bir yeşil bayrak yok.';
+
+  @override
+  String get attachmentLoopLabel => 'Aranızdaki döngü';
+
+  @override
+  String get sampleDeepDiveHint => 'Kendi raporun bu bölümü içerecek.';
+
+  @override
+  String get savedTitle => 'Raporlarım';
+
+  @override
+  String savedSubtitle(int count) {
+    return 'Bu telefonda $count rapor kayıtlı';
+  }
+
+  @override
+  String get savedNote =>
+      'Raporlar yalnızca bu telefonda saklanır. Uygulamayı kaldırınca silinir.';
+
+  @override
+  String get savedEmpty => 'Henüz kayıtlı rapor yok.';
+
+  @override
+  String get savedDeleteTitle => 'Bu rapor silinsin mi?';
+
+  @override
+  String get savedDeleteBody =>
+      'Geri getirilemez. Kilidini ödeme yaparak açtıysan bu da kaybolur.';
+
+  @override
+  String get savedDeleteConfirm => 'Sil';
+
+  @override
+  String get savedDeleteCancel => 'Sakla';
+
+  @override
+  String get savedUnlockedBadge => 'Derin analizin kilidi açıldı';
+
+  @override
+  String get coachEntryTitle => 'Yapay zeka koçuna sor';
+
+  @override
+  String get coachEntrySubtitle => 'Bu raporla ilgili istediğini sor';
+
+  @override
+  String get coachTitle => 'Yapay zeka koçu';
+
+  @override
+  String get coachDisclaimer =>
+      'Koç bir yapay zekâdır: hata yapabilir ve profesyonel yardımın yerini tutmaz.';
+
+  @override
+  String get coachHint => 'Bu ilişki hakkında sor…';
+
+  @override
+  String get coachSlow =>
+      'Yapay zekâ her zamankinden yavaş. Yeniden deneniyor…';
+
+  @override
+  String get coachSend => 'Gönder';
+
+  @override
+  String get coachSuggest1 => 'Neden hep aynı şey için kavga ediyoruz?';
+
+  @override
+  String get coachSuggest2 => 'Zor bir konuyu nasıl açabilirim?';
+
+  @override
+  String get coachSuggest3 => 'Önce neyi geliştirmeliyim?';
+
+  @override
+  String coachLeft(int count) {
+    return '$count soru hakkın kaldı';
+  }
+
+  @override
+  String get coachOutTitle => 'Soru hakkın bitti';
+
+  @override
+  String coachOutBody(int count) {
+    return 'Tüm raporlarında kullanmak için $count soru daha al.';
+  }
+
+  @override
+  String coachBuy(int count, String price) {
+    return '$price karşılığında $count soru';
+  }
+
+  @override
+  String get coachBuyNote => 'Tek seferlik ödeme. Abonelik değildir.';
+
+  @override
+  String get coachPending =>
+      'Ödemen beklemede. Tamamlandığında soruların eklenecek.';
+
+  @override
+  String get coachReportTitle => 'Bu yanıtı bildir';
+
+  @override
+  String get coachReportOffensive => 'Rahatsız edici veya uygunsuz';
+
+  @override
+  String get coachReportHarmful => 'Zararlı veya güvensiz tavsiye';
+
+  @override
+  String get coachReportWrong => 'Yanlış veya uydurma';
+
+  @override
+  String get coachReportThanks => 'Teşekkürler, bildirimini aldık.';
 }

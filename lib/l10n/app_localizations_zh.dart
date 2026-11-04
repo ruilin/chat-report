@@ -327,6 +327,175 @@ class LZh extends L {
 
   @override
   String get errorRateLimited => '分析服务正在限流，请稍后重试。';
+
+  @override
+  String get deepDiveTitle => '专题分析';
+
+  @override
+  String get attachmentAnxious => '偏焦虑';
+
+  @override
+  String get attachmentAvoidant => '偏回避';
+
+  @override
+  String get attachmentSecure => '偏安全';
+
+  @override
+  String get attachmentMixed => '混合型';
+
+  @override
+  String get deepDiveMissing => '这次没能生成专题分析。重新分析这段聊天可以再试一次。';
+
+  @override
+  String get deepDiveSubtitle => '免费报告没讲到的部分，每条结论都附上聊天原话。';
+
+  @override
+  String get sectionConflict => '争吵与和好';
+
+  @override
+  String get sectionRedFlags => '红旗信号';
+
+  @override
+  String get sectionGreenFlags => '绿旗信号';
+
+  @override
+  String get sectionAttachment => '依恋风格';
+
+  @override
+  String get sectionTurningPoints => '关系转折';
+
+  @override
+  String deepDiveBuy(String price) {
+    return '$price 解锁';
+  }
+
+  @override
+  String get deepDiveOneTime => '一次性付费，只解锁这份报告，不是订阅。';
+
+  @override
+  String get deepDiveUnavailable => '暂时无法购买，请稍后再试。';
+
+  @override
+  String get deepDivePending => '付款处理中，到账后这份报告会自动解锁。';
+
+  @override
+  String get deepDiveFailed => '购买没有完成，请重试。';
+
+  @override
+  String get deepDiveUseCredit => '使用已付费的额度解锁';
+
+  @override
+  String get deepDiveDisclaimer => 'AI 解读仅供参考，不是诊断。';
+
+  @override
+  String get deepDiveNoRedFlags => '这些聊天里没有明显的红旗信号。';
+
+  @override
+  String get deepDiveNoGreenFlags => '这些聊天里没有明显的绿旗信号。';
+
+  @override
+  String get attachmentLoopLabel => '你们之间的模式';
+
+  @override
+  String get sampleDeepDiveHint => '你自己的报告会包含这部分内容。';
+
+  @override
+  String get savedTitle => '我的报告';
+
+  @override
+  String savedSubtitle(int count) {
+    return '这台手机上有 $count 份';
+  }
+
+  @override
+  String get savedNote => '报告只保存在这台手机上，卸载应用后会被删除。';
+
+  @override
+  String get savedEmpty => '还没有保存的报告。';
+
+  @override
+  String get savedDeleteTitle => '删除这份报告？';
+
+  @override
+  String get savedDeleteBody => '删除后无法恢复。如果付费解锁过，解锁也会一起失效。';
+
+  @override
+  String get savedDeleteConfirm => '删除';
+
+  @override
+  String get savedDeleteCancel => '保留';
+
+  @override
+  String get savedUnlockedBadge => '专题分析已解锁';
+
+  @override
+  String get coachEntryTitle => '问问 AI 教练';
+
+  @override
+  String get coachEntrySubtitle => '针对这份报告，想问什么都可以';
+
+  @override
+  String get coachTitle => 'AI 教练';
+
+  @override
+  String get coachDisclaimer => '教练是 AI，可能会出错，也不能替代专业帮助。';
+
+  @override
+  String get coachHint => '问问这段关系…';
+
+  @override
+  String get coachSlow => 'AI 这会儿有点慢，正在重试…';
+
+  @override
+  String get coachSend => '发送';
+
+  @override
+  String get coachSuggest1 => '我们为什么总是为同样的事吵架？';
+
+  @override
+  String get coachSuggest2 => '有些难开口的话，我该怎么说？';
+
+  @override
+  String get coachSuggest3 => '我应该先改善哪一点？';
+
+  @override
+  String coachLeft(int count) {
+    return '还可以问 $count 次';
+  }
+
+  @override
+  String get coachOutTitle => '提问次数用完了';
+
+  @override
+  String coachOutBody(int count) {
+    return '再买 $count 次，所有报告都能用。';
+  }
+
+  @override
+  String coachBuy(int count, String price) {
+    return '$price 购买 $count 次提问';
+  }
+
+  @override
+  String get coachBuyNote => '一次性付费，不是订阅。';
+
+  @override
+  String get coachPending => '付款处理中，到账后会自动加上提问次数。';
+
+  @override
+  String get coachReportTitle => '举报这条回答';
+
+  @override
+  String get coachReportOffensive => '冒犯或不当内容';
+
+  @override
+  String get coachReportHarmful => '有害或不安全的建议';
+
+  @override
+  String get coachReportWrong => '错误或编造的内容';
+
+  @override
+  String get coachReportThanks => '谢谢，我们已收到你的举报。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -652,4 +821,173 @@ class LZhHant extends LZh {
 
   @override
   String get errorRateLimited => '分析服務正在限流，請稍後重試。';
+
+  @override
+  String get deepDiveTitle => '專題分析';
+
+  @override
+  String get attachmentAnxious => '偏焦慮';
+
+  @override
+  String get attachmentAvoidant => '偏迴避';
+
+  @override
+  String get attachmentSecure => '偏安全';
+
+  @override
+  String get attachmentMixed => '混合型';
+
+  @override
+  String get deepDiveMissing => '這次沒能生成專題分析。重新分析這段聊天可以再試一次。';
+
+  @override
+  String get deepDiveSubtitle => '免費報告沒講到的部分，每項結論都附上聊天原話。';
+
+  @override
+  String get sectionConflict => '爭吵與和好';
+
+  @override
+  String get sectionRedFlags => '紅旗訊號';
+
+  @override
+  String get sectionGreenFlags => '綠旗訊號';
+
+  @override
+  String get sectionAttachment => '依附風格';
+
+  @override
+  String get sectionTurningPoints => '關係轉折';
+
+  @override
+  String deepDiveBuy(String price) {
+    return '$price 解鎖';
+  }
+
+  @override
+  String get deepDiveOneTime => '一次性付費，只解鎖這份報告，不是訂閱。';
+
+  @override
+  String get deepDiveUnavailable => '暫時無法購買，請稍後再試。';
+
+  @override
+  String get deepDivePending => '付款處理中，入帳後這份報告會自動解鎖。';
+
+  @override
+  String get deepDiveFailed => '購買沒有完成，請再試一次。';
+
+  @override
+  String get deepDiveUseCredit => '使用已付費的額度解鎖';
+
+  @override
+  String get deepDiveDisclaimer => 'AI 解讀僅供參考，並非診斷。';
+
+  @override
+  String get deepDiveNoRedFlags => '這些聊天裡沒有明顯的紅旗訊號。';
+
+  @override
+  String get deepDiveNoGreenFlags => '這些聊天裡沒有明顯的綠旗訊號。';
+
+  @override
+  String get attachmentLoopLabel => '你們之間的模式';
+
+  @override
+  String get sampleDeepDiveHint => '你自己的報告會包含這部分內容。';
+
+  @override
+  String get savedTitle => '我的報告';
+
+  @override
+  String savedSubtitle(int count) {
+    return '這支手機上有 $count 份';
+  }
+
+  @override
+  String get savedNote => '報告只儲存在這支手機上，解除安裝應用程式後會被刪除。';
+
+  @override
+  String get savedEmpty => '還沒有儲存的報告。';
+
+  @override
+  String get savedDeleteTitle => '刪除這份報告？';
+
+  @override
+  String get savedDeleteBody => '刪除後無法復原。如果付費解鎖過，解鎖也會一併失效。';
+
+  @override
+  String get savedDeleteConfirm => '刪除';
+
+  @override
+  String get savedDeleteCancel => '保留';
+
+  @override
+  String get savedUnlockedBadge => '專題分析已解鎖';
+
+  @override
+  String get coachEntryTitle => '問問 AI 教練';
+
+  @override
+  String get coachEntrySubtitle => '針對這份報告，想問什麼都可以';
+
+  @override
+  String get coachTitle => 'AI 教練';
+
+  @override
+  String get coachDisclaimer => '教練是 AI，可能會出錯，也不能取代專業協助。';
+
+  @override
+  String get coachHint => '問問這段關係…';
+
+  @override
+  String get coachSlow => 'AI 這會兒有點慢，正在重試…';
+
+  @override
+  String get coachSend => '傳送';
+
+  @override
+  String get coachSuggest1 => '我們為什麼總是為同樣的事吵架？';
+
+  @override
+  String get coachSuggest2 => '有些難開口的話，我該怎麼說？';
+
+  @override
+  String get coachSuggest3 => '我應該先改善哪一點？';
+
+  @override
+  String coachLeft(int count) {
+    return '還可以問 $count 次';
+  }
+
+  @override
+  String get coachOutTitle => '提問次數用完了';
+
+  @override
+  String coachOutBody(int count) {
+    return '再買 $count 次，所有報告都能用。';
+  }
+
+  @override
+  String coachBuy(int count, String price) {
+    return '$price 購買 $count 次提問';
+  }
+
+  @override
+  String get coachBuyNote => '一次性付費，不是訂閱。';
+
+  @override
+  String get coachPending => '付款處理中，入帳後會自動加上提問次數。';
+
+  @override
+  String get coachReportTitle => '檢舉這則回答';
+
+  @override
+  String get coachReportOffensive => '冒犯或不當內容';
+
+  @override
+  String get coachReportHarmful => '有害或不安全的建議';
+
+  @override
+  String get coachReportWrong => '錯誤或捏造的內容';
+
+  @override
+  String get coachReportThanks => '謝謝，我們已收到你的檢舉。';
 }

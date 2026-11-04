@@ -146,6 +146,7 @@ URL 前缀：`https://ruilin.github.io/resource/`
 | Messages → Other in-app messages | ✅ Collected | ❌ Not shared（Z.ai 作为代我们处理的服务商，不算 sharing） | App functionality | 用户可选（Optional）—— 仅在用户主动导入并同意时 |
 | App activity → App interactions | ✅ Collected | ❌ Not shared | Analytics | 必需（Firebase Analytics 自动收集） |
 | Device or other IDs | ✅ Collected | ❌ Not shared | Analytics | 必需（Firebase app instance ID） |
+| Financial info → Purchase history | ✅ Collected | ❌ Not shared | Analytics | 必需（Firebase Analytics 自动记录应用内购买事件，以及我们的 purchase_result 埋点） |
 
 补充勾选：
 

@@ -41,7 +41,7 @@ lib/
 | 阶段 | 模型 | 职责 |
 |---|---|---|
 | Stage 1 | `glm-4.5-flash` | 按月分块，并行产出结构化 JSON（情绪分/话题/金句/事件） |
-| Stage 2 | `glm-4.6` | 月度 JSON + 本地统计 → 叙事报告 JSON |
+| Stage 2 | `glm-4.5-flash` | 月度 JSON + 本地统计 → 叙事报告 JSON + 付费专题分析（需要时可在 `ZaiClient.reportModel` 改回 `glm-4.6`） |
 
 两阶段都显式 `thinking: disabled`（GLM 默认思考会吃掉 max_tokens）。
 量化指标（占比、回复延迟、次数）全部由 `metrics_engine` 本地计算，LLM 只解读数字。

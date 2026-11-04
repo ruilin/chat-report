@@ -336,4 +336,185 @@ class LAr extends L {
   @override
   String get errorRateLimited =>
       'خدمة التحليل تتلقى طلبات كثيرة حاليًا. حاول مجددًا بعد قليل.';
+
+  @override
+  String get deepDiveTitle => 'تحليل معمّق';
+
+  @override
+  String get attachmentAnxious => 'ميل قلق';
+
+  @override
+  String get attachmentAvoidant => 'ميل تجنبي';
+
+  @override
+  String get attachmentSecure => 'ميل آمن';
+
+  @override
+  String get attachmentMixed => 'مختلط';
+
+  @override
+  String get deepDiveMissing =>
+      'تعذر إنشاء التحليل المعمّق هذه المرة. حلّل هذه المحادثة مرة أخرى للمحاولة من جديد.';
+
+  @override
+  String get deepDiveSubtitle =>
+      'ما لا يغطيه التقرير المجاني. كل استنتاج مرفق بنص الرسالة التي يستند إليها.';
+
+  @override
+  String get sectionConflict => 'الخلافات والمصالحة';
+
+  @override
+  String get sectionRedFlags => 'إشارات تحذيرية';
+
+  @override
+  String get sectionGreenFlags => 'إشارات إيجابية';
+
+  @override
+  String get sectionAttachment => 'أنماط التعلق';
+
+  @override
+  String get sectionTurningPoints => 'نقاط التحول';
+
+  @override
+  String deepDiveBuy(String price) {
+    return 'فتح مقابل $price';
+  }
+
+  @override
+  String get deepDiveOneTime => 'دفعة واحدة لهذا التقرير، وليست اشتراكًا.';
+
+  @override
+  String get deepDiveUnavailable =>
+      'الشراء غير متاح حاليًا. يُرجى المحاولة لاحقًا.';
+
+  @override
+  String get deepDivePending =>
+      'دفعتك قيد المعالجة. سيُفتح هذا التقرير عند اكتمالها.';
+
+  @override
+  String get deepDiveFailed =>
+      'لم تكتمل عملية الشراء. يُرجى المحاولة مرة أخرى.';
+
+  @override
+  String get deepDiveUseCredit => 'فتح باستخدام رصيدك المدفوع';
+
+  @override
+  String get deepDiveDisclaimer =>
+      'قراءة بالذكاء الاصطناعي للتأمل، وليست تشخيصًا.';
+
+  @override
+  String get deepDiveNoRedFlags =>
+      'لا توجد إشارات تحذيرية واضحة في هذه الرسائل.';
+
+  @override
+  String get deepDiveNoGreenFlags =>
+      'لا توجد إشارات إيجابية واضحة في هذه الرسائل.';
+
+  @override
+  String get attachmentLoopLabel => 'النمط بينكما';
+
+  @override
+  String get sampleDeepDiveHint => 'سيتضمن تقريرك الخاص هذا القسم.';
+
+  @override
+  String get savedTitle => 'تقاريري';
+
+  @override
+  String savedSubtitle(int count) {
+    return '$count محفوظة على هذا الهاتف';
+  }
+
+  @override
+  String get savedNote =>
+      'تُحفظ التقارير على هذا الهاتف فقط، وتُحذف عند إلغاء تثبيت التطبيق.';
+
+  @override
+  String get savedEmpty => 'لا توجد تقارير محفوظة بعد.';
+
+  @override
+  String get savedDeleteTitle => 'هل تريد حذف هذا التقرير؟';
+
+  @override
+  String get savedDeleteBody =>
+      'لا يمكن استرجاعه. وإذا دفعت لفتحه، فستفقد ذلك أيضًا.';
+
+  @override
+  String get savedDeleteConfirm => 'حذف';
+
+  @override
+  String get savedDeleteCancel => 'إبقاء';
+
+  @override
+  String get savedUnlockedBadge => 'تم فتح التحليل المعمّق';
+
+  @override
+  String get coachEntryTitle => 'اسأل مدرب الذكاء الاصطناعي';
+
+  @override
+  String get coachEntrySubtitle => 'اسأل ما تشاء عن هذا التقرير';
+
+  @override
+  String get coachTitle => 'مدرب الذكاء الاصطناعي';
+
+  @override
+  String get coachDisclaimer =>
+      'المدرب ذكاء اصطناعي: قد يخطئ ولا يغني عن المساعدة المتخصصة.';
+
+  @override
+  String get coachHint => 'اسأل عن هذه العلاقة…';
+
+  @override
+  String get coachSlow =>
+      'الذكاء الاصطناعي أبطأ من المعتاد. جارٍ إعادة المحاولة…';
+
+  @override
+  String get coachSend => 'إرسال';
+
+  @override
+  String get coachSuggest1 => 'لماذا نتشاجر دائمًا على الشيء نفسه؟';
+
+  @override
+  String get coachSuggest2 => 'كيف أفتح موضوعًا صعبًا؟';
+
+  @override
+  String get coachSuggest3 => 'ما الذي عليّ تحسينه أولًا؟';
+
+  @override
+  String coachLeft(int count) {
+    return 'الأسئلة المتبقية: $count';
+  }
+
+  @override
+  String get coachOutTitle => 'نفدت أسئلتك';
+
+  @override
+  String coachOutBody(int count) {
+    return 'احصل على $count سؤالًا إضافيًا لاستخدامها في أي من تقاريرك.';
+  }
+
+  @override
+  String coachBuy(int count, String price) {
+    return '$count سؤالًا مقابل $price';
+  }
+
+  @override
+  String get coachBuyNote => 'دفعة واحدة، وليست اشتراكًا.';
+
+  @override
+  String get coachPending => 'دفعتك قيد المعالجة. ستُضاف الأسئلة عند اكتمالها.';
+
+  @override
+  String get coachReportTitle => 'الإبلاغ عن هذه الإجابة';
+
+  @override
+  String get coachReportOffensive => 'مسيئة أو غير لائقة';
+
+  @override
+  String get coachReportHarmful => 'نصيحة ضارة أو غير آمنة';
+
+  @override
+  String get coachReportWrong => 'خاطئة أو مختلقة';
+
+  @override
+  String get coachReportThanks => 'شكرًا، لقد تلقينا بلاغك.';
 }

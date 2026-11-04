@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../sample/sample_report.dart';
 import '../services/analytics.dart';
+import '../services/report_store.dart';
 import '../services/whatsapp_parser.dart';
 import '../theme.dart';
 import 'import_guide_sheet.dart';
 import 'report_screen.dart';
+import 'saved_reports_screen.dart';
 import 'setup_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +22,31 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _busy = false;
+  int _savedCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshSaved();
+  }
+
+  Future<void> _refreshSaved() async {
+    try {
+      final count = await ReportStore().count();
+      if (mounted) setState(() => _savedCount = count);
+    } catch (e) {
+      // 读不到就不显示入口，不影响主流程
+      // ignore: avoid_print
+      print('[home] saved count failed: $e');
+    }
+  }
+
+  Future<void> _openSaved() async {
+    await Navigator.of(context).push(MaterialPageRoute(
+        settings: const RouteSettings(name: 'saved_reports'),
+        builder: (_) => const SavedReportsScreen()));
+    await _refreshSaved();
+  }
 
   /// 主入口：先弹分步引导（含跳转 WhatsApp），用户拿到文件后再选取。
   Future<void> _startImport() async {
@@ -132,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
       await Navigator.of(context).push(MaterialPageRoute(
           settings: const RouteSettings(name: 'setup'),
           builder: (_) => SetupScreen(data: data)));
+      await _refreshSaved();
     } on ParseException catch (e) {
       Analytics.chatParseFail(source: source, reason: e.kind.name);
       if (!mounted) return;
@@ -149,59 +177,80 @@ class _HomeScreenState extends State<HomeScreen> {
     final l = L.of(context);
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                // debug 彩蛋：长按 logo 打开不带「示例」标记的示例报告，
-                // 用于目检报告页和采集商店截图（tool/capture_shots.py）
-                onLongPress: kDebugMode
-                    ? () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => ReportScreen(
-                            report: buildSampleReport(
-                                lang: sampleLangOf(
-                                    Localizations.localeOf(context))))))
-                    : null,
-                child: Text(l.appTitle,
-                    style: UType.serifItalic.copyWith(fontSize: 30)),
-              ),
-              Text(l.tagline,
-                  style: const TextStyle(fontSize: 14, color: UColors.muted)),
-              const SizedBox(height: 26),
-              _EntryCard(
-                primary: true,
-                emoji: '💬',
-                title: l.homeImportTitle,
-                subtitle: l.homeImportSubtitle,
-                hint: l.homeImportHint,
-                onTap: _busy ? null : _startImport,
-              ),
-              const SizedBox(height: 14),
-              _EntryCard(
-                emoji: '📋',
-                title: l.homePasteTitle,
-                subtitle: l.homePasteSubtitle,
-                onTap: _busy ? null : _pasteText,
-              ),
-              const SizedBox(height: 10),
-              _SampleLink(
-                title: l.homeSampleTitle,
-                subtitle: l.homeSampleSubtitle,
-                onTap: _busy ? null : _openSample,
-              ),
-              const Spacer(),
-              if (_busy)
-                const Center(
-                    child: Padding(
-                  padding: EdgeInsets.all(12),
-                  child: CircularProgressIndicator(color: UColors.rose),
-                )),
-              PrivacyNote(l.homePrivacy),
-            ],
+        // 内容放不下时可滚动；放得下时隐私说明仍贴底
+        child: LayoutBuilder(
+          builder: (context, constraints) => SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(child: _body(l)),
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _body(L l) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            // debug 彩蛋：长按 logo 打开不带「示例」标记的示例报告，
+            // 用于目检报告页和采集商店截图（tool/capture_shots.py）
+            onLongPress: kDebugMode
+                ? () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => ReportScreen(
+                        report: buildSampleReport(
+                            lang: sampleLangOf(
+                                Localizations.localeOf(context))))))
+                : null,
+            child: Text(l.appTitle,
+                style: UType.serifItalic.copyWith(fontSize: 30)),
+          ),
+          Text(l.tagline,
+              style: const TextStyle(fontSize: 14, color: UColors.muted)),
+          const SizedBox(height: 26),
+          _EntryCard(
+            primary: true,
+            emoji: '💬',
+            title: l.homeImportTitle,
+            subtitle: l.homeImportSubtitle,
+            hint: l.homeImportHint,
+            onTap: _busy ? null : _startImport,
+          ),
+          const SizedBox(height: 14),
+          _EntryCard(
+            emoji: '📋',
+            title: l.homePasteTitle,
+            subtitle: l.homePasteSubtitle,
+            onTap: _busy ? null : _pasteText,
+          ),
+          const SizedBox(height: 10),
+          _SampleLink(
+            emoji: '👀',
+            title: l.homeSampleTitle,
+            subtitle: l.homeSampleSubtitle,
+            onTap: _busy ? null : _openSample,
+          ),
+          if (_savedCount > 0)
+            _SampleLink(
+              emoji: '📂',
+              title: l.savedTitle,
+              subtitle: l.savedSubtitle(_savedCount),
+              onTap: _busy ? null : _openSaved,
+            ),
+          const SizedBox(height: 12),
+          const Spacer(),
+          if (_busy)
+            const Center(
+                child: Padding(
+              padding: EdgeInsets.all(12),
+              child: CircularProgressIndicator(color: UColors.rose),
+            )),
+          PrivacyNote(l.homePrivacy),
+        ],
       ),
     );
   }
@@ -239,14 +288,18 @@ class _PressScaleState extends State<_PressScale> {
 final _splash = UColors.rose.withValues(alpha: .12);
 final _highlight = UColors.rose.withValues(alpha: .06);
 
-/// 首页第三入口：先看示例报告。比两张入口卡轻一档，不抢主路径
+/// 首页次要入口（示例报告、我的报告）。比两张入口卡轻一档，不抢主路径
 class _SampleLink extends StatelessWidget {
+  final String emoji;
   final String title;
   final String subtitle;
   final VoidCallback? onTap;
 
   const _SampleLink(
-      {required this.title, required this.subtitle, this.onTap});
+      {required this.emoji,
+      required this.title,
+      required this.subtitle,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -261,7 +314,7 @@ class _SampleLink extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
           child: Row(
             children: [
-              const Text('👀', style: TextStyle(fontSize: 17)),
+              Text(emoji, style: const TextStyle(fontSize: 17)),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(

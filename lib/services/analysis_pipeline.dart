@@ -2,16 +2,19 @@ import 'dart:async';
 import 'dart:convert';
 
 import '../models/chat_data.dart';
+import '../models/deep_dive.dart';
 import '../models/metrics.dart';
 import '../models/report.dart';
+import 'analytics.dart';
+import 'quote_verifier.dart';
 import 'zai_client.dart';
 
 /// 分析进度回调：stage 供 UI 展示阶段文案，fraction ∈ [0,1]。
 typedef ProgressCallback = void Function(String stage, double fraction);
 
 /// 两段式 LLM 管线：
-///   Stage 1  按月分块 → glm-4.5-flash 并行产出结构化 JSON
-///   Stage 2  月度 JSON + 本地统计 → glm-4.6 汇总成叙事报告
+///   Stage 1  按月分块 → [ZaiClient.flashModel] 并行产出结构化 JSON
+///   Stage 2  月度 JSON + 本地统计 → [ZaiClient.reportModel] 汇总成叙事报告和专题分析
 class AnalysisPipeline {
   final ZaiClient _client;
   static const _maxChunkChars = 12000;
@@ -47,7 +50,7 @@ class AnalysisPipeline {
         for (var attempt = 1; attempt <= _maxAttempts; attempt++) {
           try {
             monthResults[entry.key] =
-                await _analyzeChunk(entry.key, entry.value, language);
+                await _analyzeChunk(entry.key, entry.value, language, metrics);
             break;
           } catch (e) {
             lastError = e;
@@ -78,8 +81,12 @@ class AnalysisPipeline {
     }
 
     onProgress?.call('Writing your report', .75);
-    final report =
-        await _aggregate(metrics, relationship, monthResults, language);
+    final report = await _aggregate(
+        metrics, relationship, monthResults, language,
+        deepDive: () async {
+      onProgress?.call('Writing your report', .88);
+      return _deepDive(data, metrics, relationship, monthResults, language);
+    });
     onProgress?.call('Done', 1);
     return report;
   }
@@ -103,19 +110,24 @@ class AnalysisPipeline {
   }
 
   Future<Map<String, dynamic>> _analyzeChunk(
-      String month, String text, String language) {
+      String month, String text, String language, ChatMetrics metrics) {
     return _client.completeJson(
       model: ZaiClient.flashModel,
-      maxTokens: 1024,
+      maxTokens: 2400,
       system: 'You analyze a month of chat messages between two people. '
           'Reply with STRICT JSON only, no prose, in this shape: '
           '{"sentiment": 1-10, "topics": ["..."], '
           '"notable_quotes": [{"quote": "...", "who": "...", "day": "..."}], '
-          '"events": ["short event description"], "summary": "one sentence"}. '
-          'Write every human-readable value (topics, events, summary) in $language. '
+          '"events": ["short event description"], "summary": "one sentence", '
+          '"conflict_moments": [{"about": "what the disagreement was about", "who_reached_out_first": "...", "quote": "..."}], '
+          '"signals": [{"kind": "red or green", "label": "short description", "quote": "..."}]}. '
+          'conflict_moments and signals are empty arrays when nothing fits; never stretch to fill them. '
+          'A red signal is a concerning pattern such as contempt, stonewalling, guilt-tripping or controlling behavior; '
+          'a green signal is a healthy one such as repair attempts, curiosity or support. '
+          'Every quote is the text of one message copied exactly, without sender or time. '
           'Topics are short nouns (e.g. "Food", "Work", "Travel"). '
-          'Keep notable_quotes verbatim in their original language. '
-          'At most 3 quotes and 2 events.',
+          'At most 3 quotes, 2 events, 2 conflict_moments and 3 signals. '
+          '${_languageRules(language, metrics)}',
       user: 'Month $month:\n$text',
     );
   }
@@ -124,8 +136,9 @@ class AnalysisPipeline {
     ChatMetrics metrics,
     Relationship relationship,
     Map<String, Map<String, dynamic>> months,
-    String language,
-  ) async {
+    String language, {
+    required Future<DeepDive?> Function() deepDive,
+  }) async {
     // 话题权重本地聚合（数字不交给模型算）
     final topicCount = <String, int>{};
     for (final m in months.values) {
@@ -142,13 +155,21 @@ class AnalysisPipeline {
       'you': metrics.you,
       'partner': metrics.partner,
       'stats': metrics.toPromptJson(),
-      'monthly': months,
+      // 争吵和信号只给专题分析用，免费报告的输入保持不变
+      'monthly': {
+        for (final e in months.entries)
+          e.key: {
+            for (final f in e.value.entries)
+              if (f.key != 'conflict_moments' && f.key != 'signals')
+                f.key: f.value,
+          },
+      },
       'top_topics': [for (final t in topTopics.take(8)) t.key],
     });
 
     final json = await _withRetry(() => _client.completeJson(
-      model: ZaiClient.proModel,
-      maxTokens: 3000,
+      model: ZaiClient.reportModel,
+      maxTokens: 5000,
       system:
           'You are Chat Report, an app that writes warm, evidence-based readings of a '
           'two-person chat history. You receive locally-computed stats (treat every '
@@ -163,9 +184,7 @@ class AnalysisPipeline {
           '"advice": ["3 specific suggestions"]}. '
           'Use hedged language ("signs of", "tends to") — never diagnose. '
           'If relationship is "ex", stay reflective and never encourage re-contact. '
-          'Write ALL human-readable output — warmth_reason, month_notes, personality tags, '
-          'deep_reading, milestone titles, advice — in $language. '
-          'Keep quotes verbatim in their original language. '
+          '${_languageRules(language, metrics)} ${_addressRules(metrics)} '
           'JSON keys stay in English.',
       user: input,
     ));
@@ -194,18 +213,153 @@ class AnalysisPipeline {
                 m['quote']?.toString() ?? ''),
       ].take(5).toList(),
       advice: strList(json['advice']),
+      deepDive: await deepDive(),
+      relationship: relationship.promptName,
     );
   }
 
-  /// 429 指数退避重试；其他异常直接抛出。
+  /// 专题分析和免费报告一起生成：付款后立刻能看，也不用为了付费后再分析
+  /// 而把聊天原文留在手机上。失败只影响付费入口，不影响免费报告。
+  Future<DeepDive?> _deepDive(
+    ChatData data,
+    ChatMetrics metrics,
+    Relationship relationship,
+    Map<String, Map<String, dynamic>> months,
+    String language,
+  ) async {
+    try {
+      final json = await _withRetry(() => _client.completeJson(
+            model: ZaiClient.reportModel,
+            maxTokens: 5000,
+            system:
+                'You write the premium section of Chat Report, a reading of a two-person chat history. '
+                'You receive locally-computed stats (ground truth, never invent numbers) and per-month '
+                'analysis JSON. Reply with STRICT JSON only: '
+                '{"conflict": {"summary": "2-3 sentences: what they tend to fight about, who usually reaches out first, how it tends to end", '
+                '"moments": [{"date": "YYYY-MM", "title": "...", "detail": "one sentence", "quote": "..."}] (0-3 items)}, '
+                '"red_flags": [{"date": "YYYY-MM", "title": "...", "detail": "one sentence", "quote": "..."}] (0-4 items), '
+                '"green_flags": [same shape] (0-4 items), '
+                '"attachment": {"you": {"style": "exactly one of anxious, avoidant, secure, mixed", "detail": "1-2 sentences"}, '
+                '"partner": {"style": "...", "detail": "..."}, "loop": "1-2 sentences on the pattern they get stuck in together"}, '
+                '"turning_points": [{"date": "YYYY-MM", "direction": "up or down", "title": "...", "detail": "one sentence", "quote": "..."}] (0-4 items)}. '
+                'Every quote must be copied character for character from a quote field in the input; '
+                'anything else will be discarded. Leave a list empty rather than stretching: '
+                'do not invent red flags to seem insightful, and do not pad green flags. '
+                'Use hedged language ("signs of", "tends to"). Attachment styles are tendencies seen in these '
+                'messages, never a diagnosis; never diagnose anyone. '
+                'If relationship is "ex", stay reflective and never encourage re-contact. '
+                'If relationship is "friend" or "family", read it as that kind of bond, not a romance. '
+                'If the chat shows threats, violence, coercion or self-harm, say so gently and suggest talking to '
+                'someone they trust or a local support service, without drawing conclusions. '
+                '${_languageRules(language, metrics)} ${_addressRules(metrics)} '
+                'JSON keys, the direction value and the style value stay in English.',
+            user: jsonEncode({
+              'relationship': relationship.promptName,
+              'you': metrics.you,
+              'partner': metrics.partner,
+              'stats': metrics.toPromptJson(),
+              'monthly': months,
+            }),
+          ));
+      final dive = parseDeepDive(json, QuoteVerifier(data));
+      return dive.isEmpty ? null : dive;
+    } catch (e) {
+      // ignore: avoid_print
+      print('[pipeline] deep dive failed: $e');
+      Analytics.deepDiveFail(e is ZaiException ? e.kind.name : 'other');
+      return null;
+    }
+  }
+
+  /// 把模型输出转成 [DeepDive]。引用对不上聊天记录的条目直接丢弃
+  static DeepDive parseDeepDive(
+      Map<String, dynamic> json, QuoteVerifier verifier) {
+    final month = RegExp(r'^\d{4}-\d{2}$');
+
+    Map<String, String>? verified(dynamic v) {
+      if (v is! Map) return null;
+      final title = v['title']?.toString().trim() ?? '';
+      final quote = v['quote']?.toString().trim() ?? '';
+      if (title.isEmpty || !verifier.contains(quote)) return null;
+      final date = v['date']?.toString().trim() ?? '';
+      return {
+        'date': month.hasMatch(date) ? date : '',
+        'title': title,
+        'detail': v['detail']?.toString().trim() ?? '',
+        'quote': quote,
+      };
+    }
+
+    List<EvidenceItem> items(dynamic list, {int max = 4}) => [
+          for (final v in (list is List ? list : const []))
+            if (verified(v) case final m?)
+              EvidenceItem(
+                  date: m['date']!,
+                  title: m['title']!,
+                  detail: m['detail']!,
+                  quote: m['quote']!),
+        ].take(max).toList();
+
+    final conflict = json['conflict'];
+    final attachment = json['attachment'];
+    return DeepDive(
+      conflictSummary:
+          conflict is Map ? conflict['summary']?.toString().trim() ?? '' : '',
+      conflicts: items(conflict is Map ? conflict['moments'] : null, max: 3),
+      redFlags: items(json['red_flags']),
+      greenFlags: items(json['green_flags']),
+      attachmentYou: attachment is Map
+          ? AttachmentRead.maybeFromJson(attachment['you'])
+          : null,
+      attachmentPartner: attachment is Map
+          ? AttachmentRead.maybeFromJson(attachment['partner'])
+          : null,
+      attachmentLoop:
+          attachment is Map ? attachment['loop']?.toString().trim() ?? '' : '',
+      turningPoints: [
+        for (final v
+            in (json['turning_points'] is List
+                ? json['turning_points'] as List
+                : const []))
+          if (verified(v) case final m?)
+            TurningPoint(
+                date: m['date']!,
+                title: m['title']!,
+                detail: m['detail']!,
+                quote: m['quote']!,
+                rising: (v as Map)['direction']?.toString() != 'down'),
+      ].take(4).toList(),
+    );
+  }
+
+  /// 所有报告提示词共用的语言要求
+  static String _languageRules(String language, ChatMetrics metrics) =>
+      'Language rules: write every human-readable value in $language only'
+      '${language == 'Traditional Chinese' ? ', using Traditional characters throughout' : ''}. '
+      'Translate whatever comes from the chat or the input, whatever language it is in, including topic labels. '
+      'Never mix in words from another language or script. '
+      'The two people are named ${jsonEncode(metrics.you)} and ${jsonEncode(metrics.partner)}: '
+      'write these names character for character in their original script, even inside $language text; '
+      'never translate or transliterate them. '
+      'Never quote messages inside other text: paraphrase them in $language. '
+      'Only quote fields hold original wording, copied verbatim in their original language.';
+
+  /// 报告是写给用户本人看的，用第二人称
+  static String _addressRules(ChatMetrics metrics) =>
+      'Speak directly to ${jsonEncode(metrics.you)} as "you" in the second person and never use their name; '
+      'refer to the other person as ${jsonEncode(metrics.partner)}.';
+
+  /// 429 指数退避多试几次；没回应或 JSON 损坏只再试一次；其他异常直接抛出。
   Future<T> _withRetry<T>(Future<T> Function() task) async {
     for (var attempt = 1; ; attempt++) {
       try {
         return await task();
       } on ZaiException catch (e) {
-        if (!e.isRateLimited || attempt >= _maxAttempts) rethrow;
+        final retryable = e.isRateLimited || e.isTimedOut || e.isBadResponse;
+        final limit = e.isRateLimited ? _maxAttempts : 2;
+        if (!retryable || attempt >= limit) rethrow;
         // ignore: avoid_print
-        print('[pipeline] rate limited, retrying in ${3 * attempt}s');
+        print('[pipeline] ${e.kind.name}, retrying in ${3 * attempt}s');
         await Future.delayed(Duration(seconds: 3 * attempt));
       }
     }

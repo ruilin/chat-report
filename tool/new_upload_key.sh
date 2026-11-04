@@ -5,7 +5,7 @@
 # 产物：
 #   ~/.android-keystores/chat-report-upload-<日期>.jks   新上传密钥（务必备份 + 记下密码）
 #   android/key.properties                               指向新密钥（已 gitignore）
-#   ~/Desktop/chat-report-upload-certificate.pem         上传到 Play Console 的证书
+#   ~/.android-keystores/chat-report-upload-certificate.pem  上传到 Play Console 的证书
 # 最后顺带生成混淆后的 api_key.dart（同 tool/setup_release.sh）。
 #
 # 用法：tool/new_upload_key.sh
@@ -13,7 +13,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 KS="$HOME/.android-keystores/chat-report-upload-$(date +%Y%m%d).jks"
-PEM="$HOME/Desktop/chat-report-upload-certificate.pem"
+PEM="$HOME/.android-keystores/chat-report-upload-certificate.pem"
 [ -e "$KS" ] && { echo "已存在 $KS，为避免覆盖已退出"; exit 1; }
 mkdir -p "$(dirname "$KS")"
 

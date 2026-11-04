@@ -341,4 +341,187 @@ class LHi extends L {
   @override
   String get errorRateLimited =>
       'एनालिसिस सर्विस पर अभी बहुत ज़्यादा रिक्वेस्ट हैं। थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get deepDiveTitle => 'गहन विश्लेषण';
+
+  @override
+  String get attachmentAnxious => 'चिंतित झुकाव';
+
+  @override
+  String get attachmentAvoidant => 'परहेज़ी झुकाव';
+
+  @override
+  String get attachmentSecure => 'सुरक्षित झुकाव';
+
+  @override
+  String get attachmentMixed => 'मिश्रित';
+
+  @override
+  String get deepDiveMissing =>
+      'इस बार गहन विश्लेषण नहीं बन सका। फिर से कोशिश करने के लिए इस चैट का दोबारा विश्लेषण करें।';
+
+  @override
+  String get deepDiveSubtitle =>
+      'जो मुफ़्त रिपोर्ट में नहीं है। हर निष्कर्ष के साथ वही मैसेज दिया गया है जिस पर वह आधारित है।';
+
+  @override
+  String get sectionConflict => 'झगड़े और सुलह';
+
+  @override
+  String get sectionRedFlags => 'चेतावनी के संकेत';
+
+  @override
+  String get sectionGreenFlags => 'अच्छे संकेत';
+
+  @override
+  String get sectionAttachment => 'लगाव की शैलियाँ';
+
+  @override
+  String get sectionTurningPoints => 'अहम मोड़';
+
+  @override
+  String deepDiveBuy(String price) {
+    return '$price में अनलॉक करें';
+  }
+
+  @override
+  String get deepDiveOneTime =>
+      'इस रिपोर्ट के लिए एक बार का भुगतान। यह सदस्यता नहीं है।';
+
+  @override
+  String get deepDiveUnavailable =>
+      'अभी खरीदारी उपलब्ध नहीं है। कृपया बाद में फिर कोशिश करें।';
+
+  @override
+  String get deepDivePending =>
+      'आपका भुगतान लंबित है। पूरा होने पर यह रिपोर्ट अनलॉक हो जाएगी।';
+
+  @override
+  String get deepDiveFailed => 'खरीदारी पूरी नहीं हुई। कृपया फिर कोशिश करें।';
+
+  @override
+  String get deepDiveUseCredit => 'पहले से भुगतान किए गए क्रेडिट से अनलॉक करें';
+
+  @override
+  String get deepDiveDisclaimer =>
+      'सोचने-समझने के लिए AI का विश्लेषण, कोई निदान नहीं।';
+
+  @override
+  String get deepDiveNoRedFlags =>
+      'इन मैसेज में चेतावनी के कोई स्पष्ट संकेत नहीं हैं।';
+
+  @override
+  String get deepDiveNoGreenFlags =>
+      'इन मैसेज में अच्छे संकेत स्पष्ट नहीं हैं।';
+
+  @override
+  String get attachmentLoopLabel => 'आप दोनों के बीच का पैटर्न';
+
+  @override
+  String get sampleDeepDiveHint =>
+      'आपकी अपनी रिपोर्ट में यह हिस्सा शामिल होगा।';
+
+  @override
+  String get savedTitle => 'मेरी रिपोर्ट';
+
+  @override
+  String savedSubtitle(int count) {
+    return 'इस फ़ोन पर $count सेव हैं';
+  }
+
+  @override
+  String get savedNote =>
+      'रिपोर्ट सिर्फ़ इस फ़ोन पर सेव होती हैं। ऐप अनइंस्टॉल करने पर वे मिट जाती हैं।';
+
+  @override
+  String get savedEmpty => 'अभी कोई रिपोर्ट सेव नहीं है।';
+
+  @override
+  String get savedDeleteTitle => 'यह रिपोर्ट मिटाएँ?';
+
+  @override
+  String get savedDeleteBody =>
+      'इसे वापस नहीं लाया जा सकता। अगर आपने इसे पैसे देकर अनलॉक किया था, तो वह भी चला जाएगा।';
+
+  @override
+  String get savedDeleteConfirm => 'मिटाएँ';
+
+  @override
+  String get savedDeleteCancel => 'रखें';
+
+  @override
+  String get savedUnlockedBadge => 'गहन विश्लेषण अनलॉक हो गया';
+
+  @override
+  String get coachEntryTitle => 'AI कोच से पूछें';
+
+  @override
+  String get coachEntrySubtitle => 'इस रिपोर्ट के बारे में कुछ भी पूछें';
+
+  @override
+  String get coachTitle => 'AI कोच';
+
+  @override
+  String get coachDisclaimer =>
+      'कोच एक AI है: यह गलत हो सकता है और पेशेवर मदद की जगह नहीं लेता।';
+
+  @override
+  String get coachHint => 'इस रिश्ते के बारे में पूछें…';
+
+  @override
+  String get coachSlow =>
+      'AI को सामान्य से ज़्यादा समय लग रहा है। फिर से कोशिश कर रहे हैं…';
+
+  @override
+  String get coachSend => 'भेजें';
+
+  @override
+  String get coachSuggest1 => 'हम हमेशा एक ही बात पर क्यों झगड़ते हैं?';
+
+  @override
+  String get coachSuggest2 => 'मुश्किल बात कैसे शुरू करूँ?';
+
+  @override
+  String get coachSuggest3 => 'मुझे सबसे पहले किस पर काम करना चाहिए?';
+
+  @override
+  String coachLeft(int count) {
+    return '$count सवाल बाकी हैं';
+  }
+
+  @override
+  String get coachOutTitle => 'आपके सवाल खत्म हो गए';
+
+  @override
+  String coachOutBody(int count) {
+    return 'अपनी किसी भी रिपोर्ट के लिए $count और सवाल लें।';
+  }
+
+  @override
+  String coachBuy(int count, String price) {
+    return '$price में $count सवाल';
+  }
+
+  @override
+  String get coachBuyNote => 'एक बार का भुगतान। यह सदस्यता नहीं है।';
+
+  @override
+  String get coachPending =>
+      'आपका भुगतान लंबित है। पूरा होने पर सवाल जुड़ जाएँगे।';
+
+  @override
+  String get coachReportTitle => 'इस जवाब की शिकायत करें';
+
+  @override
+  String get coachReportOffensive => 'आपत्तिजनक या अनुचित';
+
+  @override
+  String get coachReportHarmful => 'नुकसानदेह या असुरक्षित सलाह';
+
+  @override
+  String get coachReportWrong => 'गलत या मनगढ़ंत';
+
+  @override
+  String get coachReportThanks => 'धन्यवाद, हमें आपकी शिकायत मिल गई है।';
 }

@@ -124,6 +124,41 @@ class Analytics {
         'elapsed_sec': elapsedSec,
       });
 
+  // —— 付费 ——
+
+  /// 专题分析付费墙展示；[itemCount]: 这份报告能解锁多少条带原话的内容
+  static void paywallView({required int itemCount}) =>
+      _log('paywall_view', {'item_count': itemCount});
+
+  static void purchaseStart(String product) =>
+      _log('purchase_start', {'product': product});
+
+  /// [status]: purchased / credited / credit_used / pending / canceled / error
+  static void purchaseResult(String status, String product) =>
+      _log('purchase_result', {'status': status, 'product': product});
+
+  /// 专题分析没能生成（不影响免费报告），[errorKind] 同 analysis_fail
+  static void deepDiveFail(String errorKind) =>
+      _log('deep_dive_fail', {'error_kind': errorKind});
+
+  // —— AI 教练（不上报提问和回答内容）——
+
+  static void coachOpen() => _log('coach_open');
+
+  /// [left]: 回答后还剩多少次提问
+  static void coachAnswer({required bool ok, required int left}) =>
+      _log('coach_answer', {'ok': ok ? 1 : 0, 'questions_left': left});
+
+  /// 用户举报回答；[reason]: offensive / harmful / wrong
+  static void coachAnswerReported(String reason) =>
+      _log('coach_answer_reported', {'reason': reason});
+
+  // —— 已保存的报告 ——
+
+  static void savedReportsOpen() => _log('saved_reports_open');
+
+  static void savedReportDelete() => _log('saved_report_delete');
+
   // —— 分享 ——
 
   static void shareSheetOpen() => _log('share_sheet_open');

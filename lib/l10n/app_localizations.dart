@@ -697,6 +697,324 @@ abstract class L {
   /// In en, this message translates to:
   /// **'The analysis service is rate-limiting requests. Please try again shortly.'**
   String get errorRateLimited;
+
+  /// No description provided for @deepDiveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Deep dive'**
+  String get deepDiveTitle;
+
+  /// No description provided for @attachmentAnxious.
+  ///
+  /// In en, this message translates to:
+  /// **'Anxious-leaning'**
+  String get attachmentAnxious;
+
+  /// No description provided for @attachmentAvoidant.
+  ///
+  /// In en, this message translates to:
+  /// **'Avoidant-leaning'**
+  String get attachmentAvoidant;
+
+  /// No description provided for @attachmentSecure.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure-leaning'**
+  String get attachmentSecure;
+
+  /// No description provided for @attachmentMixed.
+  ///
+  /// In en, this message translates to:
+  /// **'Mixed'**
+  String get attachmentMixed;
+
+  /// No description provided for @deepDiveMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'The deep dive couldn\'t be generated this time. Analyze this chat again to retry.'**
+  String get deepDiveMissing;
+
+  /// No description provided for @deepDiveSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What the free report doesn\'t cover. Every finding comes with the exact message behind it.'**
+  String get deepDiveSubtitle;
+
+  /// No description provided for @sectionConflict.
+  ///
+  /// In en, this message translates to:
+  /// **'Fights and making up'**
+  String get sectionConflict;
+
+  /// No description provided for @sectionRedFlags.
+  ///
+  /// In en, this message translates to:
+  /// **'Red flags'**
+  String get sectionRedFlags;
+
+  /// No description provided for @sectionGreenFlags.
+  ///
+  /// In en, this message translates to:
+  /// **'Green flags'**
+  String get sectionGreenFlags;
+
+  /// No description provided for @sectionAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachment styles'**
+  String get sectionAttachment;
+
+  /// No description provided for @sectionTurningPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Turning points'**
+  String get sectionTurningPoints;
+
+  /// No description provided for @deepDiveBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock for {price}'**
+  String deepDiveBuy(String price);
+
+  /// No description provided for @deepDiveOneTime.
+  ///
+  /// In en, this message translates to:
+  /// **'One-time payment for this report. Not a subscription.'**
+  String get deepDiveOneTime;
+
+  /// No description provided for @deepDiveUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases aren\'t available right now. Please try again later.'**
+  String get deepDiveUnavailable;
+
+  /// No description provided for @deepDivePending.
+  ///
+  /// In en, this message translates to:
+  /// **'Your payment is pending. This report unlocks once it goes through.'**
+  String get deepDivePending;
+
+  /// No description provided for @deepDiveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The purchase didn\'t complete. Please try again.'**
+  String get deepDiveFailed;
+
+  /// No description provided for @deepDiveUseCredit.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock with your prepaid credit'**
+  String get deepDiveUseCredit;
+
+  /// No description provided for @deepDiveDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'An AI reading for reflection, not a diagnosis.'**
+  String get deepDiveDisclaimer;
+
+  /// No description provided for @deepDiveNoRedFlags.
+  ///
+  /// In en, this message translates to:
+  /// **'No clear red flags in these messages.'**
+  String get deepDiveNoRedFlags;
+
+  /// No description provided for @deepDiveNoGreenFlags.
+  ///
+  /// In en, this message translates to:
+  /// **'No clear green flags in these messages.'**
+  String get deepDiveNoGreenFlags;
+
+  /// No description provided for @attachmentLoopLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'The pattern between you'**
+  String get attachmentLoopLabel;
+
+  /// No description provided for @sampleDeepDiveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Your own report will include this section.'**
+  String get sampleDeepDiveHint;
+
+  /// No description provided for @savedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My reports'**
+  String get savedTitle;
+
+  /// No description provided for @savedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} saved on this phone'**
+  String savedSubtitle(int count);
+
+  /// No description provided for @savedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports are saved only on this phone. Uninstalling the app deletes them.'**
+  String get savedNote;
+
+  /// No description provided for @savedEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved reports yet.'**
+  String get savedEmpty;
+
+  /// No description provided for @savedDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this report?'**
+  String get savedDeleteTitle;
+
+  /// No description provided for @savedDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'It can\'t be recovered. If you paid to unlock it, that unlock is lost too.'**
+  String get savedDeleteBody;
+
+  /// No description provided for @savedDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get savedDeleteConfirm;
+
+  /// No description provided for @savedDeleteCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep'**
+  String get savedDeleteCancel;
+
+  /// No description provided for @savedUnlockedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Deep dive unlocked'**
+  String get savedUnlockedBadge;
+
+  /// No description provided for @coachEntryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask the AI coach'**
+  String get coachEntryTitle;
+
+  /// No description provided for @coachEntrySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask anything about this report'**
+  String get coachEntrySubtitle;
+
+  /// No description provided for @coachTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI coach'**
+  String get coachTitle;
+
+  /// No description provided for @coachDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'The coach is an AI: it can be wrong and doesn\'t replace professional help.'**
+  String get coachDisclaimer;
+
+  /// No description provided for @coachHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about this relationship…'**
+  String get coachHint;
+
+  /// No description provided for @coachSlow.
+  ///
+  /// In en, this message translates to:
+  /// **'The AI is taking longer than usual. Trying again…'**
+  String get coachSlow;
+
+  /// No description provided for @coachSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get coachSend;
+
+  /// No description provided for @coachSuggest1.
+  ///
+  /// In en, this message translates to:
+  /// **'Why do we keep having the same fight?'**
+  String get coachSuggest1;
+
+  /// No description provided for @coachSuggest2.
+  ///
+  /// In en, this message translates to:
+  /// **'How can I bring up something hard?'**
+  String get coachSuggest2;
+
+  /// No description provided for @coachSuggest3.
+  ///
+  /// In en, this message translates to:
+  /// **'What should I work on first?'**
+  String get coachSuggest3;
+
+  /// No description provided for @coachLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} questions left'**
+  String coachLeft(int count);
+
+  /// No description provided for @coachOutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re out of questions'**
+  String get coachOutTitle;
+
+  /// No description provided for @coachOutBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Get {count} more to use on any of your reports.'**
+  String coachOutBody(int count);
+
+  /// No description provided for @coachBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} questions for {price}'**
+  String coachBuy(int count, String price);
+
+  /// No description provided for @coachBuyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'One-time payment. Not a subscription.'**
+  String get coachBuyNote;
+
+  /// No description provided for @coachPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Your payment is pending. Your questions will be added once it goes through.'**
+  String get coachPending;
+
+  /// No description provided for @coachReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report this answer'**
+  String get coachReportTitle;
+
+  /// No description provided for @coachReportOffensive.
+  ///
+  /// In en, this message translates to:
+  /// **'Offensive or inappropriate'**
+  String get coachReportOffensive;
+
+  /// No description provided for @coachReportHarmful.
+  ///
+  /// In en, this message translates to:
+  /// **'Harmful or unsafe advice'**
+  String get coachReportHarmful;
+
+  /// No description provided for @coachReportWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong or made up'**
+  String get coachReportWrong;
+
+  /// No description provided for @coachReportThanks.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks, we\'ve received your report.'**
+  String get coachReportThanks;
 }
 
 class _LDelegate extends LocalizationsDelegate<L> {

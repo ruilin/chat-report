@@ -338,4 +338,187 @@ class LId extends L {
   @override
   String get errorRateLimited =>
       'Layanan analisis lagi kebanjiran permintaan. Coba lagi sebentar lagi.';
+
+  @override
+  String get deepDiveTitle => 'Analisis mendalam';
+
+  @override
+  String get attachmentAnxious => 'Cenderung cemas';
+
+  @override
+  String get attachmentAvoidant => 'Cenderung menghindar';
+
+  @override
+  String get attachmentSecure => 'Cenderung aman';
+
+  @override
+  String get attachmentMixed => 'Campuran';
+
+  @override
+  String get deepDiveMissing =>
+      'Analisis mendalam gagal dibuat kali ini. Analisis ulang obrolan ini untuk mencoba lagi.';
+
+  @override
+  String get deepDiveSubtitle =>
+      'Hal yang tidak dibahas laporan gratis. Setiap temuan disertai pesan persis yang mendasarinya.';
+
+  @override
+  String get sectionConflict => 'Pertengkaran dan berbaikan';
+
+  @override
+  String get sectionRedFlags => 'Tanda bahaya';
+
+  @override
+  String get sectionGreenFlags => 'Tanda positif';
+
+  @override
+  String get sectionAttachment => 'Gaya kelekatan';
+
+  @override
+  String get sectionTurningPoints => 'Titik balik';
+
+  @override
+  String deepDiveBuy(String price) {
+    return 'Buka seharga $price';
+  }
+
+  @override
+  String get deepDiveOneTime =>
+      'Pembayaran sekali untuk laporan ini. Bukan langganan.';
+
+  @override
+  String get deepDiveUnavailable =>
+      'Pembelian belum tersedia saat ini. Coba lagi nanti.';
+
+  @override
+  String get deepDivePending =>
+      'Pembayaranmu masih tertunda. Laporan ini terbuka setelah pembayaran selesai.';
+
+  @override
+  String get deepDiveFailed => 'Pembelian tidak selesai. Silakan coba lagi.';
+
+  @override
+  String get deepDiveUseCredit => 'Buka dengan kredit yang sudah dibayar';
+
+  @override
+  String get deepDiveDisclaimer =>
+      'Bacaan AI untuk bahan renungan, bukan diagnosis.';
+
+  @override
+  String get deepDiveNoRedFlags =>
+      'Tidak ada tanda bahaya yang jelas dalam pesan-pesan ini.';
+
+  @override
+  String get deepDiveNoGreenFlags =>
+      'Tidak ada tanda positif yang jelas dalam pesan-pesan ini.';
+
+  @override
+  String get attachmentLoopLabel => 'Pola di antara kalian';
+
+  @override
+  String get sampleDeepDiveHint =>
+      'Laporanmu sendiri akan mencakup bagian ini.';
+
+  @override
+  String get savedTitle => 'Laporan saya';
+
+  @override
+  String savedSubtitle(int count) {
+    return '$count tersimpan di ponsel ini';
+  }
+
+  @override
+  String get savedNote =>
+      'Laporan hanya disimpan di ponsel ini. Menghapus aplikasi akan menghapusnya.';
+
+  @override
+  String get savedEmpty => 'Belum ada laporan tersimpan.';
+
+  @override
+  String get savedDeleteTitle => 'Hapus laporan ini?';
+
+  @override
+  String get savedDeleteBody =>
+      'Laporan tidak bisa dipulihkan. Jika kamu membayar untuk membukanya, akses itu juga hilang.';
+
+  @override
+  String get savedDeleteConfirm => 'Hapus';
+
+  @override
+  String get savedDeleteCancel => 'Simpan';
+
+  @override
+  String get savedUnlockedBadge => 'Analisis mendalam terbuka';
+
+  @override
+  String get coachEntryTitle => 'Tanya pelatih AI';
+
+  @override
+  String get coachEntrySubtitle => 'Tanyakan apa saja tentang laporan ini';
+
+  @override
+  String get coachTitle => 'Pelatih AI';
+
+  @override
+  String get coachDisclaimer =>
+      'Pelatih ini adalah AI: bisa salah dan tidak menggantikan bantuan profesional.';
+
+  @override
+  String get coachHint => 'Tanya tentang hubungan ini…';
+
+  @override
+  String get coachSlow => 'AI lebih lambat dari biasanya. Mencoba lagi…';
+
+  @override
+  String get coachSend => 'Kirim';
+
+  @override
+  String get coachSuggest1 =>
+      'Kenapa kami selalu bertengkar soal hal yang sama?';
+
+  @override
+  String get coachSuggest2 => 'Bagaimana cara membahas hal yang sulit?';
+
+  @override
+  String get coachSuggest3 => 'Apa yang sebaiknya kuperbaiki dulu?';
+
+  @override
+  String coachLeft(int count) {
+    return 'Sisa $count pertanyaan';
+  }
+
+  @override
+  String get coachOutTitle => 'Pertanyaanmu sudah habis';
+
+  @override
+  String coachOutBody(int count) {
+    return 'Beli $count lagi untuk semua laporanmu.';
+  }
+
+  @override
+  String coachBuy(int count, String price) {
+    return '$count pertanyaan seharga $price';
+  }
+
+  @override
+  String get coachBuyNote => 'Pembayaran sekali. Bukan langganan.';
+
+  @override
+  String get coachPending =>
+      'Pembayaranmu masih tertunda. Pertanyaan ditambahkan setelah pembayaran selesai.';
+
+  @override
+  String get coachReportTitle => 'Laporkan jawaban ini';
+
+  @override
+  String get coachReportOffensive => 'Menyinggung atau tidak pantas';
+
+  @override
+  String get coachReportHarmful => 'Saran berbahaya atau tidak aman';
+
+  @override
+  String get coachReportWrong => 'Salah atau dibuat-buat';
+
+  @override
+  String get coachReportThanks => 'Terima kasih, laporanmu sudah kami terima.';
 }

@@ -9,6 +9,7 @@ import '../services/analysis_pipeline.dart';
 import '../services/analytics.dart';
 import '../services/zai_client.dart';
 import '../services/metrics_engine.dart';
+import '../services/report_store.dart';
 import '../theme.dart';
 import 'report_screen.dart';
 
@@ -74,6 +75,13 @@ class _AnalyzingScreenState extends State<AnalyzingScreen> {
         messageCount: widget.data.messages.length,
         durationSec: _elapsedSec,
       );
+      try {
+        await ReportStore().save(report);
+      } catch (e) {
+        // 存不下也不影响这次查看；付款到账时会转成额度
+        // ignore: avoid_print
+        print('[analyze] save failed: $e');
+      }
       if (!mounted) return;
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           settings: const RouteSettings(name: 'report'),

@@ -28,6 +28,10 @@ Chat Report ("the app") is provided by [COMPANY / DEVELOPER NAME]. You can reach
 
 **Your report.** The finished report is stored only on your device. Deleting the app deletes it.
 
+**AI coach.** If you use the AI coach, your questions, this report's content and the last few turns of the conversation are sent over an encrypted connection to Z.ai to generate answers. The full chat is not included, though the report can contain short quotes from it. The conversation is stored only on your device and we do not retain it. If you report an answer, we receive only the type of report, not the conversation.
+
+**In-app purchases.** Payments are handled by Google Play; we never receive your card or payment details. We record on your device which report is unlocked, and use the usage analytics below to see whether purchases succeed.
+
 **Usage analytics.** We use Google Firebase Analytics to understand how the app is used: which screens are opened, whether an import or analysis succeeds or fails, how long it takes, the number of messages and the relationship type you choose. Firebase assigns a random app-instance identifier and collects basic device information (such as device model, OS version and country). Conversation text, participant names and report content are never sent to Firebase. Google processes this data under its own privacy policy.
 
 **What we do NOT collect.** No name, email, phone number, contacts, precise location or advertising identifier is collected by the app.
