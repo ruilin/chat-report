@@ -44,11 +44,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# API secrets (never commit)
-lib/config/api_key.dart
 
-# Release signing (NEVER commit)
-android/key.properties
+# Release signing (key.properties is tracked on purpose)
 *.jks
 *.keystore
 
