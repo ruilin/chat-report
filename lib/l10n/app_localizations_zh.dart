@@ -329,6 +329,12 @@ class LZh extends L {
   String get errorRateLimited => '分析服务正在限流，请稍后重试。';
 
   @override
+  String get unlockTitle => '解锁完整报告';
+
+  @override
+  String get unlockSubtitle => '专题分析（每条结论都附聊天原话）、给你的建议，以及这份报告的 AI 教练。';
+
+  @override
   String get deepDiveTitle => '专题分析';
 
   @override
@@ -464,23 +470,10 @@ class LZh extends L {
   }
 
   @override
-  String get coachOutTitle => '提问次数用完了';
+  String get coachOutTitle => '免费提问用完了';
 
   @override
-  String coachOutBody(int count) {
-    return '再买 $count 次，所有报告都能用。';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$price 购买 $count 次提问';
-  }
-
-  @override
-  String get coachBuyNote => '一次性付费，不是订阅。';
-
-  @override
-  String get coachPending => '付款处理中，到账后会自动加上提问次数。';
+  String get coachOutBody => '解锁这份报告就能继续问，还能看专题分析和给你的建议。';
 
   @override
   String get coachReportTitle => '举报这条回答';
@@ -823,6 +816,12 @@ class LZhHant extends LZh {
   String get errorRateLimited => '分析服務正在限流，請稍後重試。';
 
   @override
+  String get unlockTitle => '解鎖完整報告';
+
+  @override
+  String get unlockSubtitle => '專題分析（每條結論都附聊天原話）、給你的建議，以及這份報告的 AI 教練。';
+
+  @override
   String get deepDiveTitle => '專題分析';
 
   @override
@@ -958,23 +957,10 @@ class LZhHant extends LZh {
   }
 
   @override
-  String get coachOutTitle => '提問次數用完了';
+  String get coachOutTitle => '免費提問用完了';
 
   @override
-  String coachOutBody(int count) {
-    return '再買 $count 次，所有報告都能用。';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$price 購買 $count 次提問';
-  }
-
-  @override
-  String get coachBuyNote => '一次性付費，不是訂閱。';
-
-  @override
-  String get coachPending => '付款處理中，入帳後會自動加上提問次數。';
+  String get coachOutBody => '解鎖這份報告就能繼續問，還能看專題分析和給你的建議。';
 
   @override
   String get coachReportTitle => '檢舉這則回答';

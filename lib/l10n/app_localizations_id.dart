@@ -340,6 +340,13 @@ class LId extends L {
       'Layanan analisis lagi kebanjiran permintaan. Coba lagi sebentar lagi.';
 
   @override
+  String get unlockTitle => 'Buka laporan lengkap';
+
+  @override
+  String get unlockSubtitle =>
+      'Analisis mendalam dengan pesan persis di balik setiap temuan, saran pribadi, dan pelatih AI untuk laporan ini.';
+
+  @override
   String get deepDiveTitle => 'Analisis mendalam';
 
   @override
@@ -488,24 +495,11 @@ class LId extends L {
   }
 
   @override
-  String get coachOutTitle => 'Pertanyaanmu sudah habis';
+  String get coachOutTitle => 'Pertanyaan gratismu sudah habis';
 
   @override
-  String coachOutBody(int count) {
-    return 'Beli $count lagi untuk semua laporanmu.';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$count pertanyaan seharga $price';
-  }
-
-  @override
-  String get coachBuyNote => 'Pembayaran sekali. Bukan langganan.';
-
-  @override
-  String get coachPending =>
-      'Pembayaranmu masih tertunda. Pertanyaan ditambahkan setelah pembayaran selesai.';
+  String get coachOutBody =>
+      'Buka kunci laporan ini untuk terus bertanya. Termasuk analisis mendalam dan saran pribadi.';
 
   @override
   String get coachReportTitle => 'Laporkan jawaban ini';

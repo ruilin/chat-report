@@ -2,6 +2,8 @@
     <!-- 分析请求需要联网（release 版不会自动继承 debug 清单的权限） -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="com.android.vending.BILLING"/>
+    <!-- Play 后台声明了使用广告 ID（Firebase Analytics），清单要和声明一致 -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
     <application
         android:label="Chat Report"
         android:name="${applicationName}"

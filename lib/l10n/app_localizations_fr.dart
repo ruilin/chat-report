@@ -348,6 +348,13 @@ class LFr extends L {
       'Le service d\'analyse reçoit trop de demandes. Réessaie dans un instant.';
 
   @override
+  String get unlockTitle => 'Débloquer le rapport complet';
+
+  @override
+  String get unlockSubtitle =>
+      'L\'analyse approfondie avec les messages exacts derrière chaque constat, des conseils personnalisés et le coach IA pour ce rapport.';
+
+  @override
   String get deepDiveTitle => 'Analyse approfondie';
 
   @override
@@ -497,24 +504,11 @@ class LFr extends L {
   }
 
   @override
-  String get coachOutTitle => 'Vous n\'avez plus de questions';
+  String get coachOutTitle => 'Vos questions gratuites sont épuisées';
 
   @override
-  String coachOutBody(int count) {
-    return 'Obtenez-en $count de plus, valables sur tous vos rapports.';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$count questions pour $price';
-  }
-
-  @override
-  String get coachBuyNote => 'Paiement unique. Ce n\'est pas un abonnement.';
-
-  @override
-  String get coachPending =>
-      'Votre paiement est en attente. Les questions seront ajoutées dès qu\'il aboutira.';
+  String get coachOutBody =>
+      'Débloquez ce rapport pour continuer à poser des questions. L\'analyse approfondie et des conseils personnalisés sont aussi inclus.';
 
   @override
   String get coachReportTitle => 'Signaler cette réponse';

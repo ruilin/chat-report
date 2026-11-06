@@ -345,6 +345,13 @@ class LDe extends L {
       'Der Analysedienst bekommt gerade zu viele Anfragen. Versuch\'s gleich nochmal.';
 
   @override
+  String get unlockTitle => 'Vollständigen Bericht freischalten';
+
+  @override
+  String get unlockSubtitle =>
+      'Die Tiefenanalyse mit den genauen Nachrichten zu jedem Befund, persönliche Tipps und der KI-Coach für diesen Bericht.';
+
+  @override
   String get deepDiveTitle => 'Tiefenanalyse';
 
   @override
@@ -492,24 +499,11 @@ class LDe extends L {
   }
 
   @override
-  String get coachOutTitle => 'Keine Fragen mehr übrig';
+  String get coachOutTitle => 'Deine kostenlosen Fragen sind aufgebraucht';
 
   @override
-  String coachOutBody(int count) {
-    return 'Hol dir $count weitere für alle deine Berichte.';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$count Fragen für $price';
-  }
-
-  @override
-  String get coachBuyNote => 'Einmalzahlung. Kein Abo.';
-
-  @override
-  String get coachPending =>
-      'Deine Zahlung steht noch aus. Die Fragen werden hinzugefügt, sobald sie eingegangen ist.';
+  String get coachOutBody =>
+      'Schalte diesen Bericht frei, um weiterzufragen. Die Tiefenanalyse und persönliche Tipps sind auch dabei.';
 
   @override
   String get coachReportTitle => 'Diese Antwort melden';

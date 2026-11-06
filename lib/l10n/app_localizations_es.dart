@@ -346,6 +346,13 @@ class LEs extends L {
       'El servicio de análisis está limitando las solicitudes. Inténtalo de nuevo en un momento.';
 
   @override
+  String get unlockTitle => 'Desbloquea el informe completo';
+
+  @override
+  String get unlockSubtitle =>
+      'El análisis a fondo con los mensajes exactos de cada hallazgo, consejos personalizados y el coach de IA de este informe.';
+
+  @override
   String get deepDiveTitle => 'Análisis a fondo';
 
   @override
@@ -492,24 +499,11 @@ class LEs extends L {
   }
 
   @override
-  String get coachOutTitle => 'Te quedaste sin preguntas';
+  String get coachOutTitle => 'Se acabaron tus preguntas gratis';
 
   @override
-  String coachOutBody(int count) {
-    return 'Consigue $count más para usarlas en cualquiera de tus informes.';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$count preguntas por $price';
-  }
-
-  @override
-  String get coachBuyNote => 'Pago único. No es una suscripción.';
-
-  @override
-  String get coachPending =>
-      'Tu pago está pendiente. Las preguntas se añadirán cuando se complete.';
+  String get coachOutBody =>
+      'Desbloquea este informe para seguir preguntando. También incluye el análisis a fondo y consejos personalizados.';
 
   @override
   String get coachReportTitle => 'Denunciar esta respuesta';

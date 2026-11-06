@@ -47,17 +47,17 @@ class _CoachScreenState extends State<CoachScreen> {
   static const _slowAfter = Duration(seconds: 8);
 
   List<CoachMessage> get _messages => widget.report.coachMessages;
-  bool get _paywallOn => Purchases.coachPaywallEnabled;
-  bool get _outOfQuestions => _paywallOn && _purchases.questionsLeft <= 0;
+  bool get _locked => !Purchases.isUnlocked(widget.report);
+  bool get _outOfQuestions => _locked && _purchases.freeQuestionsLeft <= 0;
 
   @override
   void initState() {
     super.initState();
     Analytics.coachOpen();
-    if (!_paywallOn) return;
+    if (!_locked) return;
     _purchases.addListener(_onPurchaseChange);
     _purchases.loadBalances();
-    _purchases.loadProduct(Purchases.questionPackId).whenComplete(() {
+    _purchases.loadProduct().whenComplete(() {
       if (mounted) setState(() => _productLoaded = true);
     });
   }
@@ -106,8 +106,8 @@ class _CoachScreenState extends State<CoachScreen> {
         onText: _onText,
       );
       // 回答成功才扣次数
-      if (_paywallOn) await _purchases.spendQuestion();
-      Analytics.coachAnswer(ok: true, left: _purchases.questionsLeft);
+      if (_locked) await _purchases.spendFreeQuestion();
+      Analytics.coachAnswer(ok: true, left: _purchases.freeQuestionsLeft);
       // 回答跟着报告存，离开了页面也要留下
       _messages.add(CoachMessage(fromUser: false, text: answer));
       if (mounted) {
@@ -121,7 +121,7 @@ class _CoachScreenState extends State<CoachScreen> {
     } catch (e) {
       // ignore: avoid_print
       print('[coach] ask failed: $e');
-      Analytics.coachAnswer(ok: false, left: _purchases.questionsLeft);
+      Analytics.coachAnswer(ok: false, left: _purchases.freeQuestionsLeft);
       // 先撤掉问题：离开页面后请求被中断时，也不能留下没有回答的问题
       _messages.removeLast();
       if (!mounted) return;
@@ -310,8 +310,8 @@ class _CoachScreenState extends State<CoachScreen> {
               child: Text(error,
                   style: const TextStyle(fontSize: 12, color: UColors.rose)),
             ),
-          if (_paywallOn)
-            Text(l.coachLeft(_purchases.questionsLeft),
+          if (_locked)
+            Text(l.coachLeft(_purchases.freeQuestionsLeft),
                 style: const TextStyle(fontSize: 11, color: UColors.muted)),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -345,14 +345,15 @@ class _CoachScreenState extends State<CoachScreen> {
   }
 
   Widget _paywall(L l) {
-    const id = Purchases.questionPackId;
-    final state = _purchases.stateOf(id);
-    final price = _purchases.priceOf(id);
+    final state = _purchases.state;
+    final price = _purchases.price;
+    final hasCredit = _purchases.credits > 0;
+    final canPay = hasCredit || price != null;
     final busy = state == PurchaseState.buying;
     final String? notice = switch (state) {
-      PurchaseState.pending => l.coachPending,
+      PurchaseState.pending => l.deepDivePending,
       PurchaseState.failed => l.deepDiveFailed,
-      _ => _productLoaded && price == null ? l.deepDiveUnavailable : null,
+      _ => _productLoaded && !canPay ? l.deepDiveUnavailable : null,
     };
 
     return Container(
@@ -369,14 +370,14 @@ class _CoachScreenState extends State<CoachScreen> {
               style:
                   const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
           const SizedBox(height: 3),
-          Text(l.coachOutBody(Purchases.questionPackSize),
+          Text(l.coachOutBody,
               style: const TextStyle(fontSize: 12.5, color: UColors.ink2)),
           if (notice != null) ...[
             const SizedBox(height: 8),
             Text(notice,
                 style: const TextStyle(fontSize: 12, color: UColors.ink2)),
           ],
-          if (price != null) ...[
+          if (canPay) ...[
             const SizedBox(height: 10),
             FilledButton(
               style: FilledButton.styleFrom(
@@ -386,7 +387,9 @@ class _CoachScreenState extends State<CoachScreen> {
               ),
               onPressed: busy || state == PurchaseState.pending
                   ? null
-                  : _purchases.buyQuestions,
+                  : hasCredit
+                      ? () => _purchases.useCredit(widget.report)
+                      : () => _purchases.buy(widget.report.id),
               child: busy
                   ? const SizedBox(
                       width: 18,
@@ -394,11 +397,12 @@ class _CoachScreenState extends State<CoachScreen> {
                       child: CircularProgressIndicator(
                           strokeWidth: 2, color: Colors.white),
                     )
-                  : Text(l.coachBuy(Purchases.questionPackSize, price),
+                  : Text(
+                      hasCredit ? l.deepDiveUseCredit : l.deepDiveBuy(price!),
                       style: const TextStyle(fontWeight: FontWeight.w600)),
             ),
             const SizedBox(height: 6),
-            Text(l.coachBuyNote,
+            Text(l.deepDiveOneTime,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 11, color: UColors.muted)),
           ],

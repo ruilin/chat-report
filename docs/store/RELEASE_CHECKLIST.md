@@ -145,7 +145,7 @@ URL 前缀：`https://ruilin.github.io/resource/`
 |---|---|---|---|---|
 | Messages → Other in-app messages | ✅ Collected | ❌ Not shared（Z.ai 作为代我们处理的服务商，不算 sharing） | App functionality | 用户可选（Optional）—— 仅在用户主动导入并同意时 |
 | App activity → App interactions | ✅ Collected | ❌ Not shared | Analytics | 必需（Firebase Analytics 自动收集） |
-| Device or other IDs | ✅ Collected | ❌ Not shared | Analytics | 必需（Firebase app instance ID） |
+| Device or other IDs | ✅ Collected | ❌ Not shared | Analytics | 必需（Firebase app instance ID、广告 ID） |
 | Financial info → Purchase history | ✅ Collected | ❌ Not shared | Analytics | 必需（Firebase Analytics 自动记录应用内购买事件，以及我们的 purchase_result 埋点） |
 
 补充勾选：
@@ -153,7 +153,7 @@ URL 前缀：`https://ruilin.github.io/resource/`
 - **Is this data processed ephemerally?** → Messages：**Yes**（我们不落库；Z.ai 对 API 数据的留存以其条款为准）；Analytics 两项：**No**
 - **Is data encrypted in transit?** → **Yes**（HTTPS/TLS）
 - **Can users request data deletion?** → 说明不保留数据、无账号；报告仅存本机
-- 其余类别（精确位置、联系人、财务、广告 ID 等）→ 全部 **不收集**
+- 其余类别（精确位置、联系人等）→ 全部 **不收集**
 - 自 Firebase Analytics 接入（2026-11）起，上面两行 Analytics 必须申报，否则与实际不符
 
 > ⚠️ 一旦改成后端代理，如果后端会留日志，上面的 "ephemerally" 就要改口径 —— 表单必须与实际实现一致，Play 会抽查。
@@ -179,7 +179,7 @@ Play Console 操作顺序：
 
 1. Create app → 填名称/语言/免费或付费
 2. **Internal testing** → Create new release → 上传 `app-release.aab`
-3. App content：隐私政策 URL、Data safety、内容分级、目标受众、广告声明（选"无广告"）
+3. App content：隐私政策 URL、Data safety、内容分级、目标受众、广告声明（选"无广告"）、广告 ID 声明（选"使用"，用途选 Analytics，清单里要有 AD_ID 权限）
 4. Store listing：按语言粘贴 `docs/store/<语言>/LISTING.md` 的文案 + 上传对应语言的截图
 5. 内部测试跑通后再逐步推 Closed → Open → Production
 

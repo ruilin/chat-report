@@ -342,6 +342,13 @@ class LEn extends L {
       'The analysis service is rate-limiting requests. Please try again shortly.';
 
   @override
+  String get unlockTitle => 'Unlock the full report';
+
+  @override
+  String get unlockSubtitle =>
+      'The deep dive with the exact messages behind each finding, personal advice, and the AI coach for this report.';
+
+  @override
   String get deepDiveTitle => 'Deep dive';
 
   @override
@@ -487,24 +494,11 @@ class LEn extends L {
   }
 
   @override
-  String get coachOutTitle => 'You\'re out of questions';
+  String get coachOutTitle => 'You\'ve used your free questions';
 
   @override
-  String coachOutBody(int count) {
-    return 'Get $count more to use on any of your reports.';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$count questions for $price';
-  }
-
-  @override
-  String get coachBuyNote => 'One-time payment. Not a subscription.';
-
-  @override
-  String get coachPending =>
-      'Your payment is pending. Your questions will be added once it goes through.';
+  String get coachOutBody =>
+      'Unlock this report to keep asking. You also get the deep dive and personal advice.';
 
   @override
   String get coachReportTitle => 'Report this answer';

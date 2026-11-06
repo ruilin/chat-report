@@ -345,6 +345,13 @@ class LIt extends L {
       'Il servizio di analisi sta limitando le richieste. Riprova tra poco.';
 
   @override
+  String get unlockTitle => 'Sblocca il report completo';
+
+  @override
+  String get unlockSubtitle =>
+      'L\'analisi approfondita con i messaggi esatti dietro ogni risultato, consigli personalizzati e il coach IA per questo report.';
+
+  @override
   String get deepDiveTitle => 'Analisi approfondita';
 
   @override
@@ -491,24 +498,11 @@ class LIt extends L {
   }
 
   @override
-  String get coachOutTitle => 'Hai finito le domande';
+  String get coachOutTitle => 'Hai esaurito le domande gratuite';
 
   @override
-  String coachOutBody(int count) {
-    return 'Acquistane altre $count da usare su tutti i tuoi report.';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$count domande a $price';
-  }
-
-  @override
-  String get coachBuyNote => 'Pagamento unico. Non è un abbonamento.';
-
-  @override
-  String get coachPending =>
-      'Il pagamento è in attesa. Le domande verranno aggiunte quando sarà completato.';
+  String get coachOutBody =>
+      'Sblocca questo report per continuare a chiedere. Include anche l\'analisi approfondita e consigli personalizzati.';
 
   @override
   String get coachReportTitle => 'Segnala questa risposta';

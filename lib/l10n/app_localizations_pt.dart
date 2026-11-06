@@ -345,6 +345,13 @@ class LPt extends L {
       'O serviço de análise está limitando as solicitações. Tente de novo daqui a pouco.';
 
   @override
+  String get unlockTitle => 'Desbloqueie o relatório completo';
+
+  @override
+  String get unlockSubtitle =>
+      'A análise a fundo com as mensagens exatas de cada conclusão, conselhos personalizados e o coach de IA deste relatório.';
+
+  @override
   String get deepDiveTitle => 'Análise a fundo';
 
   @override
@@ -492,24 +499,11 @@ class LPt extends L {
   }
 
   @override
-  String get coachOutTitle => 'Suas perguntas acabaram';
+  String get coachOutTitle => 'Suas perguntas grátis acabaram';
 
   @override
-  String coachOutBody(int count) {
-    return 'Compre mais $count para usar em qualquer um dos seus relatórios.';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$count perguntas por $price';
-  }
-
-  @override
-  String get coachBuyNote => 'Pagamento único. Não é assinatura.';
-
-  @override
-  String get coachPending =>
-      'Seu pagamento está pendente. As perguntas serão adicionadas quando ele for concluído.';
+  String get coachOutBody =>
+      'Desbloqueie este relatório para continuar perguntando. Inclui também a análise a fundo e conselhos personalizados.';
 
   @override
   String get coachReportTitle => 'Denunciar esta resposta';

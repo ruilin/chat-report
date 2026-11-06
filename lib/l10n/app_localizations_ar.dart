@@ -338,6 +338,13 @@ class LAr extends L {
       'خدمة التحليل تتلقى طلبات كثيرة حاليًا. حاول مجددًا بعد قليل.';
 
   @override
+  String get unlockTitle => 'افتح التقرير الكامل';
+
+  @override
+  String get unlockSubtitle =>
+      'التحليل المعمّق مع الرسائل الدقيقة وراء كل نتيجة، ونصائح شخصية، ومدرب الذكاء الاصطناعي لهذا التقرير.';
+
+  @override
   String get deepDiveTitle => 'تحليل معمّق';
 
   @override
@@ -485,23 +492,11 @@ class LAr extends L {
   }
 
   @override
-  String get coachOutTitle => 'نفدت أسئلتك';
+  String get coachOutTitle => 'انتهت أسئلتك المجانية';
 
   @override
-  String coachOutBody(int count) {
-    return 'احصل على $count سؤالًا إضافيًا لاستخدامها في أي من تقاريرك.';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$count سؤالًا مقابل $price';
-  }
-
-  @override
-  String get coachBuyNote => 'دفعة واحدة، وليست اشتراكًا.';
-
-  @override
-  String get coachPending => 'دفعتك قيد المعالجة. ستُضاف الأسئلة عند اكتمالها.';
+  String get coachOutBody =>
+      'افتح هذا التقرير لمواصلة الأسئلة. يشمل أيضًا التحليل المعمّق والنصائح الشخصية.';
 
   @override
   String get coachReportTitle => 'الإبلاغ عن هذه الإجابة';

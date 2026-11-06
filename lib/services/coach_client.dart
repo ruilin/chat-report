@@ -85,9 +85,9 @@ class CoachClient {
       'personality_other': report.personalityPartner,
       'reading': report.deepReading,
       'milestones': [for (final s in report.milestones) s.toJson()],
-      'advice': report.advice,
-      // 没解锁的专题内容不给模型，否则追问就绕过了付费
-      if (Purchases.isDeepDiveOpen(report) && dive != null)
+      // 没解锁的付费内容不给模型，否则追问就绕过了付费
+      if (Purchases.isUnlocked(report)) 'advice': report.advice,
+      if (Purchases.isUnlocked(report) && dive != null)
         'deep_dive': dive.toJson(),
     });
     return 'You are the AI coach in Chat Report, an app that reads a two-person chat history. '

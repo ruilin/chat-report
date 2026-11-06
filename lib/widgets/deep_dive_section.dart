@@ -10,7 +10,7 @@ import '../theme.dart';
 const _red = Color(0xFFC0392B);
 const _green = Color(0xFF3E9B6E);
 
-/// 报告页底部的付费专题分析：未解锁时是付费墙，解锁后是完整内容。
+/// 报告页底部的付费区：未解锁时是付费墙，解锁后是专题分析的完整内容。
 /// 示例报告只展示有哪些内容，不提供购买。
 class DeepDiveSection extends StatefulWidget {
   final RelationshipReport report;
@@ -28,31 +28,28 @@ class _DeepDiveSectionState extends State<DeepDiveSection> {
   bool _productLoaded = false;
 
   RelationshipReport get _report => widget.report;
-  bool get _locked => !Purchases.isDeepDiveOpen(_report);
+  bool get _locked => !Purchases.isUnlocked(_report);
 
   @override
   void initState() {
     super.initState();
     final dive = _report.deepDive;
-    if (widget.isSample || dive == null || !_locked) return;
+    if (widget.isSample || !_locked) return;
     _purchases.addListener(_onPurchaseChange);
     _purchases.loadProduct().whenComplete(() {
       if (mounted) setState(() => _productLoaded = true);
     });
     Analytics.paywallView(
-        itemCount: dive.conflicts.length +
-            dive.redFlags.length +
-            dive.greenFlags.length +
-            dive.turningPoints.length);
+        itemCount: dive == null
+            ? 0
+            : dive.conflicts.length +
+                dive.redFlags.length +
+                dive.greenFlags.length +
+                dive.turningPoints.length);
   }
 
   void _onPurchaseChange() {
-    if (!mounted) return;
-    setState(() {
-      if (_purchases.lastUnlockedId == _report.id) {
-        _report.deepDiveUnlocked = true;
-      }
-    });
+    if (mounted) setState(() {});
   }
 
   @override
@@ -64,16 +61,36 @@ class _DeepDiveSectionState extends State<DeepDiveSection> {
   @override
   Widget build(BuildContext context) {
     final l = L.of(context);
-    if (widget.isSample) return _Paywall(l: l, footer: _sampleFooter(l));
+    final adviceCount = _report.advice.length;
+    if (widget.isSample) {
+      return _Paywall(
+          l: l,
+          showDive: true,
+          adviceCount: adviceCount,
+          footer: _sampleFooter(l));
+    }
     final dive = _report.deepDive;
     // 没生成出来要说清楚，否则用户不知道少了内容。聊天原文不留，只能重新分析
-    if (dive == null) {
-      return Text(l.deepDiveMissing,
-          style: const TextStyle(fontSize: 12, color: UColors.muted));
-    }
+    final missing = dive == null
+        ? Text(l.deepDiveMissing,
+            style: const TextStyle(fontSize: 12, color: UColors.muted))
+        : null;
     if (_locked) {
-      return _Paywall(l: l, dive: dive, footer: _buyFooter(l));
+      // 专题分析没生成时，付费仍然能解锁教练和建议，但不能再列专题分析
+      return _Paywall(
+          l: l,
+          dive: dive,
+          showDive: dive != null,
+          adviceCount: adviceCount,
+          footer: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (missing != null) ...[missing, const SizedBox(height: 10)],
+              _buyFooter(l),
+            ],
+          ));
     }
+    if (dive == null) return missing!;
     return _Unlocked(report: _report, dive: dive, l: l);
   }
 
@@ -148,18 +165,27 @@ class _DeepDiveSectionState extends State<DeepDiveSection> {
 class _Paywall extends StatelessWidget {
   final L l;
   final DeepDive? dive;
+  final bool showDive;
+  final int adviceCount;
   final Widget footer;
 
-  const _Paywall({required this.l, this.dive, required this.footer});
+  const _Paywall(
+      {required this.l,
+      this.dive,
+      required this.showDive,
+      required this.adviceCount,
+      required this.footer});
 
   @override
   Widget build(BuildContext context) {
+    // 付费墙关着时只有示例报告走到这里：建议就显示在上面，不用再列
+    final paywall = Purchases.paywallEnabled;
     Widget row(String title, int? count) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 6),
           child: Row(
             children: [
               Icon(
-                  Purchases.deepDivePaywallEnabled
+                  paywall
                       ? Icons.lock_outline
                       : Icons.auto_awesome,
                   size: 16,
@@ -184,16 +210,23 @@ class _Paywall extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ULabel(l.deepDiveTitle, color: UColors.gold),
-          Text(l.deepDiveSubtitle,
+          ULabel(paywall ? l.unlockTitle : l.deepDiveTitle,
+              color: UColors.gold),
+          Text(paywall ? l.unlockSubtitle : l.deepDiveSubtitle,
               style: const TextStyle(
                   fontSize: 13, height: 1.5, color: UColors.ink2)),
           const SizedBox(height: 10),
-          row(l.sectionConflict, dive?.conflicts.length),
-          row(l.sectionRedFlags, dive?.redFlags.length),
-          row(l.sectionGreenFlags, dive?.greenFlags.length),
-          row(l.sectionAttachment, null),
-          row(l.sectionTurningPoints, dive?.turningPoints.length),
+          if (showDive) ...[
+            row(l.sectionConflict, dive?.conflicts.length),
+            row(l.sectionRedFlags, dive?.redFlags.length),
+            row(l.sectionGreenFlags, dive?.greenFlags.length),
+            row(l.sectionAttachment, null),
+            row(l.sectionTurningPoints, dive?.turningPoints.length),
+          ],
+          if (paywall) ...[
+            if (adviceCount > 0) row(l.sectionAdvice, adviceCount),
+            row(l.coachTitle, null),
+          ],
           const SizedBox(height: 12),
           footer,
         ],

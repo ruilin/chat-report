@@ -343,6 +343,13 @@ class LHi extends L {
       'एनालिसिस सर्विस पर अभी बहुत ज़्यादा रिक्वेस्ट हैं। थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
+  String get unlockTitle => 'पूरी रिपोर्ट अनलॉक करें';
+
+  @override
+  String get unlockSubtitle =>
+      'हर निष्कर्ष के पीछे के सटीक संदेशों के साथ गहन विश्लेषण, निजी सुझाव और इस रिपोर्ट के लिए AI कोच।';
+
+  @override
   String get deepDiveTitle => 'गहन विश्लेषण';
 
   @override
@@ -491,24 +498,11 @@ class LHi extends L {
   }
 
   @override
-  String get coachOutTitle => 'आपके सवाल खत्म हो गए';
+  String get coachOutTitle => 'आपके मुफ़्त सवाल खत्म हो गए';
 
   @override
-  String coachOutBody(int count) {
-    return 'अपनी किसी भी रिपोर्ट के लिए $count और सवाल लें।';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$price में $count सवाल';
-  }
-
-  @override
-  String get coachBuyNote => 'एक बार का भुगतान। यह सदस्यता नहीं है।';
-
-  @override
-  String get coachPending =>
-      'आपका भुगतान लंबित है। पूरा होने पर सवाल जुड़ जाएँगे।';
+  String get coachOutBody =>
+      'सवाल पूछते रहने के लिए यह रिपोर्ट अनलॉक करें। इसमें गहन विश्लेषण और निजी सुझाव भी शामिल हैं।';
 
   @override
   String get coachReportTitle => 'इस जवाब की शिकायत करें';

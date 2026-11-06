@@ -32,9 +32,9 @@ Chat Report ("the app") is provided by [COMPANY / DEVELOPER NAME]. You can reach
 
 **In-app purchases.** Payments are handled by Google Play; we never receive your card or payment details. We record on your device which report is unlocked, and use the usage analytics below to see whether purchases succeed.
 
-**Usage analytics.** We use Google Firebase Analytics to understand how the app is used: which screens are opened, whether an import or analysis succeeds or fails, how long it takes, the number of messages and the relationship type you choose. Firebase assigns a random app-instance identifier and collects basic device information (such as device model, OS version and country). Conversation text, participant names and report content are never sent to Firebase. Google processes this data under its own privacy policy.
+**Usage analytics.** We use Google Firebase Analytics to understand how the app is used: which screens are opened, whether an import or analysis succeeds or fails, how long it takes, the number of messages and the relationship type you choose. Firebase assigns a random app-instance identifier and collects basic device information (such as device model, OS version and country). Where the device allows it, Firebase may also collect the advertising identifier. We use it only for analytics, and the app shows no ads. You can reset or delete your advertising ID in your device's Google settings. Conversation text, participant names and report content are never sent to Firebase. Google processes this data under its own privacy policy.
 
-**What we do NOT collect.** No name, email, phone number, contacts, precise location or advertising identifier is collected by the app.
+**What we do NOT collect.** No name, email, phone number, contacts or precise location is collected by the app.
 
 ## Information about other people
 

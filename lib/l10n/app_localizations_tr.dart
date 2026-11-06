@@ -344,6 +344,13 @@ class LTr extends L {
       'Analiz hizmeti şu an çok fazla istek alıyor. Birazdan tekrar dene.';
 
   @override
+  String get unlockTitle => 'Tam raporun kilidini aç';
+
+  @override
+  String get unlockSubtitle =>
+      'Her bulgunun ardındaki mesajlarla derin analiz, kişisel öneriler ve bu rapor için yapay zekâ koçu.';
+
+  @override
   String get deepDiveTitle => 'Derin analiz';
 
   @override
@@ -491,24 +498,11 @@ class LTr extends L {
   }
 
   @override
-  String get coachOutTitle => 'Soru hakkın bitti';
+  String get coachOutTitle => 'Ücretsiz soruların bitti';
 
   @override
-  String coachOutBody(int count) {
-    return 'Tüm raporlarında kullanmak için $count soru daha al.';
-  }
-
-  @override
-  String coachBuy(int count, String price) {
-    return '$price karşılığında $count soru';
-  }
-
-  @override
-  String get coachBuyNote => 'Tek seferlik ödeme. Abonelik değildir.';
-
-  @override
-  String get coachPending =>
-      'Ödemen beklemede. Tamamlandığında soruların eklenecek.';
+  String get coachOutBody =>
+      'Sormaya devam etmek için bu raporun kilidini aç. Derin analiz ve kişisel öneriler de dahil.';
 
   @override
   String get coachReportTitle => 'Bu yanıtı bildir';

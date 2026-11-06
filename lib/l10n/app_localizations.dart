@@ -698,6 +698,18 @@ abstract class L {
   /// **'The analysis service is rate-limiting requests. Please try again shortly.'**
   String get errorRateLimited;
 
+  /// No description provided for @unlockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock the full report'**
+  String get unlockTitle;
+
+  /// No description provided for @unlockSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The deep dive with the exact messages behind each finding, personal advice, and the AI coach for this report.'**
+  String get unlockSubtitle;
+
   /// No description provided for @deepDiveTitle.
   ///
   /// In en, this message translates to:
@@ -959,32 +971,14 @@ abstract class L {
   /// No description provided for @coachOutTitle.
   ///
   /// In en, this message translates to:
-  /// **'You\'re out of questions'**
+  /// **'You\'ve used your free questions'**
   String get coachOutTitle;
 
   /// No description provided for @coachOutBody.
   ///
   /// In en, this message translates to:
-  /// **'Get {count} more to use on any of your reports.'**
-  String coachOutBody(int count);
-
-  /// No description provided for @coachBuy.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} questions for {price}'**
-  String coachBuy(int count, String price);
-
-  /// No description provided for @coachBuyNote.
-  ///
-  /// In en, this message translates to:
-  /// **'One-time payment. Not a subscription.'**
-  String get coachBuyNote;
-
-  /// No description provided for @coachPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Your payment is pending. Your questions will be added once it goes through.'**
-  String get coachPending;
+  /// **'Unlock this report to keep asking. You also get the deep dive and personal advice.'**
+  String get coachOutBody;
 
   /// No description provided for @coachReportTitle.
   ///

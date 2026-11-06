@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../models/report.dart';
 import '../services/analytics.dart';
+import '../services/purchases.dart';
 import '../theme.dart';
 import '../widgets/charts.dart';
 import '../widgets/deep_dive_section.dart';
@@ -10,7 +11,8 @@ import '../widgets/share_card.dart';
 import 'coach_screen.dart';
 
 /// 报告页 —— 整个产品为这一页服务。
-/// 原则：每个数字可追溯（本地统计 + 金句附时间）；专题分析是付费模块，其余免费。
+/// 原则：每个数字可追溯（本地统计 + 金句附时间）；
+/// 专题分析、AI 教练和给你的建议按份付费解锁，其余免费。
 class ReportScreen extends StatelessWidget {
   final RelationshipReport report;
 
@@ -405,27 +407,39 @@ class ReportScreen extends StatelessWidget {
                 ),
               ),
           ],
-          if (report.advice.isNotEmpty) ...[
-            const SizedBox(height: 8),
-            ULabel(l.sectionAdvice, color: UColors.gold),
-            for (final a in report.advice)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('—  ',
-                        style: TextStyle(color: UColors.gold)),
-                    Expanded(
-                        child: Text(a,
-                            style: const TextStyle(
-                                fontSize: 12.5,
-                                height: 1.6,
-                                color: UColors.ink2))),
-                  ],
-                ),
-              ),
-          ],
+          // 解锁后不用离开页面就能看到
+          ListenableBuilder(
+            listenable: Purchases.instance,
+            builder: (context, _) {
+              if (report.advice.isEmpty || !Purchases.isUnlocked(report)) {
+                return const SizedBox.shrink();
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 8),
+                  ULabel(l.sectionAdvice, color: UColors.gold),
+                  for (final a in report.advice)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('—  ',
+                              style: TextStyle(color: UColors.gold)),
+                          Expanded(
+                              child: Text(a,
+                                  style: const TextStyle(
+                                      fontSize: 12.5,
+                                      height: 1.6,
+                                      color: UColors.ink2))),
+                        ],
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
         ],
       ),
     );

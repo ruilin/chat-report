@@ -557,10 +557,10 @@ void main() {
     setUp(() async {
       en = await L.delegate.load(const Locale('en'));
       Purchases.instance = purchases;
-      Purchases.deepDivePaywallEnabled = true;
+      Purchases.paywallEnabled = true;
     });
 
-    tearDown(() => Purchases.deepDivePaywallEnabled = false);
+    tearDown(() => Purchases.paywallEnabled = false);
 
     Future<void> show(WidgetTester tester, RelationshipReport report,
         {bool isSample = false, Locale locale = const Locale('en')}) async {
@@ -586,7 +586,12 @@ void main() {
       expect(find.textContaining('fine whatever'), findsNothing);
       expect(find.textContaining('Leans anxious'), findsNothing);
       // 免费内容照常展示
-      expect(find.text(buildSampleReport().deepReading), findsOneWidget);
+      final sample = buildSampleReport();
+      expect(find.text(sample.deepReading), findsOneWidget);
+      // 建议和教练都在这一个价格里，但建议的内容要解锁后才能看
+      expect(find.text(sample.advice.first), findsNothing);
+      expect(find.text(en.sectionAdvice), findsOneWidget);
+      expect(find.text(en.coachTitle), findsOneWidget);
     });
 
     testWidgets('unlocked: shows content with evidence, no paywall',
@@ -598,21 +603,23 @@ void main() {
       expect(find.text(en.deepDiveNoGreenFlags), findsOneWidget);
       expect(find.text(en.deepDiveOneTime), findsNothing);
       expect(find.text(en.deepDiveDisclaimer), findsOneWidget);
+      expect(find.text(buildSampleReport().advice.first), findsOneWidget);
     });
 
     testWidgets('paywall off: everyone sees the content, nothing to buy',
         (tester) async {
-      Purchases.deepDivePaywallEnabled = false;
+      Purchases.paywallEnabled = false;
       await show(tester, reportWithDive());
       expect(find.text('Silent treatment'), findsOneWidget);
       expect(find.text('“fine whatever”'), findsOneWidget);
       expect(find.text(en.deepDiveBuy(r'\$2.99')), findsNothing);
       expect(find.text(en.deepDiveOneTime), findsNothing);
       expect(find.byIcon(Icons.lock_outline), findsNothing);
+      expect(find.text(buildSampleReport().advice.first), findsOneWidget);
     });
 
     testWidgets('paywall off: sample shows no locks', (tester) async {
-      Purchases.deepDivePaywallEnabled = false;
+      Purchases.paywallEnabled = false;
       await show(tester, buildSampleReport(), isSample: true);
       expect(find.text(en.sampleDeepDiveHint), findsOneWidget);
       expect(find.byIcon(Icons.lock_outline), findsNothing);
@@ -641,11 +648,23 @@ void main() {
       expect(find.text('an old label'), findsOneWidget);
     });
 
-    testWidgets('no deep dive means no paywall', (tester) async {
+    testWidgets('no deep dive: says so and only sells what is there',
+        (tester) async {
       await show(tester, buildSampleReport());
-      expect(find.text(en.deepDiveTitle.toUpperCase()), findsNothing);
       // 少了内容要告诉用户
       expect(find.text(en.deepDiveMissing), findsOneWidget);
+      expect(find.text(en.sectionRedFlags), findsNothing);
+      expect(find.text(en.sectionAdvice), findsOneWidget);
+      expect(find.text(en.coachTitle), findsOneWidget);
+      expect(find.text(en.deepDiveBuy(r'$2.99')), findsOneWidget);
+    });
+
+    testWidgets('no deep dive, already unlocked: nothing left to buy',
+        (tester) async {
+      Purchases.paywallEnabled = false;
+      await show(tester, buildSampleReport());
+      expect(find.text(en.deepDiveMissing), findsOneWidget);
+      expect(find.text(en.deepDiveOneTime), findsNothing);
     });
 
     testWidgets('sample shows what is inside but cannot be bought',
@@ -686,6 +705,8 @@ void main() {
       await tester.pump();
       expect(find.text('Silent treatment'), findsOneWidget);
       expect(find.text(en.deepDiveOneTime), findsNothing);
+      // 建议同时解锁，不用离开页面
+      expect(find.text(r.advice.first), findsOneWidget);
     });
 
     testWidgets('paywall fits narrow screens in every language',

@@ -53,18 +53,6 @@ class NoSaveStore extends ReportStore {
   Future<void> save(RelationshipReport report) async => saves++;
 }
 
-PurchaseDetails pack(PurchaseStatus status, {String id = 'pack-1'}) =>
-    PurchaseDetails(
-      purchaseID: id,
-      productID: Purchases.questionPackId,
-      verificationData: PurchaseVerificationData(
-          localVerificationData: '',
-          serverVerificationData: id,
-          source: 'test'),
-      transactionDate: '0',
-      status: status,
-    );
-
 RelationshipReport report({DeepDive? dive, bool unlocked = false}) {
   final s = buildSampleReport();
   return RelationshipReport(
@@ -124,7 +112,7 @@ void main() {
     gateway = FakeStore();
     purchases = Purchases(gateway, ReportStore());
     Purchases.instance = purchases;
-    Purchases.coachPaywallEnabled = false;
+    Purchases.paywallEnabled = false;
     en = await L.delegate.load(const Locale('en'));
   });
 
@@ -166,21 +154,25 @@ void main() {
     });
 
     test('locked deep dive never reaches the model, unlocked does', () async {
-      Purchases.deepDivePaywallEnabled = true;
-      addTearDown(() => Purchases.deepDivePaywallEnabled = false);
+      Purchases.paywallEnabled = true;
+      addTearDown(() => Purchases.paywallEnabled = false);
       final c = client(() => answer('ok'));
+      final locked = report(dive: secretDive);
       await c.ask(
-          report: report(dive: secretDive),
+          report: locked,
           history: const [],
           question: 'q',
           language: 'English');
       expect(system(), isNot(contains('SECRET_FLAG')));
+      // 建议也是付费内容，追问不能绕过
+      expect(system(), isNot(contains(jsonEncode(locked.advice.first))));
       await c.ask(
           report: report(dive: secretDive, unlocked: true),
           history: const [],
           question: 'q',
           language: 'English');
       expect(system(), contains('SECRET_FLAG'));
+      expect(system(), contains(jsonEncode(locked.advice.first)));
     });
 
     test('only recent history is sent', () async {
@@ -284,41 +276,19 @@ void main() {
     expect(fromOld.relationship, '');
   });
 
-  group('question balance', () {
-    test('free questions run out, packs add more, replays do not', () async {
+  group('free questions', () {
+    test('run out, stay used after a restart and never go negative', () async {
       await purchases.start();
-      expect(purchases.questionsLeft, Purchases.freeQuestions);
-      for (var i = 0; i < Purchases.freeQuestions; i++) {
-        await purchases.spendQuestion();
-      }
-      expect(purchases.questionsLeft, 0);
-
-      await purchases.buyQuestions();
-      expect(gateway.buys, 1);
-      gateway.controller.add([pack(PurchaseStatus.purchased)]);
-      await Future<void>.delayed(const Duration(milliseconds: 20));
-      expect(purchases.questionsLeft, Purchases.questionPackSize);
-      expect(gateway.finished, hasLength(1));
-
-      gateway.controller.add([pack(PurchaseStatus.restored)]);
-      await Future<void>.delayed(const Duration(milliseconds: 20));
-      expect(purchases.questionsLeft, Purchases.questionPackSize);
-
-      await purchases.spendQuestion();
+      expect(purchases.freeQuestionsLeft, Purchases.freeQuestions);
+      await purchases.spendFreeQuestion();
       final after = Purchases(gateway, ReportStore());
       await after.start();
-      expect(after.questionsLeft, Purchases.questionPackSize - 1);
-    });
+      expect(after.freeQuestionsLeft, Purchases.freeQuestions - 1);
 
-    test('a pending pack does not block unlocking a report', () async {
-      await purchases.start();
-      await purchases.buyQuestions();
-      gateway.controller.add([pack(PurchaseStatus.pending)]);
-      await Future<void>.delayed(const Duration(milliseconds: 20));
-      expect(purchases.stateOf(Purchases.questionPackId), PurchaseState.pending);
-      expect(purchases.state, PurchaseState.idle);
-      await purchases.buy('123');
-      expect(gateway.buys, 2);
+      for (var i = 0; i < Purchases.freeQuestions + 1; i++) {
+        await purchases.spendFreeQuestion();
+      }
+      expect(purchases.freeQuestionsLeft, 0);
     });
   });
 
@@ -480,28 +450,78 @@ void main() {
       expect(r.coachMessages, isEmpty);
     });
 
-    testWidgets('with the paywall on: failures are free, then it asks to buy',
+    testWidgets('locked report: failures are free, then it asks to unlock',
         (tester) async {
-      Purchases.coachPaywallEnabled = true;
+      Purchases.paywallEnabled = true;
+      addTearDown(() => Purchases.paywallEnabled = false);
       var fail = true;
       await show(tester, report(),
           client(() => fail ? http.Response('nope', 500) : answer('ok')));
       expect(find.text(en.coachLeft(Purchases.freeQuestions)), findsOneWidget);
 
       await ask(tester, 'q');
-      expect(purchases.questionsLeft, Purchases.freeQuestions);
+      expect(purchases.freeQuestionsLeft, Purchases.freeQuestions);
 
       fail = false;
       for (var i = 0; i < Purchases.freeQuestions; i++) {
         await ask(tester, 'q$i');
       }
-      expect(purchases.questionsLeft, 0);
+      expect(purchases.freeQuestionsLeft, 0);
       expect(find.byType(TextField), findsNothing);
       expect(find.text(en.coachOutTitle), findsOneWidget);
 
-      await tester.tap(find.text(en.coachBuy(20, r'$1.99')));
+      await tester.tap(find.text(en.deepDiveBuy(r'$1.99')));
       await tester.pump();
       expect(gateway.buys, 1);
+    });
+
+    testWidgets('unlocked report: no limit and free questions are kept',
+        (tester) async {
+      Purchases.paywallEnabled = true;
+      addTearDown(() => Purchases.paywallEnabled = false);
+      final r = report(unlocked: true);
+      await show(tester, r, client(() => answer('ok')));
+      expect(find.text(en.coachLeft(3)), findsNothing);
+      for (var i = 0; i < Purchases.freeQuestions + 2; i++) {
+        await ask(tester, 'q$i');
+      }
+      expect(r.coachMessages, hasLength((Purchases.freeQuestions + 2) * 2));
+      expect(find.byType(TextField), findsOneWidget);
+      expect(purchases.freeQuestionsLeft, Purchases.freeQuestions);
+    });
+
+    testWidgets('unlocking from the coach lets the user keep asking',
+        (tester) async {
+      Purchases.paywallEnabled = true;
+      addTearDown(() => Purchases.paywallEnabled = false);
+      SharedPreferences.setMockInitialValues({
+        'ai_consent_v1': true,
+        'coach_free_used': Purchases.freeQuestions,
+        'unlock_credits': 1,
+      });
+      final r = report();
+      await show(tester, r, client(() => answer('ok')));
+      expect(find.byType(TextField), findsNothing);
+      await tester.tap(find.text(en.deepDiveUseCredit));
+      await settle(tester);
+      expect(r.deepDiveUnlocked, isTrue);
+      expect(find.byType(TextField), findsOneWidget);
+      await ask(tester, 'more');
+      expect(r.coachMessages, hasLength(2));
+    });
+
+    testWidgets('the unlock prompt fits narrow screens in every language',
+        (tester) async {
+      Purchases.paywallEnabled = true;
+      addTearDown(() => Purchases.paywallEnabled = false);
+      for (var i = 0; i < Purchases.freeQuestions; i++) {
+        await purchases.spendFreeQuestion();
+      }
+      for (final locale in L.supportedLocales) {
+        await show(tester, report(), client(() => answer('ok')),
+            locale: locale, size: const Size(320, 568));
+        expect(tester.takeException(), isNull, reason: '$locale');
+      }
     });
 
     testWidgets('fits narrow screens in every language', (tester) async {
