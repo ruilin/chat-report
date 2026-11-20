@@ -6,6 +6,7 @@ import '../models/deep_dive.dart';
 import '../models/metrics.dart';
 import '../models/report.dart';
 import 'analytics.dart';
+import 'deep_dive_jobs.dart';
 import 'quote_verifier.dart';
 import 'zai_client.dart';
 
@@ -14,15 +15,21 @@ typedef ProgressCallback = void Function(String stage, double fraction);
 
 /// 两段式 LLM 管线：
 ///   Stage 1  按月分块 → [ZaiClient.flashModel] 并行产出结构化 JSON
-///   Stage 2  月度 JSON + 本地统计 → [ZaiClient.reportModel] 汇总成叙事报告和专题分析
+///   Stage 2  月度 JSON + 本地统计 → [ZaiClient.reportModel] 汇总成叙事报告
+///   Stage 3  专题分析在报告返回后继续生成（见 [DeepDiveJobs]），用户不用等它
 class AnalysisPipeline {
   final ZaiClient _client;
+
+  /// 自己建的客户端会随等待页一起释放，专题分析那时还没写完，要另建
+  final bool _ownsClient;
   static const _maxChunkChars = 12000;
   // flash 免费档并发配额很低，2 路已实测会偶发 429，靠退避重试兜底
   static const _concurrency = 2;
   static const _maxAttempts = 4;
 
-  AnalysisPipeline([ZaiClient? client]) : _client = client ?? ZaiClient();
+  AnalysisPipeline([ZaiClient? client])
+      : _client = client ?? ZaiClient(),
+        _ownsClient = client == null;
 
   Future<RelationshipReport> run({
     required ChatData data,
@@ -81,11 +88,16 @@ class AnalysisPipeline {
     }
 
     onProgress?.call('Writing your report', .75);
-    final report = await _aggregate(
-        metrics, relationship, monthResults, language,
-        deepDive: () async {
-      onProgress?.call('Writing your report', .88);
-      return _deepDive(data, metrics, relationship, monthResults, language);
+    final report =
+        await _aggregate(metrics, relationship, monthResults, language);
+    DeepDiveJobs.start(report, () async {
+      final client = _ownsClient ? ZaiClient() : _client;
+      try {
+        return await _deepDive(
+            client, data, metrics, relationship, monthResults, language);
+      } finally {
+        if (_ownsClient) client.dispose();
+      }
     });
     onProgress?.call('Done', 1);
     return report;
@@ -113,20 +125,28 @@ class AnalysisPipeline {
       String month, String text, String language, ChatMetrics metrics) {
     return _client.completeJson(
       model: ZaiClient.flashModel,
-      maxTokens: 2400,
+      maxTokens: 3000,
       system: 'You analyze a month of chat messages between two people. '
           'Reply with STRICT JSON only, no prose, in this shape: '
           '{"sentiment": 1-10, "topics": ["..."], '
           '"notable_quotes": [{"quote": "...", "who": "...", "day": "..."}], '
           '"events": ["short event description"], "summary": "one sentence", '
           '"conflict_moments": [{"about": "what the disagreement was about", "who_reached_out_first": "...", "quote": "..."}], '
-          '"signals": [{"kind": "red or green", "label": "short description", "quote": "..."}]}. '
-          'conflict_moments and signals are empty arrays when nothing fits; never stretch to fill them. '
+          '"signals": [{"kind": "red or green", "label": "short description", "quote": "..."}], '
+          '"horsemen": [{"kind": "criticism, contempt, defensiveness or stonewalling", "who": "sender name", "quote": "..."}], '
+          '"affection": [{"type": "words, time, gifts, acts or touch", "who": "sender name", "quote": "..."}]}. '
+          'conflict_moments, signals, horsemen and affection are empty arrays when nothing fits; never stretch to fill them. '
+          'horsemen are Gottman\'s four harmful ways of arguing: criticism attacks the person rather than the behavior '
+          '(a complaint about one specific thing someone did is not criticism); '
+          'contempt is mockery, sarcasm, insults or eye-rolling; defensiveness is counter-attacking or playing the victim '
+          'instead of taking any responsibility; stonewalling is shutting down or refusing to engage. '
+          'affection is how someone shows or asks for love: words of affirmation, quality time, gifts, acts of service '
+          'or physical touch mentioned in the text. '
           'A red signal is a concerning pattern such as contempt, stonewalling, guilt-tripping or controlling behavior; '
           'a green signal is a healthy one such as repair attempts, curiosity or support. '
           'Every quote is the text of one message copied exactly, without sender or time. '
           'Topics are short nouns (e.g. "Food", "Work", "Travel"). '
-          'At most 3 quotes, 2 events, 2 conflict_moments and 3 signals. '
+          'At most 3 quotes, 2 events, 2 conflict_moments, 3 signals, 3 horsemen and 3 affection items. '
           '${_languageRules(language, metrics)} ${_addressRules(metrics)}',
       user: 'Month $month:\n$text',
     );
@@ -136,9 +156,8 @@ class AnalysisPipeline {
     ChatMetrics metrics,
     Relationship relationship,
     Map<String, Map<String, dynamic>> months,
-    String language, {
-    required Future<DeepDive?> Function() deepDive,
-  }) async {
+    String language,
+  ) async {
     // 话题权重本地聚合（数字不交给模型算）
     final topicCount = <String, int>{};
     for (final m in months.values) {
@@ -160,7 +179,7 @@ class AnalysisPipeline {
         for (final e in months.entries)
           e.key: {
             for (final f in e.value.entries)
-              if (f.key != 'conflict_moments' && f.key != 'signals')
+              if (!_premiumMonthlyKeys.contains(f.key))
                 f.key: f.value,
           },
       },
@@ -213,14 +232,14 @@ class AnalysisPipeline {
                 m['quote']?.toString() ?? ''),
       ].take(5).toList(),
       advice: strList(json['advice']),
-      deepDive: await deepDive(),
       relationship: relationship.promptName,
     );
   }
 
-  /// 专题分析和免费报告一起生成：付款后立刻能看，也不用为了付费后再分析
-  /// 而把聊天原文留在手机上。失败只影响付费入口，不影响免费报告。
+  /// 专题分析在免费报告之后生成：用户先看报告，这部分写好了再补上。
+  /// 聊天原文只在内存里留到它写完（或 App 关掉）。失败不影响免费报告。
   Future<DeepDive?> _deepDive(
+    ZaiClient client,
     ChatData data,
     ChatMetrics metrics,
     Relationship relationship,
@@ -228,7 +247,7 @@ class AnalysisPipeline {
     String language,
   ) async {
     try {
-      final json = await _withRetry(() => _client.completeJson(
+      final json = await _withRetry(() => client.completeJson(
             model: ZaiClient.reportModel,
             maxTokens: 5000,
             system:
@@ -237,14 +256,20 @@ class AnalysisPipeline {
                 'analysis JSON. Reply with STRICT JSON only: '
                 '{"conflict": {"summary": "2-3 sentences: what they tend to fight about, who usually reaches out first, how it tends to end", '
                 '"moments": [{"date": "YYYY-MM", "title": "...", "detail": "one sentence", "quote": "..."}] (0-3 items)}, '
+                '"four_horsemen": [{"kind": "criticism, contempt, defensiveness or stonewalling", "who": "you or partner", '
+                '"date": "YYYY-MM", "title": "...", "detail": "one sentence on what happened", "quote": "..."}] (0-4 items, only clear instances), '
                 '"red_flags": [{"date": "YYYY-MM", "title": "...", "detail": "one sentence", "quote": "..."}] (0-4 items), '
                 '"green_flags": [same shape] (0-4 items), '
                 '"attachment": {"you": {"style": "exactly one of anxious, avoidant, secure, mixed", "detail": "1-2 sentences"}, '
                 '"partner": {"style": "...", "detail": "..."}, "loop": "1-2 sentences on the pattern they get stuck in together"}, '
+                '"love_languages": {"you": {"primary": "exactly one of words, time, gifts, acts, touch", '
+                '"detail": "1-2 sentences on how they show and seek love", "quote": "..."}, "partner": {...}}, '
                 '"turning_points": [{"date": "YYYY-MM", "direction": "up or down", "title": "...", "detail": "one sentence", "quote": "..."}] (0-4 items)}. '
                 'Every quote must be copied character for character from a quote field in the input; '
                 'anything else will be discarded. Leave a list empty rather than stretching: '
                 'do not invent red flags to seem insightful, and do not pad green flags. '
+                'Red flags cover other concerns such as control or guilt-tripping: never repeat a four_horsemen item there. '
+                'Love languages are a popular framework, not science: read them from the affection data and hedge. '
                 'Use hedged language ("signs of", "tends to"). Attachment styles are tendencies seen in these '
                 'messages, never a diagnosis; never diagnose anyone. '
                 'If relationship is "ex", stay reflective and never encourage re-contact. '
@@ -252,7 +277,7 @@ class AnalysisPipeline {
                 'If the chat shows threats, violence, coercion or self-harm, say so gently and suggest talking to '
                 'someone they trust or a local support service, without drawing conclusions. '
                 '${_languageRules(language, metrics)} ${_addressRules(metrics)} '
-                'JSON keys, the direction value and the style value stay in English.',
+                'JSON keys and the direction, style, kind, who and primary values stay in English.',
             user: jsonEncode({
               'relationship': relationship.promptName,
               'you': metrics.you,
@@ -302,11 +327,48 @@ class AnalysisPipeline {
 
     final conflict = json['conflict'];
     final attachment = json['attachment'];
+    final love = json['love_languages'];
+
+    // 原话对不上就不带原话，判断本身还留着
+    LoveLanguageRead? loveRead(dynamic v) {
+      final read = LoveLanguageRead.maybeFromJson(v);
+      if (read == null) return null;
+      return LoveLanguageRead(
+          primary: read.primary,
+          detail: read.detail,
+          quote: verifier.contains(read.quote) ? read.quote : '');
+    }
+
+    final horsemen = [
+      for (final v
+          in (json['four_horsemen'] is List
+              ? json['four_horsemen'] as List
+              : const []))
+        if (verified(v) case final m?)
+          if (Horseman.values.asNameMap()[(v as Map)['kind']] case final kind?)
+            if (v['who'] case 'you' || 'partner')
+              HorsemanItem(
+                  date: m['date']!,
+                  title: m['title']!,
+                  detail: m['detail']!,
+                  quote: m['quote']!,
+                  kind: kind,
+                  byYou: v['who'] == 'you'),
+    ].take(4).toList();
+    // 模型常把同一句话又列成红旗，已经算作四骑士的就不重复
+    final horsemenQuotes = {
+      for (final h in horsemen) h.quote.toLowerCase(),
+    };
+
     return DeepDive(
       conflictSummary:
           conflict is Map ? conflict['summary']?.toString().trim() ?? '' : '',
       conflicts: items(conflict is Map ? conflict['moments'] : null, max: 3),
-      redFlags: items(json['red_flags']),
+      horsemen: horsemen,
+      redFlags: [
+        for (final e in items(json['red_flags']))
+          if (!horsemenQuotes.contains(e.quote.toLowerCase())) e,
+      ],
       greenFlags: items(json['green_flags']),
       attachmentYou: attachment is Map
           ? AttachmentRead.maybeFromJson(attachment['you'])
@@ -316,6 +378,8 @@ class AnalysisPipeline {
           : null,
       attachmentLoop:
           attachment is Map ? attachment['loop']?.toString().trim() ?? '' : '',
+      loveYou: love is Map ? loveRead(love['you']) : null,
+      lovePartner: love is Map ? loveRead(love['partner']) : null,
       turningPoints: [
         for (final v
             in (json['turning_points'] is List
@@ -331,6 +395,14 @@ class AnalysisPipeline {
       ].take(4).toList(),
     );
   }
+
+  /// 按月分析里只给专题分析用的字段，免费报告的输入里去掉
+  static const _premiumMonthlyKeys = {
+    'conflict_moments',
+    'signals',
+    'horsemen',
+    'affection',
+  };
 
   /// 所有报告提示词共用的语言要求
   static String _languageRules(String language, ChatMetrics metrics) =>
@@ -350,14 +422,19 @@ class AnalysisPipeline {
       'if the input mentions them by name, rewrite it as "you". '
       'Refer to the other person as ${jsonEncode(metrics.partner)}.';
 
-  /// 429 指数退避多试几次；没回应或 JSON 损坏只再试一次；其他异常直接抛出。
+  /// 429 指数退避多试几次；JSON 损坏再试两次，没回应再试一次；其他异常直接抛出。
   Future<T> _withRetry<T>(Future<T> Function() task) async {
     for (var attempt = 1; ; attempt++) {
       try {
         return await task();
       } on ZaiException catch (e) {
         final retryable = e.isRateLimited || e.isTimedOut || e.isBadResponse;
-        final limit = e.isRateLimited ? _maxAttempts : 2;
+        // 输出越长越容易出坏 JSON，多给一次机会
+        final limit = e.isRateLimited
+            ? _maxAttempts
+            : e.isBadResponse
+                ? 3
+                : 2;
         if (!retryable || attempt >= limit) rethrow;
         // ignore: avoid_print
         print('[pipeline] ${e.kind.name}, retrying in ${3 * attempt}s');

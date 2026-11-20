@@ -273,6 +273,12 @@ class LZh extends L {
   String get shareCardWatermark => '由 CHAT REPORT 生成';
 
   @override
+  String get shareCardScan => '扫码看你的聊天报告';
+
+  @override
+  String get shareFormatTall => '竖版，适合发状态';
+
+  @override
   String shareCardYears(int count) {
     return '$count 年的聊天';
   }
@@ -353,10 +359,67 @@ class LZh extends L {
   String get deepDiveMissing => '这次没能生成专题分析。重新分析这段聊天可以再试一次。';
 
   @override
+  String get deepDiveGenerating => '专题分析还在生成，通常还要一分钟左右。';
+
+  @override
   String get deepDiveSubtitle => '免费报告没讲到的部分，每条结论都附上聊天原话。';
 
   @override
   String get sectionConflict => '争吵与和好';
+
+  @override
+  String get sectionFourHorsemen => '冲突四骑士';
+
+  @override
+  String get fourHorsemenIntro => '心理学家戈特曼研究发现，这四种吵架方式对关系伤害最大。';
+
+  @override
+  String get fourHorsemenNone => '这些聊天里没有明显的四骑士信号。';
+
+  @override
+  String get horsemanCriticism => '批评';
+
+  @override
+  String get horsemanContempt => '蔑视';
+
+  @override
+  String get horsemanDefensiveness => '防御';
+
+  @override
+  String get horsemanStonewalling => '冷战';
+
+  @override
+  String get antidoteCriticism => '可以试试：说具体的事和你的需要，而不是指责对方这个人。';
+
+  @override
+  String get antidoteContempt => '可以试试：多说你欣赏对方的地方，提意见时不要嘲讽。';
+
+  @override
+  String get antidoteDefensiveness => '可以试试：哪怕只承认一小部分责任。';
+
+  @override
+  String get antidoteStonewalling => '可以试试：先暂停一会儿让自己冷静，再回来继续谈。';
+
+  @override
+  String get sectionLoveLanguages => '爱的语言';
+
+  @override
+  String get loveLanguagesNote => '爱的语言是流行的心理学说法，不是科学测试，可以作为参考。';
+
+  @override
+  String get loveWords => '肯定的话语';
+
+  @override
+  String get loveTime => '精心的时刻';
+
+  @override
+  String get loveGifts => '接受礼物';
+
+  @override
+  String get loveActs => '服务的行动';
+
+  @override
+  String get loveTouch => '身体的接触';
 
   @override
   String get sectionRedFlags => '红旗信号';
@@ -404,6 +467,12 @@ class LZh extends L {
 
   @override
   String get sampleDeepDiveHint => '你自己的报告会包含这部分内容。';
+
+  @override
+  String get samplePaidHint => '这部分是付费内容。你自己的报告会免费展示一条发现，其余解锁后可看。';
+
+  @override
+  String get previewLabel => '免费预览';
 
   @override
   String get savedTitle => '我的报告';
@@ -760,6 +829,12 @@ class LZhHant extends LZh {
   String get shareCardWatermark => '由 CHAT REPORT 產生';
 
   @override
+  String get shareCardScan => '掃碼看你的聊天報告';
+
+  @override
+  String get shareFormatTall => '直式，適合發限時動態';
+
+  @override
   String shareCardYears(int count) {
     return '$count 年的對話';
   }
@@ -840,10 +915,67 @@ class LZhHant extends LZh {
   String get deepDiveMissing => '這次沒能生成專題分析。重新分析這段聊天可以再試一次。';
 
   @override
+  String get deepDiveGenerating => '專題分析還在生成，通常還要一分鐘左右。';
+
+  @override
   String get deepDiveSubtitle => '免費報告沒講到的部分，每項結論都附上聊天原話。';
 
   @override
   String get sectionConflict => '爭吵與和好';
+
+  @override
+  String get sectionFourHorsemen => '衝突四騎士';
+
+  @override
+  String get fourHorsemenIntro => '心理學家高特曼研究發現，這四種吵架方式對關係傷害最大。';
+
+  @override
+  String get fourHorsemenNone => '這些聊天裡沒有明顯的四騎士訊號。';
+
+  @override
+  String get horsemanCriticism => '批評';
+
+  @override
+  String get horsemanContempt => '蔑視';
+
+  @override
+  String get horsemanDefensiveness => '防衛';
+
+  @override
+  String get horsemanStonewalling => '冷戰';
+
+  @override
+  String get antidoteCriticism => '可以試試：說具體的事和你的需要，而不是指責對方這個人。';
+
+  @override
+  String get antidoteContempt => '可以試試：多說你欣賞對方的地方，提意見時不要嘲諷。';
+
+  @override
+  String get antidoteDefensiveness => '可以試試：哪怕只承認一小部分責任。';
+
+  @override
+  String get antidoteStonewalling => '可以試試：先暫停一下讓自己冷靜，再回來繼續談。';
+
+  @override
+  String get sectionLoveLanguages => '愛的語言';
+
+  @override
+  String get loveLanguagesNote => '愛的語言是流行的心理學說法，不是科學測驗，可以作為參考。';
+
+  @override
+  String get loveWords => '肯定的言詞';
+
+  @override
+  String get loveTime => '精心的時刻';
+
+  @override
+  String get loveGifts => '接受禮物';
+
+  @override
+  String get loveActs => '服務的行動';
+
+  @override
+  String get loveTouch => '身體的接觸';
 
   @override
   String get sectionRedFlags => '紅旗訊號';
@@ -891,6 +1023,12 @@ class LZhHant extends LZh {
 
   @override
   String get sampleDeepDiveHint => '你自己的報告會包含這部分內容。';
+
+  @override
+  String get samplePaidHint => '這部分是付費內容。你自己的報告會免費展示一則發現，其餘解鎖後可看。';
+
+  @override
+  String get previewLabel => '免費預覽';
 
   @override
   String get savedTitle => '我的報告';

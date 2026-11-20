@@ -281,6 +281,12 @@ class LId extends L {
   String get shareCardWatermark => 'DIBUAT DENGAN CHAT REPORT';
 
   @override
+  String get shareCardScan => 'Pindai untuk menganalisis obrolanmu';
+
+  @override
+  String get shareFormatTall => 'Format tegak untuk Status dan Story';
+
+  @override
   String shareCardYears(int count) {
     return '$count tahun chatting';
   }
@@ -366,11 +372,76 @@ class LId extends L {
       'Analisis mendalam gagal dibuat kali ini. Analisis ulang obrolan ini untuk mencoba lagi.';
 
   @override
+  String get deepDiveGenerating =>
+      'Analisis mendalammu masih ditulis. Biasanya butuh sekitar satu menit.';
+
+  @override
   String get deepDiveSubtitle =>
       'Hal yang tidak dibahas laporan gratis. Setiap temuan disertai pesan persis yang mendasarinya.';
 
   @override
   String get sectionConflict => 'Pertengkaran dan berbaikan';
+
+  @override
+  String get sectionFourHorsemen => 'Empat Penunggang Kuda';
+
+  @override
+  String get fourHorsemenIntro =>
+      'Psikolog John Gottman menemukan bahwa empat cara bertengkar ini paling merusak hubungan.';
+
+  @override
+  String get fourHorsemenNone =>
+      'Tidak ada tanda jelas Empat Penunggang Kuda dalam pesan-pesan ini.';
+
+  @override
+  String get horsemanCriticism => 'Kritik';
+
+  @override
+  String get horsemanContempt => 'Penghinaan';
+
+  @override
+  String get horsemanDefensiveness => 'Sikap defensif';
+
+  @override
+  String get horsemanStonewalling => 'Menutup diri';
+
+  @override
+  String get antidoteCriticism =>
+      'Coba sebagai gantinya: bicarakan situasinya dan apa yang kamu butuhkan, bukan apa yang salah dari dirinya.';
+
+  @override
+  String get antidoteContempt =>
+      'Coba sebagai gantinya: sampaikan apa yang kamu hargai, dan utarakan keluhan tanpa mengejek.';
+
+  @override
+  String get antidoteDefensiveness =>
+      'Coba sebagai gantinya: akui setidaknya sebagian kecil masalahnya.';
+
+  @override
+  String get antidoteStonewalling =>
+      'Coba sebagai gantinya: ambil jeda sebentar untuk menenangkan diri, lalu lanjutkan obrolan.';
+
+  @override
+  String get sectionLoveLanguages => 'Bahasa cinta';
+
+  @override
+  String get loveLanguagesNote =>
+      'Bahasa cinta adalah kerangka populer, bukan tes ilmiah. Anggap saja sebagai titik awal.';
+
+  @override
+  String get loveWords => 'Kata-kata penegasan';
+
+  @override
+  String get loveTime => 'Waktu berkualitas';
+
+  @override
+  String get loveGifts => 'Menerima hadiah';
+
+  @override
+  String get loveActs => 'Tindakan melayani';
+
+  @override
+  String get loveTouch => 'Sentuhan fisik';
 
   @override
   String get sectionRedFlags => 'Tanda bahaya';
@@ -425,6 +496,13 @@ class LId extends L {
   @override
   String get sampleDeepDiveHint =>
       'Laporanmu sendiri akan mencakup bagian ini.';
+
+  @override
+  String get samplePaidHint =>
+      'Bagian ini berbayar. Laporanmu sendiri menampilkan satu temuan gratis, dan sisanya bisa kamu buka.';
+
+  @override
+  String get previewLabel => 'Pratinjau gratis';
 
   @override
   String get savedTitle => 'Laporan saya';

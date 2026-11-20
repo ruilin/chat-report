@@ -19,8 +19,9 @@ class RelationshipReport {
   final List<Milestone> milestones;
   final List<String> advice;
 
-  /// 付费专题分析。生成失败或内容不足时为 null，此时不展示付费入口
-  final DeepDive? deepDive;
+  /// 付费专题分析。在免费报告之后生成，所以一开始是 null；
+  /// 生成失败或内容不足时也一直是 null
+  DeepDive? deepDive;
   bool deepDiveUnlocked;
 
   /// 关系类型的稳定标识（Relationship.promptName），AI 教练据此调整语气

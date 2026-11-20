@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+import '../models/deep_dive.dart';
+import 'app_localizations.dart';
+
 /// 把当前界面语言映射成喂给 LLM 的语言名，让报告正文与 UI 语言一致。
 String promptLanguageOf(BuildContext context) {
   final locale = Localizations.localeOf(context);
@@ -24,3 +27,12 @@ const _promptLanguages = {
   'hi': 'Hindi',
   'id': 'Indonesian',
 };
+
+/// 爱的语言按界面语言显示（模型只给固定的英文值）
+String loveLanguageLabel(L l, LoveLanguage v) => switch (v) {
+      LoveLanguage.words => l.loveWords,
+      LoveLanguage.time => l.loveTime,
+      LoveLanguage.gifts => l.loveGifts,
+      LoveLanguage.acts => l.loveActs,
+      LoveLanguage.touch => l.loveTouch,
+    };

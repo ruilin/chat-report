@@ -13,13 +13,60 @@ import 'coach_screen.dart';
 /// 报告页 —— 整个产品为这一页服务。
 /// 原则：每个数字可追溯（本地统计 + 金句附时间）；
 /// 专题分析、AI 教练和给你的建议按份付费解锁，其余免费。
-class ReportScreen extends StatelessWidget {
+class ReportScreen extends StatefulWidget {
   final RelationshipReport report;
 
   /// 首页「示例报告」入口打开：顶部标注示例并引导去分析自己的聊天，不提供分享
   final bool isSample;
 
   const ReportScreen({super.key, required this.report, this.isSample = false});
+
+  @override
+  State<ReportScreen> createState() => _ReportScreenState();
+}
+
+class _ReportScreenState extends State<ReportScreen> {
+  RelationshipReport get report => widget.report;
+  bool get isSample => widget.isSample;
+
+  // 报告很长，付费区在最底部，顶部给几个直达入口
+  final _curveKey = GlobalKey();
+  final _readingKey = GlobalKey();
+  final _diveKey = GlobalKey();
+  final _coachKey = GlobalKey();
+
+  void _jumpTo(GlobalKey key) {
+    final target = key.currentContext;
+    if (target == null) return;
+    Scrollable.ensureVisible(target,
+        duration: const Duration(milliseconds: 350), curve: Curves.easeOut);
+  }
+
+  Widget _jumpBar(L l) {
+    Widget chip(String label, GlobalKey key) => Padding(
+          padding: const EdgeInsetsDirectional.only(end: 8),
+          child: ActionChip(
+            label: Text(label,
+                style: const TextStyle(fontSize: 12, color: UColors.ink2)),
+            backgroundColor: Colors.white,
+            side: const BorderSide(color: UColors.line),
+            shape: const StadiumBorder(),
+            visualDensity: VisualDensity.compact,
+            onPressed: () => _jumpTo(key),
+          ),
+        );
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          chip(l.sectionEmotionCurve, _curveKey),
+          chip(l.sectionFullReading, _readingKey),
+          chip(l.deepDiveTitle, _diveKey),
+          if (!isSample) chip(l.coachTitle, _coachKey),
+        ],
+      ),
+    );
+  }
 
   Widget _sampleBanner(BuildContext context, L l) {
     return Container(
@@ -102,35 +149,43 @@ class ReportScreen extends StatelessWidget {
             ),
         ],
       ),
-      body: ListView(
-        // 显式 padding 会让 ListView 不再自动避让系统栏，底部要自己加上导航栏高度
+      // 不用 ListView：它只构建屏幕附近的卡片，没法跳到还没构建的部分
+      body: SingleChildScrollView(
+        // 显式 padding 不会自动避让系统栏，底部要自己加上导航栏高度
         padding: EdgeInsets.fromLTRB(
             20, 8, 20, 32 + MediaQuery.paddingOf(context).bottom),
-        children: [
-          if (isSample) ...[
-            _sampleBanner(context, l),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (isSample) ...[
+              _sampleBanner(context, l),
+              const SizedBox(height: 14),
+            ],
+            _jumpBar(l),
+            const SizedBox(height: 8),
+            _warmthCard(l),
             const SizedBox(height: 14),
-          ],
-          _warmthCard(l),
-          const SizedBox(height: 14),
-          _balanceCard(l),
-          const SizedBox(height: 14),
-          _curveCard(l),
-          const SizedBox(height: 14),
-          if (report.topics.isNotEmpty) ...[
-            _topicsCard(l),
+            _balanceCard(l),
             const SizedBox(height: 14),
-          ],
-          _personalityCard(l),
-          const SizedBox(height: 14),
-          _deepReadingCard(l),
-          const SizedBox(height: 14),
-          DeepDiveSection(report: report, isSample: isSample),
-          if (!isSample) ...[
+            KeyedSubtree(key: _curveKey, child: _curveCard(l)),
             const SizedBox(height: 14),
-            _coachCard(context, l),
+            if (report.topics.isNotEmpty) ...[
+              _topicsCard(l),
+              const SizedBox(height: 14),
+            ],
+            _personalityCard(l),
+            const SizedBox(height: 14),
+            KeyedSubtree(key: _readingKey, child: _deepReadingCard(l)),
+            const SizedBox(height: 14),
+            KeyedSubtree(
+                key: _diveKey,
+                child: DeepDiveSection(report: report, isSample: isSample)),
+            if (!isSample) ...[
+              const SizedBox(height: 14),
+              KeyedSubtree(key: _coachKey, child: _coachCard(context, l)),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

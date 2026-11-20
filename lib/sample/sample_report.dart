@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import '../models/deep_dive.dart';
 import '../models/metrics.dart';
 import '../models/report.dart';
 
@@ -80,6 +81,74 @@ RelationshipReport buildSampleReport({String lang = 'en'}) {
       Milestone('2026-07', t('msWarmest'), t('quoteWarmest')),
     ],
     advice: [t('advice1'), t('advice2'), t('advice3')],
+    // 示例把付费内容全部展示出来，用户才知道解锁能看到什么
+    deepDive: _sampleDive(lang, t),
+    deepDiveUnlocked: true,
+  );
+}
+
+/// 示例的专题分析。原话沿用虚构聊天的英文原文
+DeepDive _sampleDive(String lang, String Function(String) t) {
+  final c = _diveCopy[lang] ?? _diveCopy['en']!;
+  String d(String key) => c[key] ?? _diveCopy['en']![key]!;
+  return DeepDive(
+    conflictSummary: d('dvConflictSummary'),
+    conflicts: [
+      EvidenceItem(
+          date: '2026-04',
+          title: d('dvConflictTitle'),
+          detail: d('dvConflictDetail'),
+          quote: 'you said Friday was ours'),
+    ],
+    horsemen: [
+      HorsemanItem(
+          date: '2026-04',
+          title: d('dvCritTitle'),
+          detail: d('dvCritDetail'),
+          quote: 'you always cancel last minute',
+          kind: Horseman.criticism,
+          byYou: true),
+      HorsemanItem(
+          date: '2026-04',
+          title: d('dvStoneTitle'),
+          detail: d('dvStoneDetail'),
+          quote: 'can we not do this right now',
+          kind: Horseman.stonewalling,
+          byYou: false),
+    ],
+    greenFlags: [
+      EvidenceItem(
+          date: '2026-05',
+          title: d('dvGreenTitle'),
+          detail: d('dvGreenDetail'),
+          quote: 'I\'m sorry about Friday. can I make it up to you?'),
+    ],
+    attachmentYou: AttachmentRead(style: 'anxious', detail: d('dvAttachYou')),
+    attachmentPartner:
+        AttachmentRead(style: 'avoidant', detail: d('dvAttachPartner')),
+    attachmentLoop: d('dvLoop'),
+    loveYou: LoveLanguageRead(
+        primary: LoveLanguage.words,
+        detail: d('dvLoveYou'),
+        quote: t('quoteGoodnight')),
+    lovePartner: LoveLanguageRead(
+        primary: LoveLanguage.time,
+        detail: d('dvLovePartner'),
+        quote: 'let\'s just walk around all day, no plans'),
+    turningPoints: [
+      TurningPoint(
+          date: '2026-04',
+          title: t('msSilent'),
+          detail: d('dvTurnDown'),
+          quote: t('quoteSilent'),
+          rising: false),
+      TurningPoint(
+          date: '2026-07',
+          title: t('msWarmest'),
+          detail: d('dvTurnUp'),
+          quote: t('quoteWarmest'),
+          rising: true),
+    ],
   );
 }
 
@@ -447,5 +516,417 @@ const _copy = <String, Map<String, String>>{
     'advice1': 'Jaga waktu larut malam kalian — di situlah obrolan terbaik kalian terjadi.',
     'advice2': 'Kalau rencana berubah, kasih tahu Mia dulu sebelum grup chat tahu.',
     'advice3': 'Sesekali biarkan Mia yang mulai duluan: coba skip satu chat pagi, lalu lihat apa yang terjadi.',
+  },
+};
+
+/// 示例专题分析的文案，语言键与 [_copy] 相同
+const _diveCopy = <String, Map<String, String>>{
+  'en': {
+    'dvConflictSummary':
+        'You two tend to argue about plans that change at the last minute. You usually push to talk it through right away, Mia tends to step back first, and things settle once one of you makes a concrete plan.',
+    'dvConflictTitle':
+        'The cancelled Friday',
+    'dvConflictDetail':
+        'A plan fell through and the talk turned sharp within minutes.',
+    'dvStoneTitle':
+        'Stepping out of the talk',
+    'dvStoneDetail':
+        'Mia tends to pause the conversation when it gets heated.',
+    'dvCritTitle':
+        '"Always" language',
+    'dvCritDetail':
+        'You turned one cancelled plan into a statement about who Mia is.',
+    'dvGreenTitle':
+        'A real repair attempt',
+    'dvGreenDetail':
+        'Mia came back with an apology and an offer, not just "sorry".',
+    'dvAttachYou':
+        'You tend to check in and seek reassurance when replies slow down.',
+    'dvAttachPartner':
+        'Mia shows signs of needing space before she can talk things through.',
+    'dvLoop':
+        'The more you reach for an answer, the more Mia steps back, and the silence makes you reach harder.',
+    'dvLoveYou':
+        'You show love in words: daily goodnights and quick check-ins.',
+    'dvLovePartner':
+        'Mia seems to feel closest through unhurried time together.',
+    'dvTurnDown':
+        'Reply times tripled and the late-night messages stopped for twelve days.',
+    'dvTurnUp':
+        'After the trip, messages got longer and warmer on both sides.',
+  },
+  'zh': {
+    'dvConflictSummary':
+        '你们的争执多半因为临时变卦的计划。你倾向于马上说清楚，Mia 倾向于先退开，等其中一人提出具体安排后才缓和下来。',
+    'dvConflictTitle':
+        '被取消的周五',
+    'dvConflictDetail':
+        '计划落空后，几分钟内对话就变得尖锐。',
+    'dvStoneTitle':
+        '从对话里退出',
+    'dvStoneDetail':
+        '谈话升温时，Mia 倾向于按下暂停。',
+    'dvCritTitle':
+        '用了「总是」',
+    'dvCritDetail':
+        '你把一次取消的计划，说成了 Mia 这个人的问题。',
+    'dvGreenTitle':
+        '真诚的修复',
+    'dvGreenDetail':
+        'Mia 回来时不只说了对不起，还提出了补偿。',
+    'dvAttachYou':
+        '回复变慢时，你倾向于主动确认、寻求安心。',
+    'dvAttachPartner':
+        'Mia 似乎需要先有空间，才能把事情谈开。',
+    'dvLoop':
+        '你越想要一个答复，Mia 越往后退，而沉默又让你追得更紧。',
+    'dvLoveYou':
+        '你用言语表达爱：每天的晚安和随时的问候。',
+    'dvLovePartner':
+        'Mia 似乎在不赶时间的相处里最感到亲近。',
+    'dvTurnDown':
+        '回复时间变成原来的三倍，深夜消息停了十二天。',
+    'dvTurnUp':
+        '旅行之后，双方的消息都变得更长、更暖。',
+  },
+  'zh-Hant': {
+    'dvConflictSummary':
+        '你們的爭執多半因為臨時變卦的計畫。你傾向於馬上說清楚，Mia 傾向於先退開，等其中一人提出具體安排後才緩和下來。',
+    'dvConflictTitle':
+        '被取消的週五',
+    'dvConflictDetail':
+        '計畫落空後，幾分鐘內對話就變得尖銳。',
+    'dvStoneTitle':
+        '從對話裡退出',
+    'dvStoneDetail':
+        '談話升溫時，Mia 傾向於按下暫停。',
+    'dvCritTitle':
+        '用了「總是」',
+    'dvCritDetail':
+        '你把一次取消的計畫，說成了 Mia 這個人的問題。',
+    'dvGreenTitle':
+        '真誠的修復',
+    'dvGreenDetail':
+        'Mia 回來時不只說了對不起，還提出了補償。',
+    'dvAttachYou':
+        '回覆變慢時，你傾向於主動確認、尋求安心。',
+    'dvAttachPartner':
+        'Mia 似乎需要先有空間，才能把事情談開。',
+    'dvLoop':
+        '你越想要一個答覆，Mia 越往後退，而沉默又讓你追得更緊。',
+    'dvLoveYou':
+        '你用言語表達愛：每天的晚安和隨時的問候。',
+    'dvLovePartner':
+        'Mia 似乎在不趕時間的相處裡最感到親近。',
+    'dvTurnDown':
+        '回覆時間變成原來的三倍，深夜訊息停了十二天。',
+    'dvTurnUp':
+        '旅行之後，雙方的訊息都變得更長、更暖。',
+  },
+  'es': {
+    'dvConflictSummary':
+        'Suelen discutir por planes que cambian a último momento. Tú tiendes a querer hablarlo enseguida, Mia tiende a tomar distancia primero, y todo se calma cuando alguno propone un plan concreto.',
+    'dvConflictTitle':
+        'El viernes cancelado',
+    'dvConflictDetail':
+        'Un plan se cayó y la conversación se volvió tensa en minutos.',
+    'dvStoneTitle':
+        'Salirse de la conversación',
+    'dvStoneDetail':
+        'Mia tiende a pausar la charla cuando sube de tono.',
+    'dvCritTitle':
+        'El "siempre"',
+    'dvCritDetail':
+        'Convertiste un plan cancelado en una afirmación sobre cómo es Mia.',
+    'dvGreenTitle':
+        'Un intento real de reparar',
+    'dvGreenDetail':
+        'Mia volvió con una disculpa y una propuesta, no solo con un "perdón".',
+    'dvAttachYou':
+        'Tiendes a buscar confirmación cuando las respuestas se demoran.',
+    'dvAttachPartner':
+        'Mia muestra señales de necesitar espacio antes de poder hablar las cosas.',
+    'dvLoop':
+        'Cuanto más buscas una respuesta, más se aleja Mia, y el silencio te hace insistir más.',
+    'dvLoveYou':
+        'Demuestras amor con palabras: buenas noches diarias y mensajes para saber cómo está.',
+    'dvLovePartner':
+        'Mia parece sentirse más cerca con tiempo compartido sin prisa.',
+    'dvTurnDown':
+        'Los tiempos de respuesta se triplicaron y los mensajes nocturnos pararon doce días.',
+    'dvTurnUp':
+        'Después del viaje, los mensajes se volvieron más largos y cálidos de ambos lados.',
+  },
+  'pt': {
+    'dvConflictSummary':
+        'Vocês costumam discutir por planos que mudam em cima da hora. Você tende a querer resolver na hora, a Mia tende a se afastar primeiro, e tudo se acalma quando alguém propõe um plano concreto.',
+    'dvConflictTitle':
+        'A sexta cancelada',
+    'dvConflictDetail':
+        'Um plano caiu e a conversa ficou tensa em minutos.',
+    'dvStoneTitle':
+        'Saindo da conversa',
+    'dvStoneDetail':
+        'A Mia tende a pausar a conversa quando ela esquenta.',
+    'dvCritTitle':
+        'O "sempre"',
+    'dvCritDetail':
+        'Você transformou um plano cancelado em uma afirmação sobre quem a Mia é.',
+    'dvGreenTitle':
+        'Uma tentativa real de reparo',
+    'dvGreenDetail':
+        'A Mia voltou com um pedido de desculpas e uma proposta, não só um "desculpa".',
+    'dvAttachYou':
+        'Você tende a buscar confirmação quando as respostas demoram.',
+    'dvAttachPartner':
+        'A Mia mostra sinais de precisar de espaço antes de conseguir conversar.',
+    'dvLoop':
+        'Quanto mais você busca uma resposta, mais a Mia recua, e o silêncio faz você insistir mais.',
+    'dvLoveYou':
+        'Você demonstra amor com palavras: boa-noite todo dia e mensagens para saber como ela está.',
+    'dvLovePartner':
+        'A Mia parece se sentir mais próxima com tempo junto, sem pressa.',
+    'dvTurnDown':
+        'O tempo de resposta triplicou e as mensagens da madrugada pararam por doze dias.',
+    'dvTurnUp':
+        'Depois da viagem, as mensagens ficaram mais longas e calorosas dos dois lados.',
+  },
+  'fr': {
+    'dvConflictSummary':
+        'Vos disputes portent souvent sur des plans qui changent au dernier moment. Tu as tendance à vouloir en parler tout de suite, Mia à prendre du recul d\'abord, et tout s\'apaise quand l\'un de vous propose un plan concret.',
+    'dvConflictTitle':
+        'Le vendredi annulé',
+    'dvConflictDetail':
+        'Un plan est tombé à l\'eau et le ton est monté en quelques minutes.',
+    'dvStoneTitle':
+        'Sortir de la discussion',
+    'dvStoneDetail':
+        'Mia a tendance à mettre la conversation en pause quand elle s\'échauffe.',
+    'dvCritTitle':
+        'Le « toujours »',
+    'dvCritDetail':
+        'Tu as fait d\'un plan annulé une affirmation sur qui est Mia.',
+    'dvGreenTitle':
+        'Une vraie tentative de réparation',
+    'dvGreenDetail':
+        'Mia est revenue avec des excuses et une proposition, pas juste un « désolée ».',
+    'dvAttachYou':
+        'Tu as tendance à chercher à être rassuré quand les réponses tardent.',
+    'dvAttachPartner':
+        'Mia semble avoir besoin d\'espace avant de pouvoir parler des choses.',
+    'dvLoop':
+        'Plus tu cherches une réponse, plus Mia recule, et le silence te pousse à insister.',
+    'dvLoveYou':
+        'Tu montres ton amour par les mots : des bonne nuit quotidiens et des petits messages pour prendre des nouvelles.',
+    'dvLovePartner':
+        'Mia semble se sentir la plus proche dans les moments partagés sans se presser.',
+    'dvTurnDown':
+        'Les temps de réponse ont triplé et les messages nocturnes se sont arrêtés pendant douze jours.',
+    'dvTurnUp':
+        'Après le voyage, les messages sont devenus plus longs et plus chaleureux des deux côtés.',
+  },
+  'de': {
+    'dvConflictSummary':
+        'Ihr streitet meist über Pläne, die sich kurzfristig ändern. Du willst es eher sofort klären, Mia zieht sich eher erst zurück, und es beruhigt sich, sobald einer von euch einen konkreten Plan macht.',
+    'dvConflictTitle':
+        'Der abgesagte Freitag',
+    'dvConflictDetail':
+        'Ein Plan platzte, und das Gespräch wurde binnen Minuten scharf.',
+    'dvStoneTitle':
+        'Raus aus dem Gespräch',
+    'dvStoneDetail':
+        'Mia neigt dazu, das Gespräch zu pausieren, wenn es hitzig wird.',
+    'dvCritTitle':
+        'Das Wort „immer“',
+    'dvCritDetail':
+        'Du hast aus einem abgesagten Plan eine Aussage über Mia als Person gemacht.',
+    'dvGreenTitle':
+        'Ein echter Versöhnungsversuch',
+    'dvGreenDetail':
+        'Mia kam mit einer Entschuldigung und einem Angebot zurück, nicht nur mit „sorry“.',
+    'dvAttachYou':
+        'Du neigst dazu, nachzufragen und Bestätigung zu suchen, wenn Antworten länger dauern.',
+    'dvAttachPartner':
+        'Mia zeigt Anzeichen, erst Abstand zu brauchen, bevor sie Dinge besprechen kann.',
+    'dvLoop':
+        'Je mehr du auf eine Antwort drängst, desto mehr zieht sich Mia zurück, und die Stille lässt dich stärker drängen.',
+    'dvLoveYou':
+        'Du zeigst Liebe mit Worten: tägliche Gute-Nacht-Nachrichten und kurze Nachfragen.',
+    'dvLovePartner':
+        'Mia scheint sich bei gemeinsamer Zeit ohne Eile am nächsten zu fühlen.',
+    'dvTurnDown':
+        'Die Antwortzeiten verdreifachten sich, und die Nachrichten spät in der Nacht blieben zwölf Tage aus.',
+    'dvTurnUp':
+        'Nach der Reise wurden die Nachrichten auf beiden Seiten länger und wärmer.',
+  },
+  'it': {
+    'dvConflictSummary':
+        'Di solito litigate per piani che cambiano all\'ultimo momento. Tu tendi a voler chiarire subito, Mia tende prima a prendere le distanze, e tutto si calma quando uno dei due propone un piano concreto.',
+    'dvConflictTitle':
+        'Il venerdì annullato',
+    'dvConflictDetail':
+        'Un piano è saltato e in pochi minuti il tono si è fatto teso.',
+    'dvStoneTitle':
+        'Uscire dalla conversazione',
+    'dvStoneDetail':
+        'Mia tende a mettere in pausa il discorso quando si scalda.',
+    'dvCritTitle':
+        'Il "sempre"',
+    'dvCritDetail':
+        'Hai trasformato un piano annullato in un\'affermazione su com\'è Mia.',
+    'dvGreenTitle':
+        'Un vero tentativo di riparare',
+    'dvGreenDetail':
+        'Mia è tornata con delle scuse e una proposta, non solo con uno "scusa".',
+    'dvAttachYou':
+        'Tendi a cercare conferme quando le risposte rallentano.',
+    'dvAttachPartner':
+        'Mia mostra segnali di aver bisogno di spazio prima di riuscire a parlarne.',
+    'dvLoop':
+        'Più cerchi una risposta, più Mia si allontana, e il silenzio ti spinge a insistere.',
+    'dvLoveYou':
+        'Mostri amore con le parole: la buonanotte ogni giorno e messaggi per sapere come sta.',
+    'dvLovePartner':
+        'Mia sembra sentirsi più vicina nel tempo passato insieme senza fretta.',
+    'dvTurnDown':
+        'I tempi di risposta sono triplicati e i messaggi notturni si sono fermati per dodici giorni.',
+    'dvTurnUp':
+        'Dopo il viaggio, i messaggi sono diventati più lunghi e affettuosi da entrambe le parti.',
+  },
+  'tr': {
+    'dvConflictSummary':
+        'Genellikle son anda değişen planlar yüzünden tartışıyorsunuz. Sen hemen konuşup çözmek istiyorsun, Mia önce geri çekilme eğiliminde; biriniz somut bir plan yapınca ortam yatışıyor.',
+    'dvConflictTitle':
+        'İptal edilen cuma',
+    'dvConflictDetail':
+        'Bir plan bozuldu ve konuşma dakikalar içinde sertleşti.',
+    'dvStoneTitle':
+        'Konuşmadan çekilmek',
+    'dvStoneDetail':
+        'Mia, konuşma gerginleşince ara verme eğiliminde.',
+    'dvCritTitle':
+        '"Hep" kelimesi',
+    'dvCritDetail':
+        'İptal edilen tek bir planı Mia\'nın nasıl biri olduğuna dair bir yargıya çevirdin.',
+    'dvGreenTitle':
+        'Gerçek bir onarım çabası',
+    'dvGreenDetail':
+        'Mia sadece "özür dilerim" demedi, bir teklifle geri döndü.',
+    'dvAttachYou':
+        'Yanıtlar gecikince yoklama ve güvence arama eğilimindesin.',
+    'dvAttachPartner':
+        'Mia, konuları konuşabilmek için önce alana ihtiyaç duyduğuna dair işaretler gösteriyor.',
+    'dvLoop':
+        'Sen yanıt aradıkça Mia geri çekiliyor, sessizlik de seni daha çok üstelemeye itiyor.',
+    'dvLoveYou':
+        'Sevgini sözlerle gösteriyorsun: her gece iyi geceler mesajları ve kısa hal hatır sormalar.',
+    'dvLovePartner':
+        'Mia kendini en çok acele etmeden birlikte geçirilen zamanda yakın hissediyor gibi.',
+    'dvTurnDown':
+        'Yanıt süreleri üç katına çıktı ve gece mesajları on iki gün kesildi.',
+    'dvTurnUp':
+        'Geziden sonra iki tarafın da mesajları uzadı ve sıcaklaştı.',
+  },
+  'ar': {
+    'dvConflictSummary':
+        'تتشاجران غالبًا بسبب خطط تتغير في اللحظة الأخيرة. تميل أنت إلى الحديث عن الأمر فورًا، وتميل Mia إلى الابتعاد أولًا، ثم تهدأ الأمور عندما يقترح أحدكما خطة محددة.',
+    'dvConflictTitle':
+        'الجمعة الملغاة',
+    'dvConflictDetail':
+        'أُلغيت خطة فاحتدّ الحديث خلال دقائق.',
+    'dvStoneTitle':
+        'الانسحاب من الحديث',
+    'dvStoneDetail':
+        'تميل Mia إلى إيقاف الحديث مؤقتًا عندما يحتدّ.',
+    'dvCritTitle':
+        'كلمة «دائمًا»',
+    'dvCritDetail':
+        'حوّلتَ خطة ملغاة واحدة إلى حكم على شخصية Mia.',
+    'dvGreenTitle':
+        'محاولة إصلاح حقيقية',
+    'dvGreenDetail':
+        'عادت Mia باعتذار وعرض للتعويض، لا بكلمة «آسفة» فقط.',
+    'dvAttachYou':
+        'تميل إلى الاطمئنان وطلب التأكيد عندما تتأخر الردود.',
+    'dvAttachPartner':
+        'تُظهر Mia علامات على حاجتها إلى مساحة قبل أن تتمكن من مناقشة الأمور.',
+    'dvLoop':
+        'كلما سعيتَ إلى جواب ابتعدت Mia أكثر، والصمت يدفعك إلى الإلحاح أكثر.',
+    'dvLoveYou':
+        'تعبّر عن حبك بالكلمات: تحية مساء يومية ورسائل قصيرة للاطمئنان.',
+    'dvLovePartner':
+        'يبدو أن Mia تشعر بأكبر قرب في الوقت المشترك غير المستعجل.',
+    'dvTurnDown':
+        'تضاعفت أوقات الرد ثلاث مرات وتوقفت رسائل آخر الليل اثني عشر يومًا.',
+    'dvTurnUp':
+        'بعد الرحلة، أصبحت الرسائل أطول وأدفأ من الطرفين.',
+  },
+  'hi': {
+    'dvConflictSummary':
+        'आप दोनों की बहस अक्सर आख़िरी समय पर बदलने वाली योजनाओं को लेकर होती है। आप तुरंत बात करके सुलझाना चाहते हैं, Mia पहले पीछे हटती हैं, और जब कोई एक ठोस योजना बनाता है तब बात संभलती है।',
+    'dvConflictTitle':
+        'रद्द हुआ शुक्रवार',
+    'dvConflictDetail':
+        'एक योजना टूट गई और कुछ ही मिनटों में बातचीत तीखी हो गई।',
+    'dvStoneTitle':
+        'बातचीत से हट जाना',
+    'dvStoneDetail':
+        'बात गरम होने पर Mia बातचीत रोक देने की ओर झुकती हैं।',
+    'dvCritTitle':
+        '"हमेशा" वाली भाषा',
+    'dvCritDetail':
+        'आपने एक रद्द हुई योजना को Mia के स्वभाव पर टिप्पणी बना दिया।',
+    'dvGreenTitle':
+        'सुधार की सच्ची कोशिश',
+    'dvGreenDetail':
+        'Mia सिर्फ़ "सॉरी" नहीं, माफ़ी के साथ एक प्रस्ताव लेकर लौटीं।',
+    'dvAttachYou':
+        'जवाब धीमे पड़ने पर आप हाल-चाल पूछने और भरोसा पाने की ओर झुकते हैं।',
+    'dvAttachPartner':
+        'Mia में ऐसे संकेत दिखते हैं कि बात करने से पहले उन्हें थोड़ी दूरी चाहिए।',
+    'dvLoop':
+        'आप जितना जवाब चाहते हैं, Mia उतना पीछे हटती हैं, और चुप्पी आपको और ज़ोर लगाने पर मजबूर करती है।',
+    'dvLoveYou':
+        'आप शब्दों से प्यार जताते हैं: रोज़ की गुडनाइट और छोटे-छोटे हाल-चाल।',
+    'dvLovePartner':
+        'लगता है Mia बिना जल्दबाज़ी के साथ बिताए समय में सबसे क़रीब महसूस करती हैं।',
+    'dvTurnDown':
+        'जवाब आने का समय तीन गुना हो गया और देर रात के संदेश बारह दिन बंद रहे।',
+    'dvTurnUp':
+        'यात्रा के बाद दोनों तरफ़ के संदेश लंबे और ज़्यादा गर्मजोशी भरे हो गए।',
+  },
+  'id': {
+    'dvConflictSummary':
+        'Kalian cenderung bertengkar soal rencana yang berubah mendadak. Kamu cenderung ingin langsung membahasnya, Mia cenderung menjauh dulu, dan suasana mereda begitu salah satu membuat rencana yang jelas.',
+    'dvConflictTitle':
+        'Jumat yang batal',
+    'dvConflictDetail':
+        'Sebuah rencana batal dan obrolan berubah tajam dalam hitungan menit.',
+    'dvStoneTitle':
+        'Keluar dari obrolan',
+    'dvStoneDetail':
+        'Mia cenderung menjeda percakapan saat mulai memanas.',
+    'dvCritTitle':
+        'Kata "selalu"',
+    'dvCritDetail':
+        'Kamu mengubah satu rencana yang batal menjadi penilaian tentang diri Mia.',
+    'dvGreenTitle':
+        'Upaya memperbaiki yang tulus',
+    'dvGreenDetail':
+        'Mia kembali dengan permintaan maaf dan tawaran, bukan sekadar "maaf".',
+    'dvAttachYou':
+        'Kamu cenderung mengecek dan mencari kepastian saat balasan melambat.',
+    'dvAttachPartner':
+        'Mia menunjukkan tanda-tanda butuh ruang sebelum bisa membicarakan masalah.',
+    'dvLoop':
+        'Makin kamu mengejar jawaban, makin Mia menjauh, dan diamnya membuatmu makin mengejar.',
+    'dvLoveYou':
+        'Kamu menunjukkan cinta lewat kata-kata: ucapan selamat malam tiap hari dan sapaan singkat.',
+    'dvLovePartner':
+        'Mia tampaknya merasa paling dekat lewat waktu bersama yang tidak terburu-buru.',
+    'dvTurnDown':
+        'Waktu balas jadi tiga kali lebih lama dan pesan larut malam berhenti selama dua belas hari.',
+    'dvTurnUp':
+        'Setelah perjalanan itu, pesan dari kedua pihak jadi lebih panjang dan hangat.',
   },
 };

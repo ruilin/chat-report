@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
+import '../l10n/locale_utils.dart';
 import '../models/deep_dive.dart';
+import '../models/metrics.dart';
 import '../models/report.dart';
 import '../services/analytics.dart';
+import '../services/deep_dive_jobs.dart';
 import '../services/purchases.dart';
 import '../theme.dart';
 
@@ -27,14 +30,19 @@ class _DeepDiveSectionState extends State<DeepDiveSection> {
   final _purchases = Purchases.instance;
   bool _productLoaded = false;
 
+  /// 专题分析还在写
+  bool _generating = false;
+
   RelationshipReport get _report => widget.report;
   bool get _locked => !Purchases.isUnlocked(_report);
 
   @override
   void initState() {
     super.initState();
+    if (widget.isSample) return;
+    _watch(DeepDiveJobs.running(_report.id));
     final dive = _report.deepDive;
-    if (widget.isSample || !_locked) return;
+    if (!_locked) return;
     _purchases.addListener(_onPurchaseChange);
     _purchases.loadProduct().whenComplete(() {
       if (mounted) setState(() => _productLoaded = true);
@@ -43,6 +51,7 @@ class _DeepDiveSectionState extends State<DeepDiveSection> {
         itemCount: dive == null
             ? 0
             : dive.conflicts.length +
+                dive.horsemen.length +
                 dive.redFlags.length +
                 dive.greenFlags.length +
                 dive.turningPoints.length);
@@ -51,6 +60,20 @@ class _DeepDiveSectionState extends State<DeepDiveSection> {
   void _onPurchaseChange() {
     if (mounted) setState(() {});
   }
+
+  /// 等后台的专题分析写完，写完就地刷新
+  void _watch(Future<DeepDive?>? job) {
+    if (job == null) return;
+    _generating = true;
+    job.then((dive) {
+      // 从「我的报告」打开的是另一个对象，这里也要补上
+      if (dive != null) _report.deepDive = dive;
+    }).whenComplete(() {
+      if (mounted) setState(() => _generating = false);
+    });
+  }
+
+  void _retry() => setState(() => _watch(DeepDiveJobs.retry(_report)));
 
   @override
   void dispose() {
@@ -62,6 +85,21 @@ class _DeepDiveSectionState extends State<DeepDiveSection> {
   Widget build(BuildContext context) {
     final l = L.of(context);
     final adviceCount = _report.advice.length;
+    // 示例报告是虚构数据，付费内容全部展示，让用户知道花钱能看到什么
+    if (widget.isSample && _report.deepDive != null) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+              Purchases.paywallEnabled
+                  ? l.samplePaidHint
+                  : l.sampleDeepDiveHint,
+              style: const TextStyle(fontSize: 12, color: UColors.muted)),
+          const SizedBox(height: 10),
+          _Unlocked(report: _report, dive: _report.deepDive!, l: l),
+        ],
+      );
+    }
     if (widget.isSample) {
       return _Paywall(
           l: l,
@@ -70,10 +108,27 @@ class _DeepDiveSectionState extends State<DeepDiveSection> {
           footer: _sampleFooter(l));
     }
     final dive = _report.deepDive;
-    // 没生成出来要说清楚，否则用户不知道少了内容。聊天原文不留，只能重新分析
+    if (dive == null && _generating) return _Generating(l: l);
+    // 没生成出来要说清楚，否则用户不知道少了内容。
+    // 这次打开期间还能重试；聊天原文不留，App 重启后只能重新分析
     final missing = dive == null
-        ? Text(l.deepDiveMissing,
-            style: const TextStyle(fontSize: 12, color: UColors.muted))
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(l.deepDiveMissing,
+                  style: const TextStyle(fontSize: 12, color: UColors.muted)),
+              if (DeepDiveJobs.canRetry(_report.id))
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: UColors.rose,
+                    padding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  onPressed: _retry,
+                  child: Text(l.errorRetry),
+                ),
+            ],
+          )
         : null;
     if (_locked) {
       // 专题分析没生成时，付费仍然能解锁教练和建议，但不能再列专题分析
@@ -81,6 +136,7 @@ class _DeepDiveSectionState extends State<DeepDiveSection> {
           l: l,
           dive: dive,
           showDive: dive != null,
+          preview: dive == null ? null : _preview(l, dive),
           adviceCount: adviceCount,
           footer: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -92,6 +148,28 @@ class _DeepDiveSectionState extends State<DeepDiveSection> {
     }
     if (dive == null) return missing!;
     return _Unlocked(report: _report, dive: dive, l: l);
+  }
+
+  /// 没解锁时免费露出一条真实发现，让用户付费前先看到内容质量
+  Widget? _preview(L l, DeepDive dive) {
+    final m = _report.metrics;
+    if (dive.horsemen.firstOrNull case final h?) {
+      return _Preview(
+          l: l,
+          section: '${l.sectionFourHorsemen} · ${_horsemanName(l, h.kind)}',
+          child: _Evidence(h,
+              leading: UAvatar(h.byYou ? m.you : m.partner,
+                  isYou: h.byYou, size: 18)));
+    }
+    final candidates = <(String, EvidenceItem)>[
+      for (final e in dive.redFlags.take(1)) (l.sectionRedFlags, e),
+      for (final e in dive.greenFlags.take(1)) (l.sectionGreenFlags, e),
+      for (final e in dive.conflicts.take(1)) (l.sectionConflict, e),
+      for (final e in dive.turningPoints.take(1)) (l.sectionTurningPoints, e),
+    ];
+    if (candidates.isEmpty) return null;
+    final (section, item) = candidates.first;
+    return _Preview(l: l, section: section, child: _Evidence(item));
   }
 
   Widget _sampleFooter(L l) => Text(l.sampleDeepDiveHint,
@@ -166,6 +244,7 @@ class _Paywall extends StatelessWidget {
   final L l;
   final DeepDive? dive;
   final bool showDive;
+  final Widget? preview;
   final int adviceCount;
   final Widget footer;
 
@@ -173,6 +252,7 @@ class _Paywall extends StatelessWidget {
       {required this.l,
       this.dive,
       required this.showDive,
+      this.preview,
       required this.adviceCount,
       required this.footer});
 
@@ -216,11 +296,14 @@ class _Paywall extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 13, height: 1.5, color: UColors.ink2)),
           const SizedBox(height: 10),
+          ?preview,
           if (showDive) ...[
             row(l.sectionConflict, dive?.conflicts.length),
+            row(l.sectionFourHorsemen, dive?.horsemen.length),
             row(l.sectionRedFlags, dive?.redFlags.length),
             row(l.sectionGreenFlags, dive?.greenFlags.length),
             row(l.sectionAttachment, null),
+            row(l.sectionLoveLanguages, null),
             row(l.sectionTurningPoints, dive?.turningPoints.length),
           ],
           if (paywall) ...[
@@ -234,6 +317,90 @@ class _Paywall extends StatelessWidget {
     );
   }
 }
+
+/// 免费报告已经能看，专题分析还在后台写
+class _Generating extends StatelessWidget {
+  final L l;
+
+  const _Generating({required this.l});
+
+  @override
+  Widget build(BuildContext context) {
+    return UCard(
+      color: const Color(0xFFFFFBF2),
+      borderColor: const Color(0xFFEAD9B8),
+      child: Row(
+        children: [
+          const SizedBox(
+            width: 18,
+            height: 18,
+            child:
+                CircularProgressIndicator(strokeWidth: 2, color: UColors.gold),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(l.deepDiveTitle,
+                    style: const TextStyle(
+                        fontSize: 13.5, fontWeight: FontWeight.w700)),
+                const SizedBox(height: 2),
+                Text(l.deepDiveGenerating,
+                    style:
+                        const TextStyle(fontSize: 12, color: UColors.ink2)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// 付费墙里免费露出的一条发现
+class _Preview extends StatelessWidget {
+  final L l;
+  final String section;
+  final Widget child;
+
+  const _Preview({required this.l, required this.section, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 6),
+      padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: const Color(0xFFEAD9B8)),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l.previewLabel,
+              style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: UColors.gold)),
+          const SizedBox(height: 2),
+          Text(section,
+              style: const TextStyle(fontSize: 11.5, color: UColors.muted)),
+          const SizedBox(height: 8),
+          child,
+        ],
+      ),
+    );
+  }
+}
+
+String _horsemanName(L l, Horseman h) => switch (h) {
+      Horseman.criticism => l.horsemanCriticism,
+      Horseman.contempt => l.horsemanContempt,
+      Horseman.defensiveness => l.horsemanDefensiveness,
+      Horseman.stonewalling => l.horsemanStonewalling,
+    };
 
 class _Unlocked extends StatelessWidget {
   final RelationshipReport report;
@@ -257,6 +424,7 @@ class _Unlocked extends StatelessWidget {
             ),
           for (final e in dive.conflicts) _Evidence(e),
         ]),
+      _horsemenCard(m),
       _card(l.sectionRedFlags, [
         if (dive.redFlags.isEmpty) _none(l.deepDiveNoRedFlags),
         for (final e in dive.redFlags)
@@ -282,6 +450,13 @@ class _Unlocked extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 12.5, height: 1.6, color: UColors.ink2)),
           ],
+        ]),
+      if (dive.loveYou != null || dive.lovePartner != null)
+        _card(l.sectionLoveLanguages, [
+          if (dive.loveYou case final v?) _love(m.you, true, v),
+          if (dive.lovePartner case final v?) _love(m.partner, false, v),
+          Text(l.loveLanguagesNote,
+              style: const TextStyle(fontSize: 11, color: UColors.muted)),
         ]),
       if (dive.turningPoints.isNotEmpty)
         _card(l.sectionTurningPoints, [
@@ -315,6 +490,78 @@ class _Unlocked extends StatelessWidget {
           ],
         ),
       );
+
+  /// 按四种类型分组，每组后面给出戈特曼建议的替代做法
+  Widget _horsemenCard(ChatMetrics m) {
+    String antidote(Horseman h) => switch (h) {
+          Horseman.criticism => l.antidoteCriticism,
+          Horseman.contempt => l.antidoteContempt,
+          Horseman.defensiveness => l.antidoteDefensiveness,
+          Horseman.stonewalling => l.antidoteStonewalling,
+        };
+    return _card(l.sectionFourHorsemen, [
+      Padding(
+        padding: const EdgeInsets.only(bottom: 12),
+        child: Text(l.fourHorsemenIntro,
+            style: const TextStyle(
+                fontSize: 12.5, height: 1.6, color: UColors.ink2)),
+      ),
+      if (dive.horsemen.isEmpty) _none(l.fourHorsemenNone),
+      for (final kind in Horseman.values)
+        if (dive.horsemen.where((h) => h.kind == kind).toList()
+            case final found when found.isNotEmpty) ...[
+          Text(_horsemanName(l, kind),
+              style: const TextStyle(
+                  fontSize: 13.5, fontWeight: FontWeight.w700, color: _red)),
+          const SizedBox(height: 6),
+          for (final h in found)
+            _Evidence(h,
+                leading: UAvatar(h.byYou ? m.you : m.partner,
+                    isYou: h.byYou, size: 18)),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 14),
+            child: Text(antidote(kind),
+                style: const TextStyle(
+                    fontSize: 12, height: 1.5, color: _green)),
+          ),
+        ],
+    ]);
+  }
+
+  Widget _love(String name, bool isYou, LoveLanguageRead v) {
+    final label = loveLanguageLabel(l, v.primary);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          UAvatar(name, isYou: isYou, size: 26),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label,
+                    style: const TextStyle(
+                        fontSize: 13, fontWeight: FontWeight.w700)),
+                if (v.detail.isNotEmpty)
+                  Text(v.detail,
+                      style: const TextStyle(
+                          fontSize: 12.5, height: 1.6, color: UColors.ink2)),
+                if (v.quote.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 3),
+                    child: Text('“${v.quote}”',
+                        style: UType.serifItalic
+                            .copyWith(fontSize: 12.5, color: UColors.ink2)),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   /// 模型只给固定的英文值，由 App 按界面语言显示。其他写法（如旧报告）原样显示
   String _attachmentLabel(String style) =>
@@ -359,7 +606,10 @@ class _Evidence extends StatelessWidget {
   final IconData? icon;
   final Color? iconColor;
 
-  const _Evidence(this.item, {this.icon, this.iconColor});
+  /// 代替图标放在标题前，比如说这句话的人的头像
+  final Widget? leading;
+
+  const _Evidence(this.item, {this.icon, this.iconColor, this.leading});
 
   @override
   Widget build(BuildContext context) {
@@ -371,7 +621,10 @@ class _Evidence extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (icon != null) ...[
+              if (leading != null) ...[
+                leading!,
+                const SizedBox(width: 6),
+              ] else if (icon != null) ...[
                 Padding(
                   padding: const EdgeInsets.only(top: 2),
                   child: Icon(icon, size: 15, color: iconColor),

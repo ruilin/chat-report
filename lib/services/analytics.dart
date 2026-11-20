@@ -164,6 +164,8 @@ class Analytics {
   static void shareSheetOpen() => _log('share_sheet_open');
 
   /// [status]: success / dismissed / unavailable / error
-  static void shareResult(String status) =>
-      _log('share_result', {'status': status});
+  static void shareResult(String status,
+          {String card = 'warmth', bool tall = false}) =>
+      _log('share_result',
+          {'status': status, 'card': card, 'tall': tall ? 1 : 0});
 }

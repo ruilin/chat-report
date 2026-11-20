@@ -23,16 +23,43 @@ void main() {
     await tester.pumpAndSettle();
 
     // 滚到底，最后一张卡片的下沿必须在导航栏之上
-    final list = find.descendant(
-        of: find.byType(ListView), matching: find.byType(Scrollable));
-    final position = tester.state<ScrollableState>(list.first).position;
-    // ListView 懒布局，maxScrollExtent 会随后续子项布局而变大，跳到不再变为止
-    do {
-      position.jumpTo(position.maxScrollExtent);
-      await tester.pumpAndSettle();
-    } while (position.pixels < position.maxScrollExtent);
+    // 第一个 Scrollable 是整页的纵向滚动，顶部的快速跳转条排在它后面
+    final position =
+        tester.state<ScrollableState>(find.byType(Scrollable).first).position;
+    position.jumpTo(position.maxScrollExtent);
+    await tester.pumpAndSettle();
     final lastCard = tester.getRect(find.byType(UCard).last);
     expect(lastCard.bottom, lessThanOrEqualTo(800 - navBar));
+  });
+
+  testWidgets('quick jump chips scroll down to the deep dive',
+      (tester) async {
+    tester.view.physicalSize = const Size(390, 800);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final l = await L.delegate.load(const Locale('en'));
+    await tester.pumpWidget(MaterialApp(
+      localizationsDelegates: L.localizationsDelegates,
+      supportedLocales: L.supportedLocales,
+      home: ReportScreen(report: buildSampleReport()),
+    ));
+    await tester.pumpAndSettle();
+    final position =
+        tester.state<ScrollableState>(find.byType(Scrollable).first).position;
+    expect(position.pixels, 0);
+    // 专题分析一开始在屏幕外
+    expect(tester.getTopLeft(find.text(l.horsemanCriticism)).dy,
+        greaterThan(800));
+
+    // 测试字体更宽，按钮可能排到屏幕右侧之外，先横向滚出来
+    final chip = find.widgetWithText(ActionChip, l.deepDiveTitle);
+    await tester.ensureVisible(chip);
+    await tester.pumpAndSettle();
+    await tester.tap(chip);
+    await tester.pumpAndSettle();
+    expect(position.pixels, greaterThan(800));
+    expect(tester.getTopLeft(find.text(l.horsemanCriticism)).dy,
+        lessThan(800));
   });
 
   testWidgets('home entry cards shrink while pressed and spring back',

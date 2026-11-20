@@ -279,6 +279,12 @@ class LAr extends L {
   String get shareCardWatermark => 'صُنع بواسطة CHAT REPORT';
 
   @override
+  String get shareCardScan => 'امسح الرمز لتحليل محادثتك';
+
+  @override
+  String get shareFormatTall => 'تنسيق طولي للحالات والقصص';
+
+  @override
   String shareCardYears(int count) {
     return '$count سنة من الرسائل';
   }
@@ -364,11 +370,76 @@ class LAr extends L {
       'تعذر إنشاء التحليل المعمّق هذه المرة. حلّل هذه المحادثة مرة أخرى للمحاولة من جديد.';
 
   @override
+  String get deepDiveGenerating =>
+      'ما زال التحليل المعمّق قيد الكتابة. يستغرق ذلك عادةً نحو دقيقة.';
+
+  @override
   String get deepDiveSubtitle =>
       'ما لا يغطيه التقرير المجاني. كل استنتاج مرفق بنص الرسالة التي يستند إليها.';
 
   @override
   String get sectionConflict => 'الخلافات والمصالحة';
+
+  @override
+  String get sectionFourHorsemen => 'الفرسان الأربعة';
+
+  @override
+  String get fourHorsemenIntro =>
+      'وجد عالم النفس جون غوتمان أن هذه الطرق الأربع في الشجار هي الأكثر ضررًا بالعلاقات.';
+
+  @override
+  String get fourHorsemenNone =>
+      'لا توجد علامات واضحة على الفرسان الأربعة في هذه الرسائل.';
+
+  @override
+  String get horsemanCriticism => 'النقد';
+
+  @override
+  String get horsemanContempt => 'الازدراء';
+
+  @override
+  String get horsemanDefensiveness => 'الدفاعية';
+
+  @override
+  String get horsemanStonewalling => 'الانسحاب الصامت';
+
+  @override
+  String get antidoteCriticism =>
+      'جرّب بدلًا من ذلك: تحدّث عن الموقف وما تحتاجه، لا عمّا هو خطأ في الطرف الآخر.';
+
+  @override
+  String get antidoteContempt =>
+      'جرّب بدلًا من ذلك: قل ما تقدّره، وعبّر عن شكواك دون سخرية.';
+
+  @override
+  String get antidoteDefensiveness =>
+      'جرّب بدلًا من ذلك: تحمّل ولو جزءًا صغيرًا من المسؤولية.';
+
+  @override
+  String get antidoteStonewalling =>
+      'جرّب بدلًا من ذلك: خذ استراحة قصيرة لتهدأ، ثم عد إلى الحديث.';
+
+  @override
+  String get sectionLoveLanguages => 'لغات الحب';
+
+  @override
+  String get loveLanguagesNote =>
+      'لغات الحب إطار شائع وليست اختبارًا علميًا. اعتبرها نقطة بداية.';
+
+  @override
+  String get loveWords => 'كلمات التقدير';
+
+  @override
+  String get loveTime => 'الوقت النوعي';
+
+  @override
+  String get loveGifts => 'تلقي الهدايا';
+
+  @override
+  String get loveActs => 'أعمال الخدمة';
+
+  @override
+  String get loveTouch => 'اللمس الجسدي';
 
   @override
   String get sectionRedFlags => 'إشارات تحذيرية';
@@ -422,6 +493,13 @@ class LAr extends L {
 
   @override
   String get sampleDeepDiveHint => 'سيتضمن تقريرك الخاص هذا القسم.';
+
+  @override
+  String get samplePaidHint =>
+      'هذا الجزء مدفوع. يعرض تقريرك الخاص نتيجة واحدة مجانًا، ويمكنك فتح الباقي.';
+
+  @override
+  String get previewLabel => 'معاينة مجانية';
 
   @override
   String get savedTitle => 'تقاريري';

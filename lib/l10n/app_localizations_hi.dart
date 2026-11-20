@@ -284,6 +284,12 @@ class LHi extends L {
   String get shareCardWatermark => 'CHAT REPORT से बनाया गया';
 
   @override
+  String get shareCardScan => 'स्कैन करें और अपनी चैट का विश्लेषण पाएँ';
+
+  @override
+  String get shareFormatTall => 'स्टेटस और स्टोरी के लिए लंबा फ़ॉर्मैट';
+
+  @override
   String shareCardYears(int count) {
     return '$count साल की चैट';
   }
@@ -369,11 +375,76 @@ class LHi extends L {
       'इस बार गहन विश्लेषण नहीं बन सका। फिर से कोशिश करने के लिए इस चैट का दोबारा विश्लेषण करें।';
 
   @override
+  String get deepDiveGenerating =>
+      'आपका गहन विश्लेषण अभी लिखा जा रहा है। इसमें आम तौर पर लगभग एक मिनट लगता है।';
+
+  @override
   String get deepDiveSubtitle =>
       'जो मुफ़्त रिपोर्ट में नहीं है। हर निष्कर्ष के साथ वही मैसेज दिया गया है जिस पर वह आधारित है।';
 
   @override
   String get sectionConflict => 'झगड़े और सुलह';
+
+  @override
+  String get sectionFourHorsemen => 'चार घुड़सवार';
+
+  @override
+  String get fourHorsemenIntro =>
+      'मनोवैज्ञानिक जॉन गॉटमैन ने पाया कि बहस करने के ये चार तरीके रिश्तों को सबसे ज़्यादा नुकसान पहुँचाते हैं।';
+
+  @override
+  String get fourHorsemenNone =>
+      'इन संदेशों में चार घुड़सवारों के साफ़ संकेत नहीं हैं।';
+
+  @override
+  String get horsemanCriticism => 'आलोचना';
+
+  @override
+  String get horsemanContempt => 'तिरस्कार';
+
+  @override
+  String get horsemanDefensiveness => 'बचाव की मुद्रा';
+
+  @override
+  String get horsemanStonewalling => 'चुप्पी की दीवार';
+
+  @override
+  String get antidoteCriticism =>
+      'इसके बजाय आज़माएँ: सामने वाले में क्या गलत है, उसकी जगह स्थिति और अपनी ज़रूरत के बारे में बात करें।';
+
+  @override
+  String get antidoteContempt =>
+      'इसके बजाय आज़माएँ: बताएँ कि आपको क्या अच्छा लगता है, और शिकायत बिना मज़ाक उड़ाए करें।';
+
+  @override
+  String get antidoteDefensiveness =>
+      'इसके बजाय आज़माएँ: समस्या का कम से कम छोटा हिस्सा अपनी ज़िम्मेदारी मानें।';
+
+  @override
+  String get antidoteStonewalling =>
+      'इसके बजाय आज़माएँ: शांत होने के लिए थोड़ा रुकें, फिर बातचीत पर लौटें।';
+
+  @override
+  String get sectionLoveLanguages => 'प्यार की भाषाएँ';
+
+  @override
+  String get loveLanguagesNote =>
+      'प्यार की भाषाएँ एक लोकप्रिय ढाँचा हैं, वैज्ञानिक परीक्षण नहीं। इन्हें शुरुआत के तौर पर देखें।';
+
+  @override
+  String get loveWords => 'तारीफ़ के शब्द';
+
+  @override
+  String get loveTime => 'साथ बिताया अच्छा समय';
+
+  @override
+  String get loveGifts => 'उपहार पाना';
+
+  @override
+  String get loveActs => 'मदद के काम';
+
+  @override
+  String get loveTouch => 'शारीरिक स्पर्श';
 
   @override
   String get sectionRedFlags => 'चेतावनी के संकेत';
@@ -428,6 +499,13 @@ class LHi extends L {
   @override
   String get sampleDeepDiveHint =>
       'आपकी अपनी रिपोर्ट में यह हिस्सा शामिल होगा।';
+
+  @override
+  String get samplePaidHint =>
+      'यह हिस्सा सशुल्क है। आपकी अपनी रिपोर्ट में एक निष्कर्ष मुफ़्त दिखता है, बाकी आप अनलॉक कर सकते हैं।';
+
+  @override
+  String get previewLabel => 'मुफ़्त झलक';
 
   @override
   String get savedTitle => 'मेरी रिपोर्ट';

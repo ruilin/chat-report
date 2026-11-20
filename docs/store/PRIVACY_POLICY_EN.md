@@ -1,6 +1,6 @@
 # Privacy Policy — Chat Report
 
-**Last updated: 3 November 2026**
+**Last updated: 20 November 2026**
 
 ⚠️ **上架前必做**：把本文件部署到一个公开可访问的 URL（GitHub Pages / Notion 公开页 / 自有域名均可），
 并把该 URL 填进 Play Console 的 *Store listing → Privacy Policy*。Play 会自动抓取校验，
@@ -26,7 +26,7 @@ Chat Report ("the app") is provided by [COMPANY / DEVELOPER NAME]. You can reach
 
 **Text sent for AI interpretation.** To produce the written parts of the report (the warmth reading, the emotion curve notes, topics, personality tags, and the full reading), the app sends the text of your conversation, including the sender names shown in your chat, to our AI processing provider, Z.ai (Zhipu AI), over an encrypted (HTTPS) connection. Before the first analysis, the app asks for your consent and explains this. This text is processed to generate your report and is not retained by us. Please refer to Z.ai's own privacy terms for their handling of API data.
 
-**Your report.** The finished report is stored only on your device. Deleting the app deletes it.
+**Your report.** The finished report is stored on your device; we never receive it. If Google backup is turned on for your device, Android may include your reports and unlock records in your own Google account backup, so they can be restored when you reinstall the app or move to a new phone. You can turn this off in your device's backup settings. Deleting the app removes the copy on your device.
 
 **AI coach.** If you use the AI coach, your questions, this report's content and the last few turns of the conversation are sent over an encrypted connection to Z.ai to generate answers. The full chat is not included, though the report can contain short quotes from it. The conversation is stored only on your device and we do not retain it. If you report an answer, we receive only the type of report, not the conversation.
 
@@ -48,7 +48,7 @@ Where GDPR applies, our legal basis for processing the conversation content you 
 
 ## Your rights
 
-Because we do not store your data or maintain accounts, there is nothing on our side to export or erase. Your reports live on your device and are removed when you delete them or uninstall the app. For questions about your rights, contact us at [CONTACT EMAIL].
+Because we do not store your data or maintain accounts, there is nothing on our side to export or erase. Your reports live on your device and are removed from it when you delete them or uninstall the app. A copy in your own Google device backup, if you use one, is managed in your Google account. For questions about your rights, contact us at [CONTACT EMAIL].
 
 ## Children
 

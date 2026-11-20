@@ -285,6 +285,12 @@ class LTr extends L {
   String get shareCardWatermark => 'CHAT REPORT İLE YAPILDI';
 
   @override
+  String get shareCardScan => 'Tara, kendi sohbetini analiz et';
+
+  @override
+  String get shareFormatTall => 'Durum ve hikâyeler için dikey format';
+
+  @override
   String shareCardYears(int count) {
     return '$count yıllık mesajlaşma';
   }
@@ -370,11 +376,76 @@ class LTr extends L {
       'Derin analiz bu kez oluşturulamadı. Yeniden denemek için bu sohbeti tekrar analiz edin.';
 
   @override
+  String get deepDiveGenerating =>
+      'Derin analizin hâlâ yazılıyor. Genellikle yaklaşık bir dakika sürer.';
+
+  @override
   String get deepDiveSubtitle =>
       'Ücretsiz raporun değinmediği konular. Her bulgu, dayandığı mesajın kendisiyle birlikte gelir.';
 
   @override
   String get sectionConflict => 'Kavgalar ve barışmalar';
+
+  @override
+  String get sectionFourHorsemen => 'Dört Atlı';
+
+  @override
+  String get fourHorsemenIntro =>
+      'Psikolog John Gottman, bu dört tartışma biçiminin ilişkilere en çok zarar verdiğini buldu.';
+
+  @override
+  String get fourHorsemenNone =>
+      'Bu mesajlarda Dört Atlı\'nın belirgin bir işareti yok.';
+
+  @override
+  String get horsemanCriticism => 'Eleştiri';
+
+  @override
+  String get horsemanContempt => 'Küçümseme';
+
+  @override
+  String get horsemanDefensiveness => 'Savunmacılık';
+
+  @override
+  String get horsemanStonewalling => 'Duvar örme';
+
+  @override
+  String get antidoteCriticism =>
+      'Bunun yerine dene: karşı tarafın nesinin yanlış olduğunu değil, durumu ve neye ihtiyacın olduğunu konuş.';
+
+  @override
+  String get antidoteContempt =>
+      'Bunun yerine dene: neyi takdir ettiğini söyle, şikâyetlerini alay etmeden dile getir.';
+
+  @override
+  String get antidoteDefensiveness =>
+      'Bunun yerine dene: sorunun en azından küçük bir kısmını üstlen.';
+
+  @override
+  String get antidoteStonewalling =>
+      'Bunun yerine dene: sakinleşmek için kısa bir ara ver, sonra konuşmaya dön.';
+
+  @override
+  String get sectionLoveLanguages => 'Sevgi dilleri';
+
+  @override
+  String get loveLanguagesNote =>
+      'Sevgi dilleri popüler bir yaklaşımdır, bilimsel bir test değildir. Bir başlangıç noktası olarak düşün.';
+
+  @override
+  String get loveWords => 'Onaylayıcı sözler';
+
+  @override
+  String get loveTime => 'Kaliteli zaman';
+
+  @override
+  String get loveGifts => 'Hediye almak';
+
+  @override
+  String get loveActs => 'Hizmet davranışları';
+
+  @override
+  String get loveTouch => 'Fiziksel temas';
 
   @override
   String get sectionRedFlags => 'Kırmızı bayraklar';
@@ -428,6 +499,13 @@ class LTr extends L {
 
   @override
   String get sampleDeepDiveHint => 'Kendi raporun bu bölümü içerecek.';
+
+  @override
+  String get samplePaidHint =>
+      'Bu bölüm ücretlidir. Kendi raporunda bir bulguyu ücretsiz görürsün, kalanının kilidini açabilirsin.';
+
+  @override
+  String get previewLabel => 'Ücretsiz önizleme';
 
   @override
   String get savedTitle => 'Raporlarım';

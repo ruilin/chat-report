@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
+import '../models/deep_dive.dart';
 import '../models/report.dart';
 
 /// 报告只存在本机：每份一个 JSON 文件，卸载应用即删除。
@@ -71,6 +72,18 @@ class ReportStore {
     final report = await _read(file);
     if (report == null) return false;
     report.deepDiveUnlocked = true;
+    await save(report);
+    return true;
+  }
+
+  /// 专题分析晚于报告生成，生成好后补进已保存的报告。
+  /// 从磁盘读出来再写回，不会盖掉这期间的解锁状态
+  Future<bool> setDeepDive(String id, DeepDive dive) async {
+    final file = await _fileOf(id);
+    if (!await file.exists()) return false;
+    final report = await _read(file);
+    if (report == null) return false;
+    report.deepDive = dive;
     await save(report);
     return true;
   }

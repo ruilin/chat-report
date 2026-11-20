@@ -285,6 +285,12 @@ class LIt extends L {
   String get shareCardWatermark => 'CREATO CON CHAT REPORT';
 
   @override
+  String get shareCardScan => 'Scansiona e analizza la tua chat';
+
+  @override
+  String get shareFormatTall => 'Formato verticale per stati e storie';
+
+  @override
   String shareCardYears(int count) {
     return '$count anni di messaggi';
   }
@@ -371,11 +377,76 @@ class LIt extends L {
       'Questa volta non è stato possibile generare l\'analisi approfondita. Analizza di nuovo questa chat per riprovare.';
 
   @override
+  String get deepDiveGenerating =>
+      'La tua analisi approfondita è ancora in fase di scrittura. Di solito ci vuole circa un minuto.';
+
+  @override
   String get deepDiveSubtitle =>
       'Ciò che il report gratuito non copre. Ogni conclusione è accompagnata dal messaggio esatto.';
 
   @override
   String get sectionConflict => 'Litigi e riappacificazioni';
+
+  @override
+  String get sectionFourHorsemen => 'I quattro cavalieri';
+
+  @override
+  String get fourHorsemenIntro =>
+      'Lo psicologo John Gottman ha scoperto che questi quattro modi di litigare sono i più dannosi per una relazione.';
+
+  @override
+  String get fourHorsemenNone =>
+      'Nessun segnale chiaro dei quattro cavalieri in questi messaggi.';
+
+  @override
+  String get horsemanCriticism => 'Critica';
+
+  @override
+  String get horsemanContempt => 'Disprezzo';
+
+  @override
+  String get horsemanDefensiveness => 'Difensività';
+
+  @override
+  String get horsemanStonewalling => 'Ostruzionismo';
+
+  @override
+  String get antidoteCriticism =>
+      'Prova invece: parla della situazione e di ciò di cui hai bisogno, non di cosa c\'è di sbagliato nell\'altra persona.';
+
+  @override
+  String get antidoteContempt =>
+      'Prova invece: di\' cosa apprezzi ed esprimi le lamentele senza sarcasmo.';
+
+  @override
+  String get antidoteDefensiveness =>
+      'Prova invece: riconosci almeno una piccola parte del problema.';
+
+  @override
+  String get antidoteStonewalling =>
+      'Prova invece: fai una breve pausa per calmarti, poi riprendi la conversazione.';
+
+  @override
+  String get sectionLoveLanguages => 'I linguaggi dell\'amore';
+
+  @override
+  String get loveLanguagesNote =>
+      'I linguaggi dell\'amore sono un modello popolare, non un test scientifico. Usali come punto di partenza.';
+
+  @override
+  String get loveWords => 'Parole di affermazione';
+
+  @override
+  String get loveTime => 'Tempo di qualità';
+
+  @override
+  String get loveGifts => 'Ricevere regali';
+
+  @override
+  String get loveActs => 'Gesti di servizio';
+
+  @override
+  String get loveTouch => 'Contatto fisico';
 
   @override
   String get sectionRedFlags => 'Segnali d\'allarme';
@@ -429,6 +500,13 @@ class LIt extends L {
 
   @override
   String get sampleDeepDiveHint => 'Il tuo report includerà questa sezione.';
+
+  @override
+  String get samplePaidHint =>
+      'Questa parte è a pagamento. Nel tuo report vedrai un risultato gratis e potrai sbloccare il resto.';
+
+  @override
+  String get previewLabel => 'Anteprima gratuita';
 
   @override
   String get savedTitle => 'I miei report';

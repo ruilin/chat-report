@@ -286,6 +286,12 @@ class LEs extends L {
   String get shareCardWatermark => 'HECHO CON CHAT REPORT';
 
   @override
+  String get shareCardScan => 'Escanea y analiza tu chat';
+
+  @override
+  String get shareFormatTall => 'Formato vertical para estados e historias';
+
+  @override
   String shareCardYears(int count) {
     return '$count años de mensajes';
   }
@@ -372,11 +378,76 @@ class LEs extends L {
       'Esta vez no se pudo generar el análisis a fondo. Vuelve a analizar este chat para reintentarlo.';
 
   @override
+  String get deepDiveGenerating =>
+      'Tu análisis a fondo aún se está escribiendo. Suele tardar alrededor de un minuto.';
+
+  @override
   String get deepDiveSubtitle =>
       'Lo que el informe gratuito no cubre. Cada conclusión viene con el mensaje exacto que la respalda.';
 
   @override
   String get sectionConflict => 'Peleas y reconciliaciones';
+
+  @override
+  String get sectionFourHorsemen => 'Los cuatro jinetes';
+
+  @override
+  String get fourHorsemenIntro =>
+      'El psicólogo John Gottman descubrió que estas cuatro formas de discutir son las que más dañan una relación.';
+
+  @override
+  String get fourHorsemenNone =>
+      'No hay señales claras de los cuatro jinetes en estos mensajes.';
+
+  @override
+  String get horsemanCriticism => 'Crítica';
+
+  @override
+  String get horsemanContempt => 'Desprecio';
+
+  @override
+  String get horsemanDefensiveness => 'Actitud defensiva';
+
+  @override
+  String get horsemanStonewalling => 'Evasión';
+
+  @override
+  String get antidoteCriticism =>
+      'Prueba en su lugar: habla de la situación y de lo que necesitas, no de lo que está mal en la otra persona.';
+
+  @override
+  String get antidoteContempt =>
+      'Prueba en su lugar: di lo que valoras y plantea las quejas sin burlas.';
+
+  @override
+  String get antidoteDefensiveness =>
+      'Prueba en su lugar: asume aunque sea una pequeña parte del problema.';
+
+  @override
+  String get antidoteStonewalling =>
+      'Prueba en su lugar: tómate una pausa para calmarte y luego retoma la conversación.';
+
+  @override
+  String get sectionLoveLanguages => 'Los lenguajes del amor';
+
+  @override
+  String get loveLanguagesNote =>
+      'Los lenguajes del amor son un marco popular, no una prueba científica. Tómalos como punto de partida.';
+
+  @override
+  String get loveWords => 'Palabras de afirmación';
+
+  @override
+  String get loveTime => 'Tiempo de calidad';
+
+  @override
+  String get loveGifts => 'Recibir regalos';
+
+  @override
+  String get loveActs => 'Actos de servicio';
+
+  @override
+  String get loveTouch => 'Contacto físico';
 
   @override
   String get sectionRedFlags => 'Señales de alerta';
@@ -430,6 +501,13 @@ class LEs extends L {
 
   @override
   String get sampleDeepDiveHint => 'Tu propio informe incluirá esta sección.';
+
+  @override
+  String get samplePaidHint =>
+      'Esta parte es de pago. En tu propio informe verás un hallazgo gratis y podrás desbloquear el resto.';
+
+  @override
+  String get previewLabel => 'Vista previa gratis';
 
   @override
   String get savedTitle => 'Mis informes';

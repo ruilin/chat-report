@@ -614,6 +614,18 @@ abstract class L {
   /// **'MADE WITH CHAT REPORT'**
   String get shareCardWatermark;
 
+  /// No description provided for @shareCardScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan to read your own chat'**
+  String get shareCardScan;
+
+  /// No description provided for @shareFormatTall.
+  ///
+  /// In en, this message translates to:
+  /// **'Tall format for Status and Stories'**
+  String get shareFormatTall;
+
   /// No description provided for @shareCardYears.
   ///
   /// In en, this message translates to:
@@ -746,6 +758,12 @@ abstract class L {
   /// **'The deep dive couldn\'t be generated this time. Analyze this chat again to retry.'**
   String get deepDiveMissing;
 
+  /// No description provided for @deepDiveGenerating.
+  ///
+  /// In en, this message translates to:
+  /// **'Your deep dive is still being written. It usually takes about a minute.'**
+  String get deepDiveGenerating;
+
   /// No description provided for @deepDiveSubtitle.
   ///
   /// In en, this message translates to:
@@ -757,6 +775,114 @@ abstract class L {
   /// In en, this message translates to:
   /// **'Fights and making up'**
   String get sectionConflict;
+
+  /// No description provided for @sectionFourHorsemen.
+  ///
+  /// In en, this message translates to:
+  /// **'The Four Horsemen'**
+  String get sectionFourHorsemen;
+
+  /// No description provided for @fourHorsemenIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Psychologist John Gottman found that these four ways of arguing do the most harm to relationships.'**
+  String get fourHorsemenIntro;
+
+  /// No description provided for @fourHorsemenNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No clear signs of the Four Horsemen in these messages.'**
+  String get fourHorsemenNone;
+
+  /// No description provided for @horsemanCriticism.
+  ///
+  /// In en, this message translates to:
+  /// **'Criticism'**
+  String get horsemanCriticism;
+
+  /// No description provided for @horsemanContempt.
+  ///
+  /// In en, this message translates to:
+  /// **'Contempt'**
+  String get horsemanContempt;
+
+  /// No description provided for @horsemanDefensiveness.
+  ///
+  /// In en, this message translates to:
+  /// **'Defensiveness'**
+  String get horsemanDefensiveness;
+
+  /// No description provided for @horsemanStonewalling.
+  ///
+  /// In en, this message translates to:
+  /// **'Stonewalling'**
+  String get horsemanStonewalling;
+
+  /// No description provided for @antidoteCriticism.
+  ///
+  /// In en, this message translates to:
+  /// **'Try instead: talk about the situation and what you need, not what\'s wrong with them.'**
+  String get antidoteCriticism;
+
+  /// No description provided for @antidoteContempt.
+  ///
+  /// In en, this message translates to:
+  /// **'Try instead: say what you appreciate, and voice complaints without mockery.'**
+  String get antidoteContempt;
+
+  /// No description provided for @antidoteDefensiveness.
+  ///
+  /// In en, this message translates to:
+  /// **'Try instead: own even a small part of the problem.'**
+  String get antidoteDefensiveness;
+
+  /// No description provided for @antidoteStonewalling.
+  ///
+  /// In en, this message translates to:
+  /// **'Try instead: take a short break to calm down, then come back to the talk.'**
+  String get antidoteStonewalling;
+
+  /// No description provided for @sectionLoveLanguages.
+  ///
+  /// In en, this message translates to:
+  /// **'Love languages'**
+  String get sectionLoveLanguages;
+
+  /// No description provided for @loveLanguagesNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Love languages are a popular framework, not a scientific test. Read them as a starting point.'**
+  String get loveLanguagesNote;
+
+  /// No description provided for @loveWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Words of affirmation'**
+  String get loveWords;
+
+  /// No description provided for @loveTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality time'**
+  String get loveTime;
+
+  /// No description provided for @loveGifts.
+  ///
+  /// In en, this message translates to:
+  /// **'Receiving gifts'**
+  String get loveGifts;
+
+  /// No description provided for @loveActs.
+  ///
+  /// In en, this message translates to:
+  /// **'Acts of service'**
+  String get loveActs;
+
+  /// No description provided for @loveTouch.
+  ///
+  /// In en, this message translates to:
+  /// **'Physical touch'**
+  String get loveTouch;
 
   /// No description provided for @sectionRedFlags.
   ///
@@ -847,6 +973,18 @@ abstract class L {
   /// In en, this message translates to:
   /// **'Your own report will include this section.'**
   String get sampleDeepDiveHint;
+
+  /// No description provided for @samplePaidHint.
+  ///
+  /// In en, this message translates to:
+  /// **'This part is paid. Your own report shows one finding for free, and you can unlock the rest.'**
+  String get samplePaidHint;
+
+  /// No description provided for @previewLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Free preview'**
+  String get previewLabel;
 
   /// No description provided for @savedTitle.
   ///

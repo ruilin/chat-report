@@ -69,8 +69,11 @@ class Purchases extends ChangeNotifier {
   static const productId = 'deep_report_unlock';
 
   /// 发布包收费，调试包免费，方便开发时直接看付费内容。
-  /// 打开后才有付费墙和提问次数限制
-  static bool paywallEnabled = kReleaseMode;
+  /// 打开后才有付费墙和提问次数限制。
+  /// 自己手机上看效果时，可以用 --dart-define=UNLOCK_ALL=true 打一个免费的发布包，
+  /// 签名和商店版一致，能直接覆盖安装、保留报告。上传商店的包不要带这个参数
+  static bool paywallEnabled =
+      kReleaseMode && !const bool.fromEnvironment('UNLOCK_ALL');
 
   /// 这份报告的付费内容能不能看。到账时写盘的是另一个对象，
   /// 这里同步到内存，否则之后保存这份报告会把解锁状态写回去

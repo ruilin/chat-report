@@ -285,6 +285,12 @@ class LPt extends L {
   String get shareCardWatermark => 'FEITO COM CHAT REPORT';
 
   @override
+  String get shareCardScan => 'Escaneie e analise sua conversa';
+
+  @override
+  String get shareFormatTall => 'Formato vertical para status e stories';
+
+  @override
   String shareCardYears(int count) {
     return '$count anos de mensagens';
   }
@@ -371,11 +377,76 @@ class LPt extends L {
       'Desta vez não foi possível gerar a análise a fundo. Analise esta conversa de novo para tentar outra vez.';
 
   @override
+  String get deepDiveGenerating =>
+      'Sua análise a fundo ainda está sendo escrita. Costuma levar cerca de um minuto.';
+
+  @override
   String get deepDiveSubtitle =>
       'O que o relatório gratuito não cobre. Cada conclusão vem com a mensagem exata que a sustenta.';
 
   @override
   String get sectionConflict => 'Brigas e reconciliações';
+
+  @override
+  String get sectionFourHorsemen => 'Os quatro cavaleiros';
+
+  @override
+  String get fourHorsemenIntro =>
+      'O psicólogo John Gottman descobriu que estas quatro formas de discutir são as que mais prejudicam um relacionamento.';
+
+  @override
+  String get fourHorsemenNone =>
+      'Não há sinais claros dos quatro cavaleiros nestas mensagens.';
+
+  @override
+  String get horsemanCriticism => 'Crítica';
+
+  @override
+  String get horsemanContempt => 'Desprezo';
+
+  @override
+  String get horsemanDefensiveness => 'Defensividade';
+
+  @override
+  String get horsemanStonewalling => 'Bloqueio';
+
+  @override
+  String get antidoteCriticism =>
+      'Experimente: fale da situação e do que você precisa, não do que há de errado com a outra pessoa.';
+
+  @override
+  String get antidoteContempt =>
+      'Experimente: diga o que você valoriza e faça reclamações sem deboche.';
+
+  @override
+  String get antidoteDefensiveness =>
+      'Experimente: assuma pelo menos uma pequena parte do problema.';
+
+  @override
+  String get antidoteStonewalling =>
+      'Experimente: faça uma pausa para se acalmar e depois volte à conversa.';
+
+  @override
+  String get sectionLoveLanguages => 'As linguagens do amor';
+
+  @override
+  String get loveLanguagesNote =>
+      'As linguagens do amor são um modelo popular, não um teste científico. Use como ponto de partida.';
+
+  @override
+  String get loveWords => 'Palavras de afirmação';
+
+  @override
+  String get loveTime => 'Tempo de qualidade';
+
+  @override
+  String get loveGifts => 'Receber presentes';
+
+  @override
+  String get loveActs => 'Atos de serviço';
+
+  @override
+  String get loveTouch => 'Toque físico';
 
   @override
   String get sectionRedFlags => 'Sinais de alerta';
@@ -429,6 +500,13 @@ class LPt extends L {
 
   @override
   String get sampleDeepDiveHint => 'Seu próprio relatório incluirá esta seção.';
+
+  @override
+  String get samplePaidHint =>
+      'Esta parte é paga. No seu relatório, você vê uma descoberta grátis e pode desbloquear o resto.';
+
+  @override
+  String get previewLabel => 'Prévia grátis';
 
   @override
   String get savedTitle => 'Meus relatórios';

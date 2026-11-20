@@ -282,6 +282,12 @@ class LEn extends L {
   String get shareCardWatermark => 'MADE WITH CHAT REPORT';
 
   @override
+  String get shareCardScan => 'Scan to read your own chat';
+
+  @override
+  String get shareFormatTall => 'Tall format for Status and Stories';
+
+  @override
   String shareCardYears(int count) {
     return '$count years of texts';
   }
@@ -368,11 +374,76 @@ class LEn extends L {
       'The deep dive couldn\'t be generated this time. Analyze this chat again to retry.';
 
   @override
+  String get deepDiveGenerating =>
+      'Your deep dive is still being written. It usually takes about a minute.';
+
+  @override
   String get deepDiveSubtitle =>
       'What the free report doesn\'t cover. Every finding comes with the exact message behind it.';
 
   @override
   String get sectionConflict => 'Fights and making up';
+
+  @override
+  String get sectionFourHorsemen => 'The Four Horsemen';
+
+  @override
+  String get fourHorsemenIntro =>
+      'Psychologist John Gottman found that these four ways of arguing do the most harm to relationships.';
+
+  @override
+  String get fourHorsemenNone =>
+      'No clear signs of the Four Horsemen in these messages.';
+
+  @override
+  String get horsemanCriticism => 'Criticism';
+
+  @override
+  String get horsemanContempt => 'Contempt';
+
+  @override
+  String get horsemanDefensiveness => 'Defensiveness';
+
+  @override
+  String get horsemanStonewalling => 'Stonewalling';
+
+  @override
+  String get antidoteCriticism =>
+      'Try instead: talk about the situation and what you need, not what\'s wrong with them.';
+
+  @override
+  String get antidoteContempt =>
+      'Try instead: say what you appreciate, and voice complaints without mockery.';
+
+  @override
+  String get antidoteDefensiveness =>
+      'Try instead: own even a small part of the problem.';
+
+  @override
+  String get antidoteStonewalling =>
+      'Try instead: take a short break to calm down, then come back to the talk.';
+
+  @override
+  String get sectionLoveLanguages => 'Love languages';
+
+  @override
+  String get loveLanguagesNote =>
+      'Love languages are a popular framework, not a scientific test. Read them as a starting point.';
+
+  @override
+  String get loveWords => 'Words of affirmation';
+
+  @override
+  String get loveTime => 'Quality time';
+
+  @override
+  String get loveGifts => 'Receiving gifts';
+
+  @override
+  String get loveActs => 'Acts of service';
+
+  @override
+  String get loveTouch => 'Physical touch';
 
   @override
   String get sectionRedFlags => 'Red flags';
@@ -425,6 +496,13 @@ class LEn extends L {
 
   @override
   String get sampleDeepDiveHint => 'Your own report will include this section.';
+
+  @override
+  String get samplePaidHint =>
+      'This part is paid. Your own report shows one finding for free, and you can unlock the rest.';
+
+  @override
+  String get previewLabel => 'Free preview';
 
   @override
   String get savedTitle => 'My reports';
