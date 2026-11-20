@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../sample/sample_report.dart';
 import '../services/analytics.dart';
+import '../services/chat_import.dart';
 import '../services/report_store.dart';
+import '../services/shared_chat.dart';
 import '../services/whatsapp_parser.dart';
 import '../theme.dart';
 import 'import_guide_sheet.dart';
@@ -28,6 +30,42 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _refreshSaved();
+    // 从 WhatsApp 分享进来启动的，或开着的时候又收到分享
+    SharedChatInbox.listen(_importShared);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _importShared());
+  }
+
+  @override
+  void dispose() {
+    SharedChatInbox.stopListening();
+    super.dispose();
+  }
+
+  /// 用户在 WhatsApp「导出聊天」时直接选了本 App
+  Future<void> _importShared() async {
+    final shared = await SharedChatInbox.take();
+    if (shared == null || !mounted) return;
+    // 用户明确要分析新的聊天，回到首页重新开始
+    Navigator.of(context).popUntil((route) => route.isFirst);
+    String? raw;
+    try {
+      raw = await ChatImport.textFrom(shared.files);
+    } finally {
+      await shared.cleanUp();
+    }
+    final text = shared.text?.trim() ?? '';
+    raw ??= text.isEmpty ? null : text;
+    if (!mounted) return;
+    if (raw == null) {
+      Analytics.chatShareReceive('no_chat', items: shared.itemCount);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(L.of(context).shareImportNoChat),
+        behavior: SnackBarBehavior.floating,
+      ));
+      return;
+    }
+    Analytics.chatShareReceive('ok', items: shared.itemCount);
+    await _parseAndGo(raw, source: 'share');
   }
 
   Future<void> _refreshSaved() async {
@@ -56,11 +94,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _importFile() async {
-    const group = XTypeGroup(label: 'Chat export', extensions: ['txt']);
+    // 有的 WhatsApp 版本导出的是压缩包
+    const group = XTypeGroup(label: 'Chat export', extensions: ['txt', 'zip']);
     final file = await openFile(acceptedTypeGroups: [group]);
     Analytics.importFilePick(file == null ? 'cancelled' : 'picked');
     if (file == null) return;
-    final raw = await file.readAsString();
+    final raw = ChatImport.textFromBytes([(file.name, await file.readAsBytes())]);
+    if (!mounted) return;
+    if (raw == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(L.of(context).shareImportNoChat),
+        behavior: SnackBarBehavior.floating,
+      ));
+      return;
+    }
     await _parseAndGo(raw, source: 'file');
   }
 
@@ -144,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  /// [source]: file / paste，仅用于埋点区分入口
+  /// [source]: file / paste / share，仅用于埋点区分入口
   Future<void> _parseAndGo(String raw, {required String source}) async {
     setState(() => _busy = true);
     try {

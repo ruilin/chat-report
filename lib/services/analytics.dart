@@ -49,6 +49,10 @@ class Analytics {
 
   static void pasteSheetOpen() => _log('paste_sheet_open');
 
+  /// 从别的 App 分享进来：ok / no_chat（没找到聊天文本）
+  static void chatShareReceive(String result, {int items = 0}) =>
+      _log('chat_share_receive', {'result': result, 'items': items});
+
   /// [source]: file / paste
   static void chatParseSuccess({
     required String source,

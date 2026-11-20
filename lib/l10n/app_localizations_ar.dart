@@ -85,11 +85,10 @@ class LAr extends L {
   String get guideStep3Detail => 'نص فقط — ملف أصغر وتحليل أسرع.';
 
   @override
-  String get guideStep4Title => 'احفظ ملف TXT ثم عُد إلى هنا';
+  String get guideStep4Title => 'اختر Chat Report من قائمة المشاركة';
 
   @override
-  String get guideStep4Detail =>
-      'احفظه في الملفات / التنزيلات، ثم عُد إلى هنا واختره.';
+  String get guideStep4Detail => 'لا يظهر؟ احفظ الملف ثم اختره بالأسفل.';
 
   @override
   String get guideOpenWhatsApp => 'افتح WhatsApp';
@@ -102,6 +101,10 @@ class LAr extends L {
 
   @override
   String get guideOpenFailed => 'تعذّر فتح WhatsApp — هل هو مثبَّت؟';
+
+  @override
+  String get shareImportNoChat =>
+      'لم يُعثر على محادثة فيما شاركته. في WhatsApp استخدم «تصدير المحادثة» واختر «بدون وسائط».';
 
   @override
   String get setupTitle => 'مع مَن هذه المحادثة؟';

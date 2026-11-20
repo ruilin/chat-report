@@ -89,11 +89,12 @@ class LFr extends L {
       'Texte uniquement — fichier plus léger, analyse plus rapide.';
 
   @override
-  String get guideStep4Title => 'Enregistre le .txt, puis reviens';
+  String get guideStep4Title =>
+      'Choisissez Chat Report dans la liste de partage';
 
   @override
   String get guideStep4Detail =>
-      'Enregistre-le dans Fichiers / Téléchargements, reviens ici et sélectionne-le.';
+      'Vous ne le voyez pas ? Enregistrez le fichier, puis sélectionnez-le ci-dessous.';
 
   @override
   String get guideOpenWhatsApp => 'Ouvrir WhatsApp';
@@ -108,6 +109,10 @@ class LFr extends L {
   @override
   String get guideOpenFailed =>
       'Impossible d\'ouvrir WhatsApp — l\'app est bien installée ?';
+
+  @override
+  String get shareImportNoChat =>
+      'Aucune discussion trouvée dans ce que vous avez partagé. Dans WhatsApp, utilisez Exporter la discussion et choisissez « Sans médias ».';
 
   @override
   String get setupTitle => 'Avec qui est cette discussion ?';

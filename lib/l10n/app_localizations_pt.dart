@@ -88,11 +88,12 @@ class LPt extends L {
       'Só texto — arquivo menor, análise mais rápida.';
 
   @override
-  String get guideStep4Title => 'Salve o .txt e volte aqui';
+  String get guideStep4Title =>
+      'Escolha o Chat Report na lista de compartilhamento';
 
   @override
   String get guideStep4Detail =>
-      'Salve em Arquivos / Downloads, volte e selecione.';
+      'Não apareceu? Salve o arquivo e selecione-o abaixo.';
 
   @override
   String get guideOpenWhatsApp => 'Abrir WhatsApp';
@@ -107,6 +108,10 @@ class LPt extends L {
   @override
   String get guideOpenFailed =>
       'Não deu para abrir o WhatsApp. Ele está instalado?';
+
+  @override
+  String get shareImportNoChat =>
+      'Nenhuma conversa foi encontrada no que você compartilhou. No WhatsApp, use Exportar conversa e escolha \"Sem mídia\".';
 
   @override
   String get setupTitle => 'Com quem é esta conversa?';

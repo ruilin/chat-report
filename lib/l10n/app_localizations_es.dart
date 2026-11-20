@@ -88,11 +88,11 @@ class LEs extends L {
       'Solo texto — archivo más ligero, análisis más rápido.';
 
   @override
-  String get guideStep4Title => 'Guarda el .txt y vuelve';
+  String get guideStep4Title => 'Elige Chat Report en la lista para compartir';
 
   @override
   String get guideStep4Detail =>
-      'Guárdalo en Archivos / Descargas, vuelve aquí y elígelo.';
+      '¿No aparece? Guarda el archivo y selecciónalo abajo.';
 
   @override
   String get guideOpenWhatsApp => 'Abrir WhatsApp';
@@ -107,6 +107,10 @@ class LEs extends L {
   @override
   String get guideOpenFailed =>
       'No se pudo abrir WhatsApp. ¿Lo tienes instalado?';
+
+  @override
+  String get shareImportNoChat =>
+      'No se encontró ningún chat en lo que compartiste. En WhatsApp, usa Exportar chat y elige \"Sin archivos\".';
 
   @override
   String get setupTitle => '¿Con quién es este chat?';

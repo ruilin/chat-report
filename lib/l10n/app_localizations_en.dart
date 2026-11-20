@@ -87,11 +87,11 @@ class LEn extends L {
   String get guideStep3Detail => 'Text only — smaller file, faster analysis.';
 
   @override
-  String get guideStep4Title => 'Save the .txt, then come back';
+  String get guideStep4Title => 'Choose Chat Report in the share list';
 
   @override
   String get guideStep4Detail =>
-      'Save to Files / Downloads, return here and pick it.';
+      'Can\'t see it? Save the file, then pick it below.';
 
   @override
   String get guideOpenWhatsApp => 'Open WhatsApp';
@@ -105,6 +105,10 @@ class LEn extends L {
 
   @override
   String get guideOpenFailed => 'Couldn\'t open WhatsApp — is it installed?';
+
+  @override
+  String get shareImportNoChat =>
+      'No chat was found in what you shared. In WhatsApp, use Export chat and choose \"Without media\".';
 
   @override
   String get setupTitle => 'Who is this chat with?';

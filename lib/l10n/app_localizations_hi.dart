@@ -89,11 +89,11 @@ class LHi extends L {
   String get guideStep3Detail => 'सिर्फ़ टेक्स्ट — छोटी फ़ाइल, तेज़ एनालिसिस।';
 
   @override
-  String get guideStep4Title => '.txt सेव करें, फिर यहाँ लौटें';
+  String get guideStep4Title => 'शेयर सूची में Chat Report चुनें';
 
   @override
   String get guideStep4Detail =>
-      'फ़ाइलें / डाउनलोड में सेव करें, फिर यहाँ आकर उसे चुनें।';
+      'दिख नहीं रहा? फ़ाइल सेव करें, फिर नीचे से चुनें।';
 
   @override
   String get guideOpenWhatsApp => 'WhatsApp खोलें';
@@ -107,6 +107,10 @@ class LHi extends L {
 
   @override
   String get guideOpenFailed => 'WhatsApp नहीं खुल पाया — क्या यह इंस्टॉल है?';
+
+  @override
+  String get shareImportNoChat =>
+      'आपने जो शेयर किया उसमें कोई चैट नहीं मिली। WhatsApp में «चैट एक्सपोर्ट करें» इस्तेमाल करें और «मीडिया के बिना» चुनें।';
 
   @override
   String get setupTitle => 'यह चैट किसके साथ है?';

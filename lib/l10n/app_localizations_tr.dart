@@ -88,11 +88,11 @@ class LTr extends L {
       'Sadece metin — daha küçük dosya, daha hızlı analiz.';
 
   @override
-  String get guideStep4Title => '.txt dosyasını kaydet, sonra geri dön';
+  String get guideStep4Title => 'Paylaşım listesinde Chat Report\'u seç';
 
   @override
   String get guideStep4Detail =>
-      'Dosyalar ya da İndirilenler klasörüne kaydet, buraya dön ve dosyayı seç.';
+      'Göremiyor musun? Dosyayı kaydet, sonra aşağıdan seç.';
 
   @override
   String get guideOpenWhatsApp => 'WhatsApp\'ı aç';
@@ -106,6 +106,10 @@ class LTr extends L {
 
   @override
   String get guideOpenFailed => 'WhatsApp açılamadı — yüklü mü?';
+
+  @override
+  String get shareImportNoChat =>
+      'Paylaştığın içerikte sohbet bulunamadı. WhatsApp\'ta Sohbeti dışa aktar\'ı kullan ve \"Medya olmadan\" seçeneğini seç.';
 
   @override
   String get setupTitle => 'Bu sohbet kiminle?';

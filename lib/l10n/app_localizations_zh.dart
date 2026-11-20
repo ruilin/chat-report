@@ -81,10 +81,10 @@ class LZh extends L {
   String get guideStep3Detail => '只导出文字 —— 文件更小，分析更快。';
 
   @override
-  String get guideStep4Title => '保存 .txt 后回到这里';
+  String get guideStep4Title => '在分享列表里选 Chat Report';
 
   @override
-  String get guideStep4Detail => '存到「文件」或「下载」，回来选中它。';
+  String get guideStep4Detail => '没看到？先保存文件，再在下面选择它。';
 
   @override
   String get guideOpenWhatsApp => '打开 WhatsApp';
@@ -97,6 +97,10 @@ class LZh extends L {
 
   @override
   String get guideOpenFailed => '无法打开 WhatsApp —— 是否已安装？';
+
+  @override
+  String get shareImportNoChat =>
+      '分享的内容里没有找到聊天记录。请在 WhatsApp 里用「导出聊天」，并选择「不含媒体文件」。';
 
   @override
   String get setupTitle => '这段对话是和谁的？';
@@ -637,10 +641,10 @@ class LZhHant extends LZh {
   String get guideStep3Detail => '只匯出文字 —— 檔案更小，分析更快。';
 
   @override
-  String get guideStep4Title => '儲存 .txt 後回到這裡';
+  String get guideStep4Title => '在分享清單裡選 Chat Report';
 
   @override
-  String get guideStep4Detail => '存到「檔案」或「下載」，回來選取它。';
+  String get guideStep4Detail => '沒看到？先儲存檔案，再在下面選擇它。';
 
   @override
   String get guideOpenWhatsApp => '開啟 WhatsApp';
@@ -653,6 +657,10 @@ class LZhHant extends LZh {
 
   @override
   String get guideOpenFailed => '無法開啟 WhatsApp —— 是否已安裝？';
+
+  @override
+  String get shareImportNoChat =>
+      '分享的內容裡沒有找到聊天記錄。請在 WhatsApp 裡使用「匯出對話」，並選擇「不含媒體檔案」。';
 
   @override
   String get setupTitle => '這段對話是和誰的？';

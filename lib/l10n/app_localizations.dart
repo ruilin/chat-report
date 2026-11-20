@@ -263,13 +263,13 @@ abstract class L {
   /// No description provided for @guideStep4Title.
   ///
   /// In en, this message translates to:
-  /// **'Save the .txt, then come back'**
+  /// **'Choose Chat Report in the share list'**
   String get guideStep4Title;
 
   /// No description provided for @guideStep4Detail.
   ///
   /// In en, this message translates to:
-  /// **'Save to Files / Downloads, return here and pick it.'**
+  /// **'Can\'t see it? Save the file, then pick it below.'**
   String get guideStep4Detail;
 
   /// No description provided for @guideOpenWhatsApp.
@@ -295,6 +295,12 @@ abstract class L {
   /// In en, this message translates to:
   /// **'Couldn\'t open WhatsApp — is it installed?'**
   String get guideOpenFailed;
+
+  /// No description provided for @shareImportNoChat.
+  ///
+  /// In en, this message translates to:
+  /// **'No chat was found in what you shared. In WhatsApp, use Export chat and choose \"Without media\".'**
+  String get shareImportNoChat;
 
   /// No description provided for @setupTitle.
   ///

@@ -86,11 +86,11 @@ class LId extends L {
       'Teks saja — file lebih kecil, analisis lebih cepat.';
 
   @override
-  String get guideStep4Title => 'Simpan file .txt, lalu balik ke sini';
+  String get guideStep4Title => 'Pilih Chat Report di daftar berbagi';
 
   @override
   String get guideStep4Detail =>
-      'Simpan ke File / Unduhan, lalu balik ke sini dan pilih.';
+      'Tidak muncul? Simpan filenya, lalu pilih di bawah.';
 
   @override
   String get guideOpenWhatsApp => 'Buka WhatsApp';
@@ -104,6 +104,10 @@ class LId extends L {
 
   @override
   String get guideOpenFailed => 'Gagal membuka WhatsApp — sudah terpasang?';
+
+  @override
+  String get shareImportNoChat =>
+      'Tidak ada chat yang ditemukan dari yang kamu bagikan. Di WhatsApp, gunakan Ekspor chat dan pilih \"Tanpa media\".';
 
   @override
   String get setupTitle => 'Ini chat sama siapa?';
