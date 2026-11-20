@@ -75,7 +75,8 @@ class EmotionCurve extends StatelessWidget {
           height: 132,
           child: CustomPaint(
             size: Size.infinite,
-            painter: _CurvePainter(points),
+            // 自己画的文字不会自动继承主题字体，把当前的文字样式带进去
+            painter: _CurvePainter(points, DefaultTextStyle.of(context).style),
           ),
         ),
         const SizedBox(height: 4),
@@ -104,7 +105,8 @@ class EmotionCurve extends StatelessWidget {
 
 class _CurvePainter extends CustomPainter {
   final List<MonthMood> points;
-  _CurvePainter(this.points);
+  final TextStyle baseStyle;
+  _CurvePainter(this.points, this.baseStyle);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -168,8 +170,11 @@ class _CurvePainter extends CustomPainter {
       final tp = TextPainter(
         text: TextSpan(
             text: text,
-            style: TextStyle(
-                fontSize: 8.5, color: color, fontWeight: FontWeight.w600)),
+            style: baseStyle.copyWith(
+                fontSize: 8.5,
+                height: null,
+                color: color,
+                fontWeight: FontWeight.w600)),
         textDirection: TextDirection.ltr,
         maxLines: 1,
         ellipsis: '…',
@@ -195,7 +200,8 @@ class _CurvePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_CurvePainter old) => old.points != points;
+  bool shouldRepaint(_CurvePainter old) =>
+      old.points != points || old.baseStyle != baseStyle;
 }
 
 /// 话题横条：长度编码量级，同一玫瑰色按位次递减透明度（颜色不承担类别信息）。

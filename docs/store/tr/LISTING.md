@@ -10,9 +10,9 @@
 ## App name（上限 30 字符）
 
 ```
-Chat Report: Sohbet Analizi
+Chat Report: AI Sohbet Analizi
 ```
-> 27 字符。⚠️ **不要在此处写 "WhatsApp"** —— 属他人商标，Play 会以冒充/商标侵权驳回。
+> 30 字符。⚠️ **不要在此处写 "WhatsApp"** —— 属他人商标，Play 会以冒充/商标侵权驳回。
 
 备选：`Chat Report – İlişki Analizi`（28 字符）
 
@@ -21,9 +21,9 @@ Chat Report: Sohbet Analizi
 ## Short description（上限 80 字符）
 
 ```
-Sohbetini içe aktar, 30 saniyede ilişkine dair yapay zekâ raporunu al.
+WhatsApp sohbetini yapay zekâyla analiz et: ilişki raporu, kırmızı bayraklar.
 ```
-> 70 字符。
+> 77 字符。
 
 ---
 
@@ -34,6 +34,8 @@ Sohbetlerin aslında ne anlatıyor?
 
 Chat Report, dışa aktarılmış bir sohbet geçmişini ilişkin hakkında gerçek bir rapora dönüştürür — burç yorumu değil, gerçek mesajlara kadar izini sürebileceğin rakamlar.
 
+WhatsApp'tan dışa aktarılan sohbetlerle çalışır.
+
 NELER GÖRECEKSİN
 
 • İlişki sıcaklığı — ilişkinizin şu an nasıl göründüğünü özetleyen, 0 ile 100 arasında tek bir puan
@@ -43,23 +45,37 @@ NELER GÖRECEKSİN
 • Sohbet kişilikleri — gerçek alışkanlıklarınızdan çıkarılan, her biriniz için üç eğlenceli etiket
 • Detaylı yorum — ritminizi, dönüm noktalarınızı ve her birinizin neyi önemsiyor göründüğünü anlatan uzun bir yazı; alıntılar ve tarihlerle
 
+DAHA DERİNE İN
+
+Yukarıdakilerin hepsi ücretsiz. Bir raporun derin analizini açmak için kilidini bir kez aç: tek seferlik satın alma, abonelik değil.
+
+• Dört Atlı — eleştiri, küçümseme, savunmacılık ve duvar örme: psikolog John Gottman'ın ilişki sorunlarıyla ilişkilendirdiği dört alışkanlık, her biri tam mesajıyla
+• Kırmızı bayraklar / Yeşil bayraklar — nelere dikkat etmeli ve neler iyi gidiyor
+• Bağlanma stilleri — her birinizin yakınlaşmaya mı yoksa geri çekilmeye mi yatkın olduğu
+• Sevgi dilleri — her birinizin sevgiyi nasıl gösterdiği ve aradığı
+• Dönüm noktaları — ilişkinin ısındığı ya da soğuduğu anlar
+• Yol azığı — bu ilişki için üç somut öneri
+• Yapay zeka koçu — kendi raporun hakkında soru sor; ilk 3 soru ücretsiz
+
+Her rapor, derin analizden bir bulguyu ücretsiz gösterir; ödemeden önce kendin değerlendirebilirsin.
+
 HER RAKAMIN BİR KAYNAĞI VAR
 
 Her istatistik — mesaj sayıları, yanıt süreleri, ilk kimin yazdığı — telefonunda, kendi dışa aktardığın dosyadan hesaplanır. Yapay zekâ bu rakamları ve konuşmalarınızı yorumlamak için kullanılır, asla uydurmak için değil. Alıntılar tarihleriyle gelir, böylece kendin kontrol edebilirsin.
 
 ÖNCE GİZLİLİK
 
-• Sohbet dosyan tamamen cihazında okunur ve istatistikleri de yine cihazında hesaplanır
-• Raporunu yazmak için sohbet metni şifreli bağlantıyla yapay zekâ sağlayıcımıza gönderilir — önce sana sorulur ve biz onu asla saklamayız
-• Sunucularımızda hiçbir şey saklanmaz, hesap oluşturman da gerekmez
-• Bir rapor kartını paylaştığında isimler otomatik olarak baş harflere kısaltılır — bu özellik kapatılamaz
+• Hesap yok, kayıt yok
+• İstatistiklerin kendi cihazında hesaplanır
+• Rapor kartını paylaştığında isimler otomatik olarak baş harflere kısaltılır
+• Ayrıntılar gizlilik politikamızda
 
 NASIL KULLANILIR
 
-1. Mesajlaşma uygulamanı aç ve bir sohbeti .txt dosyası olarak dışa aktar (yalnızca metin, medya olmadan)
-2. Chat Report'u aç ve dosyayı seç — uygulama sana adım adım yol gösterir
+1. WhatsApp'ta bir sohbeti aç ve Sohbeti dışa aktar'ı seç (yalnızca metin, medya olmadan)
+2. Paylaşım listesinde Chat Report'u seç ya da dosyayı kaydedip uygulamadan aç
 3. Hangisinin sen olduğunu ve ilişkinizin türünü seç
-4. Yaklaşık 30 saniyede raporunu al
+4. Raporun bir iki dakika içinde hazır
 
 Acelen mi var? Herhangi bir sohbeti doğrudan uygulamaya yapıştır, ücretsiz hızlı okumanı hemen al.
 
@@ -73,7 +89,7 @@ BİR NOT: CHAT REPORT NE DEĞİLDİR
 
 Chat Report bir sohbetteki örüntüleri betimler. Terapi değildir, teşhis değildir, kimse hakkında bir hüküm de değildir. Onu bir skor tablosu olarak değil, üzerine konuşmaya değer bir ayna olarak gör.
 
-Chat Report hiçbir mesajlaşma hizmetiyle bağlantılı değildir ve hiçbiri tarafından onaylanmamış veya desteklenmemiştir.
+Chat Report bağımsız bir uygulamadır. WhatsApp veya başka bir mesajlaşma servisiyle bağlantılı değildir; onlar tarafından onaylanmamış veya desteklenmemiştir.
 ```
 > 2,626 字符，留有余量。最后一行免责声明与「Chat Report ne değildir」段落**必须保留** —— 避免与消息服务方产生关联暗示。
 
@@ -98,7 +114,7 @@ Chat Report hiçbir mesajlaşma hizmetiyle bağlantılı değildir ve hiçbiri t
 |---|---|---|
 | App icon | 512×512 PNG，无 alpha | `../play_icon_512.png`（语言无关） |
 | Feature graphic | 1024×500 PNG | `feature_graphic.png` |
-| Phone screenshots | 1080×1920（9:16，符合 Play 2:1 上限）| `screenshot_1..6.png`（本目录，该语言真实界面 + 译文标题） |
+| Phone screenshots | 1080×1920（9:16，符合 Play 2:1 上限）| `screenshot_1..8.png`（本目录，该语言真实界面 + 译文标题） |
 
 > 截图重新生成：`tool/capture_shots.py <原图目录>` → `tool/gen_store_assets.py <原图目录>`。
 > **未提供**：平板截图（若不勾选平板支持则不需要）。

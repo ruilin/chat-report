@@ -10,9 +10,9 @@
 ## App name（上限 30 字符）
 
 ```
-Chat Report: Chat-Analyse
+Chat Report: KI-Chat-Analyse
 ```
-> 25 字符。⚠️ **不要在此处写 "WhatsApp"** —— 属他人商标，Play 会以冒充/商标侵权驳回。
+> 28 字符。⚠️ **不要在此处写 "WhatsApp"** —— 属他人商标，Play 会以冒充/商标侵权驳回。
 
 备选：`Chat Report – Beziehungs-KI`（27 字符）
 
@@ -21,9 +21,9 @@ Chat Report: Chat-Analyse
 ## Short description（上限 80 字符）
 
 ```
-Chat importieren – in 30 Sekunden dein KI-Report über eure Beziehung.
+Analysiere deinen WhatsApp-Chat mit KI: Beziehungs-Report, Warnsignale & mehr.
 ```
-> 69 字符。
+> 78 字符。
 
 ---
 
@@ -34,6 +34,8 @@ Was steckt wirklich in deinen Chats?
 
 Chat Report macht aus einem exportierten Chatverlauf einen echten Report über eure Beziehung – kein Horoskop, sondern Zahlen, die sich auf echte Nachrichten zurückführen lassen.
 
+Funktioniert mit Chats, die aus WhatsApp exportiert wurden.
+
 DAS BEKOMMST DU
 
 • Beziehungswärme – eine einzige Zahl von 0 bis 100, die zeigt, wo eure Beziehung gerade steht
@@ -43,23 +45,37 @@ DAS BEKOMMST DU
 • Chat-Persönlichkeiten – drei verspielte Tags für jeden von euch, abgeleitet aus echten Gewohnheiten
 • Die ganze Analyse – ein ausführlicher Text über euren Rhythmus, eure Wendepunkte und das, was euch jeweils wichtig zu sein scheint, mit Zitaten und Datum
 
+NOCH TIEFER
+
+Alles oben ist kostenlos. Schalte einen Report einmal frei, um seine Tiefenanalyse zu öffnen: ein Einmalkauf, kein Abo.
+
+• Die vier apokalyptischen Reiter – Kritik, Verachtung, Rechtfertigung und Mauern: die vier Gewohnheiten, die der Psychologe John Gottman mit Beziehungsproblemen verbindet, jeweils mit der genauen Nachricht
+• Warnsignale / Positive Signale – worauf du achten solltest und was gut läuft
+• Bindungsstile – wie jeder von euch eher Nähe sucht oder auf Abstand geht
+• Die Sprachen der Liebe – wie jeder von euch Liebe zeigt und sich wünscht
+• Wendepunkte – die Momente, in denen es wärmer oder kühler wurde
+• Mit auf den Weg – drei konkrete Vorschläge für diese Beziehung
+• KI-Coach – stell Fragen zu deinem eigenen Report; die ersten 3 sind kostenlos
+
+Jeder Report zeigt eine Erkenntnis aus der Tiefenanalyse kostenlos, damit du sie vor dem Kauf beurteilen kannst.
+
 ECHTE ZAHLEN STATT BAUCHGEFÜHL
 
 Jede Statistik – Anzahl der Nachrichten, Antwortzeiten, wer zuerst schreibt – wird auf deinem Handy aus deinem eigenen Export berechnet. Die KI deutet diese Zahlen und eure Gespräche, erfindet sie aber nie. Zitate kommen mit Datum, damit du sie selbst nachprüfen kannst.
 
 PRIVATSPHÄRE ZUERST
 
-• Deine Chat-Datei wird komplett auf deinem Gerät eingelesen, und auch alle Statistiken werden dort berechnet
-• Für deinen Report wird der Chattext über eine verschlüsselte Verbindung an unseren KI-Anbieter gesendet – wir fragen dich vorher, und wir speichern ihn nie
-• Auf unseren Servern wird nichts gespeichert, und du brauchst kein Konto
-• Wenn du eine Report-Karte teilst, werden Namen automatisch auf Initialen gekürzt – das lässt sich nicht abschalten
+• Kein Konto, keine Anmeldung
+• Deine Statistiken werden auf deinem Gerät berechnet
+• Beim Teilen einer Report-Karte werden Namen automatisch zu Initialen gekürzt
+• Die Details stehen in unserer Datenschutzerklärung
 
 SO FUNKTIONIERT'S
 
-1. Öffne deine Messaging-App und exportiere einen Chat als .txt-Datei (nur Text, ohne Medien)
-2. Öffne Chat Report und wähle die Datei aus – die App führt dich Schritt für Schritt durch
-3. Wähle, wer du bist und um welche Art von Beziehung es geht
-4. Nach etwa 30 Sekunden ist dein Report fertig
+1. Öffne einen Chat in WhatsApp und wähle „Chat exportieren“ (nur Text, ohne Medien)
+2. Wähle Chat Report in der Teilen-Liste – oder speichere die Datei und öffne sie in der App
+3. Wähle aus, wer du bist und welche Beziehung ihr habt
+4. Dein Report ist in ein bis zwei Minuten fertig
 
 Wenig Zeit? Füge eine Unterhaltung direkt in die App ein und hol dir einen kostenlosen Schnell-Check.
 
@@ -73,7 +89,7 @@ WAS DAS NICHT IST
 
 Chat Report beschreibt Muster in einem Gespräch. Es ist keine Therapie, keine Diagnose und kein Urteil über irgendwen. Sieh es als Spiegel, über den es sich zu reden lohnt – nicht als Punktetabelle.
 
-Chat Report ist mit keinem Messaging-Dienst verbunden und wird von keinem solchen Dienst unterstützt oder empfohlen.
+Chat Report ist eine unabhängige App. Sie steht in keiner Verbindung zu WhatsApp oder einem anderen Messenger-Dienst und wird von diesen weder unterstützt noch gesponsert.
 ```
 > 2,777 字符，留有余量。最后一行免责声明与「Was das nicht ist」段落**必须保留** —— 避免与消息服务方产生关联暗示。
 
@@ -98,7 +114,7 @@ Chat Report ist mit keinem Messaging-Dienst verbunden und wird von keinem solche
 |---|---|---|
 | App icon | 512×512 PNG，无 alpha | `../play_icon_512.png`（语言无关） |
 | Feature graphic | 1024×500 PNG | `feature_graphic.png` |
-| Phone screenshots | 1080×1920（9:16，符合 Play 2:1 上限）| `screenshot_1..6.png`（本目录，该语言真实界面 + 译文标题） |
+| Phone screenshots | 1080×1920（9:16，符合 Play 2:1 上限）| `screenshot_1..8.png`（本目录，该语言真实界面 + 译文标题） |
 
 > 截图重新生成：`tool/capture_shots.py <原图目录>` → `tool/gen_store_assets.py <原图目录>`。
 > **未提供**：平板截图（若不勾选平板支持则不需要）。

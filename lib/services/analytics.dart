@@ -167,6 +167,10 @@ class Analytics {
 
   static void shareSheetOpen() => _log('share_sheet_open');
 
+  /// 向商店发起了评分请求（弹不弹窗由商店决定）。[trigger]: share / report_read
+  static void reviewPrompt(String trigger) =>
+      _log('review_prompt', {'trigger': trigger});
+
   /// [status]: success / dismissed / unavailable / error
   static void shareResult(String status,
           {String card = 'warmth', bool tall = false}) =>

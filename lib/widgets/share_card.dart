@@ -13,6 +13,7 @@ import '../models/deep_dive.dart';
 import '../models/report.dart';
 import '../services/analytics.dart';
 import '../services/purchases.dart';
+import '../services/review_prompt.dart';
 import '../theme.dart';
 
 /// 卡片内容：默认的关系温度，或解锁后可选的爱的语言
@@ -89,8 +90,9 @@ class ShareCard extends StatelessWidget {
               Text(emoji, style: const TextStyle(fontSize: 13)),
               const SizedBox(width: 8),
               Expanded(
-                child: RichText(
-                  text: TextSpan(
+                // Text.rich 会继承主题字体和系统字号设置，RichText 不会
+                child: Text.rich(
+                  TextSpan(
                     style: const TextStyle(
                       fontSize: 12.5,
                       color: soft,
@@ -390,6 +392,10 @@ Future<void> showShareSheet(BuildContext context, RelationshipReport report) {
                               boundaryKey, shareMessage(L.of(ctx)));
                           Analytics.shareResult(status.name,
                               card: style.name, tall: tall);
+                          // 愿意分享说明对报告满意，这时请他评分最合适
+                          if (status == ShareResultStatus.success) {
+                            ReviewPrompt.maybeAsk('share');
+                          }
                         } catch (e) {
                           Analytics.shareResult('error',
                               card: style.name, tall: tall);

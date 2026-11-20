@@ -4,6 +4,7 @@ import '../l10n/app_localizations.dart';
 import '../models/report.dart';
 import '../services/analytics.dart';
 import '../services/purchases.dart';
+import '../services/review_prompt.dart';
 import '../theme.dart';
 import '../widgets/charts.dart';
 import '../widgets/deep_dive_section.dart';
@@ -28,6 +29,18 @@ class ReportScreen extends StatefulWidget {
 class _ReportScreenState extends State<ReportScreen> {
   RelationshipReport get report => widget.report;
   bool get isSample => widget.isSample;
+
+  final _openedAt = DateTime.now();
+
+  @override
+  void dispose() {
+    // 认真看完一份自己的报告后离开，是请用户评分的合适时机
+    if (!isSample &&
+        DateTime.now().difference(_openedAt) >= ReviewPrompt.minReadTime) {
+      ReviewPrompt.maybeAsk('report_read');
+    }
+    super.dispose();
+  }
 
   // 报告很长，付费区在最底部，顶部给几个直达入口
   final _curveKey = GlobalKey();
@@ -59,7 +72,8 @@ class _ReportScreenState extends State<ReportScreen> {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          chip(l.sectionEmotionCurve, _curveKey),
+          // 板块标题带「· 按月」这类后缀，按钮上只留名字
+          chip(l.sectionEmotionCurve.split(' · ').first, _curveKey),
           chip(l.sectionFullReading, _readingKey),
           chip(l.deepDiveTitle, _diveKey),
           if (!isSample) chip(l.coachTitle, _coachKey),
