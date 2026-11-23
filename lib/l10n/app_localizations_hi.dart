@@ -600,4 +600,66 @@ class LHi extends L {
 
   @override
   String get coachReportThanks => 'धन्यवाद, हमें आपकी शिकायत मिल गई है।';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return '$name को लिखें';
+  }
+
+  @override
+  String get draftsEntrySubtitle =>
+      'AI एक मैसेज का ड्राफ़्ट लिखता है। आप उसे बदलकर खुद भेजते हैं।';
+
+  @override
+  String get draftNote =>
+      'ये AI के ड्राफ़्ट हैं। कुछ भी भेजने से पहले इन्हें अपने शब्दों में लिखें।';
+
+  @override
+  String get draftAppreciate => 'तारीफ़ जताएँ';
+
+  @override
+  String get draftAppreciateHint => 'कोई एक ख़ास बात जो वे अच्छे से करते हैं';
+
+  @override
+  String get draftRepair => 'झगड़े के बाद सुलह';
+
+  @override
+  String get draftRepairHint =>
+      'जिस बात पर बार-बार झगड़ा होता है, उसे शांति से छेड़ने की शुरुआत';
+
+  @override
+  String get draftAsk => 'अपनी ज़रूरत कहें';
+
+  @override
+  String get draftAskHint => 'बिना दोष दिए, साफ़ गुज़ारिश';
+
+  @override
+  String get draftWrite => 'ड्राफ़्ट लिखें';
+
+  @override
+  String get draftWriting => 'लिख रहे हैं…';
+
+  @override
+  String get draftAgain => 'दूसरा आज़माएँ';
+
+  @override
+  String get draftCopy => 'कॉपी करें';
+
+  @override
+  String get draftSend => 'भेजें';
+
+  @override
+  String get draftCopied => 'कॉपी हो गया';
+
+  @override
+  String get draftLocked =>
+      'इन्हें इस्तेमाल करने के लिए यह रिपोर्ट अनलॉक करें।';
+
+  @override
+  String get draftExNote =>
+      'यहाँ हम एक्स के लिए मैसेज नहीं लिखते। अपने विचार सुलझाने के लिए AI कोच आज़माएँ।';
+
+  @override
+  String get draftUnsafe =>
+      'इस चैट में कुछ बातें चिंताजनक हैं, इसलिए मैसेज का ड्राफ़्ट लिखना सही क़दम नहीं है। अगर आप असुरक्षित महसूस करते हैं, तो किसी भरोसेमंद व्यक्ति या स्थानीय हेल्पलाइन से संपर्क करें।';
 }

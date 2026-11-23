@@ -602,4 +602,66 @@ class LIt extends L {
   @override
   String get coachReportThanks =>
       'Grazie, abbiamo ricevuto la tua segnalazione.';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return 'Scrivi a $name';
+  }
+
+  @override
+  String get draftsEntrySubtitle =>
+      'L\'IA prepara un messaggio. Tu lo modifichi e lo invii.';
+
+  @override
+  String get draftNote =>
+      'Sono bozze dell\'IA. Riscrivile con parole tue prima di inviare qualcosa.';
+
+  @override
+  String get draftAppreciate => 'Di\' cosa apprezzi';
+
+  @override
+  String get draftAppreciateHint =>
+      'Una cosa precisa che l\'altra persona fa bene';
+
+  @override
+  String get draftRepair => 'Ricucire dopo un litigio';
+
+  @override
+  String get draftRepairHint =>
+      'Un modo calmo per riaprire il tema su cui litigate sempre';
+
+  @override
+  String get draftAsk => 'Chiedi ciò di cui hai bisogno';
+
+  @override
+  String get draftAskHint => 'Una richiesta chiara, senza accuse';
+
+  @override
+  String get draftWrite => 'Scrivi una bozza';
+
+  @override
+  String get draftWriting => 'Sto scrivendo…';
+
+  @override
+  String get draftAgain => 'Provane un\'altra';
+
+  @override
+  String get draftCopy => 'Copia';
+
+  @override
+  String get draftSend => 'Invia';
+
+  @override
+  String get draftCopied => 'Copiato';
+
+  @override
+  String get draftLocked => 'Sblocca questo report per usarle.';
+
+  @override
+  String get draftExNote =>
+      'Qui non prepariamo messaggi per un ex. Per fare chiarezza nei tuoi pensieri, prova il coach IA.';
+
+  @override
+  String get draftUnsafe =>
+      'In questa chat ci sono cose preoccupanti, quindi scrivere un messaggio non è il passo giusto. Se non ti senti al sicuro, contatta una persona di fiducia o un numero di aiuto locale.';
 }

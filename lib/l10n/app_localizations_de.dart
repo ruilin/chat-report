@@ -601,4 +601,66 @@ class LDe extends L {
 
   @override
   String get coachReportThanks => 'Danke, wir haben deine Meldung erhalten.';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return 'Schreib $name';
+  }
+
+  @override
+  String get draftsEntrySubtitle =>
+      'Die KI entwirft eine Nachricht. Du passt sie an und schickst sie selbst.';
+
+  @override
+  String get draftNote =>
+      'Das sind KI-Entwürfe. Formuliere sie in deinen eigenen Worten, bevor du etwas schickst.';
+
+  @override
+  String get draftAppreciate => 'Sag, was du schätzt';
+
+  @override
+  String get draftAppreciateHint =>
+      'Eine konkrete Sache, die die andere Person gut macht';
+
+  @override
+  String get draftRepair => 'Nach einem Streit versöhnen';
+
+  @override
+  String get draftRepairHint =>
+      'Ein ruhiger Einstieg in das Thema, über das ihr immer streitet';
+
+  @override
+  String get draftAsk => 'Bitte um das, was du brauchst';
+
+  @override
+  String get draftAskHint => 'Eine klare Bitte, ohne Vorwurf';
+
+  @override
+  String get draftWrite => 'Entwurf schreiben';
+
+  @override
+  String get draftWriting => 'Schreibe…';
+
+  @override
+  String get draftAgain => 'Anderen Entwurf';
+
+  @override
+  String get draftCopy => 'Kopieren';
+
+  @override
+  String get draftSend => 'Senden';
+
+  @override
+  String get draftCopied => 'Kopiert';
+
+  @override
+  String get draftLocked => 'Schalte diesen Report frei, um sie zu nutzen.';
+
+  @override
+  String get draftExNote =>
+      'Für Ex-Partner entwerfen wir hier keine Nachrichten. Um deine Gedanken zu sortieren, probier den KI-Coach.';
+
+  @override
+  String get draftUnsafe =>
+      'Einiges in diesem Chat ist besorgniserregend, deshalb ist ein Nachrichtenentwurf hier nicht der richtige Schritt. Wenn du dich nicht sicher fühlst, wende dich an eine Vertrauensperson oder ein Hilfetelefon in deiner Nähe.';
 }

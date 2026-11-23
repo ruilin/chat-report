@@ -40,11 +40,13 @@ class ZaiClient {
     required Duration firstTextTimeout,
     required void Function(String text) onText,
     int maxTokens = 2048,
+    double? temperature,
   }) async {
     final body = jsonEncode({
       'model': model,
       'thinking': {'type': 'disabled'},
       'max_tokens': maxTokens,
+      'temperature': ?temperature,
       'stream': true,
       'messages': [
         {'role': 'system', 'content': system},

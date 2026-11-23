@@ -601,4 +601,65 @@ class LEs extends L {
 
   @override
   String get coachReportThanks => 'Gracias, hemos recibido tu denuncia.';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return 'Escríbele a $name';
+  }
+
+  @override
+  String get draftsEntrySubtitle =>
+      'La IA redacta un mensaje. Tú lo editas y lo envías.';
+
+  @override
+  String get draftNote =>
+      'Son borradores de la IA. Ponlos en tus propias palabras antes de enviar nada.';
+
+  @override
+  String get draftAppreciate => 'Di lo que valoras';
+
+  @override
+  String get draftAppreciateHint => 'Algo concreto que hace bien';
+
+  @override
+  String get draftRepair => 'Reparar tras una pelea';
+
+  @override
+  String get draftRepairHint =>
+      'Una forma tranquila de abrir el tema por el que siempre discuten';
+
+  @override
+  String get draftAsk => 'Pide lo que necesitas';
+
+  @override
+  String get draftAskHint => 'Una petición clara, sin reproches';
+
+  @override
+  String get draftWrite => 'Escribir un borrador';
+
+  @override
+  String get draftWriting => 'Escribiendo…';
+
+  @override
+  String get draftAgain => 'Probar otro';
+
+  @override
+  String get draftCopy => 'Copiar';
+
+  @override
+  String get draftSend => 'Enviar';
+
+  @override
+  String get draftCopied => 'Copiado';
+
+  @override
+  String get draftLocked => 'Desbloquea este informe para usarlos.';
+
+  @override
+  String get draftExNote =>
+      'Aquí no redactamos mensajes para un ex. Para ordenar tus ideas, prueba el coach de IA.';
+
+  @override
+  String get draftUnsafe =>
+      'Hay cosas en este chat que preocupan, así que redactar un mensaje no es el paso adecuado. Si no te sientes a salvo, contacta con alguien de confianza o con una línea de ayuda local.';
 }

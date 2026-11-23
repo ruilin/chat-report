@@ -87,21 +87,32 @@ class EvidenceItem {
   final String detail;
   final String quote;
 
+  /// 原话是谁说的：'you' 或 'partner'。从聊天记录里查出来的，不是模型说的；
+  /// 查不到或旧报告里没有时为 null
+  final String? saidBy;
+
   const EvidenceItem({
     required this.date,
     required this.title,
     required this.detail,
     required this.quote,
+    this.saidBy,
   });
 
-  Map<String, dynamic> toJson() =>
-      {'date': date, 'title': title, 'detail': detail, 'quote': quote};
+  Map<String, dynamic> toJson() => {
+        'date': date,
+        'title': title,
+        'detail': detail,
+        'quote': quote,
+        'said_by': ?saidBy,
+      };
 
   factory EvidenceItem.fromJson(Map<String, dynamic> j) => EvidenceItem(
         date: j['date'] as String? ?? '',
         title: j['title'] as String? ?? '',
         detail: j['detail'] as String? ?? '',
         quote: j['quote'] as String? ?? '',
+        saidBy: j['said_by'] as String?,
       );
 }
 
@@ -113,6 +124,7 @@ class TurningPoint extends EvidenceItem {
     required super.title,
     required super.detail,
     required super.quote,
+    super.saidBy,
     required this.rising,
   });
 
@@ -124,6 +136,7 @@ class TurningPoint extends EvidenceItem {
         title: j['title'] as String? ?? '',
         detail: j['detail'] as String? ?? '',
         quote: j['quote'] as String? ?? '',
+        saidBy: j['said_by'] as String?,
         rising: j['rising'] as bool? ?? true,
       );
 }
@@ -159,6 +172,7 @@ class HorsemanItem extends EvidenceItem {
     required super.title,
     required super.detail,
     required super.quote,
+    super.saidBy,
     required this.kind,
     required this.byYou,
   });
@@ -178,6 +192,7 @@ class HorsemanItem extends EvidenceItem {
         title: e.title,
         detail: e.detail,
         quote: e.quote,
+        saidBy: e.saidBy,
         kind: kind,
         byYou: v['by_you'] == true);
   }

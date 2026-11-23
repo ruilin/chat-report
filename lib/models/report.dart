@@ -1,5 +1,6 @@
 import 'coach.dart';
 import 'deep_dive.dart';
+import 'draft.dart';
 import 'metrics.dart';
 
 /// 报告页渲染所需的全部内容。
@@ -30,6 +31,9 @@ class RelationshipReport {
   /// 和 AI 教练的对话
   final List<CoachMessage> coachMessages;
 
+  /// 「写给 TA 的话」里最近写出的草稿，每种用途留一条
+  final List<MessageDraft> drafts;
+
   RelationshipReport({
     String? id,
     DateTime? createdAt,
@@ -47,7 +51,9 @@ class RelationshipReport {
     this.deepDiveUnlocked = false,
     this.relationship = '',
     List<CoachMessage>? coachMessages,
+    List<MessageDraft>? drafts,
   })  : coachMessages = coachMessages ?? [],
+        drafts = drafts ?? [],
         createdAt = createdAt ?? DateTime.now(),
         id = id ?? (createdAt ?? DateTime.now()).microsecondsSinceEpoch.toString();
 
@@ -68,6 +74,7 @@ class RelationshipReport {
         'deep_dive_unlocked': deepDiveUnlocked,
         'relationship': relationship,
         'coach_messages': [for (final m in coachMessages) m.toJson()],
+        'drafts': [for (final d in drafts) d.toJson()],
       };
 
   factory RelationshipReport.fromJson(Map<String, dynamic> j) {
@@ -103,6 +110,10 @@ class RelationshipReport {
         for (final m in (j['coach_messages'] as List? ?? const []))
           CoachMessage.fromJson(m as Map<String, dynamic>),
       ],
+      drafts: [
+        for (final d in (j['drafts'] as List? ?? const []))
+          ?MessageDraft.maybeFromJson(d),
+      ],
     );
   }
 }
@@ -136,11 +147,15 @@ class Milestone {
   final String date;
   final String title;
   final String quote;
-  Milestone(this.date, this.title, this.quote);
+
+  /// 原话是谁说的：'you' 或 'partner'，从聊天记录里查出来；查不到为 null
+  final String? saidBy;
+  Milestone(this.date, this.title, this.quote, {this.saidBy});
 
   Map<String, dynamic> toJson() =>
-      {'date': date, 'title': title, 'quote': quote};
+      {'date': date, 'title': title, 'quote': quote, 'said_by': ?saidBy};
 
   factory Milestone.fromJson(Map<String, dynamic> j) => Milestone(
-      j['date'] as String, j['title'] as String, j['quote'] as String);
+      j['date'] as String, j['title'] as String, j['quote'] as String,
+      saidBy: j['said_by'] as String?);
 }

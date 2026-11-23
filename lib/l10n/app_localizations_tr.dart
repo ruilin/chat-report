@@ -600,4 +600,65 @@ class LTr extends L {
 
   @override
   String get coachReportThanks => 'Teşekkürler, bildirimini aldık.';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return '$name için yaz';
+  }
+
+  @override
+  String get draftsEntrySubtitle =>
+      'Yapay zekâ bir mesaj taslağı yazar. Sen düzenler ve kendin gönderirsin.';
+
+  @override
+  String get draftNote =>
+      'Bunlar yapay zekâ taslakları. Bir şey göndermeden önce kendi cümlelerinle yaz.';
+
+  @override
+  String get draftAppreciate => 'Takdirini söyle';
+
+  @override
+  String get draftAppreciateHint => 'Karşı tarafın iyi yaptığı somut bir şey';
+
+  @override
+  String get draftRepair => 'Kavgadan sonra onar';
+
+  @override
+  String get draftRepairHint =>
+      'Hep tartıştığınız konuyu sakince açmanın bir yolu';
+
+  @override
+  String get draftAsk => 'İhtiyacını iste';
+
+  @override
+  String get draftAskHint => 'Suçlamadan, açık bir rica';
+
+  @override
+  String get draftWrite => 'Taslak yaz';
+
+  @override
+  String get draftWriting => 'Yazılıyor…';
+
+  @override
+  String get draftAgain => 'Başka bir tane';
+
+  @override
+  String get draftCopy => 'Kopyala';
+
+  @override
+  String get draftSend => 'Gönder';
+
+  @override
+  String get draftCopied => 'Kopyalandı';
+
+  @override
+  String get draftLocked => 'Bunları kullanmak için raporun kilidini aç.';
+
+  @override
+  String get draftExNote =>
+      'Burada eski sevgiliye mesaj taslağı yazmıyoruz. Kendi düşüncelerini toparlamak için yapay zekâ koçunu dene.';
+
+  @override
+  String get draftUnsafe =>
+      'Bu sohbette endişe verici şeyler var, bu yüzden mesaj taslağı yazmak doğru adım değil. Kendini güvende hissetmiyorsan güvendiğin birine ya da yerel bir yardım hattına ulaş.';
 }

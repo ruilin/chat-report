@@ -145,6 +145,18 @@ class Analytics {
   static void deepDiveFail(String errorKind) =>
       _log('deep_dive_fail', {'error_kind': errorKind});
 
+  // —— 写给 TA 的话（不上报草稿内容）——
+
+  static void draftsOpen() => _log('drafts_open');
+
+  /// [result]: ok / refused（不适合起草）/ error
+  static void draftGenerate(String kind, String result) =>
+      _log('draft_generate', {'kind': kind, 'result': result});
+
+  /// [action]: copy / send
+  static void draftAction(String kind, String action) =>
+      _log('draft_action', {'kind': kind, 'action': action});
+
   // —— AI 教练（不上报提问和回答内容）——
 
   static void coachOpen() => _log('coach_open');

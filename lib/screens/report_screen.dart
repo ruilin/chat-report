@@ -10,6 +10,7 @@ import '../widgets/charts.dart';
 import '../widgets/deep_dive_section.dart';
 import '../widgets/share_card.dart';
 import 'coach_screen.dart';
+import 'drafts_screen.dart';
 
 /// 报告页 —— 整个产品为这一页服务。
 /// 原则：每个数字可追溯（本地统计 + 金句附时间）；
@@ -197,6 +198,8 @@ class _ReportScreenState extends State<ReportScreen> {
             if (!isSample) ...[
               const SizedBox(height: 14),
               KeyedSubtree(key: _coachKey, child: _coachCard(context, l)),
+              const SizedBox(height: 14),
+              _draftsCard(context, l),
             ],
           ],
         ),
@@ -204,30 +207,51 @@ class _ReportScreenState extends State<ReportScreen> {
     );
   }
 
-  Widget _coachCard(BuildContext context, L l) {
+  Widget _coachCard(BuildContext context, L l) => _entryCard(
+        emoji: '💬',
+        title: l.coachEntryTitle,
+        subtitle: l.coachEntrySubtitle,
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            settings: const RouteSettings(name: 'coach'),
+            builder: (_) => CoachScreen(report: report))),
+      );
+
+  Widget _draftsCard(BuildContext context, L l) => _entryCard(
+        emoji: '✍️',
+        title: l.draftsEntryTitle(report.metrics.partner),
+        subtitle: l.draftsEntrySubtitle,
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            settings: const RouteSettings(name: 'drafts'),
+            builder: (_) => DraftsScreen(report: report))),
+      );
+
+  Widget _entryCard({
+    required String emoji,
+    required String title,
+    required String subtitle,
+    required VoidCallback onTap,
+  }) {
     return UCard(
       padding: EdgeInsets.zero,
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              settings: const RouteSettings(name: 'coach'),
-              builder: (_) => CoachScreen(report: report))),
+          onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                const Text('💬', style: TextStyle(fontSize: 19)),
+                Text(emoji, style: const TextStyle(fontSize: 19)),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(l.coachEntryTitle,
+                      Text(title,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.w700)),
-                      Text(l.coachEntrySubtitle,
+                      Text(subtitle,
                           style: const TextStyle(
                               fontSize: 11.5, color: UColors.muted)),
                     ],

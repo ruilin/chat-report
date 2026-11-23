@@ -89,7 +89,7 @@ class AnalysisPipeline {
 
     onProgress?.call('Writing your report', .75);
     final report =
-        await _aggregate(metrics, relationship, monthResults, language);
+        await _aggregate(data, metrics, relationship, monthResults, language);
     DeepDiveJobs.start(report, () async {
       final client = _ownsClient ? ZaiClient() : _client;
       try {
@@ -153,6 +153,7 @@ class AnalysisPipeline {
   }
 
   Future<RelationshipReport> _aggregate(
+    ChatData data,
     ChatMetrics metrics,
     Relationship relationship,
     Map<String, Map<String, dynamic>> months,
@@ -209,6 +210,7 @@ class AnalysisPipeline {
     ));
 
     final curve = _buildCurve(metrics, months, json['month_notes']);
+    final verifier = QuoteVerifier(data);
 
     List<String> strList(dynamic v, {int max = 3}) => [
           for (final s in (v as List? ?? [])) s.toString()
@@ -229,7 +231,9 @@ class AnalysisPipeline {
         for (final m in (json['milestones'] as List? ?? []))
           if (m is Map)
             Milestone(m['date']?.toString() ?? '', m['title']?.toString() ?? '',
-                m['quote']?.toString() ?? ''),
+                m['quote']?.toString() ?? '',
+                saidBy: _saidBy(
+                    verifier, m['quote']?.toString() ?? '', metrics.you)),
       ].take(5).toList(),
       advice: strList(json['advice']),
       relationship: relationship.promptName,
@@ -286,7 +290,7 @@ class AnalysisPipeline {
               'monthly': months,
             }),
           ));
-      final dive = parseDeepDive(json, QuoteVerifier(data));
+      final dive = parseDeepDive(json, QuoteVerifier(data), you: metrics.you);
       return dive.isEmpty ? null : dive;
     } catch (e) {
       // ignore: avoid_print
@@ -296,10 +300,20 @@ class AnalysisPipeline {
     }
   }
 
-  /// 把模型输出转成 [DeepDive]。引用对不上聊天记录的条目直接丢弃
-  static DeepDive parseDeepDive(
-      Map<String, dynamic> json, QuoteVerifier verifier) {
+  /// 原话是用户说的还是对方说的；查不到返回 null
+  static String? _saidBy(QuoteVerifier verifier, String quote, String you) {
+    final sender = verifier.senderOf(quote);
+    if (sender == null) return null;
+    return sender == you ? 'you' : 'partner';
+  }
+
+  /// 把模型输出转成 [DeepDive]。引用对不上聊天记录的条目直接丢弃。
+  /// 给了 [you]（用户在聊天里的名字）就顺便标出每句原话是谁说的
+  static DeepDive parseDeepDive(Map<String, dynamic> json, QuoteVerifier verifier,
+      {String? you}) {
     final month = RegExp(r'^\d{4}-\d{2}$');
+    String? saidBy(String quote) =>
+        you == null ? null : _saidBy(verifier, quote, you);
 
     Map<String, String>? verified(dynamic v) {
       if (v is! Map) return null;
@@ -322,7 +336,8 @@ class AnalysisPipeline {
                   date: m['date']!,
                   title: m['title']!,
                   detail: m['detail']!,
-                  quote: m['quote']!),
+                  quote: m['quote']!,
+                  saidBy: saidBy(m['quote']!)),
         ].take(max).toList();
 
     final conflict = json['conflict'];
@@ -352,8 +367,10 @@ class AnalysisPipeline {
                   title: m['title']!,
                   detail: m['detail']!,
                   quote: m['quote']!,
+                  saidBy: saidBy(m['quote']!),
                   kind: kind,
-                  byYou: v['who'] == 'you'),
+                  // 能查到是谁说的就以聊天记录为准，模型常把人弄反
+                  byYou: (saidBy(m['quote']!) ?? v['who']) == 'you'),
     ].take(4).toList();
     // 模型常把同一句话又列成红旗，已经算作四骑士的就不重复
     final horsemenQuotes = {
@@ -391,6 +408,7 @@ class AnalysisPipeline {
                 title: m['title']!,
                 detail: m['detail']!,
                 quote: m['quote']!,
+                saidBy: saidBy(m['quote']!),
                 rising: (v as Map)['direction']?.toString() != 'down'),
       ].take(4).toList(),
     );

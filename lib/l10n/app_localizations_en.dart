@@ -596,4 +596,65 @@ class LEn extends L {
 
   @override
   String get coachReportThanks => 'Thanks, we\'ve received your report.';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return 'Write to $name';
+  }
+
+  @override
+  String get draftsEntrySubtitle =>
+      'AI drafts a message. You edit it and send it yourself.';
+
+  @override
+  String get draftNote =>
+      'These are AI drafts. Put them in your own words before you send anything.';
+
+  @override
+  String get draftAppreciate => 'Say what you appreciate';
+
+  @override
+  String get draftAppreciateHint => 'One specific thing they do well';
+
+  @override
+  String get draftRepair => 'Repair after a fight';
+
+  @override
+  String get draftRepairHint =>
+      'A calm opener about the thing you keep fighting over';
+
+  @override
+  String get draftAsk => 'Ask for what you need';
+
+  @override
+  String get draftAskHint => 'A clear request, without blame';
+
+  @override
+  String get draftWrite => 'Write a draft';
+
+  @override
+  String get draftWriting => 'Writing…';
+
+  @override
+  String get draftAgain => 'Try another';
+
+  @override
+  String get draftCopy => 'Copy';
+
+  @override
+  String get draftSend => 'Send';
+
+  @override
+  String get draftCopied => 'Copied';
+
+  @override
+  String get draftLocked => 'Unlock this report to use these.';
+
+  @override
+  String get draftExNote =>
+      'We don\'t draft messages to an ex here. To sort through your own thoughts, try the AI coach.';
+
+  @override
+  String get draftUnsafe =>
+      'Some things in this chat are worrying, so a drafted message isn\'t the right step. If you feel unsafe, reach out to someone you trust or a local helpline.';
 }

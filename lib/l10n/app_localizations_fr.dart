@@ -608,4 +608,65 @@ class LFr extends L {
   @override
   String get coachReportThanks =>
       'Merci, nous avons bien reçu votre signalement.';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return 'Écrire à $name';
+  }
+
+  @override
+  String get draftsEntrySubtitle =>
+      'L\'IA rédige un message. Tu le modifies et tu l\'envoies toi-même.';
+
+  @override
+  String get draftNote =>
+      'Ce sont des brouillons de l\'IA. Reformule-les avec tes mots avant d\'envoyer quoi que ce soit.';
+
+  @override
+  String get draftAppreciate => 'Dire ce que tu apprécies';
+
+  @override
+  String get draftAppreciateHint => 'Une chose précise que l\'autre fait bien';
+
+  @override
+  String get draftRepair => 'Réparer après une dispute';
+
+  @override
+  String get draftRepairHint =>
+      'Une façon calme d\'aborder le sujet qui revient toujours';
+
+  @override
+  String get draftAsk => 'Demander ce dont tu as besoin';
+
+  @override
+  String get draftAskHint => 'Une demande claire, sans reproche';
+
+  @override
+  String get draftWrite => 'Écrire un brouillon';
+
+  @override
+  String get draftWriting => 'Rédaction…';
+
+  @override
+  String get draftAgain => 'En essayer un autre';
+
+  @override
+  String get draftCopy => 'Copier';
+
+  @override
+  String get draftSend => 'Envoyer';
+
+  @override
+  String get draftCopied => 'Copié';
+
+  @override
+  String get draftLocked => 'Débloque ce rapport pour les utiliser.';
+
+  @override
+  String get draftExNote =>
+      'Ici, on ne rédige pas de message pour un ex. Pour y voir plus clair, essaie le coach IA.';
+
+  @override
+  String get draftUnsafe =>
+      'Certaines choses dans cette discussion sont inquiétantes : rédiger un message n\'est pas la bonne étape. Si tu ne te sens pas en sécurité, contacte une personne de confiance ou une ligne d\'écoute locale.';
 }

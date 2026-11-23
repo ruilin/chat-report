@@ -602,4 +602,65 @@ class LPt extends L {
 
   @override
   String get coachReportThanks => 'Obrigado, recebemos sua denúncia.';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return 'Escreva para $name';
+  }
+
+  @override
+  String get draftsEntrySubtitle =>
+      'A IA redige uma mensagem. Você edita e envia.';
+
+  @override
+  String get draftNote =>
+      'São rascunhos da IA. Coloque nas suas palavras antes de enviar qualquer coisa.';
+
+  @override
+  String get draftAppreciate => 'Diga o que você valoriza';
+
+  @override
+  String get draftAppreciateHint => 'Uma coisa específica que a pessoa faz bem';
+
+  @override
+  String get draftRepair => 'Reparar depois de uma briga';
+
+  @override
+  String get draftRepairHint =>
+      'Um jeito calmo de abrir o assunto que sempre gera briga';
+
+  @override
+  String get draftAsk => 'Peça o que você precisa';
+
+  @override
+  String get draftAskHint => 'Um pedido claro, sem culpar';
+
+  @override
+  String get draftWrite => 'Escrever um rascunho';
+
+  @override
+  String get draftWriting => 'Escrevendo…';
+
+  @override
+  String get draftAgain => 'Tentar outro';
+
+  @override
+  String get draftCopy => 'Copiar';
+
+  @override
+  String get draftSend => 'Enviar';
+
+  @override
+  String get draftCopied => 'Copiado';
+
+  @override
+  String get draftLocked => 'Desbloqueie este relatório para usar.';
+
+  @override
+  String get draftExNote =>
+      'Aqui não redigimos mensagens para ex. Para organizar seus pensamentos, experimente o coach de IA.';
+
+  @override
+  String get draftUnsafe =>
+      'Há coisas nesta conversa que preocupam, então redigir uma mensagem não é o passo certo. Se você não se sente em segurança, procure alguém de confiança ou uma linha de apoio local.';
 }

@@ -562,6 +562,63 @@ class LZh extends L {
 
   @override
   String get coachReportThanks => '谢谢，我们已收到你的举报。';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return '写给 $name 的话';
+  }
+
+  @override
+  String get draftsEntrySubtitle => 'AI 起草，你来改，再由你自己发出去';
+
+  @override
+  String get draftNote => '这些是 AI 写的初稿，改成你自己的话再发。';
+
+  @override
+  String get draftAppreciate => '表达欣赏';
+
+  @override
+  String get draftAppreciateHint => '说出一件 TA 做得好的事';
+
+  @override
+  String get draftRepair => '修复一次争吵';
+
+  @override
+  String get draftRepairHint => '为你们常吵的那件事开个头';
+
+  @override
+  String get draftAsk => '提出一个需求';
+
+  @override
+  String get draftAskHint => '不带指责地说出你想要的';
+
+  @override
+  String get draftWrite => '写一条';
+
+  @override
+  String get draftWriting => '正在写…';
+
+  @override
+  String get draftAgain => '换一条';
+
+  @override
+  String get draftCopy => '复制';
+
+  @override
+  String get draftSend => '发送';
+
+  @override
+  String get draftCopied => '已复制';
+
+  @override
+  String get draftLocked => '解锁这份报告后可以使用。';
+
+  @override
+  String get draftExNote => '这里不帮你给前任写消息。想整理自己的想法，可以问问 AI 教练。';
+
+  @override
+  String get draftUnsafe =>
+      '这段聊天里有让人担心的内容，这时候不适合起草消息。如果你觉得不安全，请联系你信任的人或当地的求助热线。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -1122,4 +1179,61 @@ class LZhHant extends LZh {
 
   @override
   String get coachReportThanks => '謝謝，我們已收到你的檢舉。';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return '寫給 $name 的話';
+  }
+
+  @override
+  String get draftsEntrySubtitle => 'AI 起草，你來改，再由你自己發出去';
+
+  @override
+  String get draftNote => '這些是 AI 寫的初稿，改成你自己的話再發。';
+
+  @override
+  String get draftAppreciate => '表達欣賞';
+
+  @override
+  String get draftAppreciateHint => '說出一件對方做得好的事';
+
+  @override
+  String get draftRepair => '修復一次爭吵';
+
+  @override
+  String get draftRepairHint => '為你們常吵的那件事開個頭';
+
+  @override
+  String get draftAsk => '提出一個需求';
+
+  @override
+  String get draftAskHint => '不帶指責地說出你想要的';
+
+  @override
+  String get draftWrite => '寫一則';
+
+  @override
+  String get draftWriting => '正在寫…';
+
+  @override
+  String get draftAgain => '換一則';
+
+  @override
+  String get draftCopy => '複製';
+
+  @override
+  String get draftSend => '傳送';
+
+  @override
+  String get draftCopied => '已複製';
+
+  @override
+  String get draftLocked => '解鎖這份報告後可以使用。';
+
+  @override
+  String get draftExNote => '這裡不幫你給前任寫訊息。想整理自己的想法，可以問問 AI 教練。';
+
+  @override
+  String get draftUnsafe =>
+      '這段聊天裡有讓人擔心的內容，這時候不適合起草訊息。如果你覺得不安全，請聯絡你信任的人或當地的求助專線。';
 }

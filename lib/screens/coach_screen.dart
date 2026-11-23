@@ -12,6 +12,7 @@ import '../services/purchases.dart';
 import '../services/report_store.dart';
 import '../services/zai_client.dart';
 import '../theme.dart';
+import '../widgets/unlock_panel.dart';
 import 'consent_dialog.dart';
 
 /// AI 教练：围绕一份报告追问。对话随报告存在本机。
@@ -35,7 +36,6 @@ class _CoachScreenState extends State<CoachScreen> {
   late final CoachClient _client = widget.client ?? CoachClient();
   late final ReportStore _store = widget.store ?? ReportStore();
   bool _sending = false;
-  bool _productLoaded = false;
   String? _error;
 
   /// 正在写出的回答
@@ -57,9 +57,6 @@ class _CoachScreenState extends State<CoachScreen> {
     if (!_locked) return;
     _purchases.addListener(_onPurchaseChange);
     _purchases.loadBalances();
-    _purchases.loadProduct().whenComplete(() {
-      if (mounted) setState(() => _productLoaded = true);
-    });
   }
 
   void _onPurchaseChange() {
@@ -228,7 +225,12 @@ class _CoachScreenState extends State<CoachScreen> {
                 ],
               ),
             ),
-            _outOfQuestions ? _paywall(l) : _composer(l),
+            _outOfQuestions
+                ? UnlockPanel(
+                    report: widget.report,
+                    title: l.coachOutTitle,
+                    body: l.coachOutBody)
+                : _composer(l),
           ],
         ),
       ),
@@ -339,73 +341,6 @@ class _CoachScreenState extends State<CoachScreen> {
               ),
             ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _paywall(L l) {
-    final state = _purchases.state;
-    final price = _purchases.price;
-    final hasCredit = _purchases.credits > 0;
-    final canPay = hasCredit || price != null;
-    final busy = state == PurchaseState.buying;
-    final String? notice = switch (state) {
-      PurchaseState.pending => l.deepDivePending,
-      PurchaseState.failed => l.deepDiveFailed,
-      _ => _productLoaded && !canPay ? l.deepDiveUnavailable : null,
-    };
-
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        color: Color(0xFFFFFBF2),
-        border: Border(top: BorderSide(color: Color(0xFFEAD9B8))),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(l.coachOutTitle,
-              style:
-                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-          const SizedBox(height: 3),
-          Text(l.coachOutBody,
-              style: const TextStyle(fontSize: 12.5, color: UColors.ink2)),
-          if (notice != null) ...[
-            const SizedBox(height: 8),
-            Text(notice,
-                style: const TextStyle(fontSize: 12, color: UColors.ink2)),
-          ],
-          if (canPay) ...[
-            const SizedBox(height: 10),
-            FilledButton(
-              style: FilledButton.styleFrom(
-                backgroundColor: UColors.rose,
-                padding: const EdgeInsets.symmetric(vertical: 13),
-                shape: const StadiumBorder(),
-              ),
-              onPressed: busy || state == PurchaseState.pending
-                  ? null
-                  : hasCredit
-                      ? () => _purchases.useCredit(widget.report)
-                      : () => _purchases.buy(widget.report.id),
-              child: busy
-                  ? const SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(
-                          strokeWidth: 2, color: Colors.white),
-                    )
-                  : Text(
-                      hasCredit ? l.deepDiveUseCredit : l.deepDiveBuy(price!),
-                      style: const TextStyle(fontWeight: FontWeight.w600)),
-            ),
-            const SizedBox(height: 6),
-            Text(l.deepDiveOneTime,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 11, color: UColors.muted)),
-          ],
         ],
       ),
     );

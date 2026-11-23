@@ -597,4 +597,66 @@ class LId extends L {
 
   @override
   String get coachReportThanks => 'Terima kasih, laporanmu sudah kami terima.';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return 'Tulis untuk $name';
+  }
+
+  @override
+  String get draftsEntrySubtitle =>
+      'AI menulis draf pesan. Kamu mengeditnya dan mengirimnya sendiri.';
+
+  @override
+  String get draftNote =>
+      'Ini draf dari AI. Tulis ulang dengan kata-katamu sendiri sebelum mengirim apa pun.';
+
+  @override
+  String get draftAppreciate => 'Sampaikan apresiasi';
+
+  @override
+  String get draftAppreciateHint =>
+      'Satu hal spesifik yang dia lakukan dengan baik';
+
+  @override
+  String get draftRepair => 'Berbaikan setelah bertengkar';
+
+  @override
+  String get draftRepairHint =>
+      'Pembuka yang tenang untuk hal yang selalu kalian ributkan';
+
+  @override
+  String get draftAsk => 'Minta yang kamu butuhkan';
+
+  @override
+  String get draftAskHint => 'Permintaan yang jelas, tanpa menyalahkan';
+
+  @override
+  String get draftWrite => 'Tulis draf';
+
+  @override
+  String get draftWriting => 'Menulis…';
+
+  @override
+  String get draftAgain => 'Coba yang lain';
+
+  @override
+  String get draftCopy => 'Salin';
+
+  @override
+  String get draftSend => 'Kirim';
+
+  @override
+  String get draftCopied => 'Tersalin';
+
+  @override
+  String get draftLocked => 'Buka kunci laporan ini untuk memakainya.';
+
+  @override
+  String get draftExNote =>
+      'Di sini kami tidak menulis pesan untuk mantan. Untuk menata pikiranmu sendiri, coba pelatih AI.';
+
+  @override
+  String get draftUnsafe =>
+      'Ada hal yang mengkhawatirkan di chat ini, jadi menulis draf pesan bukan langkah yang tepat. Jika kamu merasa tidak aman, hubungi orang yang kamu percaya atau layanan bantuan setempat.';
 }

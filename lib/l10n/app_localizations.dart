@@ -1153,6 +1153,114 @@ abstract class L {
   /// In en, this message translates to:
   /// **'Thanks, we\'ve received your report.'**
   String get coachReportThanks;
+
+  /// No description provided for @draftsEntryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Write to {name}'**
+  String draftsEntryTitle(String name);
+
+  /// No description provided for @draftsEntrySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI drafts a message. You edit it and send it yourself.'**
+  String get draftsEntrySubtitle;
+
+  /// No description provided for @draftNote.
+  ///
+  /// In en, this message translates to:
+  /// **'These are AI drafts. Put them in your own words before you send anything.'**
+  String get draftNote;
+
+  /// No description provided for @draftAppreciate.
+  ///
+  /// In en, this message translates to:
+  /// **'Say what you appreciate'**
+  String get draftAppreciate;
+
+  /// No description provided for @draftAppreciateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'One specific thing they do well'**
+  String get draftAppreciateHint;
+
+  /// No description provided for @draftRepair.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair after a fight'**
+  String get draftRepair;
+
+  /// No description provided for @draftRepairHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A calm opener about the thing you keep fighting over'**
+  String get draftRepairHint;
+
+  /// No description provided for @draftAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask for what you need'**
+  String get draftAsk;
+
+  /// No description provided for @draftAskHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A clear request, without blame'**
+  String get draftAskHint;
+
+  /// No description provided for @draftWrite.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a draft'**
+  String get draftWrite;
+
+  /// No description provided for @draftWriting.
+  ///
+  /// In en, this message translates to:
+  /// **'Writing…'**
+  String get draftWriting;
+
+  /// No description provided for @draftAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another'**
+  String get draftAgain;
+
+  /// No description provided for @draftCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get draftCopy;
+
+  /// No description provided for @draftSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get draftSend;
+
+  /// No description provided for @draftCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied'**
+  String get draftCopied;
+
+  /// No description provided for @draftLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock this report to use these.'**
+  String get draftLocked;
+
+  /// No description provided for @draftExNote.
+  ///
+  /// In en, this message translates to:
+  /// **'We don\'t draft messages to an ex here. To sort through your own thoughts, try the AI coach.'**
+  String get draftExNote;
+
+  /// No description provided for @draftUnsafe.
+  ///
+  /// In en, this message translates to:
+  /// **'Some things in this chat are worrying, so a drafted message isn\'t the right step. If you feel unsafe, reach out to someone you trust or a local helpline.'**
+  String get draftUnsafe;
 }
 
 class _LDelegate extends LocalizationsDelegate<L> {

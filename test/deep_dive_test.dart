@@ -209,6 +209,42 @@ void main() {
       expect(dive.isEmpty, isFalse);
     });
 
+    test('who said a quote comes from the chat, not from the model', () {
+      final verifier = QuoteVerifier(chat());
+      expect(verifier.senderOf('fine whatever'), 'Mia');
+      expect(verifier.senderOf('"You said you would come"'), 'Alex');
+      // 没出现过，或两个人都说过，就不猜
+      expect(verifier.senderOf('never written'), isNull);
+      expect(verifier.senderOf('you'), isNull);
+
+      final dive = AnalysisPipeline.parseDeepDive({
+        'four_horsemen': [
+          // 模型说是用户说的，其实是 Mia
+          {'kind': 'contempt', 'who': 'you', 'title': 'Brushing off', 'quote': 'fine whatever'},
+        ],
+        'green_flags': [
+          {'title': 'Reaching out', 'quote': 'I missed you'},
+        ],
+        'turning_points': [
+          {'title': 'Warmer', 'direction': 'up', 'quote': 'see you soon'},
+        ],
+      }, verifier, you: 'Alex');
+      expect(dive.horsemen.single.byYou, isFalse);
+      expect(dive.horsemen.single.saidBy, 'partner');
+      expect(dive.greenFlags.single.saidBy, 'you');
+      expect(dive.turningPoints.single.saidBy, 'partner');
+
+      // 存取后还在；旧报告没有这个字段也能读
+      final again = DeepDive.fromJson(
+          jsonDecode(jsonEncode(dive.toJson())) as Map<String, dynamic>);
+      expect(again.greenFlags.single.saidBy, 'you');
+      expect(again.horsemen.single.saidBy, 'partner');
+      expect(EvidenceItem.fromJson({'title': 't', 'quote': 'q'}).saidBy, isNull);
+      expect(const EvidenceItem(date: '', title: 't', detail: '', quote: 'q')
+          .toJson()
+          .containsKey('said_by'), isFalse);
+    });
+
     test('a red flag that repeats a horsemen quote is dropped', () {
       final dive = AnalysisPipeline.parseDeepDive({
         'four_horsemen': [
@@ -353,6 +389,26 @@ void main() {
       });
       expect(report.deepDive!.redFlags.map((e) => e.title), ['Real']);
       expect(report.deepDiveUnlocked, isFalse);
+    });
+
+    test('milestones record who said the quote', () async {
+      final r = await run((system) {
+        if (system.contains('premium section')) return ok({});
+        if (system.contains('a month of chat')) return ok(month);
+        return ok({
+          'warmth': 70,
+          'deep_reading': 'free reading',
+          'milestones': [
+            {'date': '2026-03', 'title': 'A', 'quote': 'see you soon'},
+            {'date': '2026-03', 'title': 'B', 'quote': 'you said you would come'},
+            {'date': '2026-03', 'title': 'C', 'quote': 'not in the chat'},
+          ],
+        });
+      });
+      expect([for (final m in r.milestones) m.saidBy], ['partner', 'you', null]);
+      final loaded = RelationshipReport.fromJson(
+          jsonDecode(jsonEncode(r.toJson())) as Map<String, dynamic>);
+      expect([for (final m in loaded.milestones) m.saidBy], ['partner', 'you', null]);
     });
 
     test('broken JSON from the report step is retried, not fatal', () async {

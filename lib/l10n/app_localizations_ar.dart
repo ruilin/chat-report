@@ -593,4 +593,65 @@ class LAr extends L {
 
   @override
   String get coachReportThanks => 'شكرًا، لقد تلقينا بلاغك.';
+
+  @override
+  String draftsEntryTitle(String name) {
+    return 'اكتب إلى $name';
+  }
+
+  @override
+  String get draftsEntrySubtitle =>
+      'يكتب الذكاء الاصطناعي مسودة رسالة، وأنت تعدّلها وترسلها بنفسك.';
+
+  @override
+  String get draftNote =>
+      'هذه مسودات من الذكاء الاصطناعي. أعد صياغتها بكلماتك قبل أن ترسل أي شيء.';
+
+  @override
+  String get draftAppreciate => 'عبّر عن تقديرك';
+
+  @override
+  String get draftAppreciateHint => 'شيء محدد يُحسن الطرف الآخر فعله';
+
+  @override
+  String get draftRepair => 'أصلِح بعد شجار';
+
+  @override
+  String get draftRepairHint =>
+      'بداية هادئة للحديث عن الموضوع الذي تتشاجران عليه دائمًا';
+
+  @override
+  String get draftAsk => 'اطلب ما تحتاجه';
+
+  @override
+  String get draftAskHint => 'طلب واضح دون لوم';
+
+  @override
+  String get draftWrite => 'اكتب مسودة';
+
+  @override
+  String get draftWriting => 'جارٍ الكتابة…';
+
+  @override
+  String get draftAgain => 'جرّب أخرى';
+
+  @override
+  String get draftCopy => 'نسخ';
+
+  @override
+  String get draftSend => 'إرسال';
+
+  @override
+  String get draftCopied => 'تم النسخ';
+
+  @override
+  String get draftLocked => 'افتح هذا التقرير لاستخدامها.';
+
+  @override
+  String get draftExNote =>
+      'لا نكتب هنا رسائل إلى شريك سابق. لترتيب أفكارك، جرّب مدرب الذكاء الاصطناعي.';
+
+  @override
+  String get draftUnsafe =>
+      'في هذه المحادثة أمور مقلقة، لذلك ليست كتابة رسالة هي الخطوة المناسبة. إذا شعرت بعدم الأمان، تواصل مع شخص تثق به أو مع خط مساعدة محلي.';
 }
