@@ -68,6 +68,11 @@ http.Response answer(String text) {
       200);
 }
 
+/// 写完欣赏类草稿后那次单独的核对请求
+bool isCheck(http.Request req) =>
+    ((jsonDecode(req.body)['messages'] as List).first['content'] as String)
+        .startsWith('You check one chat message');
+
 /// 模型按约定返回的 JSON
 http.Response draft(String message, {bool concern = false}) => answer(jsonEncode({
       'concern': concern,
@@ -120,10 +125,20 @@ void main() {
 
   group('draft client', () {
     late List<Map<String, dynamic>> sent;
-    DraftClient client(http.Response Function() respond) {
+
+    /// 核对请求单独记，回答「谢的是谁做的事」
+    late List<Map<String, dynamic>> checks;
+    DraftClient client(http.Response Function() respond,
+        {String Function()? doneBy}) {
       sent = [];
+      checks = [];
       return DraftClient(ZaiClient(MockClient((req) async {
-        sent.add(jsonDecode(req.body) as Map<String, dynamic>);
+        final body = jsonDecode(req.body) as Map<String, dynamic>;
+        if (isCheck(req)) {
+          checks.add(body);
+          return answer(jsonEncode({'done_by': doneBy?.call() ?? 'other'}));
+        }
+        sent.add(body);
         return respond();
       })));
     }
@@ -277,19 +292,83 @@ void main() {
 
     test('appreciation about the user\'s own action is written again', () async {
       var calls = 0;
-      final c = DraftClient(ZaiClient(MockClient((req) async {
-        calls++;
-        return answer(jsonEncode({
-          'concern': false,
-          'done_by': calls == 1 ? 'user' : 'other',
-          'message': calls == 1 ? 'I booked the trip.' : 'Thanks for coming.',
-        }));
-      })));
+      final c = client(() => answer(jsonEncode({
+            'concern': false,
+            'done_by': ++calls == 1 ? 'user' : 'other',
+            'message': calls == 1 ? 'I booked the trip.' : 'Thanks for coming.',
+          })));
       final text = await c.write(
           report: report(), kind: DraftKind.appreciate, language: 'English');
       expect(calls, 2);
       expect(text, 'Thanks for coming.');
+      // 模型自己都说是用户做的那一版，不用再发请求核对
+      expect(checks, hasLength(1));
     });
+
+    test('appreciation is checked once more for who really did it', () async {
+      // 写的时候模型说是对方做的，单独再问才发现谢反了
+      var calls = 0;
+      var asked = 0;
+      final c = client(
+          () => draft(++calls == 1
+              ? 'I love how you notice what I need.'
+              : 'It meant a lot when you said I always know what you need.'),
+          doneBy: () => ++asked == 1 ? 'user' : 'other');
+      final text = await c.write(
+          report: report(), kind: DraftKind.appreciate, language: 'English');
+      expect(calls, 2);
+      expect(text, startsWith('It meant a lot'));
+      expect(checks, hasLength(2));
+      final check = (checks.first['messages'] as List);
+      expect(check.first['content'], contains('the USER did that thing'));
+      expect(check.last['content'], 'Message: "I love how you notice what I need."');
+      expect(user(), contains('it thanked them for something the user did'));
+
+      // 锁着的报告，核对时也看不到付费内容
+      expect(check.first['content'], isNot(contains('SECRET_FLAG')));
+
+      // 另外两类不多发这次请求
+      await c.write(
+          report: report(unlocked: true), kind: DraftKind.repair, language: 'English');
+      expect(checks, hasLength(2));
+    });
+
+    test('a check that keeps saying it is wrong ends in an error, not a draft',
+        () async {
+      final c = client(() => draft('I love how you notice what I need.'),
+          doneBy: () => 'user');
+      await expectLater(
+          c.write(report: report(), kind: DraftKind.appreciate, language: 'English'),
+          throwsA(isA<ZaiException>()));
+      expect(sent, hasLength(3));
+      expect(checks, hasLength(3));
+    });
+
+    test('a check that cannot connect is asked again without rewriting',
+        () async {
+      var writes = 0;
+      var asks = 0;
+      final c = DraftClient(ZaiClient(MockClient((req) async {
+        if (!isCheck(req)) {
+          writes++;
+          return draft('Thanks for coming.');
+        }
+        return ++asks == 1
+            ? http.Response('{"error":{"code":"1302"}}', 429)
+            : answer(jsonEncode({'done_by': 'other'}));
+      })), const [Duration(seconds: 1), Duration(seconds: 1)]);
+      final seen = <String>[];
+      final text = await c.write(
+          report: report(),
+          kind: DraftKind.appreciate,
+          language: 'English',
+          onText: seen.add);
+      expect(text, 'Thanks for coming.');
+      expect(writes, 1);
+      expect(asks, 2);
+      // 已经显示出来的字不清掉
+      expect(seen, isNot(contains('')));
+    }, timeout: const Timeout(Duration(seconds: 30)));
 
     test('an unclear safety answer counts as a concern', () async {
       final r = await client(() => answer(jsonEncode({'message': 'hi there'})))
@@ -675,9 +754,12 @@ void main() {
     // 结束流式响应要经过真实的事件循环，假时钟下只等帧走不完
     Future<void> settle(WidgetTester tester) async {
       await tester.pumpAndSettle();
-      await tester.runAsync(
-          () => Future<void>.delayed(const Duration(milliseconds: 20)));
-      await tester.pumpAndSettle();
+      // 欣赏类写完还有一次核对请求，多等几轮
+      for (var i = 0; i < 4; i++) {
+        await tester.runAsync(
+            () => Future<void>.delayed(const Duration(milliseconds: 20)));
+        await tester.pumpAndSettle();
+      }
     }
 
     testWidgets('locked report: appreciation is free, the rest ask to unlock',
