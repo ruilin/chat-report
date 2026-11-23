@@ -73,6 +73,13 @@ bool isCheck(http.Request req) =>
     ((jsonDecode(req.body)['messages'] as List).first['content'] as String)
         .startsWith('You check one chat message');
 
+/// 核对的回答。[deedBy] 是那件事实际谁做的，[credits] 是消息里算在谁头上
+Map<String, dynamic> verdict(String deedBy, {String credits = 'other'}) => {
+      'deed': 'knowing what they need',
+      'deed_done_by': deedBy,
+      'message_credits': credits,
+    };
+
 /// 模型按约定返回的 JSON
 http.Response draft(String message, {bool concern = false}) => answer(jsonEncode({
       'concern': concern,
@@ -136,7 +143,8 @@ void main() {
         final body = jsonDecode(req.body) as Map<String, dynamic>;
         if (isCheck(req)) {
           checks.add(body);
-          return answer(jsonEncode({'done_by': doneBy?.call() ?? 'other'}));
+          // 默认：事是对方做的，消息也算在对方头上
+          return answer(jsonEncode(verdict(doneBy?.call() ?? 'other')));
         }
         sent.add(body);
         return respond();
@@ -320,9 +328,13 @@ void main() {
       expect(text, startsWith('It meant a lot'));
       expect(checks, hasLength(2));
       final check = (checks.first['messages'] as List);
-      expect(check.first['content'], contains('the USER did that thing'));
+      expect(check.first['content'], contains('the deed is the user\'s'));
+      expect(check.first['content'], contains('message_credits'));
       expect(check.last['content'], 'Message: "I love how you notice what I need."');
       expect(user(), contains('it thanked them for something the user did'));
+      // 被拦下后让模型换一件事写，别在同一句话上打转
+      expect(user(), contains('"knowing what they need"'));
+      expect(user(), contains('build the message on a different moment'));
 
       // 锁着的报告，核对时也看不到付费内容
       expect(check.first['content'], isNot(contains('SECRET_FLAG')));
@@ -331,6 +343,27 @@ void main() {
       await c.write(
           report: report(unlocked: true), kind: DraftKind.repair, language: 'English');
       expect(checks, hasLength(2));
+    });
+
+    test('thanking them for saying so is fine, even when the user did the deed',
+        () async {
+      // 「谢谢你说我总是知道你要什么」：事是用户做的，消息里也说是用户做的
+      final c = DraftClient(ZaiClient(MockClient((req) async => isCheck(req)
+          ? answer(jsonEncode(verdict('user', credits: 'user')))
+          : draft('It meant a lot when you said I always know what you need.'))));
+      expect(
+          await c.write(
+              report: report(), kind: DraftKind.appreciate, language: 'English'),
+          startsWith('It meant a lot'));
+
+      // 核对说不清是谁做的，不因此拦下
+      final unclear = DraftClient(ZaiClient(MockClient((req) async => isCheck(req)
+          ? answer(jsonEncode(verdict('unclear')))
+          : draft('Thanks for coming.'))));
+      expect(
+          await unclear.write(
+              report: report(), kind: DraftKind.appreciate, language: 'English'),
+          'Thanks for coming.');
     });
 
     test('a check that keeps saying it is wrong ends in an error, not a draft',
@@ -355,7 +388,7 @@ void main() {
         }
         return ++asks == 1
             ? http.Response('{"error":{"code":"1302"}}', 429)
-            : answer(jsonEncode({'done_by': 'other'}));
+            : answer(jsonEncode(verdict('other')));
       })), const [Duration(seconds: 1), Duration(seconds: 1)]);
       final seen = <String>[];
       final text = await c.write(
