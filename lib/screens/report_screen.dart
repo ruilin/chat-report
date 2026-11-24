@@ -274,7 +274,7 @@ class _ReportScreenState extends State<ReportScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ULabel(l.sectionWarmth, color: const Color(0xFFC87A8A)),
+          ULabel(l.sectionWarmth, color: const Color(0xFFC9568F)),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -333,7 +333,7 @@ class _ReportScreenState extends State<ReportScreen> {
               children: [
                 _replyTile(l.labelYourReplyTime,
                     fmtDur(m.medianReply[m.you]!), UColors.roseSoft,
-                    const Color(0xFFB06A79)),
+                    const Color(0xFFA63D75)),
                 const SizedBox(width: 10),
                 _replyTile(
                     l.labelTheirReplyTime(m.partner.toUpperCase()),

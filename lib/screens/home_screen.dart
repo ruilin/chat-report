@@ -475,7 +475,7 @@ class _EntryCard extends StatelessWidget {
             ),
             child: Text(hint!,
                 style: const TextStyle(
-                    fontSize: 10.5, height: 1.7, color: Color(0xFFB06A79))),
+                    fontSize: 10.5, height: 1.7, color: Color(0xFFA63D75))),
           ),
         ],
       ],

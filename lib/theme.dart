@@ -11,9 +11,9 @@ abstract final class UColors {
   static const faint = Color(0xFFB49FB8);
   static const line = Color(0xFFEFE6EA);
   static const card = Colors.white;
-  static const rose = Color(0xFFE0526E); // You / 品牌
-  static const roseSoft = Color(0xFFFFF6F7);
-  static const roseBorder = Color(0xFFF4D7DD);
+  static const rose = Color(0xFFD61470); // You / 品牌，和图标 tool/gen_icon.py 的 PINK 一致
+  static const roseSoft = Color(0xFFFFF4F8);
+  static const roseBorder = Color(0xFFF7D0E2);
   static const blue = Color(0xFF3D8FBF); // 对方
   static const blueSoft = Color(0xFFEFF6FA);
   static const gold = Color(0xFFC99A3C); // 付费/高光
