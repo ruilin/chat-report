@@ -59,8 +59,8 @@ dart run tool/pipeline_smoke.dart   # 端到端冒烟：真实调 z.ai（少量�
   ⚠️ 上架时 **App 名里不能出现 "WhatsApp"**（商标），只能放副标题/描述。
   建议商店副标题：`Chat analyzer & relationship insights`。
 - **图标**：`python3 tool/gen_icon.py` 一键重新生成全部尺寸
-  （iOS 15 个 + Android 传统 mipmap 5 个 + Android 自适应前景/背景）。
-  设计：深紫渐变底 + 奶白对话气泡 + 玫瑰红情绪曲线，预览见 `docs/icon_preview.png`。
+  （iOS 15 个 + Android 传统 mipmap 5 个 + Android 自适应前景/背景 + 商店 512 图标）。
+  设计：艳粉渐变底 + 白色对话气泡 + 走势线，线的尽头是一颗心，预览见 `docs/icon_preview.png`。
 - **待办**：bundle id 仍为 `ai.undertone.undertone`，上架前建议同步改名（改后需卸载重装）。
 
 ## 出包（Google Play）
