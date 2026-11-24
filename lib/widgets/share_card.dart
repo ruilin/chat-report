@@ -19,8 +19,8 @@ import '../theme.dart';
 /// 卡片内容：默认的关系温度，或解锁后可选的爱的语言
 enum ShareCardStyle { warmth, love }
 
-/// 分享卡片（设计稿 Step 4）：固定深色 —— 在浅色的 IG Story 流里跳出来；
-/// 人名强制缩写为首字母，无豁免开关（隐私即品牌）。
+/// 分享卡片：上面是和图标一致的艳粉，往下过渡到深紫 —— 顶部认得出品牌，
+/// 占满屏幕时又不刺眼。人名强制缩写为首字母，无豁免开关（隐私即品牌）。
 class ShareCard extends StatelessWidget {
   final RelationshipReport report;
   final ShareCardStyle style;
@@ -61,26 +61,21 @@ class ShareCard extends StatelessWidget {
             ? l.shareCardMonths(span)
             : l.shareCardOurChat;
 
-    MonthMood? peak;
-    for (final p in report.emotionCurve) {
-      if (peak == null || p.sentiment > peak.sentiment) peak = p;
-    }
-
-    const soft = Color(0xFFB899A8);
-    const bright = Color(0xFFF6EDF2);
-    const pink = Color(0xFFF2A0B0);
+    const white = Colors.white;
+    const soft = Color(0xE0FFFFFF); // 次要文字
+    const faint = Color(0xBFFFFFFF); // 小标
 
     final youTag = report.personalityYou.firstOrNull;
     final partnerTag = report.personalityPartner.firstOrNull;
     Widget tag(String initial, String text) => Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
-            border: Border.all(color: const Color(0x2EF6EDF2)),
+            color: const Color(0x33FFFFFF),
             borderRadius: BorderRadius.circular(999),
           ),
           child: Text('$initial · $text',
               style:
-                  const TextStyle(fontSize: 11.5, height: 1.2, color: bright)),
+                  const TextStyle(fontSize: 11.5, height: 1.2, color: white)),
         );
 
     Widget stat(String emoji, String bold, String rest) => Padding(
@@ -102,7 +97,7 @@ class ShareCard extends StatelessWidget {
                       TextSpan(
                           text: bold,
                           style: const TextStyle(
-                              color: bright, fontWeight: FontWeight.w700)),
+                              color: white, fontWeight: FontWeight.w700)),
                       TextSpan(text: ' $rest'),
                     ],
                   ),
@@ -123,36 +118,38 @@ class ShareCard extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0x4DF6EDF2)),
+                  border: Border.all(color: const Color(0x80FFFFFF)),
                 ),
                 child: Text(initial,
                     style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
-                        color: bright)),
+                        color: white)),
               ),
               const SizedBox(width: 10),
               Flexible(
                 child: Text(loveLanguageLabel(l, v),
                     style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 22,
                         height: 1.2,
                         fontWeight: FontWeight.w800,
-                        color: pink)),
+                        color: white)),
               ),
             ],
           ),
         );
 
+    final bigLabel = UType.label.copyWith(fontSize: 11, color: white);
+
     final header = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(l.shareCardBrand,
-            style: UType.label.copyWith(fontSize: 9, color: soft)),
+            style: UType.label.copyWith(fontSize: 9, color: faint)),
         const SizedBox(height: 8),
         Text('$youI & $partnerI · $spanLabel',
             textAlign: TextAlign.center,
-            style: UType.serifItalic.copyWith(fontSize: 18, color: bright)),
+            style: UType.serifItalic.copyWith(fontSize: 18, color: white)),
       ],
     );
 
@@ -167,7 +164,7 @@ class ShareCard extends StatelessWidget {
             children: [
               if (youTag != null) tag(youI, youTag),
               if (youTag != null && partnerTag != null)
-                const Text('×', style: TextStyle(fontSize: 12, color: soft)),
+                const Text('×', style: TextStyle(fontSize: 12, color: faint)),
               if (partnerTag != null) tag(partnerI, partnerTag),
             ],
           );
@@ -179,34 +176,48 @@ class ShareCard extends StatelessWidget {
       children: [
         if (showLove) ...[
           Text(l.sectionLoveLanguages.toUpperCase(),
-              style: UType.label.copyWith(fontSize: 9, color: soft)),
-          const SizedBox(height: 10),
+              textAlign: TextAlign.center, style: bigLabel),
+          const SizedBox(height: 12),
           if (dive.loveYou case final v?) loveRow(youI, v.primary),
           if (dive.lovePartner case final v?) loveRow(partnerI, v.primary),
           const SizedBox(height: 8),
           Text('${report.warmth}° · ${l.sectionWarmth}',
               style: const TextStyle(fontSize: 12, color: soft)),
         ] else ...[
-          Text('${report.warmth}°',
-              style: const TextStyle(
-                fontSize: 62,
-                height: 1,
-                fontWeight: FontWeight.w800,
-                color: pink,
-                fontFeatures: [FontFeature.tabularFigures()],
-              )),
-          const SizedBox(height: 4),
+          // 一划而过时只有这个数字会被看到，所以尽量大。
+          // 字体宽的时候整体缩小，不让「°」掉到下一行
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text('${report.warmth}°',
+                maxLines: 1,
+                softWrap: false,
+                style: TextStyle(
+                  fontSize: tall ? 128 : 104,
+                  height: 1,
+                  letterSpacing: -2,
+                  fontWeight: FontWeight.w900,
+                  color: white,
+                  fontFeatures: const [FontFeature.tabularFigures()],
+                  shadows: const [
+                    Shadow(
+                        color: Color(0x402B1E2E),
+                        blurRadius: 18,
+                        offset: Offset(0, 4)),
+                  ],
+                )),
+          ),
+          const SizedBox(height: 6),
           Text(l.shareCardWarmth,
-              style: UType.label.copyWith(fontSize: 9, color: soft)),
+              textAlign: TextAlign.center, style: bigLabel),
         ],
         if (tags != null) ...[const SizedBox(height: 14), tags],
         if (!showLove) ...[
           const SizedBox(height: 16),
           Container(
-            padding: const EdgeInsets.only(top: 12),
-            decoration: const BoxDecoration(
-              border:
-                  Border(top: BorderSide(color: Color(0x2EF6EDF2), width: 1)),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            decoration: BoxDecoration(
+              color: const Color(0x572B1E2E),
+              borderRadius: BorderRadius.circular(14),
             ),
             child: Column(
               children: [
@@ -214,8 +225,6 @@ class ShareCard extends StatelessWidget {
                     l.shareCardMessages(m.lateNightCount)),
                 stat('⚡', '${(m.startShareOf(m.you) * 100).round()}%',
                     l.shareCardStarted(youI)),
-                if (peak != null)
-                  stat('🌙', peak.label, l.shareCardWarmestMonth),
               ],
             ),
           ),
@@ -223,79 +232,206 @@ class ShareCard extends StatelessWidget {
       ],
     );
 
+    // 白色名片：图标和名字让人记住是哪个 App。
     // 图片被转发后文字里的链接会丢，二维码跟着图走
-    final footer = Row(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(6),
+    final footer = Container(
+      padding: const EdgeInsets.fromLTRB(10, 9, 9, 9),
+      decoration: BoxDecoration(
+        color: white,
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Row(
+        children: [
+          const AppIconMark(size: 38),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(l.appTitle,
+                    style: const TextStyle(
+                        fontSize: 13.5,
+                        height: 1.2,
+                        fontWeight: FontWeight.w700,
+                        color: UColors.ink)),
+                const SizedBox(height: 2),
+                Text(l.shareCardScan,
+                    style: const TextStyle(
+                        fontSize: 10.5, height: 1.25, color: UColors.muted)),
+              ],
+            ),
           ),
-          child: QrImageView(
+          const SizedBox(width: 8),
+          QrImageView(
             data: playStoreQrLink,
-            size: 64,
-            padding: const EdgeInsets.all(4),
+            size: 46,
+            padding: EdgeInsets.zero,
           ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(l.shareCardScan,
-                  style:
-                      const TextStyle(fontSize: 11.5, height: 1.3, color: bright)),
-              const SizedBox(height: 4),
-              Text(l.shareCardWatermark,
-                  style: UType.label
-                      .copyWith(fontSize: 8.5, color: const Color(0xFF8A6E80))),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
 
-    const padding = EdgeInsets.fromLTRB(24, 28, 24, 22);
+    const padding = EdgeInsets.fromLTRB(20, 26, 20, 18);
     return Container(
       width: width,
       height: tall ? tallHeight : null,
-      padding: padding,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment(-.35, -1),
+          end: Alignment(.35, 1),
+          stops: [0, .45, 1],
+          colors: [Color(0xFFE0277C), Color(0xFFA3155C), Color(0xFF4A2040)],
+        ),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Stack(
+        children: [
+          // 图标里的走势线和心，淡淡地垫在右侧当底纹。
+          // 这是图标的一部分，从右往左读的语言里也不换边
+          Positioned(
+            right: -96,
+            top: tall ? 150 : 96,
+            child: const CustomPaint(
+              size: Size(330, 198),
+              painter: _LogoPainter(
+                view: Rect.fromLTWH(240, 250, 600, 360),
+                color: Color(0x14FFFFFF),
+              ),
+            ),
+          ),
+          Padding(
+            padding: padding,
+            child: tall
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      header,
+                      // 文字长的语言可能放不下，整体缩小而不是溢出
+                      Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: SizedBox(
+                              width: width - padding.horizontal,
+                              child: middle),
+                        ),
+                      ),
+                      footer,
+                    ],
+                  )
+                : Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      header,
+                      const SizedBox(height: 14),
+                      middle,
+                      const SizedBox(height: 14),
+                      footer,
+                    ],
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// App 图标，画出来而不是用图片：导出分享图时不用等图片加载。
+/// 样子要和 tool/gen_icon.py 生成的图标保持一致。
+class AppIconMark extends StatelessWidget {
+  final double size;
+  const AppIconMark({super.key, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF2B1E2E), Color(0xFF3A2438), Color(0xFF4A2937)],
+          colors: [Color(0xFFF03486), Color(0xFFC40662)],
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(size * .235),
       ),
-      child: tall
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                header,
-                // 文字长的语言可能放不下，整体缩小而不是溢出
-                Flexible(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: SizedBox(
-                        width: width - padding.horizontal, child: middle),
-                  ),
-                ),
-                footer,
-              ],
-            )
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                header,
-                const SizedBox(height: 10),
-                middle,
-                const SizedBox(height: 14),
-                footer,
-              ],
-            ),
+      child: CustomPaint(
+        size: Size.square(size),
+        painter: const _LogoPainter(
+          view: Rect.fromLTWH(0, 0, 1024, 1024),
+          color: UColors.rose,
+          bubble: Colors.white,
+        ),
+      ),
     );
   }
+}
+
+/// 图标的图案：对话气泡（可选）+ 走势线 + 线尽头的一颗心。
+/// 坐标沿用 tool/gen_icon.py 的 1024 画布，[view] 是其中要画出来的那一块。
+class _LogoPainter extends CustomPainter {
+  final Rect view;
+  final Color color;
+  final Color? bubble;
+  const _LogoPainter({required this.view, required this.color, this.bubble});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.save();
+    canvas.scale(size.width / view.width);
+    canvas.translate(-view.left, -view.top);
+
+    if (bubble case final fill?) {
+      final shape = Path()
+        ..addRRect(RRect.fromLTRBR(
+            162, 222, 862, 690, const Radius.circular(160)))
+        // 左下的小尾巴
+        ..moveTo(250, 650)
+        ..cubicTo(250, 732, 247.6, 780, 238, 810)
+        ..cubicTo(304, 756, 352, 708, 370, 682)
+        ..close();
+      canvas.drawPath(shape, Paint()..color = fill);
+    }
+
+    // 底纹是半透明的：线和心先合成一个形状再画，重叠处才不会更深
+    final line = Path()
+      ..moveTo(286, 524)
+      ..lineTo(390, 426)
+      ..lineTo(490, 562)
+      ..lineTo(594, 472);
+    final heart = Path()
+      ..moveTo(0, .93)
+      ..cubicTo(-.16, .80, -1, .30, -1, -.38)
+      ..cubicTo(-1, -.72, -.78, -.95, -.5, -.95)
+      ..cubicTo(-.26, -.95, -.07, -.80, 0, -.60)
+      ..cubicTo(.07, -.80, .26, -.95, .5, -.95)
+      ..cubicTo(.78, -.95, 1, -.72, 1, -.38)
+      ..cubicTo(1, .30, .16, .80, 0, .93)
+      ..close();
+    final place = Matrix4.identity()
+      ..translateByDouble(700, 388, 0, 1)
+      ..rotateZ(.14)
+      ..scaleByDouble(100, 100, 1, 1);
+
+    canvas.saveLayer(null, Paint()..color = color.withValues(alpha: color.a));
+    final solid = Paint()..color = color.withValues(alpha: 1);
+    canvas.drawPath(
+        line,
+        Paint()
+          ..color = solid.color
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 50
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round);
+    canvas.drawPath(heart.transform(place.storage), solid);
+    canvas.restore();
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_LogoPainter old) =>
+      old.view != view || old.color != color || old.bubble != bubble;
 }
 
 /// 分享预览弹层：展示卡片 → 截图导出 PNG → 系统分享面板。

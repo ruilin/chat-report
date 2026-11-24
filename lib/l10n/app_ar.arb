@@ -92,7 +92,6 @@
   "shareFailed": "تعذّرت المشاركة: {error}",
   "shareCardBrand": "CHAT REPORT",
   "shareCardWarmth": "دفء العلاقة",
-  "shareCardWatermark": "صُنع بواسطة CHAT REPORT",
   "shareCardScan": "امسح الرمز لتحليل محادثتك",
   "shareFormatTall": "تنسيق طولي للحالات والقصص",
   "shareCardYears": "{count} سنة من الرسائل",
@@ -100,7 +99,6 @@
   "shareCardOurChat": "محادثتنا",
   "shareCardMessages": "رسالة · {late} في آخر الليل",
   "shareCardStarted": "من المحادثات بدأها {initial}",
-  "shareCardWarmestMonth": "كان الشهر الأدفأ",
   "shareText": "محادثتنا كما قرأها Chat Report",
 
   "parseUnrecognized": "تعذّر التعرّف على صيغة الملف (عدد الأسطر المقروءة: {count} فقط)",

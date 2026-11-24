@@ -279,9 +279,6 @@ class LAr extends L {
   String get shareCardWarmth => 'دفء العلاقة';
 
   @override
-  String get shareCardWatermark => 'صُنع بواسطة CHAT REPORT';
-
-  @override
   String get shareCardScan => 'امسح الرمز لتحليل محادثتك';
 
   @override
@@ -309,9 +306,6 @@ class LAr extends L {
   String shareCardStarted(String initial) {
     return 'من المحادثات بدأها $initial';
   }
-
-  @override
-  String get shareCardWarmestMonth => 'كان الشهر الأدفأ';
 
   @override
   String get shareText => 'محادثتنا كما قرأها Chat Report';

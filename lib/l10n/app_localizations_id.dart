@@ -282,9 +282,6 @@ class LId extends L {
   String get shareCardWarmth => 'KEHANGATAN HUBUNGAN';
 
   @override
-  String get shareCardWatermark => 'DIBUAT DENGAN CHAT REPORT';
-
-  @override
   String get shareCardScan => 'Pindai untuk menganalisis obrolanmu';
 
   @override
@@ -312,9 +309,6 @@ class LId extends L {
   String shareCardStarted(String initial) {
     return 'obrolan dimulai oleh $initial';
   }
-
-  @override
-  String get shareCardWarmestMonth => 'jadi bulan paling hangat';
 
   @override
   String get shareText => 'Chat kita, dibaca oleh Chat Report';

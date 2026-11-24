@@ -287,9 +287,6 @@ class LPt extends L {
   String get shareCardWarmth => 'CALOR DA RELAÇÃO';
 
   @override
-  String get shareCardWatermark => 'FEITO COM CHAT REPORT';
-
-  @override
   String get shareCardScan => 'Escaneie e analise sua conversa';
 
   @override
@@ -317,9 +314,6 @@ class LPt extends L {
   String shareCardStarted(String initial) {
     return 'das conversas começadas por $initial';
   }
-
-  @override
-  String get shareCardWarmestMonth => 'foi o mês mais quente';
 
   @override
   String get shareText => 'Nossa conversa, lida pelo Chat Report';

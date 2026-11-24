@@ -286,9 +286,6 @@ class LTr extends L {
   String get shareCardWarmth => 'İLİŞKİ SICAKLIĞI';
 
   @override
-  String get shareCardWatermark => 'CHAT REPORT İLE YAPILDI';
-
-  @override
   String get shareCardScan => 'Tara, kendi sohbetini analiz et';
 
   @override
@@ -316,9 +313,6 @@ class LTr extends L {
   String shareCardStarted(String initial) {
     return 'sohbeti $initial başlattı';
   }
-
-  @override
-  String get shareCardWarmestMonth => 'en sıcak aydı';
 
   @override
   String get shareText => 'Sohbetimiz, Chat Report\'un gözünden';

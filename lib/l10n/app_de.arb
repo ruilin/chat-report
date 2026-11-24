@@ -92,7 +92,6 @@
   "shareFailed": "Teilen fehlgeschlagen: {error}",
   "shareCardBrand": "CHAT REPORT",
   "shareCardWarmth": "BEZIEHUNGSWÄRME",
-  "shareCardWatermark": "ERSTELLT MIT CHAT REPORT",
   "shareCardScan": "Scannen und eigenen Chat auswerten",
   "shareFormatTall": "Hochformat für Status und Stories",
   "shareCardYears": "{count} Jahre Nachrichten",
@@ -100,7 +99,6 @@
   "shareCardOurChat": "unser Chat",
   "shareCardMessages": "Nachrichten · {late} davon nachts",
   "shareCardStarted": "der Gespräche startet {initial}",
-  "shareCardWarmestMonth": "war der wärmste Monat",
   "shareText": "Unser Chat, gelesen von Chat Report",
 
   "parseUnrecognized": "Exportformat nicht erkannt (gelesene Zeilen: {count})",

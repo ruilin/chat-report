@@ -92,7 +92,6 @@
   "shareFailed": "शेयर नहीं हो पाया: {error}",
   "shareCardBrand": "CHAT REPORT",
   "shareCardWarmth": "रिश्ते की गर्माहट",
-  "shareCardWatermark": "CHAT REPORT से बनाया गया",
   "shareCardScan": "स्कैन करें और अपनी चैट का विश्लेषण पाएँ",
   "shareFormatTall": "स्टेटस और स्टोरी के लिए लंबा फ़ॉर्मैट",
   "shareCardYears": "{count} साल की चैट",
@@ -100,7 +99,6 @@
   "shareCardOurChat": "हमारी चैट",
   "shareCardMessages": "मैसेज · {late} देर रात",
   "shareCardStarted": "बातचीत {initial} ने शुरू की",
-  "shareCardWarmestMonth": "सबसे गर्माहट भरा महीना रहा",
   "shareText": "हमारी चैट, Chat Report की नज़र से",
 
   "parseUnrecognized": "एक्सपोर्ट फ़ॉर्मेट पहचाना नहीं जा सका (सिर्फ़ {count} लाइनें पढ़ी गईं)",

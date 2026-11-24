@@ -101,7 +101,6 @@
   "@shareFailed": { "placeholders": { "error": { "type": "String" } } },
   "shareCardBrand": "CHAT REPORT",
   "shareCardWarmth": "RELATIONSHIP WARMTH",
-  "shareCardWatermark": "MADE WITH CHAT REPORT",
   "shareCardScan": "Scan to read your own chat",
   "shareFormatTall": "Tall format for Status and Stories",
   "shareCardYears": "{count} years of texts",
@@ -115,7 +114,6 @@
   },
   "shareCardStarted": "of conversations started by {initial}",
   "@shareCardStarted": { "placeholders": { "initial": { "type": "String" } } },
-  "shareCardWarmestMonth": "was the warmest month",
   "shareText": "Our chat, read by Chat Report",
 
   "parseUnrecognized": "Couldn't recognize the export format (only {count} lines parsed)",

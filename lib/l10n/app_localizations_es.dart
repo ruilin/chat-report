@@ -287,9 +287,6 @@ class LEs extends L {
   String get shareCardWarmth => 'CALIDEZ DE LA RELACIÓN';
 
   @override
-  String get shareCardWatermark => 'HECHO CON CHAT REPORT';
-
-  @override
   String get shareCardScan => 'Escanea y analiza tu chat';
 
   @override
@@ -317,9 +314,6 @@ class LEs extends L {
   String shareCardStarted(String initial) {
     return 'de las charlas iniciadas por $initial';
   }
-
-  @override
-  String get shareCardWarmestMonth => 'fue el mes más cálido';
 
   @override
   String get shareText => 'Nuestro chat, leído por Chat Report';

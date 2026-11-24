@@ -286,9 +286,6 @@ class LDe extends L {
   String get shareCardWarmth => 'BEZIEHUNGSWÄRME';
 
   @override
-  String get shareCardWatermark => 'ERSTELLT MIT CHAT REPORT';
-
-  @override
   String get shareCardScan => 'Scannen und eigenen Chat auswerten';
 
   @override
@@ -316,9 +313,6 @@ class LDe extends L {
   String shareCardStarted(String initial) {
     return 'der Gespräche startet $initial';
   }
-
-  @override
-  String get shareCardWarmestMonth => 'war der wärmste Monat';
 
   @override
   String get shareText => 'Unser Chat, gelesen von Chat Report';

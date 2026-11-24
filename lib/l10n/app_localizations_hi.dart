@@ -285,9 +285,6 @@ class LHi extends L {
   String get shareCardWarmth => 'रिश्ते की गर्माहट';
 
   @override
-  String get shareCardWatermark => 'CHAT REPORT से बनाया गया';
-
-  @override
   String get shareCardScan => 'स्कैन करें और अपनी चैट का विश्लेषण पाएँ';
 
   @override
@@ -315,9 +312,6 @@ class LHi extends L {
   String shareCardStarted(String initial) {
     return 'बातचीत $initial ने शुरू की';
   }
-
-  @override
-  String get shareCardWarmestMonth => 'सबसे गर्माहट भरा महीना रहा';
 
   @override
   String get shareText => 'हमारी चैट, Chat Report की नज़र से';

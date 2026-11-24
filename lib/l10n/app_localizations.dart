@@ -614,12 +614,6 @@ abstract class L {
   /// **'RELATIONSHIP WARMTH'**
   String get shareCardWarmth;
 
-  /// No description provided for @shareCardWatermark.
-  ///
-  /// In en, this message translates to:
-  /// **'MADE WITH CHAT REPORT'**
-  String get shareCardWatermark;
-
   /// No description provided for @shareCardScan.
   ///
   /// In en, this message translates to:
@@ -661,12 +655,6 @@ abstract class L {
   /// In en, this message translates to:
   /// **'of conversations started by {initial}'**
   String shareCardStarted(String initial);
-
-  /// No description provided for @shareCardWarmestMonth.
-  ///
-  /// In en, this message translates to:
-  /// **'was the warmest month'**
-  String get shareCardWarmestMonth;
 
   /// No description provided for @shareText.
   ///

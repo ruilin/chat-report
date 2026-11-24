@@ -92,7 +92,6 @@
   "shareFailed": "Condivisione non riuscita: {error}",
   "shareCardBrand": "CHAT REPORT",
   "shareCardWarmth": "CALORE DELLA RELAZIONE",
-  "shareCardWatermark": "CREATO CON CHAT REPORT",
   "shareCardScan": "Scansiona e analizza la tua chat",
   "shareFormatTall": "Formato verticale per stati e storie",
   "shareCardYears": "{count} anni di messaggi",
@@ -100,7 +99,6 @@
   "shareCardOurChat": "la nostra chat",
   "shareCardMessages": "messaggi · {late} a notte fonda",
   "shareCardStarted": "delle conversazioni iniziate da {initial}",
-  "shareCardWarmestMonth": "è stato il mese più caldo",
   "shareText": "La nostra chat, letta da Chat Report",
 
   "parseUnrecognized": "Formato del file non riconosciuto (righe lette: {count})",

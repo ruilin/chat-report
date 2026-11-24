@@ -92,7 +92,6 @@
   "shareFailed": "Gagal membagikan: {error}",
   "shareCardBrand": "CHAT REPORT",
   "shareCardWarmth": "KEHANGATAN HUBUNGAN",
-  "shareCardWatermark": "DIBUAT DENGAN CHAT REPORT",
   "shareCardScan": "Pindai untuk menganalisis obrolanmu",
   "shareFormatTall": "Format tegak untuk Status dan Story",
   "shareCardYears": "{count} tahun chatting",
@@ -100,7 +99,6 @@
   "shareCardOurChat": "chat kita",
   "shareCardMessages": "pesan · {late} tengah malam",
   "shareCardStarted": "obrolan dimulai oleh {initial}",
-  "shareCardWarmestMonth": "jadi bulan paling hangat",
   "shareText": "Chat kita, dibaca oleh Chat Report",
 
   "parseUnrecognized": "Format ekspor tidak dikenali (cuma {count} baris yang terbaca)",

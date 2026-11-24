@@ -283,9 +283,6 @@ class LEn extends L {
   String get shareCardWarmth => 'RELATIONSHIP WARMTH';
 
   @override
-  String get shareCardWatermark => 'MADE WITH CHAT REPORT';
-
-  @override
   String get shareCardScan => 'Scan to read your own chat';
 
   @override
@@ -313,9 +310,6 @@ class LEn extends L {
   String shareCardStarted(String initial) {
     return 'of conversations started by $initial';
   }
-
-  @override
-  String get shareCardWarmestMonth => 'was the warmest month';
 
   @override
   String get shareText => 'Our chat, read by Chat Report';

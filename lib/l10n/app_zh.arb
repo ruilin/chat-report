@@ -101,7 +101,6 @@
   "@shareFailed": { "placeholders": { "error": { "type": "String" } } },
   "shareCardBrand": "CHAT REPORT",
   "shareCardWarmth": "关系温度",
-  "shareCardWatermark": "由 CHAT REPORT 生成",
   "shareCardScan": "扫码看你的聊天报告",
   "shareFormatTall": "竖版，适合发状态",
   "shareCardYears": "{count} 年的聊天",
@@ -115,7 +114,6 @@
   },
   "shareCardStarted": "的对话由 {initial} 先开口",
   "@shareCardStarted": { "placeholders": { "initial": { "type": "String" } } },
-  "shareCardWarmestMonth": "是最温暖的月份",
   "shareText": "我们的聊天，由 Chat Report 解读",
 
   "parseUnrecognized": "无法识别导出格式（仅解析到 {count} 条）",

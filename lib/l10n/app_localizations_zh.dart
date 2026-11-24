@@ -274,9 +274,6 @@ class LZh extends L {
   String get shareCardWarmth => '关系温度';
 
   @override
-  String get shareCardWatermark => '由 CHAT REPORT 生成';
-
-  @override
   String get shareCardScan => '扫码看你的聊天报告';
 
   @override
@@ -304,9 +301,6 @@ class LZh extends L {
   String shareCardStarted(String initial) {
     return '的对话由 $initial 先开口';
   }
-
-  @override
-  String get shareCardWarmestMonth => '是最温暖的月份';
 
   @override
   String get shareText => '我们的聊天，由 Chat Report 解读';
@@ -891,9 +885,6 @@ class LZhHant extends LZh {
   String get shareCardWarmth => '關係溫度';
 
   @override
-  String get shareCardWatermark => '由 CHAT REPORT 產生';
-
-  @override
   String get shareCardScan => '掃碼看你的聊天報告';
 
   @override
@@ -921,9 +912,6 @@ class LZhHant extends LZh {
   String shareCardStarted(String initial) {
     return '的對話由 $initial 先開口';
   }
-
-  @override
-  String get shareCardWarmestMonth => '是最溫暖的月份';
 
   @override
   String get shareText => '我們的對話，由 Chat Report 解讀';
