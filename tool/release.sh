@@ -40,11 +40,15 @@ unzip -o -q "$AAB" -d "$UNPACKED"
 dart run tool/check_key_leak.dart "$UNPACKED"
 rm -rf "$UNPACKED"
 
+# 交付的文件名带版本号和构建号，不同的包一眼能分清
+FINAL="$(dirname "$AAB")/chat-report-v$NAME-build$CODE.aab"
+mv "$AAB" "$FINAL"
+
 echo "  versionName : $NAME"
 echo "  versionCode : $CODE"
 echo "  签名主体     : $SIGNER"
-echo "  体积         : $(du -h "$AAB" | cut -f1)"
-echo "  路径         : $AAB"
+echo "  体积         : $(du -h "$FINAL" | cut -f1)"
+echo "  路径         : $FINAL"
 echo "  符号表       : $SYMBOLS"
 
 case "$SIGNER" in

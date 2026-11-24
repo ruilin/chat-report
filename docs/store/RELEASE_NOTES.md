@@ -108,3 +108,93 @@ Chat Report 新增简体中文与繁体中文界面 —— 而且报告正文也
 
 Chat Report 新增繁體中文與簡體中文介面 —— 而且報告內文也會以同一種語言撰寫，不只是按鈕翻譯。Android 13 以上可在系統設定中為本應用程式單獨選擇語言。
 ```
+
+---
+
+## v1.1.0（versionCode 15）— 写给 TA 的话 + 新外观
+
+线上是 versionCode 13。这一版新增「写给 TA 的话」，换了图标、主色和分享卡片。
+
+下面整段可以直接贴进 Play Console 的 Release notes 输入框（带语言标签，一次填完 13 个语言代码）。
+每种语言都在 500 字符以内。
+
+```
+<en-US>
+What's new:
+• Write to them: the AI drafts a message from your report — a thank-you, a way to make up, or something you'd like to ask for. You edit it and send it yourself.
+• A brighter look: new icon and colours.
+• A redesigned share card that reads at a glance.
+</en-US>
+<zh-CN>
+本次更新：
+• 新增「写给 TA 的话」：AI 根据报告起草一条消息——感谢、和好，或提一个请求。你来改，再由你自己发出去。
+• 全新图标和配色，更明亮。
+• 分享卡片重新设计，一眼就能看清。
+</zh-CN>
+<zh-TW>
+本次更新：
+• 新增「寫給 TA 的話」：AI 根據報告起草一則訊息——感謝、和好，或提出一個請求。你來改，再由你自己發出去。
+• 全新圖示與配色，更明亮。
+• 分享卡片重新設計，一眼就能看清。
+</zh-TW>
+<zh-HK>
+本次更新：
+• 新增「寫給 TA 的話」：AI 根據報告起草一則訊息——感謝、和好，或提出一個請求。你來改，再由你自己發出去。
+• 全新圖示與配色，更明亮。
+• 分享卡片重新設計，一眼就能看清。
+</zh-HK>
+<es-419>
+Novedades:
+• Escríbele: la IA redacta un mensaje a partir de tu informe: para agradecer, para reconciliarse o para pedir algo. Tú lo editas y lo envías.
+• Un aspecto más luminoso: nuevo ícono y nuevos colores.
+• Tarjeta para compartir rediseñada, más fácil de leer de un vistazo.
+</es-419>
+<pt-BR>
+Novidades:
+• Escreva para a pessoa: a IA redige uma mensagem a partir do seu relatório — para agradecer, fazer as pazes ou pedir algo. Você edita e envia.
+• Visual mais vivo: novo ícone e novas cores.
+• Cartão de compartilhamento redesenhado, mais fácil de ler de relance.
+</pt-BR>
+<fr-FR>
+Nouveautés :
+• Lui écrire : l'IA rédige un message à partir de ton rapport — pour remercier, se réconcilier ou demander quelque chose. Tu le modifies et tu l'envoies toi-même.
+• Un look plus lumineux : nouvelle icône et nouvelles couleurs.
+• Une carte de partage repensée, lisible d'un coup d'œil.
+</fr-FR>
+<de-DE>
+Neu in dieser Version:
+• Schreib ihr oder ihm: Die KI entwirft aus deinem Bericht eine Nachricht – zum Danken, zum Versöhnen oder für eine Bitte. Du passt sie an und schickst sie selbst.
+• Frischerer Look: neues Icon und neue Farben.
+• Neu gestaltete Karte zum Teilen, auf einen Blick lesbar.
+</de-DE>
+<it-IT>
+Novità:
+• Scrivile o scrivigli: l'IA prepara un messaggio a partire dal tuo report: per ringraziare, fare pace o chiedere qualcosa. Tu lo modifichi e lo invii.
+• Un aspetto più luminoso: nuova icona e nuovi colori.
+• Scheda da condividere ridisegnata, leggibile a colpo d'occhio.
+</it-IT>
+<tr-TR>
+Yenilikler:
+• Ona yaz: Yapay zekâ raporundan yola çıkarak bir mesaj taslağı yazar; teşekkür etmek, barışmak ya da bir şey istemek için. Sen düzenler ve kendin gönderirsin.
+• Daha canlı bir görünüm: yeni simge ve yeni renkler.
+• Yeniden tasarlanan paylaşım kartı, bir bakışta okunur.
+</tr-TR>
+<ar>
+الجديد في هذا الإصدار:
+• اكتب له أو لها: يكتب الذكاء الاصطناعي مسودة رسالة من تقريرك؛ للشكر أو للمصالحة أو لطلب شيء. وأنت تعدّلها وترسلها بنفسك.
+• مظهر أكثر إشراقًا: أيقونة جديدة وألوان جديدة.
+• بطاقة مشاركة بتصميم جديد تُقرأ بنظرة واحدة.
+</ar>
+<hi-IN>
+इस अपडेट में नया:
+• उन्हें लिखें: AI आपकी रिपोर्ट से एक मैसेज का ड्राफ़्ट लिखता है — शुक्रिया कहने, सुलह करने या कुछ माँगने के लिए। आप उसे बदलकर खुद भेजते हैं।
+• ज़्यादा चमकदार लुक: नया आइकन और नए रंग।
+• नया शेयर कार्ड, जो एक नज़र में पढ़ा जा सके।
+</hi-IN>
+<id>
+Yang baru:
+• Tulis untuk dia: AI menulis draf pesan dari laporanmu — untuk berterima kasih, berbaikan, atau meminta sesuatu. Kamu mengeditnya dan mengirimnya sendiri.
+• Tampilan lebih cerah: ikon dan warna baru.
+• Kartu berbagi dengan desain baru, terbaca sekilas.
+</id>
+```

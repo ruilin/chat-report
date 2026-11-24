@@ -54,7 +54,7 @@
 | 界面语言 | English / 简体中文 / 繁體中文，报告正文跟随界面语言；已声明 `localeConfig`（Android 13+ 可按 App 选语言） |
 | 签名密钥 | `~/.android-keystores/chat-report-upload.jks`，密码在 `android/key.properties`（已 gitignore） |
 | 签名验证 | AAB 已用 release key 签名（SHA256 `7B:07:A2:09:...`），非 debug key |
-| AAB | `build/app/outputs/bundle/release/app-release.aab`（50.2MB，含调试符号；Play 剥离后用户下载约 10–15MB） |
+| AAB | `build/app/outputs/bundle/release/chat-report-v<版本号>-build<构建号>.aab`，例如 `chat-report-v1.1.0-build14.aab`（50.2MB，含调试符号；Play 剥离后用户下载约 10–15MB） |
 | R8 混淆/资源压缩 | 已开启，已加 Flutter 插件 keep 规则，release 真机验证过启动、引导弹层、文件选择器 |
 | INTERNET 权限 | 已加入 main manifest（release 不继承 debug manifest） |
 | 明文流量 | 仅 debug 允许（开发代理用），release 强制 HTTPS |
@@ -173,12 +173,12 @@ tool/release.sh --minor    # 1.1.0 → 1.2.0
 
 脚本依次执行：递增版本 → `flutter analyze` → `flutter test` → 构建 AAB →
 校验 versionCode/签名/体积，任一步失败即中止。产物在
-`build/app/outputs/bundle/release/app-release.aab`。
+`build/app/outputs/bundle/release/chat-report-v<版本号>-build<构建号>.aab`（脚本结束时会打印完整路径）。
 
 Play Console 操作顺序：
 
 1. Create app → 填名称/语言/免费或付费
-2. **Internal testing** → Create new release → 上传 `app-release.aab`
+2. **Internal testing** → Create new release → 上传这个 `.aab` 文件
 3. App content：隐私政策 URL、Data safety、内容分级、目标受众、广告声明（选"无广告"）、广告 ID 声明（选"使用"，用途选 Analytics，清单里要有 AD_ID 权限）
 4. Store listing：按语言粘贴 `docs/store/<语言>/LISTING.md` 的文案 + 上传对应语言的截图
 5. 内部测试跑通后再逐步推 Closed → Open → Production
