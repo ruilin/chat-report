@@ -6,7 +6,10 @@
 都来自 App 本身，用户在报告页里能看到一模一样的东西。
 
 流程：
-  1. tool/capture_banner_src.sh <原图目录>   逐语言在真机上采集报告页 + 分享弹层
+  1. 准备原图，每种语言一个子目录，里面有 report.png（报告页顶部）和 share.png（分享弹层）：
+     - 不用手机：tool/render_store_shots.dart 渲染后，把 3_report_top.png 复制为 report.png，
+       6_share.png 复制为 share.png
+     - 或 tool/capture_banner_src.sh <原图目录> 逐语言在真机上采集
   2. python3 tool/gen_feature_graphic.py <原图目录>
      → 裁出两块界面 → 每种语言生成 HTML → Chrome 无头渲染 → docs/store/<语言>/feature_graphic.png
 
@@ -50,18 +53,31 @@ def lum(p):
 
 
 def crop_share_card(path):
-    """分享弹层截图里的深色卡片：按行/列投影找深色像素占多数的区域"""
+    """分享弹层截图里的分享卡（上粉下深紫，底部有一块白色名片）。
+
+    卡片四周一圈内边距里只有底色，沿着它找：左侧内边距那一列上，
+    第一段够长的非浅色像素就是卡片的上下边；再在卡片顶部内边距那一行取左右边。
+    下面的分享按钮也是深色，但比卡片短得多，不会被当成卡片。
+    """
     img = Image.open(path).convert("RGB")
     w, h = img.size
     px = img.load()
-    top, bottom = int(h * 0.3), int(h * 0.92)
-    rows = [y for y in range(top, bottom)
-            if sum(lum(px[x, y]) < 90 for x in range(0, w, 4)) > w / 4 * 0.5]
-    if not rows:
+    x = int(w * 0.105)
+    seg, start = None, None
+    for y in range(int(h * 0.3), int(h * 0.97)):
+        on = lum(px[x, y]) < 150
+        if on and start is None:
+            start = y
+        elif not on and start is not None:
+            if y - start > h * 0.15:
+                seg = (start, y - 1)
+                break
+            start = None
+    if seg is None:
         raise SystemExit(f"{path}: 没找到分享卡")
-    y0, y1 = rows[0], rows[-1]
-    mid = (y0 + y1) // 2
-    cols = [x for x in range(w) if lum(px[x, mid]) < 90]
+    y0, y1 = seg
+    row = y0 + int(w * 0.055)
+    cols = [cx for cx in range(w) if lum(px[cx, row]) < 150]
     return img.crop((cols[0], y0, cols[-1] + 1, y1 + 1))
 
 
@@ -122,7 +138,7 @@ def page(lang_dir, strings, font_stack, share_png, curve_png):
   .copy {{ flex: 0 0 430px; position: relative; }}
   .brand {{
     font-family: Palatino, Georgia, serif; font-style: italic; font-weight: 700;
-    font-size: 27px; color: #E0526E; margin-bottom: 18px; direction: ltr;
+    font-size: 27px; color: #D61470; margin-bottom: 18px; direction: ltr;
     display: inline-block;
   }}
   h1 {{
